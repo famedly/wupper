@@ -1,0 +1,14 @@
+image: google/dart
+
+stages:
+  - test
+
+code_analyze:
+  tags:
+    - docker
+  stage: test
+  dependencies: []
+  script:
+    - pub get
+    - dart format lib/ test/ --set-exit-if-changed
+    - dart analyze
