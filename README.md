@@ -20,6 +20,16 @@ Our requirements when starting with this were:
 
 This made us creating a very minimal own single-page-application framework with Dart on web:
 
+### Running the Example App
+
+There's a small example app included in this package. If you want to see how it works in practice, you can run it like this:
+
+```bash
+cd example
+pub get
+webdev serve
+```
+
 ### Widgets
 
 Similar to Flutter we say: Everything is a widget. But instead of using Flutter widgets we use HTML Elements to create widgets with them.
@@ -110,7 +120,7 @@ class TodoApp extends Widget {
   Element build() {
     return BasicRouter(routeBuilder: (route) {
       switch (route) {
-        case '/':
+        case '':
           return TodoListPage();
         default:
           return NotFoundPage();

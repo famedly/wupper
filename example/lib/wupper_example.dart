@@ -2,17 +2,13 @@ import 'dart:html';
 
 import 'package:wupper/wupper.dart';
 
-void main() {
-  runApp(TodoApp());
-}
-
 class TodoApp extends Widget {
   @override
   Element build() {
     return BasicRouter(
       routeBuilder: (route) {
         switch (route) {
-          case '/':
+          case '':
             return TodoListPage();
           default:
             return NotFoundPage();
