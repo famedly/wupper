@@ -61,6 +61,7 @@ abstract class Widget {
   Element appendTo(Widget parent) {
     _parent = parent;
     initState();
+
     return wrapWithElement();
   }
 
@@ -71,11 +72,13 @@ abstract class Widget {
     final parentPointer = parent;
     if (parentPointer == null) {
       throw Exception(
-          'Unable to find parent of type $T in widget tree. Have you appended this widget with `.build()` instead of `.appendTo(this)` maybe?');
+        'Unable to find parent of type $T in widget tree. Have you appended this widget with `.build()` instead of `.appendTo(this)` maybe?',
+      );
     }
     if (parentPointer is T) {
       return parentPointer as T;
     }
+
     return parentPointer.findParent<T>();
   }
 
@@ -88,7 +91,8 @@ abstract class Widget {
         _appNode.querySelector('[$_dataWidgetTypeId="${hashCode.toString()}"]');
     if (widgetNode == null) {
       throw Exception(
-          'No widget node with hashCode $hashCode found in the DOM! Have you appended this widget with `.build()` instead of `.appendTo(this)` maybe?');
+        'No widget node with hashCode $hashCode found in the DOM! Have you appended this widget with `.build()` instead of `.appendTo(this)` maybe?',
+      );
     }
     widgetNode.replaceWith(wrapWithElement());
     while (_postSetStateCallbacks.isNotEmpty) {
@@ -122,6 +126,7 @@ extension _WrapWithElement on Widget {
         element.hasAttribute(_dataWidgetTypeId)) {
       element = spanElement(children: [element]);
     }
+
     return element
       ..setAttribute(_dataWidgetTypeKey, runtimeType.toString())
       ..setAttribute(_dataWidgetTypeId, hashCode.toString());

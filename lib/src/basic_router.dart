@@ -59,6 +59,7 @@ class BasicRouter extends Widget {
   @override
   Element build() {
     window.location.hash = currentRoute;
+
     return routeBuilder(currentRoute).appendTo(this);
   }
 }
