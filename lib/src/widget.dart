@@ -42,11 +42,18 @@ abstract class Widget {
   /// for this!
   Element build();
 
+  /// Override this method to initialize the state of this widget. The [parent]
+  /// value is already set when this method is called.
+  void initState() {
+    return;
+  }
+
   /// Use this method inside of the [build] method of the parent widget to
   /// append this widget to it. This creates a widget tree and makes it possible
   /// to use the [findParent()] and [setState()] method.
   Element appendTo(Widget parent) {
     _parent = parent;
+    initState();
     return wrapWithElement();
   }
 
