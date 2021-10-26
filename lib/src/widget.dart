@@ -83,14 +83,7 @@ abstract class Widget {
       throw Exception(
           'No widget node with hashCode $hashCode found in the DOM! Have you appended this widget with `.build()` instead of `.appendTo(this)` maybe?');
     }
-    final parent = widgetNode.parent;
-    if (parent == null) {
-      throw Exception(
-          'No parent node for widget with hashCode $hashCode found in the DOM!');
-    }
-    final index = parent.children.indexWhere((element) =>
-        element.getAttribute(_dataWidgetTypeId) == hashCode.toString());
-    parent.children[index] = wrapWithElement();
+    widgetNode.replaceWith(wrapWithElement());
     while (_postSetStateCallbacks.isNotEmpty) {
       _postSetStateCallbacks.removeLast()();
     }
