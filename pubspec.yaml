@@ -1,6 +1,6 @@
 name: wupper
 description: Dart Web UI Framework based on HTML Elements inspired by Flutter
-version: 1.0.0
+version: 1.0.1
 homepage: https://gitlab.com/famedly/company/frontend/libraries/wupper
 
 environment:
