@@ -130,7 +130,7 @@ class NotFoundPage extends Widget {
 Once we have our first widgets we need to append them to the DOM. We can do this by using `runApp()`:
 
 ```dart
-void main() => runApp(TodoApp());
+void main() => runApp((Map<String, String> args) => TodoApp());
 ```
 
 By default this appends the whole web app to the element with the ID `app`. We can change this by:

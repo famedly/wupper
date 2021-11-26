@@ -3,7 +3,7 @@ import 'dart:html';
 import 'package:wupper/wupper.dart';
 
 void main() {
-  runApp(TodoApp());
+  runApp((Map<String, String> args) => TodoApp());
 }
 
 class TodoApp extends Widget {

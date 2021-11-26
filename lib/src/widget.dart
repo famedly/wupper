@@ -122,10 +122,14 @@ extension _WrapWithElement on Widget {
 }
 
 /// Creates a new app and appends it to the HTML element with the ID [targetId].
-void runApp(Widget widget, {String targetId = 'app'}) {
+/// The [args] contain all attributes of the HTML element.
+void runApp(
+  Widget Function(Map<String, String> args) widgetBuilder, {
+  String targetId = 'app',
+}) {
   final appNode = document.getElementById(targetId);
   if (appNode == null) {
     throw Exception('There is no element with the ID $targetId in the DOM!');
   }
-  appNode.children = [widget.wrapWithElement()];
+  appNode.children = [widgetBuilder(appNode.attributes).wrapWithElement()];
 }
