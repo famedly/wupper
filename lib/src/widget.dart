@@ -24,6 +24,13 @@ import 'dart:html';
 
 import 'html_element_constructors.dart';
 
+/// the root node of the whole application
+///
+/// this is required to perform relative `querySelector` calls
+/// as the root node might be out of scope for `document.querySelector` in case
+/// it is placed in a shadow DOM or frame
+late Element _appNode;
+
 /// Flutter-like widgets for building UIs with HTML elements. Define the [build]
 /// method to create a new widget.
 /// ```dart
@@ -78,7 +85,7 @@ abstract class Widget {
   void setState(void Function() fun) {
     fun();
     final widgetNode =
-        document.querySelector('[$_dataWidgetTypeId="${hashCode.toString()}"]');
+        _appNode.querySelector('[$_dataWidgetTypeId="${hashCode.toString()}"]');
     if (widgetNode == null) {
       throw Exception(
           'No widget node with hashCode $hashCode found in the DOM! Have you appended this widget with `.build()` instead of `.appendTo(this)` maybe?');
@@ -98,7 +105,7 @@ abstract class Widget {
 
   /// Checks if this widget instance is still mounted to the DOM.
   bool get mounted =>
-      document.querySelector('[$_dataWidgetTypeId="${hashCode.toString()}"]') !=
+      _appNode.querySelector('[$_dataWidgetTypeId="${hashCode.toString()}"]') !=
       null;
 
   @override
@@ -121,15 +128,18 @@ extension _WrapWithElement on Widget {
   }
 }
 
-/// Creates a new app and appends it to the HTML element with the ID [targetId].
+/// Creates a new app and appends it to the [target] HTML element.
 /// The [args] contain all attributes of the HTML element.
 void runApp(
   Widget Function(Map<String, String> args) widgetBuilder, {
-  String targetId = 'app',
+  @Deprecated('Use [target] instead') String? targetId,
+  Element? target,
 }) {
-  final appNode = document.getElementById(targetId);
-  if (appNode == null) {
+  targetId ??= 'app';
+  target ??= document.getElementById(targetId);
+  if (target == null) {
     throw Exception('There is no element with the ID $targetId in the DOM!');
   }
-  appNode.children = [widgetBuilder(appNode.attributes).wrapWithElement()];
+  _appNode = target;
+  _appNode.children = [widgetBuilder(_appNode.attributes).wrapWithElement()];
 }
