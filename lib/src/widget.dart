@@ -40,8 +40,14 @@ late Element _appNode;
 /// }
 /// ```
 abstract class Widget {
+  Widget({this.widgetId});
+
   Widget? get parent => _parent;
   Widget? _parent;
+
+  final String? widgetId;
+
+  String get _id => widgetId ?? hashCode.toString();
 
   /// Method which needs to be defined by the developer to describe the UI
   /// using HTML Elements. It is **not** recommended to use this method to
@@ -71,11 +77,13 @@ abstract class Widget {
     final parentPointer = parent;
     if (parentPointer == null) {
       throw Exception(
-          'Unable to find parent of type $T in widget tree. Have you appended this widget with `.build()` instead of `.appendTo(this)` maybe?');
+        'Unable to find parent of type $T in widget tree. Have you appended this widget with `.build()` instead of `.appendTo(this)` maybe?',
+      );
     }
     if (parentPointer is T) {
       return parentPointer as T;
     }
+
     return parentPointer.findParent<T>();
   }
 
@@ -84,13 +92,13 @@ abstract class Widget {
   /// has been appended by the [appendTo()] method first.
   void setState(void Function() fun) {
     fun();
-    final widgetNode =
-        _appNode.querySelector('[$_dataWidgetTypeId="${hashCode.toString()}"]');
+    final widgetNode = _appNode.querySelector('[$_dataWidgetTypeId="$_id"]');
     if (widgetNode == null) {
       throw Exception(
-          'No widget node with hashCode $hashCode found in the DOM! Have you appended this widget with `.build()` instead of `.appendTo(this)` maybe?');
+        'No widget node with the Widget ID "$_id" found in the DOM! Have you appended this widget with `.build()` instead of `.appendTo(this)` maybe?',
+      );
     }
-    widgetNode.replaceWith(wrapWithElement());
+    widgetNode.updateWith(wrapWithElement());
     while (_postSetStateCallbacks.isNotEmpty) {
       _postSetStateCallbacks.removeLast()();
     }
@@ -105,8 +113,7 @@ abstract class Widget {
 
   /// Checks if this widget instance is still mounted to the DOM.
   bool get mounted =>
-      _appNode.querySelector('[$_dataWidgetTypeId="${hashCode.toString()}"]') !=
-      null;
+      _appNode.querySelector('[$_dataWidgetTypeId="$_id"]') != null;
 
   @override
   String toString() => build().toString();
@@ -114,6 +121,37 @@ abstract class Widget {
 
 const String _dataWidgetTypeKey = 'data-widget-type';
 const String _dataWidgetTypeId = 'data-widget-id';
+
+extension on Element {
+  Node updateWith(Element other) {
+    if (other.tagName != tagName) {
+      return replaceWith(other);
+    }
+    if (attributes.toString() != other.attributes.toString()) {
+      attributes = other.attributes;
+    }
+    if (innerText != other.innerText) innerText = other.innerText;
+    if (scrollTop != other.scrollTop) scrollTop = other.scrollTop;
+    if (scrollLeft != other.scrollLeft) scrollLeft = other.scrollLeft;
+    if (children.isNotEmpty || other.children.isNotEmpty) {
+      if (children.length == other.children.length) {
+        for (var i = 0; i < children.length; i++) {
+          children[i].updateWith(other.children[i]);
+        }
+      } else if (children.length < other.children.length) {
+        for (var i = 0; i < children.length; i++) {
+          children[i].updateWith(other.children[i]);
+        }
+        children.addAll(
+          other.children.sublist(children.length, other.children.length),
+        );
+      } else {
+        children = other.children;
+      }
+    }
+    return this;
+  }
+}
 
 extension _WrapWithElement on Widget {
   Element wrapWithElement() {
@@ -124,7 +162,7 @@ extension _WrapWithElement on Widget {
     }
     return element
       ..setAttribute(_dataWidgetTypeKey, runtimeType.toString())
-      ..setAttribute(_dataWidgetTypeId, hashCode.toString());
+      ..setAttribute(_dataWidgetTypeId, _id);
   }
 }
 
