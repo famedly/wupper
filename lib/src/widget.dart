@@ -141,5 +141,5 @@ void runApp(
     throw Exception('There is no element with the ID $targetId in the DOM!');
   }
   _appNode = target;
-  _appNode.children = [widgetBuilder(_appNode.attributes).wrapWithElement()];
+  _appNode.children = [widgetBuilder(_appNode.dataset).wrapWithElement()];
 }

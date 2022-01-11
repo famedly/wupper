@@ -133,14 +133,14 @@ Once we have our first widgets we need to append them to the DOM. We can do this
 void main() => runApp((Map<String, String> args) => TodoApp());
 ```
 
-By default this appends the whole web app to the element with the ID `app`. We can change this by:
+By default, this appends the whole web app to the element with the ID `app`. We can change this by:
 
 ```dart
-void main() => runApp(TodoApp(), targetId = 'other-id');
+void main() => runApp((Map<String, String> args) => TodoApp(), target = document.querySelector(#'other-id'));
 ```
 
 It is important to understand how the widget tree is related to the DOM! All widgets are represented
-as an element in the DOM so we can see the widget tree in it.
+as an element in the DOM, so we can see the widget tree in it.
 
 For example our `TodoListItem` widget would look like this:
 
