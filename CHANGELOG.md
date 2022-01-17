@@ -1,3 +1,7 @@
+## 3.0.0
+- BREAKING CHANGE: use dataset as runApp args
+- feat: provide html element instead of target ID
+
 ## 2.0.0
 - feat: runApp with attributes
 
