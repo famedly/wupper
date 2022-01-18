@@ -52,6 +52,13 @@ abstract class Widget {
   /// Override this method to initialize the state of this widget. The [parent]
   /// value is already set when this method is called.
   void initState() {
+    findParent<Widget>().addPostBuildCallback(onDispose);
+    return;
+  }
+
+  /// Override this method to initialize the state of this widget. The [parent]
+  /// value is already set when this method is called.
+  void onDispose() {
     return;
   }
 
@@ -97,10 +104,16 @@ abstract class Widget {
   }
 
   final List<Function> _postSetStateCallbacks = [];
+  final List<Function> _postBuildCallbacks = [];
 
   /// Perform some action after setState has been called.
   void addPostSetStateCallback(Function callback) {
     _postSetStateCallbacks.add(callback);
+  }
+
+  /// Perform some action after build has been called.
+  void addPostBuildCallback(Function callback) {
+    _postBuildCallbacks.add(callback);
   }
 
   /// Checks if this widget instance is still mounted to the DOM.
@@ -118,6 +131,9 @@ const String _dataWidgetTypeId = 'data-widget-id';
 extension _WrapWithElement on Widget {
   Element wrapWithElement() {
     var element = build();
+    while (_postSetStateCallbacks.isNotEmpty) {
+      _postSetStateCallbacks.removeLast()();
+    }
     if (element.hasAttribute(_dataWidgetTypeKey) ||
         element.hasAttribute(_dataWidgetTypeId)) {
       element = spanElement(children: [element]);
