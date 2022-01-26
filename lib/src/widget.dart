@@ -58,7 +58,7 @@ abstract class Widget {
   /// Use this method inside of the [build] method of the parent widget to
   /// append this widget to it. This creates a widget tree and makes it possible
   /// to use the [findParent()] and [setState()] method.
-  Element appendTo(Widget parent) {
+  Element appendTo(Widget parent, [Object? cacheKey]) {
     _parent = parent;
     initState();
     return wrapWithElement();
@@ -82,7 +82,11 @@ abstract class Widget {
   /// Similar to the Flutter equivalent this changes the state of this widget
   /// and rebuilds the UI and all underlying widgets. Make sure that this widget
   /// has been appended by the [appendTo()] method first.
-  void setState(void Function() fun) {
+  ///
+  /// If you do not want to rebuild everything, specify the elements you want
+  /// to rebuild in [only] by adding valid selectors. For example, to replace
+  /// only the element with the ID "list_item_4": set `only: {'#list_item_4'}`.
+  void setState(void Function() fun, {Set<String>? only}) {
     fun();
     final widgetNode =
         _appNode.querySelector('[$_dataWidgetTypeId="${hashCode.toString()}"]');
@@ -90,7 +94,24 @@ abstract class Widget {
       throw Exception(
           'No widget node with hashCode $hashCode found in the DOM! Have you appended this widget with `.build()` instead of `.appendTo(this)` maybe?');
     }
-    widgetNode.replaceWith(wrapWithElement());
+    final newBuild = wrapWithElement();
+    if (only == null) {
+      widgetNode.replaceWith(newBuild);
+    } else {
+      for (final query in only) {
+        final elemToReplace = widgetNode.querySelector(query);
+        if (elemToReplace == null) {
+          throw Exception(
+              'Can not setState. The querySelector("$query") returned null in the old build.');
+        }
+        final replaceWith = newBuild.querySelector(query);
+        if (replaceWith == null) {
+          throw Exception(
+              'Can not setState. The querySelector("$query") returned null in the new build.');
+        }
+        elemToReplace.replaceWith(replaceWith);
+      }
+    }
     while (_postSetStateCallbacks.isNotEmpty) {
       _postSetStateCallbacks.removeLast()();
     }
