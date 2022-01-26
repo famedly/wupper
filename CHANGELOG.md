@@ -1,3 +1,6 @@
+## 3.1.0
+- feat: Use query selectors for more granular setState
+
 ## 3.0.0
 - BREAKING CHANGE: use dataset as runApp args
 - feat: provide html element instead of target ID
