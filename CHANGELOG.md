@@ -1,3 +1,6 @@
+# 3.1.1
+- fix: Call initState for root widget
+
 ## 3.1.0
 - feat: Use query selectors for more granular setState
 
