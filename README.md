@@ -125,6 +125,42 @@ class NotFoundPage extends Widget {
 }
 ```
 
+### FutureBuilder and StreamBuilder
+
+You have FutureBuilders and StreamBuilders which are working similar to Flutter.
+
+#### FutureBuilder
+
+Similar to Flutters FutureBuilder but without AsyncSnapshot. Build something
+depending of the result of a future. Optional you can set an errorBuilder to
+handle errors happening while waiting on the future.
+
+##### Example:
+
+```dart
+FutureBuilder<String>(
+  future: loadDataFromServer(),
+  builder: (AsyncSnapshot<String> snapshot, Widget parent) =>
+    divElement(text: snapshot.data ?? snapshot.error?.toString() ?? 'No data yet'),
+).appendTo(this);
+```
+
+#### StreamBuilder
+
+Similar to Flutters StreamBuilder but without AsyncSnapshot. Constantly
+rebuild something depending of the last value of a stream. Optional you can
+set an errorBuilder to handle errors.
+
+##### Example:
+
+```dart
+StreamBuilder<String>(
+  stream: someDataStream,
+  builder: (AsyncSnapshot<String> snapshot, Widget parent) =>
+    divElement(text: snapshot.data ?? snapshot.error?.toString() ?? 'No data yet'),
+).appendTo(this);
+```
+
 ### runApp and widget tree
 
 Once we have our first widgets we need to append them to the DOM. We can do this by using `runApp()`:
