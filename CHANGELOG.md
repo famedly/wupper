@@ -1,4 +1,8 @@
-# 3.1.1
+## 3.2.0
+- feat: Add future builder and stream builder
+- feat: Add basic listview
+
+## 3.1.1
 - fix: Call initState for root widget
 
 ## 3.1.0
