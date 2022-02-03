@@ -1,3 +1,6 @@
+## 3.2.1
+- fix: Actually export the new widgets
+
 ## 3.2.0
 - feat: Add future builder and stream builder
 - feat: Add basic listview
