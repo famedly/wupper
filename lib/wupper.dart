@@ -22,6 +22,7 @@
 
 library wupper;
 
+export 'src/async_snapshot.dart';
 export 'src/basic_router.dart';
 export 'src/html_element_constructors.dart';
 export 'src/future_builder.dart';
