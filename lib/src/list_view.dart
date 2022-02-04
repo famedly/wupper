@@ -59,7 +59,7 @@ class ListView extends Widget {
       return;
     }
     initialItemCount++;
-    _uListElement.children.insert(initialItemCount, itemBuilder(i, this));
+    _uListElement.children.insert(i, itemBuilder(i, this));
   }
 
   void _onDeleteListener(int i) {
