@@ -1,3 +1,8 @@
+## 3.2.2
+- fix: Initial AsyncSnapshot
+- fix: Insert in ListView at correct position
+- fix: Export AsyncSnapshot
+
 ## 3.2.1
 - fix: Actually export the new widgets
 
