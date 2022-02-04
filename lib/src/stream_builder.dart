@@ -3,8 +3,6 @@ import 'dart:html';
 
 import 'package:wupper/wupper.dart';
 
-import 'async_snapshot.dart';
-
 /// Similar to Flutters StreamBuilder but without AsyncSnapshot. Constantly
 /// rebuild something depending of the last value of a stream. Optional you can
 /// set an errorBuilder to handle errors.
@@ -22,7 +20,12 @@ class StreamBuilder<T> extends Widget {
   final Stream<T> stream;
   final Element Function(AsyncSnapshot<T> value, Widget parent) builder;
   late final StreamSubscription _streamSubscription;
-  late AsyncSnapshot<T> _snapshot;
+  AsyncSnapshot<T> _snapshot = AsyncSnapshot(
+    hasData: false,
+    hasError: false,
+    error: null,
+    data: null,
+  );
 
   StreamBuilder({required this.stream, required this.builder});
 

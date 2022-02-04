@@ -3,8 +3,6 @@ import 'dart:html';
 
 import 'package:wupper/wupper.dart';
 
-import 'async_snapshot.dart';
-
 /// Similar to Flutters FutureBuilder. Build something
 /// depending of the result of a future.
 ///
@@ -21,7 +19,12 @@ class FutureBuilder<T> extends Widget {
   final Future<T> future;
   final Element Function(AsyncSnapshot<T> snapshot, Widget parent) builder;
 
-  late AsyncSnapshot<T> _snapshot;
+  AsyncSnapshot<T> _snapshot = AsyncSnapshot(
+    hasData: false,
+    hasError: false,
+    error: null,
+    data: null,
+  );
 
   FutureBuilder({required this.future, required this.builder});
 
