@@ -1,3 +1,6 @@
+## 3.3.0
+- refactor: Finish ListView implementation
+
 ## 3.2.2
 - fix: Initial AsyncSnapshot
 - fix: Insert in ListView at correct position
