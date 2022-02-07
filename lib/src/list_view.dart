@@ -11,6 +11,8 @@ import 'package:wupper/wupper.dart';
 class ListView extends Widget {
   final ListViewController? _controller;
   final Element Function(int i, Widget parent) itemBuilder;
+  final Element Function(Widget parent)? headerBuilder;
+  final Element Function(Widget parent)? footerBuilder;
   int initialItemCount;
 
   late final StreamSubscription? _onUpdateAllSub;
@@ -18,14 +20,13 @@ class ListView extends Widget {
   late final StreamSubscription? _onInsertSub;
   late final StreamSubscription? _onDeleteSub;
 
-  final bool reverse;
-
   final UListElement _uListElement = UListElement();
 
   ListView({
     required this.itemBuilder,
     required this.initialItemCount,
-    this.reverse = false,
+    this.headerBuilder,
+    this.footerBuilder,
     ListViewController? controller,
   }) : _controller = controller {
     _onUpdateAllSub =
@@ -50,7 +51,8 @@ class ListView extends Widget {
       _onUpdateSub?.cancel();
       return;
     }
-    _uListElement.children[i] = itemBuilder(i, this);
+    final index = headerBuilder != null ? i + 1 : 1;
+    _uListElement.children[index] = itemBuilder(i, this);
   }
 
   void _onInsertListener(int i) {
@@ -59,7 +61,8 @@ class ListView extends Widget {
       return;
     }
     initialItemCount++;
-    _uListElement.children.insert(i, itemBuilder(i, this));
+    final index = headerBuilder != null ? i + 1 : 1;
+    _uListElement.children.insert(index, itemBuilder(i, this));
   }
 
   void _onDeleteListener(int i) {
@@ -68,17 +71,21 @@ class ListView extends Widget {
       return;
     }
     initialItemCount--;
-    _uListElement.children.removeAt(i);
+    final index = headerBuilder != null ? i + 1 : 1;
+    _uListElement.children.removeAt(index);
   }
 
   @override
-  Element build() => _uListElement
-    ..children = [
-      if (reverse)
-        for (var i = initialItemCount - 1; i >= 0; i--) itemBuilder(i, this)
-      else
+  Element build() {
+    final headerBuilder = this.headerBuilder;
+    final footerBuilder = this.footerBuilder;
+    return _uListElement
+      ..children = [
+        if (headerBuilder != null) headerBuilder(this),
         for (var i = 0; i < initialItemCount; i++) itemBuilder(i, this),
-    ];
+        if (footerBuilder != null) footerBuilder(this),
+      ];
+  }
 }
 
 /// Controller for the ListView. If you want to rerender the whole list at
@@ -88,10 +95,10 @@ class ListView extends Widget {
 /// - `insert(index)`
 /// - `delete(index)`
 class ListViewController {
-  final StreamController<int> _updateAll = StreamController<int>();
-  final StreamController<int> _update = StreamController<int>();
-  final StreamController<int> _insert = StreamController<int>();
-  final StreamController<int> _delete = StreamController<int>();
+  final StreamController<int> _updateAll = StreamController<int>.broadcast();
+  final StreamController<int> _update = StreamController<int>.broadcast();
+  final StreamController<int> _insert = StreamController<int>.broadcast();
+  final StreamController<int> _delete = StreamController<int>.broadcast();
 
   void updateAll(int itemCount) => _updateAll.add(itemCount);
   void update(int index) => _update.add(index);
