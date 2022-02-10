@@ -1,3 +1,6 @@
+## 3.3.1
+- fix: UpdateAll in ListView was not working correctly
+
 ## 3.3.0
 - refactor: Finish ListView implementation
 
