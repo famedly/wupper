@@ -41,9 +41,8 @@ class ListView extends Widget {
       _onUpdateAllSub?.cancel();
       return;
     }
-    setState(() {
-      initialItemCount = i;
-    });
+    initialItemCount = i;
+    _uListElement.children = build().children;
   }
 
   void _onUpdateListener(int i) {
