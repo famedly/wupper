@@ -124,6 +124,16 @@ abstract class Widget {
     _postSetStateCallbacks.add(callback);
   }
 
+  /// Perform some action after setState has been called.
+  void addPostRenderCallback(Function callback) {
+    var parent = this.parent;
+    while (parent != null) {
+      parent.addPostSetStateCallback(callback);
+      parent = parent.parent;
+    }
+    return;
+  }
+
   /// Checks if this widget instance is still mounted to the DOM.
   bool get mounted =>
       _appNode.querySelector('[$_dataWidgetTypeId="${hashCode.toString()}"]') !=

@@ -20,11 +20,14 @@ class ListView extends Widget {
   late final StreamSubscription? _onInsertSub;
   late final StreamSubscription? _onDeleteSub;
 
+  final bool reverse;
+
   final UListElement _uListElement = UListElement();
 
   ListView({
     required this.itemBuilder,
     required this.initialItemCount,
+    this.reverse = false,
     this.headerBuilder,
     this.footerBuilder,
     ListViewController? controller,
@@ -36,13 +39,34 @@ class ListView extends Widget {
     _onDeleteSub = _controller?._delete.stream.listen(_onDeleteListener);
   }
 
+  bool get _isAtBottom =>
+      _uListElement.scrollTop >=
+      (_uListElement.scrollHeight - _uListElement.clientHeight);
+
+  void _updateReverseScrollPosition() {
+    _uListElement.scrollTop =
+        (_uListElement.scrollHeight - _uListElement.clientHeight);
+  }
+
   void _onUpdateAllListener(int i) {
     if (!mounted) {
       _onUpdateAllSub?.cancel();
       return;
     }
     initialItemCount = i;
+    final isAtBottom = _isAtBottom;
     _uListElement.children = build().children;
+    if (reverse && isAtBottom) _updateReverseScrollPosition();
+  }
+
+  int _calcRealIndex(int i) {
+    if (reverse) {
+      i = initialItemCount - i;
+      if (footerBuilder != null) i++;
+    } else {
+      if (headerBuilder != null) i++;
+    }
+    return i;
   }
 
   void _onUpdateListener(int i) {
@@ -50,8 +74,9 @@ class ListView extends Widget {
       _onUpdateSub?.cancel();
       return;
     }
-    final index = headerBuilder != null ? i + 1 : 1;
-    _uListElement.children[index] = itemBuilder(i, this);
+    final isAtBottom = _isAtBottom;
+    _uListElement.children[_calcRealIndex(i)] = itemBuilder(i, this);
+    if (reverse && isAtBottom) _updateReverseScrollPosition();
   }
 
   void _onInsertListener(int i) {
@@ -60,8 +85,9 @@ class ListView extends Widget {
       return;
     }
     initialItemCount++;
-    final index = headerBuilder != null ? i + 1 : 1;
-    _uListElement.children.insert(index, itemBuilder(i, this));
+    final isAtBottom = _isAtBottom;
+    _uListElement.children.insert(_calcRealIndex(i), itemBuilder(i, this));
+    if (reverse && isAtBottom) _updateReverseScrollPosition();
   }
 
   void _onDeleteListener(int i) {
@@ -70,14 +96,35 @@ class ListView extends Widget {
       return;
     }
     initialItemCount--;
-    final index = headerBuilder != null ? i + 1 : 1;
-    _uListElement.children.removeAt(index);
+    final isAtBottom = _isAtBottom;
+    _uListElement.children.removeAt(_calcRealIndex(i));
+    if (reverse && isAtBottom) _updateReverseScrollPosition();
+  }
+
+  @override
+  Element appendTo(Widget parent, [Object? cacheKey]) {
+    final element = super.appendTo(parent, cacheKey);
+    if (reverse) {
+      addPostRenderCallback(() {
+        _uListElement.scrollTop =
+            (_uListElement.scrollHeight - _uListElement.clientHeight);
+      });
+    }
+    return element;
   }
 
   @override
   Element build() {
     final headerBuilder = this.headerBuilder;
     final footerBuilder = this.footerBuilder;
+    if (reverse) {
+      return _uListElement
+        ..children = [
+          if (footerBuilder != null) footerBuilder(this),
+          for (var i = initialItemCount - 1; i >= 0; i--) itemBuilder(i, this),
+          if (headerBuilder != null) headerBuilder(this),
+        ];
+    }
     return _uListElement
       ..children = [
         if (headerBuilder != null) headerBuilder(this),
