@@ -29,6 +29,8 @@ class ListView extends Widget {
     this.footerBuilder,
     ListViewController? controller,
   }) : _controller = controller {
+    // attach the list to the controller
+    _controller?._attachView(this);
     _onUpdateAllSub =
         _controller?._updateAll.stream.listen(_onUpdateAllListener);
     _onUpdateSub = _controller?._update.stream.listen(_onUpdateListener);
@@ -94,13 +96,28 @@ class ListView extends Widget {
 /// - `insert(index)`
 /// - `delete(index)`
 class ListViewController {
+  late final ListView _view;
   final StreamController<int> _updateAll = StreamController<int>.broadcast();
   final StreamController<int> _update = StreamController<int>.broadcast();
   final StreamController<int> _insert = StreamController<int>.broadcast();
   final StreamController<int> _delete = StreamController<int>.broadcast();
 
+  /// connects the given [ListView] with the controller in order to access its
+  /// properties
+  void _attachView(ListView listView) => _view = listView;
+
+  /// re-renders the entire list with the given new [itemCount]
   void updateAll(int itemCount) => _updateAll.add(itemCount);
+
+  /// updates the item at offset [index]
   void update(int index) => _update.add(index);
+
+  /// inserts an item at offset [index]
   void insert(int index) => _insert.add(index);
+
+  /// deletes the item at offset [index]
   void delete(int index) => _delete.add(index);
+
+  /// returns every [Element] which is currently present in the attached view
+  List<Element> get items => _view._uListElement.children;
 }
