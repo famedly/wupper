@@ -96,7 +96,7 @@ class ListView extends Widget {
 /// - `insert(index)`
 /// - `delete(index)`
 class ListViewController {
-  late final ListView _view;
+  ListView? _view;
   final StreamController<int> _updateAll = StreamController<int>.broadcast();
   final StreamController<int> _update = StreamController<int>.broadcast();
   final StreamController<int> _insert = StreamController<int>.broadcast();
@@ -119,5 +119,5 @@ class ListViewController {
   void delete(int index) => _delete.add(index);
 
   /// returns every [Element] which is currently present in the attached view
-  List<Element> get items => _view._uListElement.children;
+  List<Element> get items => _view?._uListElement.children ?? [];
 }
