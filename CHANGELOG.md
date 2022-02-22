@@ -1,3 +1,7 @@
+## 3.4.0
+- fix: allow to change `_view` of ListViewController
+- feat: expose list view children to controller
+
 ## 3.3.1
 - fix: UpdateAll in ListView was not working correctly
 

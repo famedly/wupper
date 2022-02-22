@@ -1,6 +1,6 @@
 name: wupper
 description: Dart Web UI Framework based on HTML Elements inspired by Flutter
-version: 3.3.1
+version: 3.4.0
 homepage: https://famedly.com
 repository: https://gitlab.com/famedly/company/frontend/libraries/wupper
 issue_tracker: https://gitlab.com/famedly/company/frontend/libraries/wupper/issues
