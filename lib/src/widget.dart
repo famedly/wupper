@@ -86,6 +86,7 @@ abstract class Widget {
   /// If you do not want to rebuild everything, specify the elements you want
   /// to rebuild in [only] by adding valid selectors. For example, to replace
   /// only the element with the ID "list_item_4": set `only: {'#list_item_4'}`.
+  @Deprecated('Use State objects instead')
   void setState(void Function() fun, {Set<String>? only}) {
     fun();
     final widgetNode =

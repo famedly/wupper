@@ -20,11 +20,13 @@ class StreamBuilder<T> extends Widget {
   final Stream<T> stream;
   final Element Function(AsyncSnapshot<T> value, Widget parent) builder;
   late final StreamSubscription _streamSubscription;
-  AsyncSnapshot<T> _snapshot = AsyncSnapshot(
-    hasData: false,
-    hasError: false,
-    error: null,
-    data: null,
+  final State<AsyncSnapshot<T>> _snapshot = State(
+    AsyncSnapshot(
+      hasData: false,
+      hasError: false,
+      error: null,
+      data: null,
+    ),
   );
 
   StreamBuilder({required this.stream, required this.builder});
@@ -40,12 +42,12 @@ class StreamBuilder<T> extends Widget {
       _streamSubscription.cancel();
       return;
     }
-    setState(() {
-      _snapshot = AsyncSnapshot(
+    _snapshot.set(
+      AsyncSnapshot(
         hasData: true,
         data: data,
-      );
-    });
+      ),
+    );
   }
 
   void _errorListener(Object? error) {
@@ -53,16 +55,16 @@ class StreamBuilder<T> extends Widget {
       _streamSubscription.cancel();
       return;
     }
-    setState(() {
-      _snapshot = AsyncSnapshot(
+    _snapshot.set(
+      AsyncSnapshot(
         hasError: true,
         error: error,
-        hasData: _snapshot.hasData,
-        data: _snapshot.data,
-      );
-    });
+        hasData: _snapshot.state.hasData,
+        data: _snapshot.state.data,
+      ),
+    );
   }
 
   @override
-  Element build() => builder(_snapshot, this);
+  Element build() => _snapshot.bind((_snapshot) => builder(_snapshot, this));
 }

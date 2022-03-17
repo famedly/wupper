@@ -19,11 +19,13 @@ class FutureBuilder<T> extends Widget {
   final Future<T> future;
   final Element Function(AsyncSnapshot<T> snapshot, Widget parent) builder;
 
-  AsyncSnapshot<T> _snapshot = AsyncSnapshot(
-    hasData: false,
-    hasError: false,
-    error: null,
-    data: null,
+  final State<AsyncSnapshot<T>> _snapshot = State(
+    AsyncSnapshot(
+      hasData: false,
+      hasError: false,
+      error: null,
+      data: null,
+    ),
   );
 
   FutureBuilder({required this.future, required this.builder});
@@ -31,23 +33,20 @@ class FutureBuilder<T> extends Widget {
   void _run() async {
     try {
       final data = await future;
-      _snapshot = AsyncSnapshot(hasData: true, data: data);
+      _snapshot.set(AsyncSnapshot(hasData: true, data: data));
     } catch (error) {
-      _snapshot = AsyncSnapshot(hasError: true, error: error);
-    } finally {
-      if (mounted) setState(() {});
+      _snapshot.set(AsyncSnapshot(hasError: true, error: error));
     }
   }
 
   @override
   initState() {
-    _snapshot = AsyncSnapshot(hasData: false, hasError: false);
     _run();
     super.initState();
   }
 
   @override
   Element build() {
-    return builder(_snapshot, this);
+    return _snapshot.bind((_snapshot) => builder(_snapshot, this));
   }
 }

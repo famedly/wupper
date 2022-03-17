@@ -37,28 +37,28 @@ import '../wupper.dart';
 /// ```
 class BasicRouter extends Widget {
   final Widget Function(String) routeBuilder;
-  String currentRoute;
+  late final State<String> currentRoute;
 
   BasicRouter({
     required this.routeBuilder,
     String? initialRoute,
-  }) : currentRoute =
-            initialRoute ?? window.location.hash.replaceFirst('#', '') {
+  }) : currentRoute = State<String>(
+            initialRoute ?? window.location.hash.replaceFirst('#', '')) {
     window.onHashChange.listen(_onHashChangeListener);
   }
 
   void _onHashChangeListener(_) {
     final route = window.location.hash.replaceFirst('#', '');
-    if (route != currentRoute) push(route);
+    if (route != currentRoute.state) push(route);
   }
 
-  void push(String route) => setState(() {
-        currentRoute = route;
-      });
+  void push(String route) => currentRoute.set(route);
 
   @override
   Element build() {
-    window.location.hash = currentRoute;
-    return routeBuilder(currentRoute).appendTo(this);
+    window.location.hash = currentRoute.state;
+    return currentRoute.bind(
+      (currentRoute) => routeBuilder(currentRoute).appendTo(this),
+    );
   }
 }

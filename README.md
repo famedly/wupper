@@ -45,6 +45,45 @@ class TodoListItem extends Widget {
 }
 ```
 
+Use normal final variables for parameters and `State` variables for state management. It will have a getter and setter:
+
+```dart
+class CounterPage extends Widget {
+  CounterPage({required this.title});
+
+  final String title;
+  final State<int> count = State(0);
+
+  @override
+  Element build() {
+    return divElement(
+      children: [
+        headingElementH1(text: title),
+        count.bind((count) => paragraphElement(text: 'Counter: $count')),
+        buttonElement(
+          text: 'Counter +',
+          onClick: (_) => count.set(count.state + 1),
+        ),
+      ],
+    );
+  }
+}
+```
+
+If you just want to bind the text node of an element you can use `Element..bindText()`:
+
+```dart
+paragraphElement()..bindText(count, (count) => 'Counter: $count'),
+```
+
+You can also use `Element..bindAttribute()` to only update a single attribute:
+
+```dart
+paragraphElement()
+  ..bindText((count) => 'Counter: $count')
+  ..bindAttribute(count, 'style', (count) => count == 0 ? 'color: blue;' : 'color: red;'),
+```
+
 The widget class must extend `Widget` and at least implement a build method. This method must return a HTML Element. We can compose
 a widget from other widgets as well using `WidgetClass().appendTo(this)`.
 
@@ -54,21 +93,17 @@ class TodoListPage extends Widget {
     type: 'text',
     placeholder: 'New todo',
   );
-  final List<String> todos = [];
+  State<List<String>> todos = State([]);
 
   void addTodoAction([_]) {
     final value = textField.value;
     if (value == null || value.isEmpty) return;
-    setState(() {
-      todos.add(value);
-      textField.value = '';
-    });
+    todos.set(todos.state.add(value));
+    textField.value = '';
   }
 
   void removeTodo(String todo) {
-    setState(() {
-      todos.removeWhere((t) => t == todo);
-    });
+    todos.set(todos.state..removeWhere((t) => t == todo));
   }
 
   @override
@@ -97,12 +132,7 @@ somewhere up in it by using `findParent<Type>()`. This works very similar to **P
 ```dart
 findParent<TodoListPage>().removeTodo(todo)
 ```
-
-If we want to change the UI at runtime, we can use `setState((){})`. This triggers the build method and appends the outcoming
-HTML Element to the DOM where the widget currently is. **This rebuilds the whole widget and every widget below it!** For a good
-performance we should rebuild as least Elements as possible. We can store some Elements from rebuilding by making them members
-of the class. So we can make sure that states (like the value of a textfield) does not get lost on rebuilding. We also have a
-very basic hash router:
+We also have a very basic hash router:
 
 ```dart
 class TodoApp extends Widget {

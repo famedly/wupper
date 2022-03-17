@@ -32,21 +32,17 @@ class TodoListPage extends Widget {
     type: 'text',
     placeholder: 'New todo',
   );
-  final List<String> todos = [];
+  final State<List<String>> todos = State([]);
 
   void addTodoAction([_]) {
     final value = textField.value;
     if (value == null || value.isEmpty) return;
-    setState(() {
-      todos.add(value);
-      textField.value = '';
-    });
+    todos.set(todos.state..add(value));
+    textField.value = '';
   }
 
   void removeTodo(String todo) {
-    setState(() {
-      todos.removeWhere((t) => t == todo);
-    });
+    todos.set(todos.state..removeWhere((t) => t == todo));
   }
 
   @override
@@ -58,10 +54,13 @@ class TodoListPage extends Widget {
             text: 'Add',
             onClick: addTodoAction,
           ),
-          uListElement(
-            children: [
-              for (final todo in todos) TodoListItem(todo: todo).appendTo(this),
-            ],
+          todos.bind(
+            (todos) => uListElement(
+              children: [
+                for (final todo in todos)
+                  TodoListItem(todo: todo).appendTo(this),
+              ],
+            ),
           ),
         ],
       );
