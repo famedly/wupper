@@ -1,3 +1,24 @@
+## 4.0.0
+BREAKING CHANGE! The setState method got deprecated and will be removed in a future release.
+Use the new State object instead and bind HTML elements to a state by using:
+
+```dart
+// Add a state to a widget:
+final state = State<int>(5);
+
+// Bind the state to the whole HTML element:
+state.bind((stateValue) => divElement());
+
+// Bind the state only to the text node:
+divElement..bindText(state);
+
+// Bind the state only to a specific attribute:
+divElement..bindAttribute(state, 'class');
+
+// Change the state:
+buttonElement(onClick: state.set(state.state++));
+```
+
 ## 3.4.0
 - fix: allow to change `_view` of ListViewController
 - feat: expose list view children to controller

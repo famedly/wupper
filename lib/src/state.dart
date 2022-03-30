@@ -56,18 +56,20 @@ class _Subscription<T> {
 
 extension BindStateExtension on Element {
   void bindText<T>(
-    State<T> state,
-    String Function(T value) builder,
-  ) {
+    State<T> state, [
+    String Function(T value)? builder,
+  ]) {
+    builder ??= (value) => value.toString();
     state._textSubscriptions.add(_TextSubscription<T>(this, builder));
     text = builder(state.state);
   }
 
   void bindAttribute<T>(
     State<T> state,
-    String attribute,
-    String Function(T value) builder,
-  ) {
+    String attribute, [
+    String Function(T value)? builder,
+  ]) {
+    builder ??= (value) => value.toString();
     state._attributeSubscriptions.add(
       _AttributeSubscription<T>(
         this,
