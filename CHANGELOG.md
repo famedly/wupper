@@ -1,3 +1,22 @@
+## 4.1.0
+BREAKING CHANGE! The bindAttribute and bindText now have been fixed and became part of
+the State object, instead of extensions of the Element object. Use them in this way:
+
+```dart
+// Bind text only:
+count.bindText(
+  paragraphElement(),
+  (count) => 'Counter: $count' // Optional! Defaults to `state.toString()`
+),
+
+// Bind a single attribute:
+count.bindAttribute(
+  paragraphElement(),
+  'style',
+  (count) => count == 0 ? 'color: blue;' : 'color: red;',  // Optional! Defaults to `state.toString()`
+),
+```
+
 ## 4.0.0
 BREAKING CHANGE! The setState method got deprecated and will be removed in a future release.
 Use the new State object instead and bind HTML elements to a state by using:

@@ -70,18 +70,23 @@ class CounterPage extends Widget {
 }
 ```
 
-If you just want to bind the text node of an element you can use `Element..bindText()`:
+If you just want to bind the text node of an element you can use `State.bindText()`:
 
 ```dart
-paragraphElement()..bindText(count, (count) => 'Counter: $count'),
+count.bindText(
+  paragraphElement(),
+  (count) => 'Counter: $count'
+),
 ```
 
-You can also use `Element..bindAttribute()` to only update a single attribute:
+You can also use `State.bindAttribute()` to only update a single attribute:
 
 ```dart
-paragraphElement()
-  ..bindText((count) => 'Counter: $count')
-  ..bindAttribute(count, 'style', (count) => count == 0 ? 'color: blue;' : 'color: red;'),
+count.bindAttribute(
+  paragraphElement(),
+  'style',
+  (count) => count == 0 ? 'color: blue;' : 'color: red;',
+),
 ```
 
 The widget class must extend `Widget` and at least implement a build method. This method must return a HTML Element. We can compose

@@ -11,23 +11,48 @@ class State<T> {
       sub.element.replaceWith(newElement);
       sub.element = newElement;
     }
-    if (value is String) {
-      for (final sub in _textSubscriptions) {
-        sub.element.text = sub.builder(value);
-      }
-      for (final sub in _attributeSubscriptions) {
-        sub.element.attributes[sub.attribute] = sub.builder(value);
-      }
+    for (final sub in _textSubscriptions) {
+      sub.element.text = sub.builder(value);
+    }
+    for (final sub in _attributeSubscriptions) {
+      sub.element.setAttribute(sub.attribute, sub.builder(value));
     }
   }
 
   final Set<_Subscription<T>> _subscriptions = {};
-  final Set<_TextSubscription> _textSubscriptions = {};
-  final Set<_AttributeSubscription> _attributeSubscriptions = {};
+  final Set<_TextSubscription<T>> _textSubscriptions = {};
+  final Set<_AttributeSubscription<T>> _attributeSubscriptions = {};
 
   Element bind(Element Function(T value) builder) {
     final element = builder(_state);
     _subscriptions.add(_Subscription<T>(element, builder));
+    return element;
+  }
+
+  Element bindText(
+    Element element, [
+    String Function(T value)? builder,
+  ]) {
+    builder ??= (value) => value.toString();
+    _textSubscriptions.add(_TextSubscription<T>(element, builder));
+    element.text = builder(state);
+    return element;
+  }
+
+  Element bindAttribute(
+    Element element,
+    String attribute, [
+    String Function(T value)? builder,
+  ]) {
+    builder ??= (value) => value.toString();
+    _attributeSubscriptions.add(
+      _AttributeSubscription<T>(
+        element,
+        attribute,
+        builder,
+      ),
+    );
+    element.setAttribute(attribute, builder(state));
     return element;
   }
 }
@@ -52,30 +77,4 @@ class _Subscription<T> {
   final Element Function(T value) builder;
 
   _Subscription(this.element, this.builder);
-}
-
-extension BindStateExtension on Element {
-  void bindText<T>(
-    State<T> state, [
-    String Function(T value)? builder,
-  ]) {
-    builder ??= (value) => value.toString();
-    state._textSubscriptions.add(_TextSubscription<T>(this, builder));
-    text = builder(state.state);
-  }
-
-  void bindAttribute<T>(
-    State<T> state,
-    String attribute, [
-    String Function(T value)? builder,
-  ]) {
-    builder ??= (value) => value.toString();
-    state._attributeSubscriptions.add(
-      _AttributeSubscription<T>(
-        this,
-        attribute,
-        builder,
-      ),
-    );
-  }
 }
