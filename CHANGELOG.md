@@ -1,3 +1,6 @@
+## 4.1.1
+- fix: StreamBuilder cancels Streams too early
+
 ## 4.1.0
 BREAKING CHANGE! The bindAttribute and bindText now have been fixed and became part of
 the State object, instead of extensions of the Element object. Use them in this way:
