@@ -3,18 +3,35 @@ import 'dart:html';
 class State<T> {
   State(T initState) : _state = initState;
   T get state => _state;
+  bool get hasListener =>
+      _subscriptions.isNotEmpty ||
+      _textSubscriptions.isNotEmpty ||
+      _attributeSubscriptions.isNotEmpty;
+
   T _state;
   void set(T value) {
     _state = value;
     for (final sub in _subscriptions) {
+      if (sub.element.isConnected != true) {
+        _subscriptions.remove(sub);
+        continue;
+      }
       final newElement = sub.builder(value);
       sub.element.replaceWith(newElement);
       sub.element = newElement;
     }
     for (final sub in _textSubscriptions) {
+      if (sub.element.isConnected != true) {
+        _textSubscriptions.remove(sub);
+        continue;
+      }
       sub.element.text = sub.builder(value);
     }
     for (final sub in _attributeSubscriptions) {
+      if (sub.element.isConnected != true) {
+        _attributeSubscriptions.remove(sub);
+        continue;
+      }
       sub.element.setAttribute(sub.attribute, sub.builder(value));
     }
   }

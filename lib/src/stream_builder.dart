@@ -38,7 +38,7 @@ class StreamBuilder<T> extends Widget {
   }
 
   void _listener(T? data) {
-    if (!mounted) {
+    if (!_snapshot.hasListener) {
       _streamSubscription.cancel();
       return;
     }
@@ -51,7 +51,7 @@ class StreamBuilder<T> extends Widget {
   }
 
   void _errorListener(Object? error) {
-    if (!mounted) {
+    if (!_snapshot.hasListener) {
       _streamSubscription.cancel();
       return;
     }
