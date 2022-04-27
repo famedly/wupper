@@ -1,3 +1,6 @@
+## 4.1.2
+- fix: concurrent modifications in subscriptions sets
+
 ## 4.1.1
 - fix: StreamBuilder cancels Streams too early
 
