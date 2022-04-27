@@ -11,7 +11,8 @@ class State<T> {
   T _state;
   void set(T value) {
     _state = value;
-    for (final sub in _subscriptions) {
+    final _subs = {..._subscriptions};
+    for (final sub in _subs) {
       if (sub.element.isConnected != true) {
         _subscriptions.remove(sub);
         continue;
@@ -20,14 +21,16 @@ class State<T> {
       sub.element.replaceWith(newElement);
       sub.element = newElement;
     }
-    for (final sub in _textSubscriptions) {
+    final _textSubs = {..._textSubscriptions};
+    for (final sub in _textSubs) {
       if (sub.element.isConnected != true) {
         _textSubscriptions.remove(sub);
         continue;
       }
       sub.element.text = sub.builder(value);
     }
-    for (final sub in _attributeSubscriptions) {
+    final _attriSubs = {..._attributeSubscriptions};
+    for (final sub in _attriSubs) {
       if (sub.element.isConnected != true) {
         _attributeSubscriptions.remove(sub);
         continue;
