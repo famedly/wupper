@@ -43,8 +43,27 @@ class ListView extends Widget {
       _onUpdateAllSub?.cancel();
       return;
     }
-    initialItemCount = i;
-    _uListElement.children = build().children;
+
+    if (i != initialItemCount) {
+      print("complete rebuild");
+      initialItemCount = i;
+      _uListElement.children = build().children;
+      return;
+    }
+    print("list: ${_uListElement.id}");
+    final element = appNode.querySelector("#" + _uListElement.id);
+    print("element: ${element}");
+    if (element == null) return;
+    var pos = 0;
+    for (var child in element.children) {
+      final delta = element.scrollTop - child.offsetTop;
+      final deltaEnd = delta + element.clientHeight;
+      pos++;
+      if (delta < 0 && deltaEnd > 0) {
+        _onUpdateListener(pos);
+        print("scroll top: ${child.id} $delta $deltaEnd");
+      }
+    }
   }
 
   void _onUpdateListener(int i) {
@@ -80,6 +99,7 @@ class ListView extends Widget {
   Element build() {
     final headerBuilder = this.headerBuilder;
     final footerBuilder = this.footerBuilder;
+
     return _uListElement
       ..children = [
         if (headerBuilder != null) headerBuilder(this),

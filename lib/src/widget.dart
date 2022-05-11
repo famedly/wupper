@@ -31,6 +31,8 @@ import 'html_element_constructors.dart';
 /// it is placed in a shadow DOM or frame
 late Element _appNode;
 
+Element get appNode => _appNode;
+
 /// Flutter-like widgets for building UIs with HTML elements. Define the [build]
 /// method to create a new widget.
 /// ```dart
