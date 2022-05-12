@@ -23,13 +23,14 @@ class ListView extends Widget {
 
   final UListElement _uListElement = UListElement();
 
-  ListView({
-    required this.itemBuilder,
-    required this.initialItemCount,
-    this.headerBuilder,
-    this.footerBuilder,
-    ListViewController? controller,
-  }) : _controller = controller {
+  ListView(
+      {required this.itemBuilder,
+      required this.initialItemCount,
+      this.headerBuilder,
+      this.footerBuilder,
+      ListViewController? controller,
+      this.buffer = 0})
+      : _controller = controller {
     // attach the list to the controller
     _controller?._attachView(this);
     _onUpdateAllSub =
@@ -41,17 +42,21 @@ class ListView extends Widget {
 
   List<bool> rebuildNeeded = [];
 
+  // Buffer to load elements further than what is displayed on the screen
+  final int buffer;
   bool onScreen(i) {
     if (rootListView == null) return false;
 
     final index = headerBuilder != null ? i + 1 : 1;
     final child = _uListElement.children[index];
 
-    final delta = rootListView!.scrollTop - child.offsetTop;
+    var delta = rootListView!.scrollTop - child.offsetTop;
     final deltaEnd = delta + rootListView!.clientHeight;
 
-    if (delta < 0 && deltaEnd > 0) {
-      print("scroll top: $i ${child.id} $delta $deltaEnd");
+    delta = delta - child.offsetHeight;
+    if (delta <= buffer && deltaEnd >= -buffer) {
+      print(
+          "scroll top: index: $index i:$i ${child.id} delta: $delta->$deltaEnd");
       return true;
     }
     return false;
