@@ -50,6 +50,9 @@ class ListView extends Widget {
     final index = headerBuilder != null ? i + 1 : 1;
     final child = _uListElement.children[index];
 
+    // We calculate the distance to the max and min boundaries of the viewport
+    // from the opposite point for the element.
+
     var delta = rootListView!.scrollTop - child.offsetTop;
     final deltaEnd = delta + rootListView!.clientHeight;
 
