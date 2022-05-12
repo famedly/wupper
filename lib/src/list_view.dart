@@ -19,6 +19,7 @@ class ListView extends Widget {
   late final StreamSubscription? _onUpdateSub;
   late final StreamSubscription? _onInsertSub;
   late final StreamSubscription? _onDeleteSub;
+  late final StreamSubscription? _onScrollSub;
 
   final UListElement _uListElement = UListElement();
 
@@ -38,31 +39,89 @@ class ListView extends Widget {
     _onDeleteSub = _controller?._delete.stream.listen(_onDeleteListener);
   }
 
+  List<bool> rebuildNeeded = [];
+
+  bool onScreen(i) {
+    if (rootListView == null) return false;
+
+    final index = headerBuilder != null ? i + 1 : 1;
+    final child = _uListElement.children[index];
+
+    final delta = rootListView!.scrollTop - child.offsetTop;
+    final deltaEnd = delta + rootListView!.clientHeight;
+
+    if (delta < 0 && deltaEnd > 0) {
+      print("scroll top: $i ${child.id} $delta $deltaEnd");
+      return true;
+    }
+    return false;
+  }
+
+  void markToRender(int i) {
+    rebuildNeeded[i] = true;
+    if (onScreen(i)) {
+      render(i);
+    }
+  }
+
+  void insert(i) {}
+
+  void rebuildIfNeeded(int i) {
+    if (rebuildNeeded[i] && onScreen(i)) {
+      render(i);
+    }
+  }
+
+  void _onScrollListener(_) {
+    if (!mounted) {
+      _onScrollSub?.cancel();
+      return;
+    }
+
+    print("Scroll");
+
+    for (int i = 0; i < rebuildNeeded.length; i++) {
+      rebuildIfNeeded(i);
+    }
+  }
+
+  Element? rootListView;
+
+  Element? getRootView() {
+    if (rootListView != null) return null;
+    rootListView = appNode.querySelector("#" + _uListElement.id);
+    _onScrollSub = rootListView?.onScroll.listen(_onScrollListener);
+    return rootListView;
+  }
+
+  void render(int i) {
+    final index = headerBuilder != null ? i + 1 : 1;
+    _uListElement.children[index] = itemBuilder(i, this);
+    rebuildNeeded[i] = false;
+  }
+
   void _onUpdateAllListener(int i) {
     if (!mounted) {
       _onUpdateAllSub?.cancel();
       return;
     }
+    getRootView();
+
+    print("Update all ${i} ${initialItemCount}");
+
+    if (rebuildNeeded.length != i) {
+      rebuildNeeded = List.filled(i, true);
+    }
 
     if (i != initialItemCount) {
       print("complete rebuild");
       initialItemCount = i;
-      _uListElement.children = build().children;
+      _uListElement.children = [spanElement(innerText: "Hello")];
       return;
     }
-    print("list: ${_uListElement.id}");
-    final element = appNode.querySelector("#" + _uListElement.id);
-    print("element: ${element}");
-    if (element == null) return;
-    var pos = 0;
-    for (var child in element.children) {
-      final delta = element.scrollTop - child.offsetTop;
-      final deltaEnd = delta + element.clientHeight;
-      pos++;
-      if (delta < 0 && deltaEnd > 0) {
-        _onUpdateListener(pos);
-        print("scroll top: ${child.id} $delta $deltaEnd");
-      }
+
+    for (int pos = 0; pos < i; pos++) {
+      markToRender(pos);
     }
   }
 
@@ -71,8 +130,8 @@ class ListView extends Widget {
       _onUpdateSub?.cancel();
       return;
     }
-    final index = headerBuilder != null ? i + 1 : 1;
-    _uListElement.children[index] = itemBuilder(i, this);
+    print("Unique update $i");
+    markToRender(i);
   }
 
   void _onInsertListener(int i) {
@@ -81,8 +140,11 @@ class ListView extends Widget {
       return;
     }
     initialItemCount++;
+    print("insert: $i");
     final index = headerBuilder != null ? i + 1 : 1;
     _uListElement.children.insert(index, itemBuilder(i, this));
+    rebuildNeeded.insert(i, false); // we just did a rebuild
+    print("Insert i $i");
   }
 
   void _onDeleteListener(int i) {
@@ -93,6 +155,7 @@ class ListView extends Widget {
     initialItemCount--;
     final index = headerBuilder != null ? i + 1 : 1;
     _uListElement.children.removeAt(index);
+    rebuildNeeded.removeAt(index);
   }
 
   @override
@@ -103,7 +166,8 @@ class ListView extends Widget {
     return _uListElement
       ..children = [
         if (headerBuilder != null) headerBuilder(this),
-        for (var i = 0; i < initialItemCount; i++) itemBuilder(i, this),
+        for (var i = 0; i < initialItemCount; i++)
+          divElement(className: "h-24"),
         if (footerBuilder != null) footerBuilder(this),
       ];
   }
