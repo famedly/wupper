@@ -10,6 +10,7 @@ import 'package:wupper/wupper.dart';
 /// Set [reverse] to true, to flip the direction of the items.
 class ListView extends Widget {
   final ListViewController? _controller;
+  final int itemDefaultHeight;
   final Element Function(int i, Widget parent) itemBuilder;
   final Element Function(Widget parent)? headerBuilder;
   final Element Function(Widget parent)? footerBuilder;
@@ -29,8 +30,11 @@ class ListView extends Widget {
       this.headerBuilder,
       this.footerBuilder,
       ListViewController? controller,
+      this.itemDefaultHeight = 100,
       this.buffer = 0})
-      : _controller = controller {
+      : _controller = controller,
+        assert(itemDefaultHeight > 0),
+        assert(buffer >= 0) {
     // attach the list to the controller
     _controller?._attachView(this);
     _onUpdateAllSub =
@@ -175,7 +179,7 @@ class ListView extends Widget {
       ..children = [
         if (headerBuilder != null) headerBuilder(this),
         for (var i = 0; i < initialItemCount; i++)
-          divElement(className: "h-24"),
+          divElement()..style.height = '${itemDefaultHeight}px',
         if (footerBuilder != null) footerBuilder(this),
       ];
   }
