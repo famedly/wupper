@@ -69,7 +69,7 @@ class ListView extends Widget {
     return false;
   }
 
-  void markToRender(int i) {
+  void markAndRenderIfNeeded(int i) {
     rebuildNeeded[i] = true;
     if (onScreen(i)) {
       render(i);
@@ -128,12 +128,15 @@ class ListView extends Widget {
     if (i != initialItemCount) {
       print("complete rebuild");
       initialItemCount = i;
-      _uListElement.children = [spanElement(innerText: "Hello")];
-      return;
+
+      // fill view
+      rebuildNeeded = List.filled(initialItemCount, true, growable: true);
+      _uListElement.children =
+          List.filled(i, divElement()..style.height = '${itemDefaultHeight}px');
     }
 
     for (int pos = 0; pos < i; pos++) {
-      markToRender(pos);
+      markAndRenderIfNeeded(pos);
     }
   }
 
@@ -143,7 +146,7 @@ class ListView extends Widget {
       return;
     }
     print("Unique update $i");
-    markToRender(i);
+    markAndRenderIfNeeded(i);
   }
 
   void _onInsertListener(int i) {
@@ -193,9 +196,14 @@ class ListView extends Widget {
           divElement()..style.height = '${itemDefaultHeight}px',
         if (footerBuilder != null) footerBuilder(this),
       ];
+
+    rebuildNeeded = List.filled(initialItemCount, true, growable: true);
+
     addPostSetStateCallback(() {
+      getRootView();
       _onUpdateAllListener(element.children.length);
     });
+
     return element;
   }
 }
