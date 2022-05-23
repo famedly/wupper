@@ -62,17 +62,20 @@ class ListView extends Widget {
 
     delta = delta - child.offsetHeight;
     if (delta <= buffer && deltaEnd >= -buffer) {
-      print(
-          "scroll top: index: $index i:$i ${child.id} delta: $delta->$deltaEnd");
+      if (false)
+        print(
+            "scroll top: index: $index i:$i ${child.id} delta: $delta->$deltaEnd");
       return true;
     }
     return false;
   }
 
   void markAndRenderIfNeeded(int i) {
-    rebuildNeeded[i] = true;
     if (onScreen(i)) {
       render(i);
+      rebuildNeeded[i] = false;
+    } else {
+      rebuildNeeded[i] = true;
     }
   }
 
@@ -81,6 +84,7 @@ class ListView extends Widget {
   void rebuildIfNeeded(int i) {
     if (rebuildNeeded[i] && onScreen(i)) {
       render(i);
+      rebuildNeeded[i] = false;
     }
   }
 
@@ -89,8 +93,6 @@ class ListView extends Widget {
       _onScrollSub?.cancel();
       return;
     }
-
-    print("Scroll");
 
     for (int i = 0; i < rebuildNeeded.length; i++) {
       rebuildIfNeeded(i);
@@ -109,7 +111,7 @@ class ListView extends Widget {
   void render(int i) {
     final index = headerBuilder != null ? i + 1 : 1;
     _uListElement.children[index] = itemBuilder(i, this);
-    rebuildNeeded[i] = false;
+    print("render $i");
   }
 
   void _onUpdateAllListener(int i) {
@@ -117,9 +119,7 @@ class ListView extends Widget {
       _onUpdateAllSub?.cancel();
       return;
     }
-    getRootView();
-
-    print("Update all ${i} ${initialItemCount}");
+    initView();
 
     if (rebuildNeeded.length != i) {
       rebuildNeeded = List.filled(i, true);
@@ -145,6 +145,7 @@ class ListView extends Widget {
       _onUpdateSub?.cancel();
       return;
     }
+    initView();
     print("Unique update $i");
     markAndRenderIfNeeded(i);
   }
@@ -154,6 +155,8 @@ class ListView extends Widget {
       _onInsertSub?.cancel();
       return;
     }
+    initView();
+
     initialItemCount++;
     print("insert: $i");
     final index = headerBuilder != null ? i + 1 : 1;
@@ -184,6 +187,15 @@ class ListView extends Widget {
     rebuildNeeded.removeAt(index);
   }
 
+  bool _inited = false;
+  void initView() {
+    if (!_inited) {
+      _inited = true;
+      getRootView();
+      _onUpdateAllListener(initialItemCount);
+    }
+  }
+
   @override
   Element build() {
     final headerBuilder = this.headerBuilder;
@@ -196,14 +208,8 @@ class ListView extends Widget {
           divElement()..style.height = '${itemDefaultHeight}px',
         if (footerBuilder != null) footerBuilder(this),
       ];
-
+    _inited = false;
     rebuildNeeded = List.filled(initialItemCount, true, growable: true);
-
-    addPostSetStateCallback(() {
-      getRootView();
-      _onUpdateAllListener(element.children.length);
-    });
-
     return element;
   }
 }
