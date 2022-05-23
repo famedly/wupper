@@ -154,8 +154,19 @@ class ListView extends Widget {
     initialItemCount++;
     print("insert: $i");
     final index = headerBuilder != null ? i + 1 : 1;
-    _uListElement.children.insert(index, itemBuilder(i, this));
-    rebuildNeeded.insert(i, false); // we just did a rebuild
+    if (_uListElement.children.length < index) {
+      _uListElement.children.insert(index, itemBuilder(i, this));
+    } else {
+      _uListElement.children.add(itemBuilder(i, this));
+    }
+
+    if (rebuildNeeded.length < i) {
+      rebuildNeeded.insert(i, false);
+      // we just did a rebuild
+    } else {
+      rebuildNeeded.add(false);
+    }
+
     print("Insert i $i");
   }
 
@@ -175,13 +186,17 @@ class ListView extends Widget {
     final headerBuilder = this.headerBuilder;
     final footerBuilder = this.footerBuilder;
 
-    return _uListElement
+    final element = _uListElement
       ..children = [
         if (headerBuilder != null) headerBuilder(this),
         for (var i = 0; i < initialItemCount; i++)
           divElement()..style.height = '${itemDefaultHeight}px',
         if (footerBuilder != null) footerBuilder(this),
       ];
+    addPostSetStateCallback(() {
+      _onUpdateAllListener(element.children.length);
+    });
+    return element;
   }
 }
 
