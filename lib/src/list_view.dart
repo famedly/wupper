@@ -46,25 +46,47 @@ class ListView extends Widget {
 
   List<bool> rebuildNeeded = [];
 
+  int top = 0;
+  int clientHeight = 0;
+
+  List<int> offsetsTop = [];
+  List<int> offsetsHeight = [];
+
+  /// UI rendering is expensive, to avoid forced reflow issues, we
+  /// get the item height before rendering
+  void updateViewPortDimension() {
+    top = rootListView!.scrollTop;
+    clientHeight = rootListView!.clientHeight;
+
+    if (offsetsTop.isNotEmpty &&
+        _uListElement.children[1].getAttribute("data-widget-type") ==
+            "EventWidget") {
+      for (int i = 0; i < offsetsTop.length; i++) {
+        print(
+            "Top ${offsetsTop[i]} ${_uListElement.children[i].offsetTop} ${_uListElement.children[i].offsetTop - offsetsTop[i]}");
+      }
+    }
+
+    offsetsTop = List.generate(_uListElement.children.length,
+        (index) => _uListElement.children[index].offsetTop);
+    offsetsHeight = List.generate(_uListElement.children.length,
+        (index) => _uListElement.children[index].offsetHeight);
+  }
+
   // Buffer to load elements further than what is displayed on the screen
   final int buffer;
   bool onScreen(i) {
     if (rootListView == null) return false;
 
     final index = headerBuilder != null ? i + 1 : 1;
-    final child = _uListElement.children[index];
 
     // We calculate the distance to the max and min boundaries of the viewport
     // from the opposite point for the element.
+    var delta = top - offsetsTop[index];
+    final deltaEnd = delta + clientHeight;
 
-    var delta = rootListView!.scrollTop - child.offsetTop;
-    final deltaEnd = delta + rootListView!.clientHeight;
-
-    delta = delta - child.offsetHeight;
+    delta = delta - offsetsHeight[index];
     if (delta <= buffer && deltaEnd >= -buffer) {
-      if (false)
-        print(
-            "scroll top: index: $index i:$i ${child.id} delta: $delta->$deltaEnd");
       return true;
     }
     return false;
@@ -75,6 +97,7 @@ class ListView extends Widget {
       render(i);
       rebuildNeeded[i] = false;
     } else {
+      print("List: not render $i");
       rebuildNeeded[i] = true;
     }
   }
@@ -111,7 +134,14 @@ class ListView extends Widget {
   void render(int i) {
     final index = headerBuilder != null ? i + 1 : 1;
     _uListElement.children[index] = itemBuilder(i, this);
-    print("render $i");
+
+    final newHeight = _uListElement.children[index].offsetHeight;
+    final delta = offsetsHeight[i] - newHeight;
+    offsetsHeight[i] = newHeight;
+
+    for (var pos = i + 1; pos < offsetsHeight.length; pos++) {
+      offsetsTop[pos] += delta;
+    }
   }
 
   void _onUpdateAllListener(int i) {
@@ -120,13 +150,13 @@ class ListView extends Widget {
       return;
     }
     initView();
+    updateViewPortDimension();
 
     if (rebuildNeeded.length != i) {
       rebuildNeeded = List.filled(i, true);
     }
 
     if (i != initialItemCount) {
-      print("complete rebuild");
       initialItemCount = i;
 
       // fill view
@@ -138,6 +168,7 @@ class ListView extends Widget {
     for (int pos = 0; pos < i; pos++) {
       markAndRenderIfNeeded(pos);
     }
+    updateViewPortDimension();
   }
 
   void _onUpdateListener(int i) {
@@ -145,8 +176,9 @@ class ListView extends Widget {
       _onUpdateSub?.cancel();
       return;
     }
+
     initView();
-    print("Unique update $i");
+    updateViewPortDimension(); // TODO: remove me
     markAndRenderIfNeeded(i);
   }
 
@@ -158,7 +190,6 @@ class ListView extends Widget {
     initView();
 
     initialItemCount++;
-    print("insert: $i");
     final index = headerBuilder != null ? i + 1 : 1;
     if (_uListElement.children.length < index) {
       _uListElement.children.insert(index, itemBuilder(i, this));
@@ -172,8 +203,6 @@ class ListView extends Widget {
     } else {
       rebuildNeeded.add(false);
     }
-
-    print("Insert i $i");
   }
 
   void _onDeleteListener(int i) {
@@ -185,6 +214,8 @@ class ListView extends Widget {
     final index = headerBuilder != null ? i + 1 : 1;
     _uListElement.children.removeAt(index);
     rebuildNeeded.removeAt(index);
+
+    // handle the fact that we may need to rebuild the later element
   }
 
   bool _inited = false;
