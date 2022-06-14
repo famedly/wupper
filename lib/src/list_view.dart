@@ -22,7 +22,7 @@ class ListView extends Widget {
   late final StreamSubscription? _onDeleteSub;
   late final StreamSubscription? _onScrollSub;
 
-  final UListElement _uListElement = UListElement();
+  final _uListElement = UListElement();
 
   ListView(
       {required this.itemBuilder,
@@ -46,31 +46,45 @@ class ListView extends Widget {
 
   List<bool> rebuildNeeded = [];
 
-  int top = 0;
-  int clientHeight = 0;
+  int firstItemOnScreen = 0;
+  int lastItemOnScreen = 0;
 
-  List<int> offsetsTop = [];
-  List<int> offsetsHeight = [];
+  int offsetTop = 0;
+  int? _offsetBottom;
+  int get offsetBottom {
+    if (_offsetBottom != null) return _offsetBottom!;
+
+    var delta = 0;
+    for (int i = 0; i < _uListElement.children.length; i++) {
+      delta += _uListElement.children[i].offsetHeight;
+    }
+
+    _offsetBottom = offsetTop + delta;
+    return _offsetBottom!;
+  }
+
+  int scrollPositionToTop = 0;
+  int clientHeight = 0;
 
   /// UI rendering is expensive, to avoid forced reflow issues, we
   /// get the item height before rendering
   void updateViewPortDimension() {
-    top = rootListView!.scrollTop;
+    scrollPositionToTop = rootListView!.scrollTop;
     clientHeight = rootListView!.clientHeight;
+  }
 
-    if (offsetsTop.isNotEmpty &&
-        _uListElement.children[1].getAttribute("data-widget-type") ==
-            "EventWidget") {
-      for (int i = 0; i < offsetsTop.length; i++) {
-        print(
-            "Top ${offsetsTop[i]} ${_uListElement.children[i].offsetTop} ${_uListElement.children[i].offsetTop - offsetsTop[i]}");
-      }
+  void setPos() {
+    final end = (initialItemCount - lastItemOnScreen) * itemDefaultHeight;
+    _uListElement.setAttribute(
+        "style", "padding: ${offsetTop}px 0px ${end}px  ");
+  }
+
+  Element? getUIElement(int i) {
+    final pos = i - firstItemOnScreen;
+    if (pos >= 0 && pos < _uListElement.children.length) {
+      return _uListElement.children[pos];
     }
-
-    offsetsTop = List.generate(_uListElement.children.length,
-        (index) => _uListElement.children[index].offsetTop);
-    offsetsHeight = List.generate(_uListElement.children.length,
-        (index) => _uListElement.children[index].offsetHeight);
+    return null;
   }
 
   // Buffer to load elements further than what is displayed on the screen
@@ -78,38 +92,89 @@ class ListView extends Widget {
   bool onScreen(i) {
     if (rootListView == null) return false;
 
-    final index = headerBuilder != null ? i + 1 : 1;
+    final element = getUIElement(i);
+
+    if (element == null) {
+      final pos = i - firstItemOnScreen;
+      if (pos < 0 && scrollPositionToTop < offsetTop) {
+        return true;
+      }
+      if (scrollPositionToTop + clientHeight > offsetBottom &&
+          pos >= _uListElement.children.length) {
+        return true;
+      }
+    }
+
+    if (element == null) return false;
 
     // We calculate the distance to the max and min boundaries of the viewport
     // from the opposite point for the element.
-    var delta = top - offsetsTop[index];
+    var delta = scrollPositionToTop - element.offsetTop - element.clientHeight;
     final deltaEnd = delta + clientHeight;
 
-    delta = delta - offsetsHeight[index];
+    delta = delta - element.offsetHeight;
+
     if (delta <= buffer && deltaEnd >= -buffer) {
       return true;
     }
+
     return false;
   }
 
-  void markAndRenderIfNeeded(int i) {
-    if (onScreen(i)) {
-      render(i);
-      rebuildNeeded[i] = false;
-    } else {
-      print("List: not render $i");
-      rebuildNeeded[i] = true;
+  void runRender() {
+    var start = firstItemOnScreen - 1;
+    while (start >= 0 && getUIElement(start) == null && onScreen(start)) {
+      render(start, start: true);
+      start--;
+    }
+
+    for (var pos = 0; pos < _uListElement.children.length; pos++) {
+      final i = pos + firstItemOnScreen;
+      if ((rebuildNeeded[i] || getUIElement(i) == null) && onScreen(i)) {
+        render(i);
+        rebuildNeeded[i] = false;
+      }
+    }
+
+    var end = lastItemOnScreen;
+    while (
+        end < initialItemCount && getUIElement(end) == null && onScreen(end)) {
+      render(end, end: true);
+      end++;
     }
   }
 
   void insert(i) {}
 
-  void rebuildIfNeeded(int i) {
-    if (rebuildNeeded[i] && onScreen(i)) {
-      render(i);
-      rebuildNeeded[i] = false;
+  bool unloading = false;
+  void unloadIfNotOnScreen() {
+    if (unloading) return;
+    unloading = true;
+    var pos = 0;
+    while (pos < _uListElement.children.length) {
+      final i = pos + firstItemOnScreen;
+      final element = getUIElement(i);
+
+      if (element != null && !onScreen(i)) {
+        if (i == firstItemOnScreen) {
+          offsetTop += element.offsetHeight;
+          firstItemOnScreen++;
+        } else {
+          _offsetBottom = offsetBottom - element.offsetHeight;
+          lastItemOnScreen--;
+        }
+        _uListElement.children.removeAt(pos);
+        setPos();
+      } else {
+        pos++;
+      }
     }
+    setPos();
+    unloading = false;
   }
+
+  Timer? scrollRateLimiter;
+  bool shouldRunScrollHandler = false;
 
   void _onScrollListener(_) {
     if (!mounted) {
@@ -117,23 +182,56 @@ class ListView extends Widget {
       return;
     }
 
-    for (int i = 0; i < rebuildNeeded.length; i++) {
-      rebuildIfNeeded(i);
+    if (scrollRateLimiter == null) {
+      //scrollHandler();
+      scrollRateLimiter = Timer(Duration(milliseconds: 100), () {
+        if (shouldRunScrollHandler) {
+          scrollHandler();
+          shouldRunScrollHandler = false;
+        }
+
+        scrollRateLimiter = null;
+      });
+    } else {
+      shouldRunScrollHandler = true;
     }
+  }
+
+  void scrollHandler() {
+    updateViewPortDimension();
+    runRender();
+
+    unloadIfNotOnScreen();
   }
 
   Element? rootListView;
 
   Element? getRootView() {
     if (rootListView != null) return null;
-    rootListView = appNode.querySelector("#" + _uListElement.id);
+    rootListView = appNode.querySelector("#" + div.id);
     _onScrollSub = rootListView?.onScroll.listen(_onScrollListener);
     return rootListView;
   }
 
-  void render(int i) {
-    final index = headerBuilder != null ? i + 1 : 1;
-    _uListElement.children[index] = itemBuilder(i, this);
+  void render(int i, {bool start = false, bool end = false}) {
+    final pos = i - firstItemOnScreen;
+    final newElement = itemBuilder(i, this);
+
+    if (start) {
+      _uListElement.children.insert(0, newElement);
+      offsetTop -= newElement.offsetHeight;
+      firstItemOnScreen--;
+      setPos();
+    } else if (end) {
+      _uListElement.children.add(newElement);
+      _offsetBottom = offsetBottom + newElement.offsetHeight;
+      lastItemOnScreen++;
+      setPos();
+    } else {
+      _uListElement.children[pos] = newElement;
+    }
+
+    /*_uListElement.children[index] = itemBuilder(i, this);
 
     final newHeight = _uListElement.children[index].offsetHeight;
     final delta = offsetsHeight[i] - newHeight;
@@ -141,7 +239,7 @@ class ListView extends Widget {
 
     for (var pos = i + 1; pos < offsetsHeight.length; pos++) {
       offsetsTop[pos] += delta;
-    }
+    }*/
   }
 
   void _onUpdateAllListener(int i) {
@@ -149,6 +247,7 @@ class ListView extends Widget {
       _onUpdateAllSub?.cancel();
       return;
     }
+
     initView();
     updateViewPortDimension();
 
@@ -156,19 +255,16 @@ class ListView extends Widget {
       rebuildNeeded = List.filled(i, true);
     }
 
-    if (i != initialItemCount) {
+    if (i != _uListElement.children.length) {
       initialItemCount = i;
 
       // fill view
       rebuildNeeded = List.filled(initialItemCount, true, growable: true);
-      _uListElement.children =
-          List.filled(i, divElement()..style.height = '${itemDefaultHeight}px');
     }
 
-    for (int pos = 0; pos < i; pos++) {
-      markAndRenderIfNeeded(pos);
-    }
+    runRender();
     updateViewPortDimension();
+    unloadIfNotOnScreen();
   }
 
   void _onUpdateListener(int i) {
@@ -179,7 +275,8 @@ class ListView extends Widget {
 
     initView();
     updateViewPortDimension(); // TODO: remove me
-    markAndRenderIfNeeded(i);
+    runRender();
+    setPos();
   }
 
   void _onInsertListener(int i) {
@@ -190,12 +287,12 @@ class ListView extends Widget {
     initView();
 
     initialItemCount++;
-    final index = headerBuilder != null ? i + 1 : 1;
+    /*final index = headerBuilder != null ? i + 1 : 1;
     if (_uListElement.children.length < index) {
       _uListElement.children.insert(index, itemBuilder(i, this));
     } else {
       _uListElement.children.add(itemBuilder(i, this));
-    }
+    }*/ // TODO: update me
 
     if (rebuildNeeded.length < i) {
       rebuildNeeded.insert(i, false);
@@ -223,25 +320,28 @@ class ListView extends Widget {
     if (!_inited) {
       _inited = true;
       getRootView();
-      _onUpdateAllListener(initialItemCount);
     }
   }
+
+  late DivElement div;
 
   @override
   Element build() {
     final headerBuilder = this.headerBuilder;
     final footerBuilder = this.footerBuilder;
 
-    final element = _uListElement
-      ..children = [
-        if (headerBuilder != null) headerBuilder(this),
-        for (var i = 0; i < initialItemCount; i++)
-          divElement()..style.height = '${itemDefaultHeight}px',
-        if (footerBuilder != null) footerBuilder(this),
-      ];
+    // final element = _uListElement
+    //   ..children = [
+    //     if (headerBuilder != null) headerBuilder(this),
+    //     for (var i = 0; i < initialItemCount; i++)
+    //       divElement()..style.height = '${itemDefaultHeight}px',
+    //     if (footerBuilder != null) footerBuilder(this),
+    //   ];
     _inited = false;
     rebuildNeeded = List.filled(initialItemCount, true, growable: true);
-    return element;
+    _uListElement.id = "child_$hashCode";
+    div = divElement(children: [_uListElement]);
+    return div;
   }
 }
 
