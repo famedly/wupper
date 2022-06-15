@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'dart:html';
+import 'dart:js';
+import 'dart:js_util';
 
 import 'package:wupper/wupper.dart';
 
@@ -125,6 +127,7 @@ class ListView extends Widget {
     var start = firstItemOnScreen - 1;
     while (start >= 0 && getUIElement(start) == null && onScreen(start)) {
       render(start, start: true);
+      rebuildNeeded[start] = false;
       start--;
     }
 
@@ -132,6 +135,7 @@ class ListView extends Widget {
       final i = pos + firstItemOnScreen;
       if ((rebuildNeeded[i] || getUIElement(i) == null) && onScreen(i)) {
         render(i);
+
         rebuildNeeded[i] = false;
       }
     }
@@ -140,6 +144,7 @@ class ListView extends Widget {
     while (
         end < initialItemCount && getUIElement(end) == null && onScreen(end)) {
       render(end, end: true);
+      rebuildNeeded[end] = false;
       end++;
     }
   }
@@ -173,28 +178,29 @@ class ListView extends Widget {
     unloading = false;
   }
 
-  Timer? scrollRateLimiter;
-  bool shouldRunScrollHandler = false;
+  Timer? scrollCoolDown;
+  bool isScrolling = false;
 
   void _onScrollListener(_) {
     if (!mounted) {
       _onScrollSub?.cancel();
       return;
     }
+    scrollHandler();
 
-    if (scrollRateLimiter == null) {
-      //scrollHandler();
-      scrollRateLimiter = Timer(Duration(milliseconds: 100), () {
-        if (shouldRunScrollHandler) {
-          scrollHandler();
-          shouldRunScrollHandler = false;
-        }
-
-        scrollRateLimiter = null;
-      });
-    } else {
-      shouldRunScrollHandler = true;
+    if (!isScrolling) {
+      print("No more update until...");
+      isScrolling = true;
     }
+
+    scrollCoolDown?.cancel();
+    scrollCoolDown = Timer(Duration(milliseconds: 20500), () {
+      isScrolling = false;
+      print("Update ok");
+      if (shouldUpdateAll) {
+        _onUpdateAllListener(initialItemCount);
+      }
+    });
   }
 
   void scrollHandler() {
@@ -207,9 +213,20 @@ class ListView extends Widget {
   Element? rootListView;
 
   Element? getRootView() {
-    if (rootListView != null) return null;
+    if (rootListView != null) return rootListView;
     rootListView = appNode.querySelector("#" + div.id);
-    _onScrollSub = rootListView?.onScroll.listen(_onScrollListener);
+    //_onScrollSub = rootListView?.onScroll.listen(_onScrollListener);
+    //rootListView?.addEventListener("scroll", (event) => {print("scroll")});
+
+    if (rootListView != null) {
+      final option = newObject();
+      setProperty(option, "passive", true);
+      callMethod(rootListView!, 'addEventListener',
+          ['scroll', allowInterop(_onScrollListener), option]);
+    }
+
+    print("get root view");
+
     return rootListView;
   }
 
@@ -242,6 +259,7 @@ class ListView extends Widget {
     }*/
   }
 
+  bool shouldUpdateAll = false;
   void _onUpdateAllListener(int i) {
     if (!mounted) {
       _onUpdateAllSub?.cancel();
@@ -249,7 +267,6 @@ class ListView extends Widget {
     }
 
     initView();
-    updateViewPortDimension();
 
     if (rebuildNeeded.length != i) {
       rebuildNeeded = List.filled(i, true);
@@ -262,9 +279,17 @@ class ListView extends Widget {
       rebuildNeeded = List.filled(initialItemCount, true, growable: true);
     }
 
-    runRender();
+    if (isScrolling && !shouldUpdateAll) {
+      shouldUpdateAll = true;
+      return;
+    }
+
+    print("rendering in update");
+
     updateViewPortDimension();
+    runRender();
     unloadIfNotOnScreen();
+    shouldUpdateAll = false;
   }
 
   void _onUpdateListener(int i) {
@@ -272,6 +297,12 @@ class ListView extends Widget {
       _onUpdateSub?.cancel();
       return;
     }
+    if (isScrolling && !shouldUpdateAll) {
+      shouldUpdateAll = true;
+      return;
+    }
+
+    print("rendering in update single");
 
     initView();
     updateViewPortDimension(); // TODO: remove me
@@ -308,9 +339,10 @@ class ListView extends Widget {
       return;
     }
     initialItemCount--;
-    final index = headerBuilder != null ? i + 1 : 1;
-    _uListElement.children.removeAt(index);
-    rebuildNeeded.removeAt(index);
+    final element = getUIElement(i);
+    if (element != null) _uListElement.children.remove(element);
+    //_uListElement.children.removeAt(index); // todo: delete item if found
+    rebuildNeeded.removeAt(i);
 
     // handle the fact that we may need to rebuild the later element
   }
