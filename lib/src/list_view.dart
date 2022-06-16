@@ -111,10 +111,10 @@ class ListView extends Widget {
 
     // We calculate the distance to the max and min boundaries of the viewport
     // from the opposite point for the element.
-    var delta = scrollPositionToTop - element.offsetTop - element.clientHeight;
+    var delta = scrollPositionToTop - i * itemDefaultHeight;
     final deltaEnd = delta + clientHeight;
 
-    delta = delta - element.offsetHeight;
+    delta = delta - itemDefaultHeight;
 
     if (delta <= buffer && deltaEnd >= -buffer) {
       return true;
@@ -162,10 +162,10 @@ class ListView extends Widget {
 
       if (element != null && !onScreen(i)) {
         if (i == firstItemOnScreen) {
-          offsetTop += element.offsetHeight;
+          offsetTop += itemDefaultHeight;
           firstItemOnScreen++;
         } else {
-          _offsetBottom = offsetBottom - element.offsetHeight;
+          _offsetBottom = offsetBottom - itemDefaultHeight;
           lastItemOnScreen--;
         }
         _uListElement.children.removeAt(pos);
@@ -236,12 +236,12 @@ class ListView extends Widget {
 
     if (start) {
       _uListElement.children.insert(0, newElement);
-      offsetTop -= newElement.offsetHeight;
+      offsetTop -= itemDefaultHeight;
       firstItemOnScreen--;
       setPos();
     } else if (end) {
       _uListElement.children.add(newElement);
-      _offsetBottom = offsetBottom + newElement.offsetHeight;
+      _offsetBottom = offsetBottom + itemDefaultHeight;
       lastItemOnScreen++;
       setPos();
     } else {
