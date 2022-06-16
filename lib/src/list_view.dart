@@ -1,7 +1,5 @@
 import 'dart:async';
 import 'dart:html';
-import 'dart:js';
-import 'dart:js_util';
 
 import 'package:wupper/wupper.dart';
 
@@ -12,7 +10,6 @@ import 'package:wupper/wupper.dart';
 /// Set [reverse] to true, to flip the direction of the items.
 class ListView extends Widget {
   final ListViewController? _controller;
-  final int itemDefaultHeight;
   final Element Function(int i, Widget parent) itemBuilder;
   final Element Function(Widget parent)? headerBuilder;
   final Element Function(Widget parent)? footerBuilder;
@@ -22,21 +19,16 @@ class ListView extends Widget {
   late final StreamSubscription? _onUpdateSub;
   late final StreamSubscription? _onInsertSub;
   late final StreamSubscription? _onDeleteSub;
-  late final StreamSubscription? _onScrollSub;
 
-  final _uListElement = UListElement();
+  final UListElement _uListElement = UListElement();
 
-  ListView(
-      {required this.itemBuilder,
-      required this.initialItemCount,
-      this.headerBuilder,
-      this.footerBuilder,
-      ListViewController? controller,
-      this.itemDefaultHeight = 100,
-      this.buffer = 0})
-      : _controller = controller,
-        assert(itemDefaultHeight > 0),
-        assert(buffer >= 0) {
+  ListView({
+    required this.itemBuilder,
+    required this.initialItemCount,
+    this.headerBuilder,
+    this.footerBuilder,
+    ListViewController? controller,
+  }) : _controller = controller {
     // attach the list to the controller
     _controller?._attachView(this);
     _onUpdateAllSub =
@@ -46,250 +38,13 @@ class ListView extends Widget {
     _onDeleteSub = _controller?._delete.stream.listen(_onDeleteListener);
   }
 
-  List<bool> rebuildNeeded = [];
-
-  int firstItemOnScreen = 0;
-  int lastItemOnScreen = 0;
-
-  int offsetTop = 0;
-  int? _offsetBottom;
-  int get offsetBottom {
-    if (_offsetBottom != null) return _offsetBottom!;
-
-    var delta = 0;
-    for (int i = 0; i < _uListElement.children.length; i++) {
-      delta += _uListElement.children[i].offsetHeight;
-    }
-
-    _offsetBottom = offsetTop + delta;
-    return _offsetBottom!;
-  }
-
-  int scrollPositionToTop = 0;
-  int clientHeight = 0;
-
-  /// UI rendering is expensive, to avoid forced reflow issues, we
-  /// get the item height before rendering
-  void updateViewPortDimension() {
-    scrollPositionToTop = rootListView!.scrollTop;
-    clientHeight = rootListView!.clientHeight;
-  }
-
-  void setPos() {
-    final end = (initialItemCount - lastItemOnScreen) * itemDefaultHeight;
-    _uListElement.setAttribute(
-        "style", "padding: ${offsetTop}px 0px ${end}px  ");
-  }
-
-  Element? getUIElement(int i) {
-    final pos = i - firstItemOnScreen;
-    if (pos >= 0 && pos < _uListElement.children.length) {
-      return _uListElement.children[pos];
-    }
-    return null;
-  }
-
-  // Buffer to load elements further than what is displayed on the screen
-  final int buffer;
-  bool onScreen(i) {
-    if (rootListView == null) return false;
-
-    final element = getUIElement(i);
-
-    if (element == null) {
-      final pos = i - firstItemOnScreen;
-      if (pos < 0 && scrollPositionToTop < offsetTop) {
-        return true;
-      }
-      if (scrollPositionToTop + clientHeight > offsetBottom &&
-          pos >= _uListElement.children.length) {
-        return true;
-      }
-    }
-
-    if (element == null) return false;
-
-    // We calculate the distance to the max and min boundaries of the viewport
-    // from the opposite point for the element.
-    var delta = scrollPositionToTop - i * itemDefaultHeight;
-    final deltaEnd = delta + clientHeight;
-
-    delta = delta - itemDefaultHeight;
-
-    if (delta <= buffer && deltaEnd >= -buffer) {
-      return true;
-    }
-
-    return false;
-  }
-
-  void runRender() {
-    var start = firstItemOnScreen - 1;
-    while (start >= 0 && getUIElement(start) == null && onScreen(start)) {
-      render(start, start: true);
-      rebuildNeeded[start] = false;
-      start--;
-    }
-
-    for (var pos = 0; pos < _uListElement.children.length; pos++) {
-      final i = pos + firstItemOnScreen;
-      if ((rebuildNeeded[i] || getUIElement(i) == null) && onScreen(i)) {
-        render(i);
-
-        rebuildNeeded[i] = false;
-      }
-    }
-
-    var end = lastItemOnScreen;
-    while (
-        end < initialItemCount && getUIElement(end) == null && onScreen(end)) {
-      render(end, end: true);
-      rebuildNeeded[end] = false;
-      end++;
-    }
-  }
-
-  void insert(i) {}
-
-  bool unloading = false;
-  void unloadIfNotOnScreen() {
-    if (unloading) return;
-    unloading = true;
-    var pos = 0;
-    while (pos < _uListElement.children.length) {
-      final i = pos + firstItemOnScreen;
-      final element = getUIElement(i);
-
-      if (element != null && !onScreen(i)) {
-        if (i == firstItemOnScreen) {
-          offsetTop += itemDefaultHeight;
-          firstItemOnScreen++;
-        } else {
-          _offsetBottom = offsetBottom - itemDefaultHeight;
-          lastItemOnScreen--;
-        }
-        _uListElement.children.removeAt(pos);
-        setPos();
-      } else {
-        pos++;
-      }
-    }
-    setPos();
-    unloading = false;
-  }
-
-  Timer? scrollCoolDown;
-  bool isScrolling = false;
-
-  void _onScrollListener(_) {
-    if (!mounted) {
-      _onScrollSub?.cancel();
-      return;
-    }
-    scrollHandler();
-
-    if (!isScrolling) {
-      print("No more update until...");
-      isScrolling = true;
-    }
-
-    scrollCoolDown?.cancel();
-    scrollCoolDown = Timer(Duration(milliseconds: 20500), () {
-      isScrolling = false;
-      print("Update ok");
-      if (shouldUpdateAll) {
-        _onUpdateAllListener(initialItemCount);
-      }
-    });
-  }
-
-  void scrollHandler() {
-    updateViewPortDimension();
-    runRender();
-
-    unloadIfNotOnScreen();
-  }
-
-  Element? rootListView;
-
-  Element? getRootView() {
-    if (rootListView != null) return rootListView;
-    rootListView = appNode.querySelector("#" + div.id);
-    //_onScrollSub = rootListView?.onScroll.listen(_onScrollListener);
-    //rootListView?.addEventListener("scroll", (event) => {print("scroll")});
-
-    if (rootListView != null) {
-      final option = newObject();
-      setProperty(option, "passive", true);
-      callMethod(rootListView!, 'addEventListener',
-          ['scroll', allowInterop(_onScrollListener), option]);
-    }
-
-    print("get root view");
-
-    return rootListView;
-  }
-
-  void render(int i, {bool start = false, bool end = false}) {
-    final pos = i - firstItemOnScreen;
-    final newElement = itemBuilder(i, this);
-
-    if (start) {
-      _uListElement.children.insert(0, newElement);
-      offsetTop -= itemDefaultHeight;
-      firstItemOnScreen--;
-      setPos();
-    } else if (end) {
-      _uListElement.children.add(newElement);
-      _offsetBottom = offsetBottom + itemDefaultHeight;
-      lastItemOnScreen++;
-      setPos();
-    } else {
-      _uListElement.children[pos] = newElement;
-    }
-
-    /*_uListElement.children[index] = itemBuilder(i, this);
-
-    final newHeight = _uListElement.children[index].offsetHeight;
-    final delta = offsetsHeight[i] - newHeight;
-    offsetsHeight[i] = newHeight;
-
-    for (var pos = i + 1; pos < offsetsHeight.length; pos++) {
-      offsetsTop[pos] += delta;
-    }*/
-  }
-
-  bool shouldUpdateAll = false;
   void _onUpdateAllListener(int i) {
     if (!mounted) {
       _onUpdateAllSub?.cancel();
       return;
     }
-
-    initView();
-
-    if (rebuildNeeded.length != i) {
-      rebuildNeeded = List.filled(i, true);
-    }
-
-    if (i != _uListElement.children.length) {
-      initialItemCount = i;
-
-      // fill view
-      rebuildNeeded = List.filled(initialItemCount, true, growable: true);
-    }
-
-    if (isScrolling && !shouldUpdateAll) {
-      shouldUpdateAll = true;
-      return;
-    }
-
-    print("rendering in update");
-
-    updateViewPortDimension();
-    runRender();
-    unloadIfNotOnScreen();
-    shouldUpdateAll = false;
+    initialItemCount = i;
+    _uListElement.children = build().children;
   }
 
   void _onUpdateListener(int i) {
@@ -297,17 +52,8 @@ class ListView extends Widget {
       _onUpdateSub?.cancel();
       return;
     }
-    if (isScrolling && !shouldUpdateAll) {
-      shouldUpdateAll = true;
-      return;
-    }
-
-    print("rendering in update single");
-
-    initView();
-    updateViewPortDimension(); // TODO: remove me
-    runRender();
-    setPos();
+    final index = headerBuilder != null ? i + 1 : 1;
+    _uListElement.children[index] = itemBuilder(i, this);
   }
 
   void _onInsertListener(int i) {
@@ -315,22 +61,9 @@ class ListView extends Widget {
       _onInsertSub?.cancel();
       return;
     }
-    initView();
-
     initialItemCount++;
-    /*final index = headerBuilder != null ? i + 1 : 1;
-    if (_uListElement.children.length < index) {
-      _uListElement.children.insert(index, itemBuilder(i, this));
-    } else {
-      _uListElement.children.add(itemBuilder(i, this));
-    }*/ // TODO: update me
-
-    if (rebuildNeeded.length < i) {
-      rebuildNeeded.insert(i, false);
-      // we just did a rebuild
-    } else {
-      rebuildNeeded.add(false);
-    }
+    final index = headerBuilder != null ? i + 1 : 1;
+    _uListElement.children.insert(index, itemBuilder(i, this));
   }
 
   void _onDeleteListener(int i) {
@@ -339,41 +72,20 @@ class ListView extends Widget {
       return;
     }
     initialItemCount--;
-    final element = getUIElement(i);
-    if (element != null) _uListElement.children.remove(element);
-    //_uListElement.children.removeAt(index); // todo: delete item if found
-    rebuildNeeded.removeAt(i);
-
-    // handle the fact that we may need to rebuild the later element
+    final index = headerBuilder != null ? i + 1 : 1;
+    _uListElement.children.removeAt(index);
   }
-
-  bool _inited = false;
-  void initView() {
-    if (!_inited) {
-      _inited = true;
-      getRootView();
-    }
-  }
-
-  late DivElement div;
 
   @override
   Element build() {
     final headerBuilder = this.headerBuilder;
     final footerBuilder = this.footerBuilder;
-
-    // final element = _uListElement
-    //   ..children = [
-    //     if (headerBuilder != null) headerBuilder(this),
-    //     for (var i = 0; i < initialItemCount; i++)
-    //       divElement()..style.height = '${itemDefaultHeight}px',
-    //     if (footerBuilder != null) footerBuilder(this),
-    //   ];
-    _inited = false;
-    rebuildNeeded = List.filled(initialItemCount, true, growable: true);
-    _uListElement.id = "child_$hashCode";
-    div = divElement(children: [_uListElement]);
-    return div;
+    return _uListElement
+      ..children = [
+        if (headerBuilder != null) headerBuilder(this),
+        for (var i = 0; i < initialItemCount; i++) itemBuilder(i, this),
+        if (footerBuilder != null) footerBuilder(this),
+      ];
   }
 }
 
