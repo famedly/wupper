@@ -28,5 +28,6 @@ export 'src/html_element_constructors.dart';
 export 'src/future_builder.dart';
 export 'src/stream_builder.dart';
 export 'src/list_view.dart';
+export 'src/fixed_list_view.dart';
 export 'src/state.dart';
 export 'src/widget.dart';
