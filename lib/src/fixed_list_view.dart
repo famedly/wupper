@@ -151,16 +151,14 @@ class FixedHeightListView extends Widget {
 
   void insert(i) {}
 
-  bool unloading = false;
   void unloadIfNotOnScreen() {
-    if (unloading) return;
-    unloading = true;
     var pos = 0;
     while (pos < _uListElement.children.length) {
       final i = pos + firstItemOnScreen;
       final element = getUIElement(i);
 
       if (element != null && !onScreen(i)) {
+        _uListElement.children.removeAt(pos);
         if (i == firstItemOnScreen) {
           offsetTop += itemDefaultHeight;
           firstItemOnScreen++;
@@ -168,14 +166,12 @@ class FixedHeightListView extends Widget {
           _offsetBottom = offsetBottom - itemDefaultHeight;
           lastItemOnScreen--;
         }
-        _uListElement.children.removeAt(pos);
         setPos();
       } else {
         pos++;
       }
     }
     setPos();
-    unloading = false;
   }
 
   Timer? scrollCoolDown;
@@ -187,27 +183,15 @@ class FixedHeightListView extends Widget {
       return;
     }
     scrollHandler();
-
-    if (!isScrolling) {
-      print("No more update until...");
-      isScrolling = true;
-    }
-
-    scrollCoolDown?.cancel();
-    scrollCoolDown = Timer(Duration(milliseconds: 20500), () {
-      isScrolling = false;
-      print("Update ok");
-      if (shouldUpdateAll) {
-        _onUpdateAllListener(initialItemCount);
-      }
-    });
   }
 
   void scrollHandler() {
+    scrollCoolDown?.cancel();
     updateViewPortDimension();
     runRender();
 
-    unloadIfNotOnScreen();
+    // unload screen if needed
+    scrollCoolDown = Timer(Duration(milliseconds: 1000), unloadIfNotOnScreen);
   }
 
   Element? rootListView;
@@ -232,8 +216,10 @@ class FixedHeightListView extends Widget {
 
   void render(int i, {bool start = false, bool end = false}) {
     final pos = i - firstItemOnScreen;
+
     final newElement = itemBuilder(i, this);
 
+    newElement.style.height = "$itemDefaultHeight px";
     if (start) {
       _uListElement.children.insert(0, newElement);
       offsetTop -= itemDefaultHeight;
