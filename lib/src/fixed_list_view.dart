@@ -258,9 +258,9 @@ class FixedHeightListView extends Widget {
     }
 
     initView();
-    updateViewPortDimension(); // TODO: remove me
+    updateViewPortDimension();
     runRender();
-    setPos();
+    unloadIfNotOnScreen();
   }
 
   void _onDeleteListener(int i) {
