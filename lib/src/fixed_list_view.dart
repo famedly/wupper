@@ -1,7 +1,5 @@
 import 'dart:async';
 import 'dart:html';
-import 'dart:js';
-import 'dart:js_util';
 
 import 'package:wupper/wupper.dart';
 
@@ -20,7 +18,6 @@ class FixedHeightListView extends Widget {
 
   late final StreamSubscription? _onUpdateAllSub;
   late final StreamSubscription? _onUpdateSub;
-  late final StreamSubscription? _onInsertSub;
   late final StreamSubscription? _onDeleteSub;
   late final StreamSubscription? _onScrollSub;
 
@@ -42,7 +39,6 @@ class FixedHeightListView extends Widget {
     _onUpdateAllSub =
         _controller?._updateAll.stream.listen(_onUpdateAllListener);
     _onUpdateSub = _controller?._update.stream.listen(_onUpdateListener);
-    _onInsertSub = _controller?._insert.stream.listen(_onInsertListener);
     _onDeleteSub = _controller?._delete.stream.listen(_onDeleteListener);
   }
 
@@ -171,17 +167,14 @@ class FixedHeightListView extends Widget {
   Element? getRootView() {
     if (rootListView != null) return rootListView;
     rootListView = appNode.querySelector("#" + div.id);
-    //_onScrollSub = rootListView?.onScroll.listen(_onScrollListener);
+    _onScrollSub = rootListView?.onScroll.listen(_onScrollListener);
 
-    if (rootListView != null) {
-      final option = newObject();
-      setProperty(option, "passive", true);
-      callMethod(rootListView!, 'addEventListener',
-          ['scroll', allowInterop(_onScrollListener), option]);
-    }
-
-    print("get root view");
-
+    //if (rootListView != null) {
+    //  final option = newObject();
+    //  setProperty(option, "passive", true);
+    //  callMethod(rootListView!, 'addEventListener',
+    //      ['scroll', allowInterop(_onScrollListener), option]);
+    //}
     return rootListView;
   }
 
@@ -270,31 +263,6 @@ class FixedHeightListView extends Widget {
     setPos();
   }
 
-  void _onInsertListener(int i) {
-    if (!mounted) {
-      _onInsertSub?.cancel();
-      return;
-    }
-    initView();
-
-    initialItemCount++;
-    /*final index = headerBuilder != null ? i + 1 : 1;
-    if (_uListElement.children.length < index) {
-      _uListElement.children.insert(index, itemBuilder(i, this));
-    } else {
-      _uListElement.children.add(itemBuilder(i, this));
-    }*/ // TODO: update me
-
-    if (rebuildNeeded.length < i) {
-      rebuildNeeded.insert(i, false);
-      // we just did a rebuild
-    } else {
-      rebuildNeeded.add(false);
-    }
-
-    runRender();
-  }
-
   void _onDeleteListener(int i) {
     if (!mounted) {
       _onDeleteSub?.cancel();
@@ -318,16 +286,6 @@ class FixedHeightListView extends Widget {
 
   @override
   Element build() {
-    final headerBuilder = this.headerBuilder;
-    final footerBuilder = this.footerBuilder;
-
-    // final element = _uListElement
-    //   ..children = [
-    //     if (headerBuilder != null) headerBuilder(this),
-    //     for (var i = 0; i < initialItemCount; i++)
-    //       divElement()..style.height = '${itemDefaultHeight}px',
-    //     if (footerBuilder != null) footerBuilder(this),
-    //   ];
     _inited = false;
     rebuildNeeded = List.filled(initialItemCount, true, growable: true);
     _uListElement.id = "child_$hashCode";
@@ -346,7 +304,6 @@ class FixedHeightListViewController {
   FixedHeightListView? _view;
   final StreamController<int> _updateAll = StreamController<int>.broadcast();
   final StreamController<int> _update = StreamController<int>.broadcast();
-  final StreamController<int> _insert = StreamController<int>.broadcast();
   final StreamController<int> _delete = StreamController<int>.broadcast();
 
   /// connects the given [FixedHeightListView] with the controller in order to access its
@@ -358,9 +315,6 @@ class FixedHeightListViewController {
 
   /// updates the item at offset [index]
   void update(int index) => _update.add(index);
-
-  /// inserts an item at offset [index]
-  void insert(int index) => _insert.add(index);
 
   /// deletes the item at offset [index]
   void delete(int index) => _delete.add(index);
