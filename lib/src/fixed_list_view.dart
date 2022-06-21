@@ -12,22 +12,20 @@ class FixedHeightListView extends Widget {
   final FixedHeightListViewController? _controller;
   final int itemDefaultHeight;
   final Element Function(int i, Widget parent) itemBuilder;
-  final Element Function(Widget parent)? headerBuilder;
-  final Element Function(Widget parent)? footerBuilder;
-  int initialItemCount;
 
   late final StreamSubscription? _onUpdateAllSub;
   late final StreamSubscription? _onUpdateSub;
   late final StreamSubscription? _onDeleteSub;
-  late final StreamSubscription? _onScrollSub;
 
+  late final StreamSubscription? _onScrollSub;
+  late final StreamSubscription? _onResizeSub;
+
+  int initialItemCount;
   final _uListElement = UListElement();
 
   FixedHeightListView(
       {required this.itemBuilder,
       required this.initialItemCount,
-      this.headerBuilder,
-      this.footerBuilder,
       FixedHeightListViewController? controller,
       this.itemDefaultHeight = 100,
       this.buffer = 0})
@@ -148,6 +146,7 @@ class FixedHeightListView extends Widget {
   void _onScrollListener(_) {
     if (!mounted) {
       _onScrollSub?.cancel();
+      _onDeleteSub?.cancel();
       return;
     }
     scrollHandler();
@@ -168,13 +167,7 @@ class FixedHeightListView extends Widget {
     if (rootListView != null) return rootListView;
     rootListView = appNode.querySelector("#" + div.id);
     _onScrollSub = rootListView?.onScroll.listen(_onScrollListener);
-
-    //if (rootListView != null) {
-    //  final option = newObject();
-    //  setProperty(option, "passive", true);
-    //  callMethod(rootListView!, 'addEventListener',
-    //      ['scroll', allowInterop(_onScrollListener), option]);
-    //}
+    _onResizeSub = window.onResize.listen(_onScrollListener);
     return rootListView;
   }
 
