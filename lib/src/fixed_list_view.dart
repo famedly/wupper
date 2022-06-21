@@ -123,34 +123,6 @@ class FixedHeightListView extends Widget {
     return false;
   }
 
-  void runRender() {
-    var start = firstItemOnScreen - 1;
-    while (start >= 0 && getUIElement(start) == null && onScreen(start)) {
-      render(start, start: true);
-      rebuildNeeded[start] = false;
-      start--;
-    }
-
-    for (var pos = 0; pos < _uListElement.children.length; pos++) {
-      final i = pos + firstItemOnScreen;
-      if ((rebuildNeeded[i] || getUIElement(i) == null) && onScreen(i)) {
-        render(i);
-
-        rebuildNeeded[i] = false;
-      }
-    }
-
-    var end = lastItemOnScreen;
-    while (
-        end < initialItemCount && getUIElement(end) == null && onScreen(end)) {
-      render(end, end: true);
-      rebuildNeeded[end] = false;
-      end++;
-    }
-  }
-
-  void insert(i) {}
-
   void unloadIfNotOnScreen() {
     var pos = 0;
     while (pos < _uListElement.children.length) {
@@ -200,7 +172,6 @@ class FixedHeightListView extends Widget {
     if (rootListView != null) return rootListView;
     rootListView = appNode.querySelector("#" + div.id);
     //_onScrollSub = rootListView?.onScroll.listen(_onScrollListener);
-    //rootListView?.addEventListener("scroll", (event) => {print("scroll")});
 
     if (rootListView != null) {
       final option = newObject();
@@ -234,18 +205,35 @@ class FixedHeightListView extends Widget {
       _uListElement.children[pos] = newElement;
     }
 
-    /*_uListElement.children[index] = itemBuilder(i, this);
-
-    final newHeight = _uListElement.children[index].offsetHeight;
-    final delta = offsetsHeight[i] - newHeight;
-    offsetsHeight[i] = newHeight;
-
-    for (var pos = i + 1; pos < offsetsHeight.length; pos++) {
-      offsetsTop[pos] += delta;
-    }*/
+    rebuildNeeded[i] = false;
   }
 
-  bool shouldUpdateAll = false;
+  void runRender() {
+    var start = firstItemOnScreen - 1;
+    while (start >= 0 && getUIElement(start) == null && onScreen(start)) {
+      render(start, start: true);
+      rebuildNeeded[start] = false;
+      start--;
+    }
+
+    for (var pos = 0; pos < _uListElement.children.length; pos++) {
+      final i = pos + firstItemOnScreen;
+      if ((rebuildNeeded[i] || getUIElement(i) == null) && onScreen(i)) {
+        render(i);
+
+        rebuildNeeded[i] = false;
+      }
+    }
+
+    var end = lastItemOnScreen;
+    while (
+        end < initialItemCount && getUIElement(end) == null && onScreen(end)) {
+      render(end, end: true);
+      rebuildNeeded[end] = false;
+      end++;
+    }
+  }
+
   void _onUpdateAllListener(int i) {
     if (!mounted) {
       _onUpdateAllSub?.cancel();
@@ -265,17 +253,9 @@ class FixedHeightListView extends Widget {
       rebuildNeeded = List.filled(initialItemCount, true, growable: true);
     }
 
-    if (isScrolling && !shouldUpdateAll) {
-      shouldUpdateAll = true;
-      return;
-    }
-
-    print("rendering in update");
-
     updateViewPortDimension();
     runRender();
     unloadIfNotOnScreen();
-    shouldUpdateAll = false;
   }
 
   void _onUpdateListener(int i) {
@@ -283,12 +263,6 @@ class FixedHeightListView extends Widget {
       _onUpdateSub?.cancel();
       return;
     }
-    if (isScrolling && !shouldUpdateAll) {
-      shouldUpdateAll = true;
-      return;
-    }
-
-    print("rendering in update single");
 
     initView();
     updateViewPortDimension(); // TODO: remove me
@@ -317,6 +291,8 @@ class FixedHeightListView extends Widget {
     } else {
       rebuildNeeded.add(false);
     }
+
+    runRender();
   }
 
   void _onDeleteListener(int i) {
@@ -327,10 +303,7 @@ class FixedHeightListView extends Widget {
     initialItemCount--;
     final element = getUIElement(i);
     if (element != null) _uListElement.children.remove(element);
-    //_uListElement.children.removeAt(index); // todo: delete item if found
     rebuildNeeded.removeAt(i);
-
-    // handle the fact that we may need to rebuild the later element
   }
 
   bool _inited = false;
