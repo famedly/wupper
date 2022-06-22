@@ -228,16 +228,13 @@ class FixedHeightListView extends Widget {
 
     initView();
 
-    if (rebuildNeeded.length != i) {
-      rebuildNeeded = List.filled(i, true);
-    }
-
-    if (i != _uListElement.children.length) {
+    if (initialItemCount != i) {
+      // we need to reset the view
+      clearView();
       initialItemCount = i;
-
-      // fill view
-      rebuildNeeded = List.filled(initialItemCount, true, growable: true);
     }
+
+    rebuildNeeded = List.filled(i, true, growable: true);
 
     updateViewPortDimension();
     runRender();
@@ -250,10 +247,22 @@ class FixedHeightListView extends Widget {
       return;
     }
 
+    if (i >= 0 && i < rebuildNeeded.length) {
+      rebuildNeeded[i] = true;
+    }
+
     initView();
     updateViewPortDimension();
     runRender();
     unloadIfNotOnScreen();
+  }
+
+  void clearView() {
+    offsetTop = 0;
+    _offsetBottom = 0;
+    _uListElement.children.clear();
+    firstItemOnScreen = 0;
+    lastItemOnScreen = 0;
   }
 
   void _onDeleteListener(int i) {
