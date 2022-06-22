@@ -55,10 +55,10 @@ class BasicRouter extends Widget {
   void push(String route) => currentRoute.set(route);
 
   @override
-  Element build() {
+  Element build(context) {
     window.location.hash = currentRoute.state;
     return currentRoute.bind(
-      (currentRoute) => routeBuilder(currentRoute).appendTo(this),
+      context, (context, currentRoute) => routeBuilder(currentRoute).appendTo(context),
     );
   }
 }

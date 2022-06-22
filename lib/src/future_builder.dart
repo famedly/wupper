@@ -46,7 +46,7 @@ class FutureBuilder<T> extends Widget {
   }
 
   @override
-  Element build() {
-    return _snapshot.bind((_snapshot) => builder(_snapshot, this));
+  Element build(context) {
+    return _snapshot.bind(context, (context, _snapshot) => builder(_snapshot, this));
   }
 }

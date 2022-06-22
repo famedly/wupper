@@ -298,7 +298,7 @@ class FixedHeightListView extends Widget {
   late DivElement div;
 
   @override
-  Element build() {
+  Element build(context) {
     _inited = false;
     rebuildNeeded = List.filled(initialItemCount, true, growable: true);
     _uListElement.id = "child_$hashCode";

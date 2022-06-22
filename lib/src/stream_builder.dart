@@ -66,5 +66,6 @@ class StreamBuilder<T> extends Widget {
   }
 
   @override
-  Element build() => _snapshot.bind((_snapshot) => builder(_snapshot, this));
+  Element build(context) =>
+      _snapshot.bind(context, (context, _snapshot) => builder(_snapshot, this));
 }

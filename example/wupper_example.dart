@@ -8,7 +8,7 @@ void main() {
 
 class TodoApp extends Widget {
   @override
-  Element build() {
+  Element build(context) {
     return BasicRouter(
       routeBuilder: (route) {
         switch (route) {
@@ -18,13 +18,13 @@ class TodoApp extends Widget {
             return NotFoundPage();
         }
       },
-    ).appendTo(this);
+    ).appendTo(context);
   }
 }
 
 class NotFoundPage extends Widget {
   @override
-  Element build() => paragraphElement(text: '404: Not found');
+  Element build(context) => paragraphElement(text: '404: Not found');
 }
 
 class TodoListPage extends Widget {
@@ -46,7 +46,7 @@ class TodoListPage extends Widget {
   }
 
   @override
-  Element build() => divElement(
+  Element build(context) => divElement(
         className: 'container',
         children: [
           textField,
@@ -55,10 +55,11 @@ class TodoListPage extends Widget {
             onClick: addTodoAction,
           ),
           todos.bind(
-            (todos) => uListElement(
+            context,
+            (context, todos) => uListElement(
               children: [
                 for (final todo in todos)
-                  TodoListItem(todo: todo).appendTo(this),
+                  TodoListItem(todo: todo).appendTo(context),
               ],
             ),
           ),
@@ -72,7 +73,7 @@ class TodoListItem extends Widget {
   TodoListItem({required this.todo});
 
   @override
-  Element build() => lIElement(
+  Element build(context) => lIElement(
         children: [
           paragraphElement(text: todo),
           buttonElement(

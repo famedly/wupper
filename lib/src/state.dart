@@ -1,5 +1,7 @@
 import 'dart:html';
 
+import '../wupper.dart';
+
 class State<T> {
   State(T initState) : _state = initState;
   T get state => _state;
@@ -10,6 +12,7 @@ class State<T> {
 
   T _state;
   void set(T value) {
+    BuildContext context = BuildContext(null);
     _state = value;
     final _subs = {..._subscriptions};
     for (final sub in _subs) {
@@ -17,7 +20,7 @@ class State<T> {
         _subscriptions.remove(sub);
         continue;
       }
-      final newElement = sub.builder(value);
+      final newElement = sub.builder(context, value);
       sub.element.replaceWith(newElement);
       sub.element = newElement;
     }
@@ -37,14 +40,19 @@ class State<T> {
       }
       sub.element.setAttribute(sub.attribute, sub.builder(value));
     }
+
+    context.executeCallbacks();
   }
 
   final Set<_Subscription<T>> _subscriptions = {};
   final Set<_TextSubscription<T>> _textSubscriptions = {};
   final Set<_AttributeSubscription<T>> _attributeSubscriptions = {};
 
-  Element bind(Element Function(T value) builder) {
-    final element = builder(_state);
+  Element bind(BuildContext context,
+      Element Function(BuildContext context, T value) builder) {
+    BuildContext childContext = BuildContext(context.parent);
+
+    final element = builder(childContext, _state);
     _subscriptions.add(_Subscription<T>(element, builder));
     return element;
   }
@@ -94,7 +102,7 @@ class _AttributeSubscription<T> {
 
 class _Subscription<T> {
   Element element;
-  final Element Function(T value) builder;
+  final Element Function(BuildContext context, T value) builder;
 
   _Subscription(this.element, this.builder);
 }

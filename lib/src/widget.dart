@@ -42,14 +42,14 @@ Element get appNode => _appNode;
 /// }
 /// ```
 abstract class Widget {
-  Widget? get parent => _parent;
-  Widget? _parent;
+  Widget? get parent => _context?.parent;
+  BuildContext? _context; // TODO: was parent
 
   /// Method which needs to be defined by the developer to describe the UI
   /// using HTML Elements. It is **not** recommended to use this method to
   /// append your widget in the [build] method of another widget! Use [appendTo]
   /// for this!
-  Element build();
+  Element build(BuildContext context);
 
   /// Override this method to initialize the state of this widget. The [parent]
   /// value is already set when this method is called.
@@ -60,8 +60,9 @@ abstract class Widget {
   /// Use this method inside of the [build] method of the parent widget to
   /// append this widget to it. This creates a widget tree and makes it possible
   /// to use the [findParent()] and [setState()] method.
-  Element appendTo(Widget parent, [Object? cacheKey]) {
-    _parent = parent;
+  Element appendTo(BuildContext context, [Object? cacheKey]) {
+    print("Append to ${context.parent}");
+    _context = context;
     initState();
     return wrapWithElement();
   }
@@ -124,7 +125,7 @@ abstract class Widget {
 
   /// Perform some action after setState has been called.
   void addPostSetStateCallback(Function callback) {
-    _postSetStateCallbacks.add(callback);
+    _context?.addCallback(callback);
   }
 
   /// Checks if this widget instance is still mounted to the DOM.
@@ -133,7 +134,7 @@ abstract class Widget {
       null;
 
   @override
-  String toString() => build().toString();
+  String toString() => _context == null ? '' : build(_context!).toString();
 }
 
 const String _dataWidgetTypeKey = 'data-widget-type';
@@ -141,7 +142,9 @@ const String _dataWidgetTypeId = 'data-widget-id';
 
 extension _WrapWithElement on Widget {
   Element wrapWithElement() {
-    var element = build();
+    final context = BuildContext(this);
+
+    var element = build(context);
     if (element.hasAttribute(_dataWidgetTypeKey) ||
         element.hasAttribute(_dataWidgetTypeId)) {
       element = spanElement(children: [element]);
@@ -167,5 +170,28 @@ void runApp(
   _appNode = target;
   final rootWidget = widgetBuilder(_appNode.dataset);
   rootWidget.initState();
+  rootWidget._context = BuildContext(null);
+
   _appNode.children = [rootWidget.wrapWithElement()];
+}
+
+class BuildContext {
+  Widget? parent;
+
+  BuildContext(this.parent);
+
+  final List<Function> _callbacks = [];
+
+  void addCallback(Function callback) {
+    _callbacks.add(callback);
+
+    print(
+        "Added callback for context parent is null ? ${parent == null} now: ${_callbacks.length} callback");
+  }
+
+  void executeCallbacks() {
+    while (_callbacks.isNotEmpty) {
+      _callbacks.removeLast()();
+    }
+  }
 }
