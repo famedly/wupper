@@ -40,6 +40,7 @@ class FixedHeightListView extends Widget {
     _onDeleteSub = _controller?._delete.stream.listen(_onDeleteListener);
   }
 
+  Timer? _unloadIfNotOnScreenTimer;
   List<bool> rebuildNeeded = [];
 
   int firstItemOnScreen = 0;
@@ -117,7 +118,17 @@ class FixedHeightListView extends Widget {
     return false;
   }
 
+  void cancelUnloadIfNotOnScreen() {
+    _unloadIfNotOnScreenTimer?.cancel();
+  }
+
   void unloadIfNotOnScreen() {
+    // unload screen if needed
+    _unloadIfNotOnScreenTimer =
+        Timer(Duration(milliseconds: 1000), _unloadIfNotOnScreen);
+  }
+
+  void _unloadIfNotOnScreen() {
     var pos = 0;
     while (pos < _uListElement.children.length) {
       final i = pos + firstItemOnScreen;
@@ -140,25 +151,20 @@ class FixedHeightListView extends Widget {
     setPos();
   }
 
-  Timer? scrollCoolDown;
-  bool isScrolling = false;
-
   void _onScrollListener(_) {
     if (!mounted) {
       _onScrollSub?.cancel();
-      _onDeleteSub?.cancel();
+      _onResizeSub?.cancel();
       return;
     }
     scrollHandler();
   }
 
   void scrollHandler() {
-    scrollCoolDown?.cancel();
+    cancelUnloadIfNotOnScreen();
     updateViewPortDimension();
     runRender();
-
-    // unload screen if needed
-    scrollCoolDown = Timer(Duration(milliseconds: 1000), unloadIfNotOnScreen);
+    unloadIfNotOnScreen();
   }
 
   Element? rootListView;
@@ -221,6 +227,8 @@ class FixedHeightListView extends Widget {
   }
 
   void _onUpdateAllListener(int i) {
+    cancelUnloadIfNotOnScreen();
+
     if (!mounted) {
       _onUpdateAllSub?.cancel();
       return;
@@ -229,8 +237,9 @@ class FixedHeightListView extends Widget {
     initView();
 
     if (initialItemCount != i) {
-      // we need to reset the view
+      // we need to reset the view as the number of elements did change
       clearView();
+
       initialItemCount = i;
     }
 
@@ -242,6 +251,8 @@ class FixedHeightListView extends Widget {
   }
 
   void _onUpdateListener(int i) {
+    cancelUnloadIfNotOnScreen();
+
     if (!mounted) {
       _onUpdateSub?.cancel();
       return;
