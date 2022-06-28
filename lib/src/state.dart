@@ -104,7 +104,7 @@ class _AttributeSubscription<T> {
 
 class _Subscription<T> {
   Element element;
-  Widget? parent;
+  final Widget? parent;
   final Element Function(BuildContext context, T value) builder;
 
   _Subscription(this.element, this.parent, this.builder);
