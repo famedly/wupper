@@ -12,15 +12,18 @@ class State<T> {
 
   T _state;
   void set(T value) {
-    BuildContext context = BuildContext(null);
+    final callbacks = <Function>[];
     _state = value;
+
     final _subs = {..._subscriptions};
     for (final sub in _subs) {
       if (sub.element.isConnected != true) {
         _subscriptions.remove(sub);
         continue;
       }
-      final newElement = sub.builder(context, value);
+
+      final newElement =
+          sub.builder(BuildContext(sub.parent, callbacks: callbacks), value);
       sub.element.replaceWith(newElement);
       sub.element = newElement;
     }
@@ -41,7 +44,8 @@ class State<T> {
       sub.element.setAttribute(sub.attribute, sub.builder(value));
     }
 
-    context.executeCallbacks();
+    // fake context object to execute all the callbacks
+    BuildContext(null, callbacks: callbacks).executeCallbacks();
   }
 
   final Set<_Subscription<T>> _subscriptions = {};
@@ -50,10 +54,8 @@ class State<T> {
 
   Element bind(BuildContext context,
       Element Function(BuildContext context, T value) builder) {
-    BuildContext childContext = BuildContext(context.parent);
-
-    final element = builder(childContext, _state);
-    _subscriptions.add(_Subscription<T>(element, builder));
+    final element = builder(context, _state);
+    _subscriptions.add(_Subscription<T>(element, context.parent, builder));
     return element;
   }
 
@@ -102,7 +104,8 @@ class _AttributeSubscription<T> {
 
 class _Subscription<T> {
   Element element;
+  Widget? parent;
   final Element Function(BuildContext context, T value) builder;
 
-  _Subscription(this.element, this.builder);
+  _Subscription(this.element, this.parent, this.builder);
 }

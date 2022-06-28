@@ -43,7 +43,7 @@ Element get appNode => _appNode;
 /// ```
 abstract class Widget {
   Widget? get parent => _internalContext?.parent;
-  BuildContext? _internalContext; // TODO: was parent
+  BuildContext? _internalContext;
 
   /// Method which needs to be defined by the developer to describe the UI
   /// using HTML Elements. It is **not** recommended to use this method to
@@ -169,10 +169,13 @@ void runApp(
     throw Exception('There is no element with the ID $targetId in the DOM!');
   }
   _appNode = target;
+
+  // Set the context of the root widget
   final rootWidget = widgetBuilder(_appNode.dataset);
-  rootWidget.initState();
   rootWidget._internalContext = BuildContext(null);
 
+  // Build and mount it
+  rootWidget.initState();
   _appNode.children = [rootWidget.wrapWithElement()];
 
   // We added elements to the grid, we can now execute callbacks.
@@ -191,8 +194,10 @@ class BuildContext {
   void addCallback(Function callback) {
     _callbacks.add(callback);
 
-    print(
-        "Added callback for context parent is null ? ${parent == null} now: ${_callbacks.length} callback");
+    if (parent == null) {
+      print(
+          "WARNING: Added callback when parent is null. now: ${_callbacks.length} callback");
+    }
   }
 
   void executeCallbacks() {
