@@ -42,8 +42,8 @@ Element get appNode => _appNode;
 /// }
 /// ```
 abstract class Widget {
-  Widget? get parent => _context?.parent;
-  BuildContext? _context; // TODO: was parent
+  Widget? get parent => _internalContext?.parent;
+  BuildContext? _internalContext; // TODO: was parent
 
   /// Method which needs to be defined by the developer to describe the UI
   /// using HTML Elements. It is **not** recommended to use this method to
@@ -61,8 +61,7 @@ abstract class Widget {
   /// append this widget to it. This creates a widget tree and makes it possible
   /// to use the [findParent()] and [setState()] method.
   Element appendTo(BuildContext context, [Object? cacheKey]) {
-    print("Append to ${context.parent}");
-    _context = context;
+    _internalContext = context;
     initState();
     return wrapWithElement();
   }
@@ -125,7 +124,7 @@ abstract class Widget {
 
   /// Perform some action after setState has been called.
   void addPostSetStateCallback(Function callback) {
-    _context?.addCallback(callback);
+    _internalContext?.addCallback(callback);
   }
 
   /// Checks if this widget instance is still mounted to the DOM.
@@ -134,7 +133,8 @@ abstract class Widget {
       null;
 
   @override
-  String toString() => _context == null ? '' : build(_context!).toString();
+  String toString() =>
+      _internalContext == null ? '' : build(_internalContext!).toString();
 }
 
 const String _dataWidgetTypeKey = 'data-widget-type';
@@ -142,9 +142,10 @@ const String _dataWidgetTypeId = 'data-widget-id';
 
 extension _WrapWithElement on Widget {
   Element wrapWithElement() {
-    final context = BuildContext(this);
+    final childContext =
+        BuildContext(this, callbacks: _internalContext?._callbacks);
 
-    var element = build(context);
+    var element = build(childContext);
     if (element.hasAttribute(_dataWidgetTypeKey) ||
         element.hasAttribute(_dataWidgetTypeId)) {
       element = spanElement(children: [element]);
@@ -170,17 +171,22 @@ void runApp(
   _appNode = target;
   final rootWidget = widgetBuilder(_appNode.dataset);
   rootWidget.initState();
-  rootWidget._context = BuildContext(null);
+  rootWidget._internalContext = BuildContext(null);
 
   _appNode.children = [rootWidget.wrapWithElement()];
+
+  // We added elements to the grid, we can now execute callbacks.
+  rootWidget._internalContext?.executeCallbacks();
 }
 
 class BuildContext {
   Widget? parent;
 
-  BuildContext(this.parent);
+  BuildContext(this.parent, {List<Function>? callbacks}) {
+    _callbacks = callbacks ?? [];
+  }
 
-  final List<Function> _callbacks = [];
+  late List<Function> _callbacks;
 
   void addCallback(Function callback) {
     _callbacks.add(callback);
