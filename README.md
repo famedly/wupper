@@ -33,7 +33,7 @@ class TodoListItem extends Widget {
   TodoListItem({required this.todo});
 
   @override
-  Element build() => lIElement(
+  Element build(BuildContext context) => lIElement(
         children: [
           paragraphElement(text: todo),
           buttonElement(
@@ -55,11 +55,11 @@ class CounterPage extends Widget {
   final State<int> count = State(0);
 
   @override
-  Element build() {
+  Element build(BuildContext context) {
     return divElement(
       children: [
         headingElementH1(text: title),
-        count.bind((count) => paragraphElement(text: 'Counter: $count')),
+        count.bind(context, (context, count) => paragraphElement(text: 'Counter: $count')),
         buttonElement(
           text: 'Counter +',
           onClick: (_) => count.set(count.state + 1),
@@ -112,7 +112,7 @@ class TodoListPage extends Widget {
   }
 
   @override
-  Element build() => divElement(
+  Element build(BuildContext context) => divElement(
         className: 'container',
         children: [
           textField,
@@ -122,7 +122,7 @@ class TodoListPage extends Widget {
           ),
           uListElement(
             children: [
-              for (final todo in todos) TodoListItem(todo: todo).appendTo(this),
+              for (final todo in todos) TodoListItem(todo: todo).appendTo(context),
             ],
           ),
         ],
@@ -142,7 +142,7 @@ We also have a very basic hash router:
 ```dart
 class TodoApp extends Widget {
   @override
-  Element build() {
+  Element build(BuildContext context) {
     return BasicRouter(routeBuilder: (route) {
       switch (route) {
         case '/':
@@ -150,13 +150,13 @@ class TodoApp extends Widget {
         default:
           return NotFoundPage();
       }
-    }).appendTo(this);
+    }).appendTo(context);
   }
 }
 
 class NotFoundPage extends Widget {
   @override
-  Element build() => paragraphElement(text: '404: Not found');
+  Element build(BuildContext context) => paragraphElement(text: '404: Not found');
 }
 ```
 
@@ -167,17 +167,16 @@ You have FutureBuilders and StreamBuilders which are working similar to Flutter.
 #### FutureBuilder
 
 Similar to Flutters FutureBuilder but without AsyncSnapshot. Build something
-depending of the result of a future. Optional you can set an errorBuilder to
-handle errors happening while waiting on the future.
+depending of the result of a future. Optional you can set an errorBuilder to --handle errors happening while waiting on the future.
 
 ##### Example:
 
 ```dart
 FutureBuilder<String>(
   future: loadDataFromServer(),
-  builder: (AsyncSnapshot<String> snapshot, Widget parent) =>
+  builder: (BuilContext context, AsyncSnapshot<String> snapshot) =>
     divElement(text: snapshot.data ?? snapshot.error?.toString() ?? 'No data yet'),
-).appendTo(this);
+).appendTo(context);
 ```
 
 #### StreamBuilder
@@ -191,9 +190,24 @@ set an errorBuilder to handle errors.
 ```dart
 StreamBuilder<String>(
   stream: someDataStream,
-  builder: (AsyncSnapshot<String> snapshot, Widget parent) =>
+  builder: (BuildContext context, AsyncSnapshot<String> snapshot) =>
     divElement(text: snapshot.data ?? snapshot.error?.toString() ?? 'No data yet'),
-).appendTo(this);
+).appendTo(context);
+```
+
+### Context
+
+The BuildContext is used in the `build` and `appendTo` functions. It is used to provide some context when building the widget.
+
+It stores
+
+* the parent of the widget so appendTo can add the element to the widget.
+* add information for the build callback so we can execute callbacks after inital build or set states.
+
+Especially, build callbacks are handy if you want to execute a function after the element has been added to the DOM.
+
+```
+  context.addPostFrameCallback((){/* my function */});
 ```
 
 ### runApp and widget tree

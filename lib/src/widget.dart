@@ -124,8 +124,8 @@ abstract class Widget {
   final List<Function> _postSetStateCallbacks = [];
 
   /// Perform some action after setState has been called.
-  void addPostSetStateCallback(Function callback) {
-    _context?.addCallback(callback);
+  void addPostFrameCallback(Function callback) {
+    _context?.addPostFrameCallback(callback);
   }
 
   /// Checks if this widget instance is still mounted to the DOM.
@@ -190,7 +190,7 @@ class BuildContext {
 
   late List<Function> _callbacks;
 
-  void addCallback(Function callback) {
+  void addPostFrameCallback(Function callback) {
     _callbacks.add(callback);
 
     if (parent == null) {
