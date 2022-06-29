@@ -190,6 +190,7 @@ class BuildContext {
 
   late List<Function> _callbacks;
 
+  /// Add a callback which will be executed after initial build or after set state.
   void addPostFrameCallback(Function callback) {
     _callbacks.add(callback);
 
@@ -199,6 +200,7 @@ class BuildContext {
     }
   }
 
+  /// Execute all the callbacks and clear the callback list.
   void executeCallbacks() {
     while (_callbacks.isNotEmpty) {
       _callbacks.removeLast()();
