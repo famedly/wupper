@@ -58,7 +58,8 @@ class BasicRouter extends Widget {
   Element build(context) {
     window.location.hash = currentRoute.state;
     return currentRoute.bind(
-      context, (context, currentRoute) => routeBuilder(currentRoute).appendTo(context),
+      context,
+      (context, currentRoute) => routeBuilder(currentRoute).appendTo(context),
     );
   }
 }

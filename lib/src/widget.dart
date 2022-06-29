@@ -134,8 +134,7 @@ abstract class Widget {
       null;
 
   @override
-  String toString() =>
-      _context == null ? '' : build(_context!).toString();
+  String toString() => _context == null ? '' : build(_context!).toString();
 }
 
 const String _dataWidgetTypeKey = 'data-widget-type';
@@ -143,8 +142,7 @@ const String _dataWidgetTypeId = 'data-widget-id';
 
 extension _WrapWithElement on Widget {
   Element wrapWithElement() {
-    final childContext =
-        BuildContext(this, callbacks: _context?._callbacks);
+    final childContext = BuildContext(this, callbacks: _context?._callbacks);
 
     var element = build(childContext);
     if (element.hasAttribute(_dataWidgetTypeKey) ||
