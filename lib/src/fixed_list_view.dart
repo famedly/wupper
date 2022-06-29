@@ -11,7 +11,7 @@ import 'package:wupper/wupper.dart';
 class FixedHeightListView extends Widget {
   final FixedHeightListViewController? _controller;
   final int itemDefaultHeight;
-  final Element Function(int i, Widget parent) itemBuilder;
+  final Element Function(BuildContext context, int i) itemBuilder;
 
   late final StreamSubscription? _onUpdateAllSub;
   late final StreamSubscription? _onUpdateSub;
@@ -180,7 +180,7 @@ class FixedHeightListView extends Widget {
   void render(int i, {bool start = false, bool end = false}) {
     final pos = i - firstItemOnScreen;
 
-    final newElement = itemBuilder(i, this);
+    final newElement = itemBuilder(context, i);
 
     newElement.style.height = "$itemDefaultHeight px";
     if (start) {
@@ -303,6 +303,9 @@ class FixedHeightListView extends Widget {
     rebuildNeeded = List.filled(initialItemCount, true, growable: true);
     _uListElement.id = "child_$hashCode";
     div = divElement(children: [_uListElement]);
+    addPostSetStateCallback(() {
+      _onUpdateAllListener(initialItemCount);
+    });
     return div;
   }
 }

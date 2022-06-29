@@ -17,7 +17,7 @@ import 'package:wupper/wupper.dart';
 /// ```
 class FutureBuilder<T> extends Widget {
   final Future<T> future;
-  final Element Function(AsyncSnapshot<T> snapshot, Widget parent) builder;
+  final Element Function(BuildContext context, AsyncSnapshot<T> snapshot) builder;
 
   final State<AsyncSnapshot<T>> _snapshot = State(
     AsyncSnapshot(
@@ -47,6 +47,6 @@ class FutureBuilder<T> extends Widget {
 
   @override
   Element build(context) {
-    return _snapshot.bind(context, (context, _snapshot) => builder(_snapshot, this));
+    return _snapshot.bind(context, (context, _snapshot) => builder(context, _snapshot));
   }
 }
