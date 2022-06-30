@@ -44,8 +44,10 @@ class State<T> {
       sub.element.setAttribute(sub.attribute, sub.builder(value));
     }
 
-    // fake context object to execute all the callbacks
-    BuildContext(null, callbacks: callbacks).executeCallbacks();
+    // execute callbacks
+    while (callbacks.isNotEmpty) {
+      callbacks.removeLast()();
+    }
   }
 
   final Set<_Subscription<T>> _subscriptions = {};

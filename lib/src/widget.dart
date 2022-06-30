@@ -140,7 +140,7 @@ void runApp(
   _appNode.children = [rootWidget.wrapWithElement()];
 
   // We added elements to the grid, we can now execute callbacks.
-  rootWidget._context?.executeCallbacks();
+  rootWidget._context?._executeCallbacks();
 }
 
 class BuildContext {
@@ -163,7 +163,7 @@ class BuildContext {
   }
 
   /// Execute all the callbacks and clear the callback list.
-  void executeCallbacks() {
+  void _executeCallbacks() {
     while (_callbacks.isNotEmpty) {
       _callbacks.removeLast()();
     }
