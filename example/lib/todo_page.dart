@@ -40,7 +40,7 @@ class TodoListPage extends Widget {
           return uListElement(
             children: [
               for (final todo in value)
-                TodoListItem(todo: todo).appendTo(context),
+                widgetElement(context, TodoListItem(todo: todo)),
             ],
           );
         }),

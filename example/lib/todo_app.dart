@@ -19,7 +19,7 @@ class TodoApp extends Widget {
     return divElement(children: [
       postBackExecuted.bind(context,
           (context, value) => spanElement(innerText: "Post frame: $value")),
-      BasicRouter(routeBuilder: (route) {
+      widgetElement(context, BasicRouter(routeBuilder: (route) {
         print("Build route $route");
         switch (route) {
           case '/':
@@ -27,7 +27,7 @@ class TodoApp extends Widget {
           default:
             return NotFoundPage();
         }
-      }).appendTo(context)
+      }))
     ]);
   }
 }

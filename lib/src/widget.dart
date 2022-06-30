@@ -58,15 +58,6 @@ abstract class Widget {
     return;
   }
 
-  /// Use this method inside of the [build] method of the parent widget to
-  /// append this widget to it. This creates a widget tree and makes it possible
-  /// to use the [findParent()] and [setState()] method.
-  Element appendTo(BuildContext context, [Object? cacheKey]) {
-    _context = context;
-    initState();
-    return wrapWithElement();
-  }
-
   /// Looks up the widget tree until it finds a parent of this type or otherwise
   /// throws an exception. Make sure that this widget has been appended by the
   /// [appendTo()] method first.
@@ -94,6 +85,15 @@ abstract class Widget {
 
   @override
   String toString() => _context == null ? '' : build(_context!).toString();
+}
+
+/// Use this method inside of the [build] method of the parent widget to
+/// append this widget to it. This creates a widget tree and makes it possible
+/// to use the [findParent()] and [setState()] method.
+Element widgetElement(BuildContext context, Widget child) {
+  child._context = context;
+  child.initState();
+  return child.wrapWithElement();
 }
 
 const String _dataWidgetTypeKey = 'data-widget-type';
