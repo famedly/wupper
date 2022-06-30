@@ -8,7 +8,7 @@ import 'package:wupper/wupper.dart';
 /// `ListViewController`.
 /// Set an [itemBuilder] and an [initialItemCount] to render the list.
 /// Set [reverse] to true, to flip the direction of the items.
-class ListView extends Widget {
+class ListView extends StatelessWidget {
   final ListViewController? _controller;
   final Element Function(BuildContext context, int i) itemBuilder;
   final Element Function(BuildContext context)? headerBuilder;
@@ -77,7 +77,7 @@ class ListView extends Widget {
   }
 
   @override
-  Element build(context) {
+  Widget build(context) {
     final headerBuilder = this.headerBuilder;
     final footerBuilder = this.footerBuilder;
     return _uListElement
