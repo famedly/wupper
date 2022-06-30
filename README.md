@@ -167,7 +167,7 @@ You have FutureBuilders and StreamBuilders which are working similar to Flutter.
 #### FutureBuilder
 
 Similar to Flutters FutureBuilder but without AsyncSnapshot. Build something
-depending of the result of a future. Optional you can set an errorBuilder to --handle errors happening while waiting on the future.
+depending of the result of a future. Optional you can set an errorBuilder to handle errors happening while waiting on the future.
 
 ##### Example:
 
