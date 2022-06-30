@@ -61,16 +61,9 @@ abstract class Widget {
   /// Looks up the widget tree until it finds a parent of this type or otherwise
   /// throws an exception. Make sure that this widget has been appended by the
   /// [appendTo()] method first.
+  @Deprecated("Use context.dependOnInheritedWidgetOfExactType instead")
   T findParent<T>() {
-    final parentPointer = parent;
-    if (parentPointer == null) {
-      throw Exception(
-          'Unable to find parent of type $T in widget tree. Have you appended this widget with `.build()` instead of `.appendTo(this)` maybe?');
-    }
-    if (parentPointer is T) {
-      return parentPointer as T;
-    }
-    return parentPointer.findParent<T>();
+    return context.dependOnInheritedWidgetOfExactType<T>();
   }
 
   /// Perform some action after setState has been called.
@@ -164,5 +157,19 @@ class BuildContext {
     while (_callbacks.isNotEmpty) {
       _callbacks.removeLast()();
     }
+  }
+
+  /// Looks up the widget tree until it finds a parent of this type or otherwise
+  /// throws an exception. Make sure that this widget has been appended by the
+  /// [appendTo()] method first.
+  T dependOnInheritedWidgetOfExactType<T>() {
+    if (parent == null) {
+      throw Exception(
+          'Unable to find parent of type $T in widget tree. Have you appended this widget with `.build()` instead of `.appendTo(this)` maybe?');
+    }
+    if (parent is T) {
+      return parent as T;
+    }
+    return parent!.context.dependOnInheritedWidgetOfExactType<T>();
   }
 }

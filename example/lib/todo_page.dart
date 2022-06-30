@@ -11,6 +11,10 @@ class TodoListPage extends Widget {
   State<List<String>> todos = State([]);
   State<String> text = State("");
 
+  static TodoListPage of(BuildContext context) {
+    return context.dependOnInheritedWidgetOfExactType<TodoListPage>();
+  }
+
   void addTodoAction([_]) {
     final value = textField.value;
     if (value == null || value.isEmpty) return;
