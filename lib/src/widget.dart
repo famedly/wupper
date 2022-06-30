@@ -48,8 +48,8 @@ abstract class Widget {
 
   /// Method which needs to be defined by the developer to describe the UI
   /// using HTML Elements. It is **not** recommended to use this method to
-  /// append your widget in the [build] method of another widget! Use [appendTo]
-  /// for this!
+  /// append your widget in the [build] method of another widget! Use
+  /// [widgetElement] for this!
   Element build(BuildContext context);
 
   /// Override this method to initialize the state of this widget. The [parent]
@@ -58,9 +58,18 @@ abstract class Widget {
     return;
   }
 
+  /// Use this method inside of the [build] method of the parent widget to
+  /// append this widget to it. This creates a widget tree and makes it possible
+  /// to use the [context.dependOnInheritedWidgetOfExactType] and [State.set]
+  /// method.
+  @Deprecated("Use widgetElement instead")
+  Element appendTo(BuildContext context, [Object? cacheKey]) {
+    return widgetElement(context, this);
+  }
+
   /// Looks up the widget tree until it finds a parent of this type or otherwise
   /// throws an exception. Make sure that this widget has been appended by the
-  /// [appendTo()] method first.
+  /// [widgetElement] method first.
   @Deprecated("Use context.dependOnInheritedWidgetOfExactType instead")
   T findParent<T>() {
     return context.dependOnInheritedWidgetOfExactType<T>();
@@ -82,7 +91,8 @@ abstract class Widget {
 
 /// Use this method inside of the [build] method of the parent widget to
 /// append this widget to it. This creates a widget tree and makes it possible
-/// to use the [findParent()] and [setState()] method.
+/// to use the [context.dependOnInheritedWidgetOfExactType] and [State.set]
+  /// method.
 Element widgetElement(BuildContext context, Widget child) {
   child._context = context;
   child.initState();
