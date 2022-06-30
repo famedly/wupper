@@ -82,47 +82,6 @@ abstract class Widget {
     return parentPointer.findParent<T>();
   }
 
-  /// Similar to the Flutter equivalent this changes the state of this widget
-  /// and rebuilds the UI and all underlying widgets. Make sure that this widget
-  /// has been appended by the [appendTo()] method first.
-  ///
-  /// If you do not want to rebuild everything, specify the elements you want
-  /// to rebuild in [only] by adding valid selectors. For example, to replace
-  /// only the element with the ID "list_item_4": set `only: {'#list_item_4'}`.
-  @Deprecated('Use State objects instead')
-  void setState(void Function() fun, {Set<String>? only}) {
-    fun();
-    final widgetNode =
-        _appNode.querySelector('[$_dataWidgetTypeId="${hashCode.toString()}"]');
-    if (widgetNode == null) {
-      throw Exception(
-          'No widget node with hashCode $hashCode found in the DOM! Have you appended this widget with `.build()` instead of `.appendTo(this)` maybe?');
-    }
-    final newBuild = wrapWithElement();
-    if (only == null) {
-      widgetNode.replaceWith(newBuild);
-    } else {
-      for (final query in only) {
-        final elemToReplace = widgetNode.querySelector(query);
-        if (elemToReplace == null) {
-          throw Exception(
-              'Can not setState. The querySelector("$query") returned null in the old build.');
-        }
-        final replaceWith = newBuild.querySelector(query);
-        if (replaceWith == null) {
-          throw Exception(
-              'Can not setState. The querySelector("$query") returned null in the new build.');
-        }
-        elemToReplace.replaceWith(replaceWith);
-      }
-    }
-    while (_postSetStateCallbacks.isNotEmpty) {
-      _postSetStateCallbacks.removeLast()();
-    }
-  }
-
-  final List<Function> _postSetStateCallbacks = [];
-
   /// Perform some action after setState has been called.
   void addPostFrameCallback(Function callback) {
     _context?.addPostFrameCallback(callback);
