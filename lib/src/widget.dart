@@ -75,10 +75,6 @@ abstract class Widget {
     return context.dependOnInheritedWidgetOfExactType<T>();
   }
 
-  /// Perform some action after setState has been called.
-  void addPostFrameCallback(Function callback) {
-    _context?.addPostFrameCallback(callback);
-  }
 
   /// Checks if this widget instance is still mounted to the DOM.
   bool get mounted =>

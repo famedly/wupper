@@ -7,7 +7,7 @@ class TodoApp extends Widget {
   final postBackExecuted = State<int>(0);
   @override
   void initState() {
-    addPostFrameCallback(() {
+    context.addPostFrameCallback(() {
       print("Router mounted");
       postBackExecuted.set(postBackExecuted.state + 1);
     });

@@ -303,7 +303,7 @@ class FixedHeightListView extends Widget {
     rebuildNeeded = List.filled(initialItemCount, true, growable: true);
     _uListElement.id = "child_$hashCode";
     div = divElement(children: [_uListElement]);
-    addPostFrameCallback(() {
+    context.addPostFrameCallback(() {
       _onUpdateAllListener(initialItemCount);
     });
     return div;
