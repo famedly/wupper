@@ -295,14 +295,14 @@ class FixedHeightListView extends Widget {
     }
   }
 
-  late DivElement div;
+  late DivElementWidget div;
 
   @override
-  Element build(context) {
+  Widget build(context) {
     _inited = false;
     rebuildNeeded = List.filled(initialItemCount, true, growable: true);
     _uListElement.id = "child_$hashCode";
-    div = divElement(children: [_uListElement]);
+    div = DivElementWidget(children: [_uListElement]);
     context.addPostFrameCallback(() {
       _onUpdateAllListener(initialItemCount);
     });

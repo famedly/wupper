@@ -31,3 +31,5 @@ export 'src/list_view.dart';
 export 'src/fixed_list_view.dart';
 export 'src/state.dart';
 export 'src/widget.dart';
+export 'src/stateless_widget.dart';
+export 'src/statefull_widget.dart';

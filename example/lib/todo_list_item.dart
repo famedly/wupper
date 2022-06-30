@@ -3,7 +3,7 @@ import 'dart:html';
 import 'package:try_wupper/todo_page.dart';
 import 'package:wupper/wupper.dart';
 
-class TodoListItem extends Widget {
+class TodoListItem extends StatelessWidget {
   final String todo;
   final postBackExecuted = State<int>(0);
 
@@ -18,12 +18,12 @@ class TodoListItem extends Widget {
   }
 
   @override
-  Element build(context) => lIElement(
+  Widget build(context) => LIElementWidget(
         children: [
-          paragraphElement(text: todo),
+          ParagraphElementWidget(text: todo),
           postBackExecuted.bind(context,
-              (context, value) => spanElement(innerText: "Post frame: $value")),
-          buttonElement(
+              (context, value) => SpanElementWidget(innerText: "Post frame: $value")),
+          ButtonElementWidget(
             text: 'X',
             onClick: (_) => TodoListPage.of(context).removeTodo(todo),
           ),

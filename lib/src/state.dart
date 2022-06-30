@@ -54,15 +54,15 @@ class State<T> {
   final Set<_TextSubscription<T>> _textSubscriptions = {};
   final Set<_AttributeSubscription<T>> _attributeSubscriptions = {};
 
-  Element bind(BuildContext context,
-      Element Function(BuildContext context, T value) builder) {
+  Widget bind(BuildContext context,
+      Widget Function(BuildContext context, T value) builder) {
     final element = builder(context, _state);
     _subscriptions.add(_Subscription<T>(element, context.parent, builder));
     return element;
   }
 
-  Element bindText(
-    Element element, [
+  Widget bindText(
+    Widget element, [
     String Function(T value)? builder,
   ]) {
     builder ??= (value) => value.toString();
@@ -71,8 +71,8 @@ class State<T> {
     return element;
   }
 
-  Element bindAttribute(
-    Element element,
+  Widget bindAttribute(
+    Widget element,
     String attribute, [
     String Function(T value)? builder,
   ]) {
@@ -90,14 +90,14 @@ class State<T> {
 }
 
 class _TextSubscription<T> {
-  final Element element;
+  final Widget element;
   final String Function(T value) builder;
 
   const _TextSubscription(this.element, this.builder);
 }
 
 class _AttributeSubscription<T> {
-  final Element element;
+  final Widget element;
   final String attribute;
   final String Function(T value) builder;
 
@@ -105,9 +105,9 @@ class _AttributeSubscription<T> {
 }
 
 class _Subscription<T> {
-  Element element;
+  Widget element;
   final Widget? parent;
-  final Element Function(BuildContext context, T value) builder;
+  final Widget Function(BuildContext context, T value) builder;
 
   _Subscription(this.element, this.parent, this.builder);
 }

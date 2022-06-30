@@ -1,13109 +1,6410 @@
-// MIT License
-
-// Copyright (c) 2021 Famedly
-
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
-
-// The above copyright notice and this permission notice shall be included in all
-// copies or substantial portions of the Software.
-
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-// SOFTWARE.
-
 import 'dart:html';
 
-// ignore_for_file: curly_braces_in_flow_control_structures
+import 'package:wupper/src/widget.dart';
 
-HtmlElement htmlElement(
-    {String? nonce,
-    Map<String, String>? attributes,
-    List<Element>? children,
-    Iterable<String>? classes,
-    Map<String, String>? dataset,
-    String? innerHtml,
-    String? innerText,
-    int? scrollLeft,
-    int? scrollTop,
-    String? contentEditable,
-    String? dir,
-    bool? draggable,
-    bool? hidden,
-    bool? inert,
-    String? inputMode,
-    String? lang,
-    bool? spellcheck,
-    int? tabIndex,
-    String? title,
-    bool? translate,
-    String? className,
-    String? id,
-    String? slot,
-    Iterable<Node>? nodes,
-    String? text,
-    void Function(Event)? onAbort,
-    void Function(Event)? onBeforeCopy,
-    void Function(Event)? onBeforeCut,
-    void Function(Event)? onBeforePaste,
-    void Function(Event)? onBlur,
-    void Function(Event)? onCanPlay,
-    void Function(Event)? onCanPlayThrough,
-    void Function(Event)? onChange,
-    void Function(MouseEvent)? onClick,
-    void Function(MouseEvent)? onContextMenu,
-    void Function(ClipboardEvent)? onCopy,
-    void Function(ClipboardEvent)? onCut,
-    void Function(Event)? onDoubleClick,
-    void Function(MouseEvent)? onDrag,
-    void Function(MouseEvent)? onDragEnd,
-    void Function(MouseEvent)? onDragEnter,
-    void Function(MouseEvent)? onDragLeave,
-    void Function(MouseEvent)? onDragOver,
-    void Function(MouseEvent)? onDragStart,
-    void Function(MouseEvent)? onDrop,
-    void Function(Event)? onDurationChange,
-    void Function(Event)? onEmptied,
-    void Function(Event)? onEnded,
-    void Function(Event)? onError,
-    void Function(Event)? onFocus,
-    void Function(Event)? onInput,
-    void Function(Event)? onInvalid,
-    void Function(KeyboardEvent)? onKeyDown,
-    void Function(KeyboardEvent)? onKeyPress,
-    void Function(KeyboardEvent)? onKeyUp,
-    void Function(Event)? onLoad,
-    void Function(Event)? onLoadedData,
-    void Function(Event)? onLoadedMetadata,
-    void Function(MouseEvent)? onMouseDown,
-    void Function(MouseEvent)? onMouseEnter,
-    void Function(MouseEvent)? onMouseLeave,
-    void Function(MouseEvent)? onMouseMove,
-    void Function(MouseEvent)? onMouseOut,
-    void Function(MouseEvent)? onMouseOver,
-    void Function(MouseEvent)? onMouseUp,
-    void Function(WheelEvent)? onMouseWheel,
-    void Function(ClipboardEvent)? onPaste,
-    void Function(Event)? onPause,
-    void Function(Event)? onPlay,
-    void Function(Event)? onPlaying,
-    void Function(Event)? onRateChange,
-    void Function(Event)? onReset,
-    void Function(Event)? onResize,
-    void Function(Event)? onScroll,
-    void Function(Event)? onSearch,
-    void Function(Event)? onSeeked,
-    void Function(Event)? onSeeking,
-    void Function(Event)? onSelect,
-    void Function(Event)? onSelectStart,
-    void Function(Event)? onStalled,
-    void Function(Event)? onSubmit,
-    void Function(Event)? onSuspend,
-    void Function(Event)? onTimeUpdate,
-    void Function(TouchEvent)? onTouchCancel,
-    void Function(TouchEvent)? onTouchEnd,
-    void Function(TouchEvent)? onTouchEnter,
-    void Function(TouchEvent)? onTouchLeave,
-    void Function(TouchEvent)? onTouchMove,
-    void Function(TouchEvent)? onTouchStart,
-    void Function(TransitionEvent)? onTransitionEnd,
-    void Function(Event)? onVolumeChange,
-    void Function(Event)? onWaiting,
-    void Function(Event)? onFullscreenChange,
-    void Function(Event)? onFullscreenError,
-    void Function(WheelEvent)? onWheel}) {
-  final v = HtmlElement();
-  if (nonce != null) v.nonce = nonce;
-  if (attributes != null) v.attributes = attributes;
-  if (children != null) v.children = children;
-  if (classes != null) v.classes = classes;
-  if (dataset != null) v.dataset = dataset;
-  if (innerHtml != null) v.innerHtml = innerHtml;
-  if (innerText != null) v.innerText = innerText;
-  if (scrollLeft != null) v.scrollLeft = scrollLeft;
-  if (scrollTop != null) v.scrollTop = scrollTop;
-  if (contentEditable != null) v.contentEditable = contentEditable;
-  if (dir != null) v.dir = dir;
-  if (draggable != null) v.draggable = draggable;
-  if (hidden != null) v.hidden = hidden;
-  if (inert != null) v.inert = inert;
-  if (inputMode != null) v.inputMode = inputMode;
-  if (lang != null) v.lang = lang;
-  if (spellcheck != null) v.spellcheck = spellcheck;
-  if (tabIndex != null) v.tabIndex = tabIndex;
-  if (title != null) v.title = title;
-  if (translate != null) v.translate = translate;
-  if (className != null) v.className = className;
-  if (id != null) v.id = id;
-  if (slot != null) v.slot = slot;
-  if (nodes != null) v.nodes = nodes;
-  if (text != null) v.text = text;
-  if (onAbort != null) v.onAbort.listen(onAbort);
-  if (onBeforeCopy != null) v.onBeforeCopy.listen(onBeforeCopy);
-  if (onBeforeCut != null) v.onBeforeCut.listen(onBeforeCut);
-  if (onBeforePaste != null) v.onBeforePaste.listen(onBeforePaste);
-  if (onBlur != null) v.onBlur.listen(onBlur);
-  if (onCanPlay != null) v.onCanPlay.listen(onCanPlay);
-  if (onCanPlayThrough != null) v.onCanPlayThrough.listen(onCanPlayThrough);
-  if (onChange != null) v.onChange.listen(onChange);
-  if (onClick != null) v.onClick.listen(onClick);
-  if (onContextMenu != null) v.onContextMenu.listen(onContextMenu);
-  if (onCopy != null) v.onCopy.listen(onCopy);
-  if (onCut != null) v.onCut.listen(onCut);
-  if (onDoubleClick != null) v.onDoubleClick.listen(onDoubleClick);
-  if (onDrag != null) v.onDrag.listen(onDrag);
-  if (onDragEnd != null) v.onDragEnd.listen(onDragEnd);
-  if (onDragEnter != null) v.onDragEnter.listen(onDragEnter);
-  if (onDragLeave != null) v.onDragLeave.listen(onDragLeave);
-  if (onDragOver != null) v.onDragOver.listen(onDragOver);
-  if (onDragStart != null) v.onDragStart.listen(onDragStart);
-  if (onDrop != null) v.onDrop.listen(onDrop);
-  if (onDurationChange != null) v.onDurationChange.listen(onDurationChange);
-  if (onEmptied != null) v.onEmptied.listen(onEmptied);
-  if (onEnded != null) v.onEnded.listen(onEnded);
-  if (onError != null) v.onError.listen(onError);
-  if (onFocus != null) v.onFocus.listen(onFocus);
-  if (onInput != null) v.onInput.listen(onInput);
-  if (onInvalid != null) v.onInvalid.listen(onInvalid);
-  if (onKeyDown != null) v.onKeyDown.listen(onKeyDown);
-  if (onKeyPress != null) v.onKeyPress.listen(onKeyPress);
-  if (onKeyUp != null) v.onKeyUp.listen(onKeyUp);
-  if (onLoad != null) v.onLoad.listen(onLoad);
-  if (onLoadedData != null) v.onLoadedData.listen(onLoadedData);
-  if (onLoadedMetadata != null) v.onLoadedMetadata.listen(onLoadedMetadata);
-  if (onMouseDown != null) v.onMouseDown.listen(onMouseDown);
-  if (onMouseEnter != null) v.onMouseEnter.listen(onMouseEnter);
-  if (onMouseLeave != null) v.onMouseLeave.listen(onMouseLeave);
-  if (onMouseMove != null) v.onMouseMove.listen(onMouseMove);
-  if (onMouseOut != null) v.onMouseOut.listen(onMouseOut);
-  if (onMouseOver != null) v.onMouseOver.listen(onMouseOver);
-  if (onMouseUp != null) v.onMouseUp.listen(onMouseUp);
-  if (onMouseWheel != null) v.onMouseWheel.listen(onMouseWheel);
-  if (onPaste != null) v.onPaste.listen(onPaste);
-  if (onPause != null) v.onPause.listen(onPause);
-  if (onPlay != null) v.onPlay.listen(onPlay);
-  if (onPlaying != null) v.onPlaying.listen(onPlaying);
-  if (onRateChange != null) v.onRateChange.listen(onRateChange);
-  if (onReset != null) v.onReset.listen(onReset);
-  if (onResize != null) v.onResize.listen(onResize);
-  if (onScroll != null) v.onScroll.listen(onScroll);
-  if (onSearch != null) v.onSearch.listen(onSearch);
-  if (onSeeked != null) v.onSeeked.listen(onSeeked);
-  if (onSeeking != null) v.onSeeking.listen(onSeeking);
-  if (onSelect != null) v.onSelect.listen(onSelect);
-  if (onSelectStart != null) v.onSelectStart.listen(onSelectStart);
-  if (onStalled != null) v.onStalled.listen(onStalled);
-  if (onSubmit != null) v.onSubmit.listen(onSubmit);
-  if (onSuspend != null) v.onSuspend.listen(onSuspend);
-  if (onTimeUpdate != null) v.onTimeUpdate.listen(onTimeUpdate);
-  if (onTouchCancel != null) v.onTouchCancel.listen(onTouchCancel);
-  if (onTouchEnd != null) v.onTouchEnd.listen(onTouchEnd);
-  if (onTouchEnter != null) v.onTouchEnter.listen(onTouchEnter);
-  if (onTouchLeave != null) v.onTouchLeave.listen(onTouchLeave);
-  if (onTouchMove != null) v.onTouchMove.listen(onTouchMove);
-  if (onTouchStart != null) v.onTouchStart.listen(onTouchStart);
-  if (onTransitionEnd != null) v.onTransitionEnd.listen(onTransitionEnd);
-  if (onVolumeChange != null) v.onVolumeChange.listen(onVolumeChange);
-  if (onWaiting != null) v.onWaiting.listen(onWaiting);
-  if (onFullscreenChange != null)
-    v.onFullscreenChange.listen(onFullscreenChange);
-  if (onFullscreenError != null) v.onFullscreenError.listen(onFullscreenError);
-  if (onWheel != null) v.onWheel.listen(onWheel);
-  return v;
+class ElementWidget extends Widget {
+  final Map<String, String>? attributes;
+  final List<Widget>? children;
+  final Iterable<String>? classes;
+  final Map<String, String>? dataset;
+  final String? innerHtml;
+  final String? innerText;
+  final int? scrollLeft;
+  final int? scrollTop;
+  final String? contentEditable;
+  final String? dir;
+  final bool? draggable;
+  final bool? hidden;
+  final bool? inert;
+  final String? inputMode;
+  final String? lang;
+  final bool? spellcheck;
+  final int? tabIndex;
+  final String? title;
+  final bool? translate;
+  final String? className;
+  final String? id;
+  final String? slot;
+  final Iterable<Node>? nodes;
+  final String? text;
+
+  final void Function(Event)? onAbort;
+  final void Function(Event)? onBeforeCopy;
+  final void Function(Event)? onBeforeCut;
+  final void Function(Event)? onBeforePaste;
+  final void Function(Event)? onBlur;
+  final void Function(Event)? onCanPlay;
+  final void Function(Event)? onCanPlayThrough;
+  final void Function(Event)? onChange;
+  final void Function(MouseEvent)? onClick;
+  final void Function(MouseEvent)? onContextMenu;
+  final void Function(ClipboardEvent)? onCopy;
+  final void Function(ClipboardEvent)? onCut;
+  final void Function(Event)? onDoubleClick;
+  final void Function(MouseEvent)? onDrag;
+  final void Function(MouseEvent)? onDragEnd;
+  final void Function(MouseEvent)? onDragEnter;
+  final void Function(MouseEvent)? onDragLeave;
+  final void Function(MouseEvent)? onDragOver;
+  final void Function(MouseEvent)? onDragStart;
+  final void Function(MouseEvent)? onDrop;
+  final void Function(Event)? onDurationChange;
+  final void Function(Event)? onEmptied;
+  final void Function(Event)? onEnded;
+  final void Function(Event)? onError;
+  final void Function(Event)? onFocus;
+  final void Function(Event)? onInput;
+  final void Function(Event)? onInvalid;
+  final void Function(KeyboardEvent)? onKeyDown;
+  final void Function(KeyboardEvent)? onKeyPress;
+  final void Function(KeyboardEvent)? onKeyUp;
+  final void Function(Event)? onLoad;
+  final void Function(Event)? onLoadedData;
+  final void Function(Event)? onLoadedMetadata;
+  final void Function(MouseEvent)? onMouseDown;
+  final void Function(MouseEvent)? onMouseEnter;
+  final void Function(MouseEvent)? onMouseLeave;
+  final void Function(MouseEvent)? onMouseMove;
+  final void Function(MouseEvent)? onMouseOut;
+  final void Function(MouseEvent)? onMouseOver;
+  final void Function(MouseEvent)? onMouseUp;
+  final void Function(WheelEvent)? onMouseWheel;
+  final void Function(ClipboardEvent)? onPaste;
+  final void Function(Event)? onPause;
+  final void Function(Event)? onPlay;
+  final void Function(Event)? onPlaying;
+  final void Function(Event)? onRateChange;
+  final void Function(Event)? onReset;
+  final void Function(Event)? onResize;
+  final void Function(Event)? onScroll;
+  final void Function(Event)? onSearch;
+  final void Function(Event)? onSeeked;
+  final void Function(Event)? onSeeking;
+  final void Function(Event)? onSelect;
+  final void Function(Event)? onSelectStart;
+  final void Function(Event)? onStalled;
+  final void Function(Event)? onSubmit;
+  final void Function(Event)? onSuspend;
+  final void Function(Event)? onTimeUpdate;
+  final void Function(TouchEvent)? onTouchCancel;
+  final void Function(TouchEvent)? onTouchEnd;
+  final void Function(TouchEvent)? onTouchEnter;
+  final void Function(TouchEvent)? onTouchLeave;
+  final void Function(TouchEvent)? onTouchMove;
+  final void Function(TouchEvent)? onTouchStart;
+  final void Function(TransitionEvent)? onTransitionEnd;
+  final void Function(Event)? onVolumeChange;
+  final void Function(Event)? onWaiting;
+  final void Function(Event)? onFullscreenChange;
+  final void Function(Event)? onFullscreenError;
+  final void Function(WheelEvent)? onWheel;
+
+  ElementWidget(
+      {this.attributes,
+      this.children,
+      this.classes,
+      this.dataset,
+      this.innerHtml,
+      this.innerText,
+      this.scrollLeft,
+      this.scrollTop,
+      this.contentEditable,
+      this.dir,
+      this.draggable,
+      this.hidden,
+      this.inert,
+      this.inputMode,
+      this.lang,
+      this.spellcheck,
+      this.tabIndex,
+      this.title,
+      this.translate,
+      this.className,
+      this.id,
+      this.slot,
+      this.nodes,
+      this.text,
+      this.onAbort,
+      this.onBeforeCopy,
+      this.onBeforeCut,
+      this.onBeforePaste,
+      this.onBlur,
+      this.onCanPlay,
+      this.onCanPlayThrough,
+      this.onChange,
+      this.onClick,
+      this.onContextMenu,
+      this.onCopy,
+      this.onCut,
+      this.onDoubleClick,
+      this.onDrag,
+      this.onDragEnd,
+      this.onDragEnter,
+      this.onDragLeave,
+      this.onDragOver,
+      this.onDragStart,
+      this.onDrop,
+      this.onDurationChange,
+      this.onEmptied,
+      this.onEnded,
+      this.onError,
+      this.onFocus,
+      this.onInput,
+      this.onInvalid,
+      this.onKeyDown,
+      this.onKeyPress,
+      this.onKeyUp,
+      this.onLoad,
+      this.onLoadedData,
+      this.onLoadedMetadata,
+      this.onMouseDown,
+      this.onMouseEnter,
+      this.onMouseLeave,
+      this.onMouseMove,
+      this.onMouseOut,
+      this.onMouseOver,
+      this.onMouseUp,
+      this.onMouseWheel,
+      this.onPaste,
+      this.onPause,
+      this.onPlay,
+      this.onPlaying,
+      this.onRateChange,
+      this.onReset,
+      this.onResize,
+      this.onScroll,
+      this.onSearch,
+      this.onSeeked,
+      this.onSeeking,
+      this.onSelect,
+      this.onSelectStart,
+      this.onStalled,
+      this.onSubmit,
+      this.onSuspend,
+      this.onTimeUpdate,
+      this.onTouchCancel,
+      this.onTouchEnd,
+      this.onTouchEnter,
+      this.onTouchLeave,
+      this.onTouchMove,
+      this.onTouchStart,
+      this.onTransitionEnd,
+      this.onVolumeChange,
+      this.onWaiting,
+      this.onFullscreenChange,
+      this.onFullscreenError,
+      this.onWheel});
+
+  @override
+  Element render() => hook(HtmlElement());
+
+  Element hook(Element v) {
+    if (attributes != null) v.attributes = attributes!;
+    if (classes != null) v.classes = classes!;
+    if (dataset != null) v.dataset = dataset!;
+    if (innerHtml != null) v.innerHtml = innerHtml;
+    if (innerText != null) v.innerText = innerText!;
+    if (scrollLeft != null) v.scrollLeft = scrollLeft!;
+    if (scrollTop != null) v.scrollTop = scrollTop!;
+    if (contentEditable != null) v.contentEditable = contentEditable!;
+    if (dir != null) v.dir = dir;
+    if (draggable != null) v.draggable = draggable!;
+    if (hidden != null) v.hidden = hidden!;
+    if (inert != null) v.inert = inert;
+    if (inputMode != null) v.inputMode = inputMode;
+    if (lang != null) v.lang = lang;
+    if (spellcheck != null) v.spellcheck = spellcheck;
+    if (tabIndex != null) v.tabIndex = tabIndex;
+    if (title != null) v.title = title;
+    if (translate != null) v.translate = translate;
+    if (className != null) v.className = className!;
+    if (id != null) v.id = id!;
+    if (slot != null) v.slot = slot;
+    if (nodes != null) v.nodes = nodes!;
+    if (text != null) v.text = text;
+    if (onAbort != null) v.onAbort.listen(onAbort);
+    if (onBeforeCopy != null) v.onBeforeCopy.listen(onBeforeCopy);
+    if (onBeforeCut != null) v.onBeforeCut.listen(onBeforeCut);
+    if (onBeforePaste != null) v.onBeforePaste.listen(onBeforePaste);
+    if (onBlur != null) v.onBlur.listen(onBlur);
+    if (onCanPlay != null) v.onCanPlay.listen(onCanPlay);
+    if (onCanPlayThrough != null) v.onCanPlayThrough.listen(onCanPlayThrough);
+    if (onChange != null) v.onChange.listen(onChange);
+    if (onClick != null) v.onClick.listen(onClick);
+    if (onContextMenu != null) v.onContextMenu.listen(onContextMenu);
+    if (onCopy != null) v.onCopy.listen(onCopy);
+    if (onCut != null) v.onCut.listen(onCut);
+    if (onDoubleClick != null) v.onDoubleClick.listen(onDoubleClick);
+    if (onDrag != null) v.onDrag.listen(onDrag);
+    if (onDragEnd != null) v.onDragEnd.listen(onDragEnd);
+    if (onDragEnter != null) v.onDragEnter.listen(onDragEnter);
+    if (onDragLeave != null) v.onDragLeave.listen(onDragLeave);
+    if (onDragOver != null) v.onDragOver.listen(onDragOver);
+    if (onDragStart != null) v.onDragStart.listen(onDragStart);
+    if (onDrop != null) v.onDrop.listen(onDrop);
+    if (onDurationChange != null) v.onDurationChange.listen(onDurationChange);
+    if (onEmptied != null) v.onEmptied.listen(onEmptied);
+    if (onEnded != null) v.onEnded.listen(onEnded);
+    if (onError != null) v.onError.listen(onError);
+    if (onFocus != null) v.onFocus.listen(onFocus);
+    if (onInput != null) v.onInput.listen(onInput);
+    if (onInvalid != null) v.onInvalid.listen(onInvalid);
+    if (onKeyDown != null) v.onKeyDown.listen(onKeyDown);
+    if (onKeyPress != null) v.onKeyPress.listen(onKeyPress);
+    if (onKeyUp != null) v.onKeyUp.listen(onKeyUp);
+    if (onLoad != null) v.onLoad.listen(onLoad);
+    if (onLoadedData != null) v.onLoadedData.listen(onLoadedData);
+    if (onLoadedMetadata != null) v.onLoadedMetadata.listen(onLoadedMetadata);
+    if (onMouseDown != null) v.onMouseDown.listen(onMouseDown);
+    if (onMouseEnter != null) v.onMouseEnter.listen(onMouseEnter);
+    if (onMouseLeave != null) v.onMouseLeave.listen(onMouseLeave);
+    if (onMouseMove != null) v.onMouseMove.listen(onMouseMove);
+    if (onMouseOut != null) v.onMouseOut.listen(onMouseOut);
+    if (onMouseOver != null) v.onMouseOver.listen(onMouseOver);
+    if (onMouseUp != null) v.onMouseUp.listen(onMouseUp);
+    if (onMouseWheel != null) v.onMouseWheel.listen(onMouseWheel);
+    if (onPaste != null) v.onPaste.listen(onPaste);
+    if (onPause != null) v.onPause.listen(onPause);
+    if (onPlay != null) v.onPlay.listen(onPlay);
+    if (onPlaying != null) v.onPlaying.listen(onPlaying);
+    if (onRateChange != null) v.onRateChange.listen(onRateChange);
+    if (onReset != null) v.onReset.listen(onReset);
+    if (onResize != null) v.onResize.listen(onResize);
+    if (onScroll != null) v.onScroll.listen(onScroll);
+    if (onSearch != null) v.onSearch.listen(onSearch);
+    if (onSeeked != null) v.onSeeked.listen(onSeeked);
+    if (onSeeking != null) v.onSeeking.listen(onSeeking);
+    if (onSelect != null) v.onSelect.listen(onSelect);
+    if (onSelectStart != null) v.onSelectStart.listen(onSelectStart);
+    if (onStalled != null) v.onStalled.listen(onStalled);
+    if (onSubmit != null) v.onSubmit.listen(onSubmit);
+    if (onSuspend != null) v.onSuspend.listen(onSuspend);
+    if (onTimeUpdate != null) v.onTimeUpdate.listen(onTimeUpdate);
+    if (onTouchCancel != null) v.onTouchCancel.listen(onTouchCancel);
+    if (onTouchEnd != null) v.onTouchEnd.listen(onTouchEnd);
+    if (onTouchEnter != null) v.onTouchEnter.listen(onTouchEnter);
+    if (onTouchLeave != null) v.onTouchLeave.listen(onTouchLeave);
+    if (onTouchMove != null) v.onTouchMove.listen(onTouchMove);
+    if (onTouchStart != null) v.onTouchStart.listen(onTouchStart);
+    if (onTransitionEnd != null) v.onTransitionEnd.listen(onTransitionEnd);
+    if (onVolumeChange != null) v.onVolumeChange.listen(onVolumeChange);
+    if (onWaiting != null) v.onWaiting.listen(onWaiting);
+    if (onFullscreenChange != null) {
+      v.onFullscreenChange.listen(onFullscreenChange);
+    }
+    if (onFullscreenError != null) {
+      v.onFullscreenError.listen(onFullscreenError);
+    }
+    if (onWheel != null) v.onWheel.listen(onWheel);
+
+    if (children != null) {
+      v.children = children!.map((e) => e.render()).toList();
+    }
+
+    return v;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    throw UnimplementedError();
+  }
 }
 
-AnchorElement anchorElement(
-    {String? download,
-    String? hreflang,
-    String? referrerPolicy,
-    String? rel,
-    String? target,
-    String? type,
-    String? hash,
-    String? host,
-    String? hostname,
-    String? href,
-    String? password,
-    String? pathname,
-    String? port,
-    String? protocol,
-    String? search,
-    String? username,
-    String? nonce,
-    Map<String, String>? attributes,
-    List<Element>? children,
-    Iterable<String>? classes,
-    Map<String, String>? dataset,
-    String? innerHtml,
-    String? innerText,
-    int? scrollLeft,
-    int? scrollTop,
-    String? contentEditable,
-    String? dir,
-    bool? draggable,
-    bool? hidden,
-    bool? inert,
-    String? inputMode,
-    String? lang,
-    bool? spellcheck,
-    int? tabIndex,
-    String? title,
-    bool? translate,
-    String? className,
-    String? id,
-    String? slot,
-    Iterable<Node>? nodes,
-    String? text,
-    void Function(Event)? onAbort,
-    void Function(Event)? onBeforeCopy,
-    void Function(Event)? onBeforeCut,
-    void Function(Event)? onBeforePaste,
-    void Function(Event)? onBlur,
-    void Function(Event)? onCanPlay,
-    void Function(Event)? onCanPlayThrough,
-    void Function(Event)? onChange,
-    void Function(MouseEvent)? onClick,
-    void Function(MouseEvent)? onContextMenu,
-    void Function(ClipboardEvent)? onCopy,
-    void Function(ClipboardEvent)? onCut,
-    void Function(Event)? onDoubleClick,
-    void Function(MouseEvent)? onDrag,
-    void Function(MouseEvent)? onDragEnd,
-    void Function(MouseEvent)? onDragEnter,
-    void Function(MouseEvent)? onDragLeave,
-    void Function(MouseEvent)? onDragOver,
-    void Function(MouseEvent)? onDragStart,
-    void Function(MouseEvent)? onDrop,
-    void Function(Event)? onDurationChange,
-    void Function(Event)? onEmptied,
-    void Function(Event)? onEnded,
-    void Function(Event)? onError,
-    void Function(Event)? onFocus,
-    void Function(Event)? onInput,
-    void Function(Event)? onInvalid,
-    void Function(KeyboardEvent)? onKeyDown,
-    void Function(KeyboardEvent)? onKeyPress,
-    void Function(KeyboardEvent)? onKeyUp,
-    void Function(Event)? onLoad,
-    void Function(Event)? onLoadedData,
-    void Function(Event)? onLoadedMetadata,
-    void Function(MouseEvent)? onMouseDown,
-    void Function(MouseEvent)? onMouseEnter,
-    void Function(MouseEvent)? onMouseLeave,
-    void Function(MouseEvent)? onMouseMove,
-    void Function(MouseEvent)? onMouseOut,
-    void Function(MouseEvent)? onMouseOver,
-    void Function(MouseEvent)? onMouseUp,
-    void Function(WheelEvent)? onMouseWheel,
-    void Function(ClipboardEvent)? onPaste,
-    void Function(Event)? onPause,
-    void Function(Event)? onPlay,
-    void Function(Event)? onPlaying,
-    void Function(Event)? onRateChange,
-    void Function(Event)? onReset,
-    void Function(Event)? onResize,
-    void Function(Event)? onScroll,
-    void Function(Event)? onSearch,
-    void Function(Event)? onSeeked,
-    void Function(Event)? onSeeking,
-    void Function(Event)? onSelect,
-    void Function(Event)? onSelectStart,
-    void Function(Event)? onStalled,
-    void Function(Event)? onSubmit,
-    void Function(Event)? onSuspend,
-    void Function(Event)? onTimeUpdate,
-    void Function(TouchEvent)? onTouchCancel,
-    void Function(TouchEvent)? onTouchEnd,
-    void Function(TouchEvent)? onTouchEnter,
-    void Function(TouchEvent)? onTouchLeave,
-    void Function(TouchEvent)? onTouchMove,
-    void Function(TouchEvent)? onTouchStart,
-    void Function(TransitionEvent)? onTransitionEnd,
-    void Function(Event)? onVolumeChange,
-    void Function(Event)? onWaiting,
-    void Function(Event)? onFullscreenChange,
-    void Function(Event)? onFullscreenError,
-    void Function(WheelEvent)? onWheel}) {
-  final v = AnchorElement();
-  if (download != null) v.download = download;
-  if (hreflang != null) v.hreflang = hreflang;
-  if (referrerPolicy != null) v.referrerPolicy = referrerPolicy;
-  if (rel != null) v.rel = rel;
-  if (target != null) v.target = target;
-  if (type != null) v.type = type;
-  if (hash != null) v.hash = hash;
-  if (host != null) v.host = host;
-  if (hostname != null) v.hostname = hostname;
-  if (href != null) v.href = href;
-  if (password != null) v.password = password;
-  if (pathname != null) v.pathname = pathname;
-  if (port != null) v.port = port;
-  if (protocol != null) v.protocol = protocol;
-  if (search != null) v.search = search;
-  if (username != null) v.username = username;
-  if (nonce != null) v.nonce = nonce;
-  if (attributes != null) v.attributes = attributes;
-  if (children != null) v.children = children;
-  if (classes != null) v.classes = classes;
-  if (dataset != null) v.dataset = dataset;
-  if (innerHtml != null) v.innerHtml = innerHtml;
-  if (innerText != null) v.innerText = innerText;
-  if (scrollLeft != null) v.scrollLeft = scrollLeft;
-  if (scrollTop != null) v.scrollTop = scrollTop;
-  if (contentEditable != null) v.contentEditable = contentEditable;
-  if (dir != null) v.dir = dir;
-  if (draggable != null) v.draggable = draggable;
-  if (hidden != null) v.hidden = hidden;
-  if (inert != null) v.inert = inert;
-  if (inputMode != null) v.inputMode = inputMode;
-  if (lang != null) v.lang = lang;
-  if (spellcheck != null) v.spellcheck = spellcheck;
-  if (tabIndex != null) v.tabIndex = tabIndex;
-  if (title != null) v.title = title;
-  if (translate != null) v.translate = translate;
-  if (className != null) v.className = className;
-  if (id != null) v.id = id;
-  if (slot != null) v.slot = slot;
-  if (nodes != null) v.nodes = nodes;
-  if (text != null) v.text = text;
-  if (onAbort != null) v.onAbort.listen(onAbort);
-  if (onBeforeCopy != null) v.onBeforeCopy.listen(onBeforeCopy);
-  if (onBeforeCut != null) v.onBeforeCut.listen(onBeforeCut);
-  if (onBeforePaste != null) v.onBeforePaste.listen(onBeforePaste);
-  if (onBlur != null) v.onBlur.listen(onBlur);
-  if (onCanPlay != null) v.onCanPlay.listen(onCanPlay);
-  if (onCanPlayThrough != null) v.onCanPlayThrough.listen(onCanPlayThrough);
-  if (onChange != null) v.onChange.listen(onChange);
-  if (onClick != null) v.onClick.listen(onClick);
-  if (onContextMenu != null) v.onContextMenu.listen(onContextMenu);
-  if (onCopy != null) v.onCopy.listen(onCopy);
-  if (onCut != null) v.onCut.listen(onCut);
-  if (onDoubleClick != null) v.onDoubleClick.listen(onDoubleClick);
-  if (onDrag != null) v.onDrag.listen(onDrag);
-  if (onDragEnd != null) v.onDragEnd.listen(onDragEnd);
-  if (onDragEnter != null) v.onDragEnter.listen(onDragEnter);
-  if (onDragLeave != null) v.onDragLeave.listen(onDragLeave);
-  if (onDragOver != null) v.onDragOver.listen(onDragOver);
-  if (onDragStart != null) v.onDragStart.listen(onDragStart);
-  if (onDrop != null) v.onDrop.listen(onDrop);
-  if (onDurationChange != null) v.onDurationChange.listen(onDurationChange);
-  if (onEmptied != null) v.onEmptied.listen(onEmptied);
-  if (onEnded != null) v.onEnded.listen(onEnded);
-  if (onError != null) v.onError.listen(onError);
-  if (onFocus != null) v.onFocus.listen(onFocus);
-  if (onInput != null) v.onInput.listen(onInput);
-  if (onInvalid != null) v.onInvalid.listen(onInvalid);
-  if (onKeyDown != null) v.onKeyDown.listen(onKeyDown);
-  if (onKeyPress != null) v.onKeyPress.listen(onKeyPress);
-  if (onKeyUp != null) v.onKeyUp.listen(onKeyUp);
-  if (onLoad != null) v.onLoad.listen(onLoad);
-  if (onLoadedData != null) v.onLoadedData.listen(onLoadedData);
-  if (onLoadedMetadata != null) v.onLoadedMetadata.listen(onLoadedMetadata);
-  if (onMouseDown != null) v.onMouseDown.listen(onMouseDown);
-  if (onMouseEnter != null) v.onMouseEnter.listen(onMouseEnter);
-  if (onMouseLeave != null) v.onMouseLeave.listen(onMouseLeave);
-  if (onMouseMove != null) v.onMouseMove.listen(onMouseMove);
-  if (onMouseOut != null) v.onMouseOut.listen(onMouseOut);
-  if (onMouseOver != null) v.onMouseOver.listen(onMouseOver);
-  if (onMouseUp != null) v.onMouseUp.listen(onMouseUp);
-  if (onMouseWheel != null) v.onMouseWheel.listen(onMouseWheel);
-  if (onPaste != null) v.onPaste.listen(onPaste);
-  if (onPause != null) v.onPause.listen(onPause);
-  if (onPlay != null) v.onPlay.listen(onPlay);
-  if (onPlaying != null) v.onPlaying.listen(onPlaying);
-  if (onRateChange != null) v.onRateChange.listen(onRateChange);
-  if (onReset != null) v.onReset.listen(onReset);
-  if (onResize != null) v.onResize.listen(onResize);
-  if (onScroll != null) v.onScroll.listen(onScroll);
-  if (onSearch != null) v.onSearch.listen(onSearch);
-  if (onSeeked != null) v.onSeeked.listen(onSeeked);
-  if (onSeeking != null) v.onSeeking.listen(onSeeking);
-  if (onSelect != null) v.onSelect.listen(onSelect);
-  if (onSelectStart != null) v.onSelectStart.listen(onSelectStart);
-  if (onStalled != null) v.onStalled.listen(onStalled);
-  if (onSubmit != null) v.onSubmit.listen(onSubmit);
-  if (onSuspend != null) v.onSuspend.listen(onSuspend);
-  if (onTimeUpdate != null) v.onTimeUpdate.listen(onTimeUpdate);
-  if (onTouchCancel != null) v.onTouchCancel.listen(onTouchCancel);
-  if (onTouchEnd != null) v.onTouchEnd.listen(onTouchEnd);
-  if (onTouchEnter != null) v.onTouchEnter.listen(onTouchEnter);
-  if (onTouchLeave != null) v.onTouchLeave.listen(onTouchLeave);
-  if (onTouchMove != null) v.onTouchMove.listen(onTouchMove);
-  if (onTouchStart != null) v.onTouchStart.listen(onTouchStart);
-  if (onTransitionEnd != null) v.onTransitionEnd.listen(onTransitionEnd);
-  if (onVolumeChange != null) v.onVolumeChange.listen(onVolumeChange);
-  if (onWaiting != null) v.onWaiting.listen(onWaiting);
-  if (onFullscreenChange != null)
-    v.onFullscreenChange.listen(onFullscreenChange);
-  if (onFullscreenError != null) v.onFullscreenError.listen(onFullscreenError);
-  if (onWheel != null) v.onWheel.listen(onWheel);
-  return v;
+class HtmlElementWidget extends ElementWidget {
+  String? nonce;
+
+  HtmlElementWidget(
+      {this.nonce,
+      super.attributes,
+      super.children,
+      super.classes,
+      super.dataset,
+      super.innerHtml,
+      super.innerText,
+      super.scrollLeft,
+      super.scrollTop,
+      super.contentEditable,
+      super.dir,
+      super.draggable,
+      super.hidden,
+      super.inert,
+      super.inputMode,
+      super.lang,
+      super.spellcheck,
+      super.tabIndex,
+      super.title,
+      super.translate,
+      super.className,
+      super.id,
+      super.slot,
+      super.nodes,
+      super.text,
+      super.onAbort,
+      super.onBeforeCopy,
+      super.onBeforeCut,
+      super.onBeforePaste,
+      super.onBlur,
+      super.onCanPlay,
+      super.onCanPlayThrough,
+      super.onChange,
+      super.onClick,
+      super.onContextMenu,
+      super.onCopy,
+      super.onCut,
+      super.onDoubleClick,
+      super.onDrag,
+      super.onDragEnd,
+      super.onDragEnter,
+      super.onDragLeave,
+      super.onDragOver,
+      super.onDragStart,
+      super.onDrop,
+      super.onDurationChange,
+      super.onEmptied,
+      super.onEnded,
+      super.onError,
+      super.onFocus,
+      super.onInput,
+      super.onInvalid,
+      super.onKeyDown,
+      super.onKeyPress,
+      super.onKeyUp,
+      super.onLoad,
+      super.onLoadedData,
+      super.onLoadedMetadata,
+      super.onMouseDown,
+      super.onMouseEnter,
+      super.onMouseLeave,
+      super.onMouseMove,
+      super.onMouseOut,
+      super.onMouseOver,
+      super.onMouseUp,
+      super.onMouseWheel,
+      super.onPaste,
+      super.onPause,
+      super.onPlay,
+      super.onPlaying,
+      super.onRateChange,
+      super.onReset,
+      super.onResize,
+      super.onScroll,
+      super.onSearch,
+      super.onSeeked,
+      super.onSeeking,
+      super.onSelect,
+      super.onSelectStart,
+      super.onStalled,
+      super.onSubmit,
+      super.onSuspend,
+      super.onTimeUpdate,
+      super.onTouchCancel,
+      super.onTouchEnd,
+      super.onTouchEnter,
+      super.onTouchLeave,
+      super.onTouchMove,
+      super.onTouchStart,
+      super.onTransitionEnd,
+      super.onVolumeChange,
+      super.onWaiting,
+      super.onFullscreenChange,
+      super.onFullscreenError,
+      super.onWheel});
+  @override
+  Element hook(Element el) {
+    final v = el as HtmlElement;
+    if (nonce != null) v.nonce = nonce;
+    return super.hook(v);
+  }
+
+  @override
+  Element render() => hook(HtmlElement());
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    throw UnimplementedError();
+  }
 }
 
-AreaElement areaElement(
-    {String? alt,
-    String? coords,
-    String? download,
-    String? referrerPolicy,
-    String? rel,
-    String? shape,
-    String? target,
-    String? hash,
-    String? host,
-    String? hostname,
-    String? href,
-    String? password,
-    String? pathname,
-    String? port,
-    String? protocol,
-    String? search,
-    String? username,
-    String? nonce,
-    Map<String, String>? attributes,
-    List<Element>? children,
-    Iterable<String>? classes,
-    Map<String, String>? dataset,
-    String? innerHtml,
-    String? innerText,
-    int? scrollLeft,
-    int? scrollTop,
-    String? contentEditable,
-    String? dir,
-    bool? draggable,
-    bool? hidden,
-    bool? inert,
-    String? inputMode,
-    String? lang,
-    bool? spellcheck,
-    int? tabIndex,
-    String? title,
-    bool? translate,
-    String? className,
-    String? id,
-    String? slot,
-    Iterable<Node>? nodes,
-    String? text,
-    void Function(Event)? onAbort,
-    void Function(Event)? onBeforeCopy,
-    void Function(Event)? onBeforeCut,
-    void Function(Event)? onBeforePaste,
-    void Function(Event)? onBlur,
-    void Function(Event)? onCanPlay,
-    void Function(Event)? onCanPlayThrough,
-    void Function(Event)? onChange,
-    void Function(MouseEvent)? onClick,
-    void Function(MouseEvent)? onContextMenu,
-    void Function(ClipboardEvent)? onCopy,
-    void Function(ClipboardEvent)? onCut,
-    void Function(Event)? onDoubleClick,
-    void Function(MouseEvent)? onDrag,
-    void Function(MouseEvent)? onDragEnd,
-    void Function(MouseEvent)? onDragEnter,
-    void Function(MouseEvent)? onDragLeave,
-    void Function(MouseEvent)? onDragOver,
-    void Function(MouseEvent)? onDragStart,
-    void Function(MouseEvent)? onDrop,
-    void Function(Event)? onDurationChange,
-    void Function(Event)? onEmptied,
-    void Function(Event)? onEnded,
-    void Function(Event)? onError,
-    void Function(Event)? onFocus,
-    void Function(Event)? onInput,
-    void Function(Event)? onInvalid,
-    void Function(KeyboardEvent)? onKeyDown,
-    void Function(KeyboardEvent)? onKeyPress,
-    void Function(KeyboardEvent)? onKeyUp,
-    void Function(Event)? onLoad,
-    void Function(Event)? onLoadedData,
-    void Function(Event)? onLoadedMetadata,
-    void Function(MouseEvent)? onMouseDown,
-    void Function(MouseEvent)? onMouseEnter,
-    void Function(MouseEvent)? onMouseLeave,
-    void Function(MouseEvent)? onMouseMove,
-    void Function(MouseEvent)? onMouseOut,
-    void Function(MouseEvent)? onMouseOver,
-    void Function(MouseEvent)? onMouseUp,
-    void Function(WheelEvent)? onMouseWheel,
-    void Function(ClipboardEvent)? onPaste,
-    void Function(Event)? onPause,
-    void Function(Event)? onPlay,
-    void Function(Event)? onPlaying,
-    void Function(Event)? onRateChange,
-    void Function(Event)? onReset,
-    void Function(Event)? onResize,
-    void Function(Event)? onScroll,
-    void Function(Event)? onSearch,
-    void Function(Event)? onSeeked,
-    void Function(Event)? onSeeking,
-    void Function(Event)? onSelect,
-    void Function(Event)? onSelectStart,
-    void Function(Event)? onStalled,
-    void Function(Event)? onSubmit,
-    void Function(Event)? onSuspend,
-    void Function(Event)? onTimeUpdate,
-    void Function(TouchEvent)? onTouchCancel,
-    void Function(TouchEvent)? onTouchEnd,
-    void Function(TouchEvent)? onTouchEnter,
-    void Function(TouchEvent)? onTouchLeave,
-    void Function(TouchEvent)? onTouchMove,
-    void Function(TouchEvent)? onTouchStart,
-    void Function(TransitionEvent)? onTransitionEnd,
-    void Function(Event)? onVolumeChange,
-    void Function(Event)? onWaiting,
-    void Function(Event)? onFullscreenChange,
-    void Function(Event)? onFullscreenError,
-    void Function(WheelEvent)? onWheel}) {
-  final v = AreaElement();
-  if (alt != null) v.alt = alt;
-  if (coords != null) v.coords = coords;
-  if (download != null) v.download = download;
-  if (referrerPolicy != null) v.referrerPolicy = referrerPolicy;
-  if (rel != null) v.rel = rel;
-  if (shape != null) v.shape = shape;
-  if (target != null) v.target = target;
-  if (hash != null) v.hash = hash;
-  if (host != null) v.host = host;
-  if (hostname != null) v.hostname = hostname;
-  if (href != null) v.href = href;
-  if (password != null) v.password = password;
-  if (pathname != null) v.pathname = pathname;
-  if (port != null) v.port = port;
-  if (protocol != null) v.protocol = protocol;
-  if (search != null) v.search = search;
-  if (username != null) v.username = username;
-  if (nonce != null) v.nonce = nonce;
-  if (attributes != null) v.attributes = attributes;
-  if (children != null) v.children = children;
-  if (classes != null) v.classes = classes;
-  if (dataset != null) v.dataset = dataset;
-  if (innerHtml != null) v.innerHtml = innerHtml;
-  if (innerText != null) v.innerText = innerText;
-  if (scrollLeft != null) v.scrollLeft = scrollLeft;
-  if (scrollTop != null) v.scrollTop = scrollTop;
-  if (contentEditable != null) v.contentEditable = contentEditable;
-  if (dir != null) v.dir = dir;
-  if (draggable != null) v.draggable = draggable;
-  if (hidden != null) v.hidden = hidden;
-  if (inert != null) v.inert = inert;
-  if (inputMode != null) v.inputMode = inputMode;
-  if (lang != null) v.lang = lang;
-  if (spellcheck != null) v.spellcheck = spellcheck;
-  if (tabIndex != null) v.tabIndex = tabIndex;
-  if (title != null) v.title = title;
-  if (translate != null) v.translate = translate;
-  if (className != null) v.className = className;
-  if (id != null) v.id = id;
-  if (slot != null) v.slot = slot;
-  if (nodes != null) v.nodes = nodes;
-  if (text != null) v.text = text;
-  if (onAbort != null) v.onAbort.listen(onAbort);
-  if (onBeforeCopy != null) v.onBeforeCopy.listen(onBeforeCopy);
-  if (onBeforeCut != null) v.onBeforeCut.listen(onBeforeCut);
-  if (onBeforePaste != null) v.onBeforePaste.listen(onBeforePaste);
-  if (onBlur != null) v.onBlur.listen(onBlur);
-  if (onCanPlay != null) v.onCanPlay.listen(onCanPlay);
-  if (onCanPlayThrough != null) v.onCanPlayThrough.listen(onCanPlayThrough);
-  if (onChange != null) v.onChange.listen(onChange);
-  if (onClick != null) v.onClick.listen(onClick);
-  if (onContextMenu != null) v.onContextMenu.listen(onContextMenu);
-  if (onCopy != null) v.onCopy.listen(onCopy);
-  if (onCut != null) v.onCut.listen(onCut);
-  if (onDoubleClick != null) v.onDoubleClick.listen(onDoubleClick);
-  if (onDrag != null) v.onDrag.listen(onDrag);
-  if (onDragEnd != null) v.onDragEnd.listen(onDragEnd);
-  if (onDragEnter != null) v.onDragEnter.listen(onDragEnter);
-  if (onDragLeave != null) v.onDragLeave.listen(onDragLeave);
-  if (onDragOver != null) v.onDragOver.listen(onDragOver);
-  if (onDragStart != null) v.onDragStart.listen(onDragStart);
-  if (onDrop != null) v.onDrop.listen(onDrop);
-  if (onDurationChange != null) v.onDurationChange.listen(onDurationChange);
-  if (onEmptied != null) v.onEmptied.listen(onEmptied);
-  if (onEnded != null) v.onEnded.listen(onEnded);
-  if (onError != null) v.onError.listen(onError);
-  if (onFocus != null) v.onFocus.listen(onFocus);
-  if (onInput != null) v.onInput.listen(onInput);
-  if (onInvalid != null) v.onInvalid.listen(onInvalid);
-  if (onKeyDown != null) v.onKeyDown.listen(onKeyDown);
-  if (onKeyPress != null) v.onKeyPress.listen(onKeyPress);
-  if (onKeyUp != null) v.onKeyUp.listen(onKeyUp);
-  if (onLoad != null) v.onLoad.listen(onLoad);
-  if (onLoadedData != null) v.onLoadedData.listen(onLoadedData);
-  if (onLoadedMetadata != null) v.onLoadedMetadata.listen(onLoadedMetadata);
-  if (onMouseDown != null) v.onMouseDown.listen(onMouseDown);
-  if (onMouseEnter != null) v.onMouseEnter.listen(onMouseEnter);
-  if (onMouseLeave != null) v.onMouseLeave.listen(onMouseLeave);
-  if (onMouseMove != null) v.onMouseMove.listen(onMouseMove);
-  if (onMouseOut != null) v.onMouseOut.listen(onMouseOut);
-  if (onMouseOver != null) v.onMouseOver.listen(onMouseOver);
-  if (onMouseUp != null) v.onMouseUp.listen(onMouseUp);
-  if (onMouseWheel != null) v.onMouseWheel.listen(onMouseWheel);
-  if (onPaste != null) v.onPaste.listen(onPaste);
-  if (onPause != null) v.onPause.listen(onPause);
-  if (onPlay != null) v.onPlay.listen(onPlay);
-  if (onPlaying != null) v.onPlaying.listen(onPlaying);
-  if (onRateChange != null) v.onRateChange.listen(onRateChange);
-  if (onReset != null) v.onReset.listen(onReset);
-  if (onResize != null) v.onResize.listen(onResize);
-  if (onScroll != null) v.onScroll.listen(onScroll);
-  if (onSearch != null) v.onSearch.listen(onSearch);
-  if (onSeeked != null) v.onSeeked.listen(onSeeked);
-  if (onSeeking != null) v.onSeeking.listen(onSeeking);
-  if (onSelect != null) v.onSelect.listen(onSelect);
-  if (onSelectStart != null) v.onSelectStart.listen(onSelectStart);
-  if (onStalled != null) v.onStalled.listen(onStalled);
-  if (onSubmit != null) v.onSubmit.listen(onSubmit);
-  if (onSuspend != null) v.onSuspend.listen(onSuspend);
-  if (onTimeUpdate != null) v.onTimeUpdate.listen(onTimeUpdate);
-  if (onTouchCancel != null) v.onTouchCancel.listen(onTouchCancel);
-  if (onTouchEnd != null) v.onTouchEnd.listen(onTouchEnd);
-  if (onTouchEnter != null) v.onTouchEnter.listen(onTouchEnter);
-  if (onTouchLeave != null) v.onTouchLeave.listen(onTouchLeave);
-  if (onTouchMove != null) v.onTouchMove.listen(onTouchMove);
-  if (onTouchStart != null) v.onTouchStart.listen(onTouchStart);
-  if (onTransitionEnd != null) v.onTransitionEnd.listen(onTransitionEnd);
-  if (onVolumeChange != null) v.onVolumeChange.listen(onVolumeChange);
-  if (onWaiting != null) v.onWaiting.listen(onWaiting);
-  if (onFullscreenChange != null)
-    v.onFullscreenChange.listen(onFullscreenChange);
-  if (onFullscreenError != null) v.onFullscreenError.listen(onFullscreenError);
-  if (onWheel != null) v.onWheel.listen(onWheel);
-  return v;
+class AnchorElementWidget extends HtmlElementWidget {
+  String? href;
+  AnchorElementWidget(
+      {this.href,
+      super.nonce,
+      super.attributes,
+      super.children,
+      super.classes,
+      super.dataset,
+      super.innerHtml,
+      super.innerText,
+      super.scrollLeft,
+      super.scrollTop,
+      super.contentEditable,
+      super.dir,
+      super.draggable,
+      super.hidden,
+      super.inert,
+      super.inputMode,
+      super.lang,
+      super.spellcheck,
+      super.tabIndex,
+      super.title,
+      super.translate,
+      super.className,
+      super.id,
+      super.slot,
+      super.nodes,
+      super.text,
+      super.onAbort,
+      super.onBeforeCopy,
+      super.onBeforeCut,
+      super.onBeforePaste,
+      super.onBlur,
+      super.onCanPlay,
+      super.onCanPlayThrough,
+      super.onChange,
+      super.onClick,
+      super.onContextMenu,
+      super.onCopy,
+      super.onCut,
+      super.onDoubleClick,
+      super.onDrag,
+      super.onDragEnd,
+      super.onDragEnter,
+      super.onDragLeave,
+      super.onDragOver,
+      super.onDragStart,
+      super.onDrop,
+      super.onDurationChange,
+      super.onEmptied,
+      super.onEnded,
+      super.onError,
+      super.onFocus,
+      super.onInput,
+      super.onInvalid,
+      super.onKeyDown,
+      super.onKeyPress,
+      super.onKeyUp,
+      super.onLoad,
+      super.onLoadedData,
+      super.onLoadedMetadata,
+      super.onMouseDown,
+      super.onMouseEnter,
+      super.onMouseLeave,
+      super.onMouseMove,
+      super.onMouseOut,
+      super.onMouseOver,
+      super.onMouseUp,
+      super.onMouseWheel,
+      super.onPaste,
+      super.onPause,
+      super.onPlay,
+      super.onPlaying,
+      super.onRateChange,
+      super.onReset,
+      super.onResize,
+      super.onScroll,
+      super.onSearch,
+      super.onSeeked,
+      super.onSeeking,
+      super.onSelect,
+      super.onSelectStart,
+      super.onStalled,
+      super.onSubmit,
+      super.onSuspend,
+      super.onTimeUpdate,
+      super.onTouchCancel,
+      super.onTouchEnd,
+      super.onTouchEnter,
+      super.onTouchLeave,
+      super.onTouchMove,
+      super.onTouchStart,
+      super.onTransitionEnd,
+      super.onVolumeChange,
+      super.onWaiting,
+      super.onFullscreenChange,
+      super.onFullscreenError,
+      super.onWheel});
+  @override
+  Element render() {
+    final v = AnchorElement();
+
+    if (href != null) v.href = href;
+    return hook(v);
+  }
 }
 
-AudioElement audioElement(
-    {bool? autoplay,
-    bool? controls,
-    String? crossOrigin,
-    num? currentTime,
-    bool? defaultMuted,
-    num? defaultPlaybackRate,
-    bool? disableRemotePlayback,
-    bool? loop,
-    bool? muted,
-    num? playbackRate,
-    String? preload,
-    String? src,
-    MediaStream? srcObject,
-    num? volume,
-    String? nonce,
-    Map<String, String>? attributes,
-    List<Element>? children,
-    Iterable<String>? classes,
-    Map<String, String>? dataset,
-    String? innerHtml,
-    String? innerText,
-    int? scrollLeft,
-    int? scrollTop,
-    String? contentEditable,
-    String? dir,
-    bool? draggable,
-    bool? hidden,
-    bool? inert,
-    String? inputMode,
-    String? lang,
-    bool? spellcheck,
-    int? tabIndex,
-    String? title,
-    bool? translate,
-    String? className,
-    String? id,
-    String? slot,
-    Iterable<Node>? nodes,
-    String? text,
-    void Function(Event)? onAbort,
-    void Function(Event)? onBeforeCopy,
-    void Function(Event)? onBeforeCut,
-    void Function(Event)? onBeforePaste,
-    void Function(Event)? onBlur,
-    void Function(Event)? onCanPlay,
-    void Function(Event)? onCanPlayThrough,
-    void Function(Event)? onChange,
-    void Function(MouseEvent)? onClick,
-    void Function(MouseEvent)? onContextMenu,
-    void Function(ClipboardEvent)? onCopy,
-    void Function(ClipboardEvent)? onCut,
-    void Function(Event)? onDoubleClick,
-    void Function(MouseEvent)? onDrag,
-    void Function(MouseEvent)? onDragEnd,
-    void Function(MouseEvent)? onDragEnter,
-    void Function(MouseEvent)? onDragLeave,
-    void Function(MouseEvent)? onDragOver,
-    void Function(MouseEvent)? onDragStart,
-    void Function(MouseEvent)? onDrop,
-    void Function(Event)? onDurationChange,
-    void Function(Event)? onEmptied,
-    void Function(Event)? onEnded,
-    void Function(Event)? onError,
-    void Function(Event)? onFocus,
-    void Function(Event)? onInput,
-    void Function(Event)? onInvalid,
-    void Function(KeyboardEvent)? onKeyDown,
-    void Function(KeyboardEvent)? onKeyPress,
-    void Function(KeyboardEvent)? onKeyUp,
-    void Function(Event)? onLoad,
-    void Function(Event)? onLoadedData,
-    void Function(Event)? onLoadedMetadata,
-    void Function(MouseEvent)? onMouseDown,
-    void Function(MouseEvent)? onMouseEnter,
-    void Function(MouseEvent)? onMouseLeave,
-    void Function(MouseEvent)? onMouseMove,
-    void Function(MouseEvent)? onMouseOut,
-    void Function(MouseEvent)? onMouseOver,
-    void Function(MouseEvent)? onMouseUp,
-    void Function(WheelEvent)? onMouseWheel,
-    void Function(ClipboardEvent)? onPaste,
-    void Function(Event)? onPause,
-    void Function(Event)? onPlay,
-    void Function(Event)? onPlaying,
-    void Function(Event)? onRateChange,
-    void Function(Event)? onReset,
-    void Function(Event)? onResize,
-    void Function(Event)? onScroll,
-    void Function(Event)? onSearch,
-    void Function(Event)? onSeeked,
-    void Function(Event)? onSeeking,
-    void Function(Event)? onSelect,
-    void Function(Event)? onSelectStart,
-    void Function(Event)? onStalled,
-    void Function(Event)? onSubmit,
-    void Function(Event)? onSuspend,
-    void Function(Event)? onTimeUpdate,
-    void Function(TouchEvent)? onTouchCancel,
-    void Function(TouchEvent)? onTouchEnd,
-    void Function(TouchEvent)? onTouchEnter,
-    void Function(TouchEvent)? onTouchLeave,
-    void Function(TouchEvent)? onTouchMove,
-    void Function(TouchEvent)? onTouchStart,
-    void Function(TransitionEvent)? onTransitionEnd,
-    void Function(Event)? onVolumeChange,
-    void Function(Event)? onWaiting,
-    void Function(Event)? onFullscreenChange,
-    void Function(Event)? onFullscreenError,
-    void Function(WheelEvent)? onWheel}) {
-  final v = AudioElement();
-  if (autoplay != null) v.autoplay = autoplay;
-  if (controls != null) v.controls = controls;
-  if (crossOrigin != null) v.crossOrigin = crossOrigin;
-  if (currentTime != null) v.currentTime = currentTime;
-  if (defaultMuted != null) v.defaultMuted = defaultMuted;
-  if (defaultPlaybackRate != null) v.defaultPlaybackRate = defaultPlaybackRate;
-  if (disableRemotePlayback != null)
-    v.disableRemotePlayback = disableRemotePlayback;
-  if (loop != null) v.loop = loop;
-  if (muted != null) v.muted = muted;
-  if (playbackRate != null) v.playbackRate = playbackRate;
-  if (preload != null) v.preload = preload;
-  if (src != null) v.src = src;
-  if (srcObject != null) v.srcObject = srcObject;
-  if (volume != null) v.volume = volume;
-  if (nonce != null) v.nonce = nonce;
-  if (attributes != null) v.attributes = attributes;
-  if (children != null) v.children = children;
-  if (classes != null) v.classes = classes;
-  if (dataset != null) v.dataset = dataset;
-  if (innerHtml != null) v.innerHtml = innerHtml;
-  if (innerText != null) v.innerText = innerText;
-  if (scrollLeft != null) v.scrollLeft = scrollLeft;
-  if (scrollTop != null) v.scrollTop = scrollTop;
-  if (contentEditable != null) v.contentEditable = contentEditable;
-  if (dir != null) v.dir = dir;
-  if (draggable != null) v.draggable = draggable;
-  if (hidden != null) v.hidden = hidden;
-  if (inert != null) v.inert = inert;
-  if (inputMode != null) v.inputMode = inputMode;
-  if (lang != null) v.lang = lang;
-  if (spellcheck != null) v.spellcheck = spellcheck;
-  if (tabIndex != null) v.tabIndex = tabIndex;
-  if (title != null) v.title = title;
-  if (translate != null) v.translate = translate;
-  if (className != null) v.className = className;
-  if (id != null) v.id = id;
-  if (slot != null) v.slot = slot;
-  if (nodes != null) v.nodes = nodes;
-  if (text != null) v.text = text;
-  if (onAbort != null) v.onAbort.listen(onAbort);
-  if (onBeforeCopy != null) v.onBeforeCopy.listen(onBeforeCopy);
-  if (onBeforeCut != null) v.onBeforeCut.listen(onBeforeCut);
-  if (onBeforePaste != null) v.onBeforePaste.listen(onBeforePaste);
-  if (onBlur != null) v.onBlur.listen(onBlur);
-  if (onCanPlay != null) v.onCanPlay.listen(onCanPlay);
-  if (onCanPlayThrough != null) v.onCanPlayThrough.listen(onCanPlayThrough);
-  if (onChange != null) v.onChange.listen(onChange);
-  if (onClick != null) v.onClick.listen(onClick);
-  if (onContextMenu != null) v.onContextMenu.listen(onContextMenu);
-  if (onCopy != null) v.onCopy.listen(onCopy);
-  if (onCut != null) v.onCut.listen(onCut);
-  if (onDoubleClick != null) v.onDoubleClick.listen(onDoubleClick);
-  if (onDrag != null) v.onDrag.listen(onDrag);
-  if (onDragEnd != null) v.onDragEnd.listen(onDragEnd);
-  if (onDragEnter != null) v.onDragEnter.listen(onDragEnter);
-  if (onDragLeave != null) v.onDragLeave.listen(onDragLeave);
-  if (onDragOver != null) v.onDragOver.listen(onDragOver);
-  if (onDragStart != null) v.onDragStart.listen(onDragStart);
-  if (onDrop != null) v.onDrop.listen(onDrop);
-  if (onDurationChange != null) v.onDurationChange.listen(onDurationChange);
-  if (onEmptied != null) v.onEmptied.listen(onEmptied);
-  if (onEnded != null) v.onEnded.listen(onEnded);
-  if (onError != null) v.onError.listen(onError);
-  if (onFocus != null) v.onFocus.listen(onFocus);
-  if (onInput != null) v.onInput.listen(onInput);
-  if (onInvalid != null) v.onInvalid.listen(onInvalid);
-  if (onKeyDown != null) v.onKeyDown.listen(onKeyDown);
-  if (onKeyPress != null) v.onKeyPress.listen(onKeyPress);
-  if (onKeyUp != null) v.onKeyUp.listen(onKeyUp);
-  if (onLoad != null) v.onLoad.listen(onLoad);
-  if (onLoadedData != null) v.onLoadedData.listen(onLoadedData);
-  if (onLoadedMetadata != null) v.onLoadedMetadata.listen(onLoadedMetadata);
-  if (onMouseDown != null) v.onMouseDown.listen(onMouseDown);
-  if (onMouseEnter != null) v.onMouseEnter.listen(onMouseEnter);
-  if (onMouseLeave != null) v.onMouseLeave.listen(onMouseLeave);
-  if (onMouseMove != null) v.onMouseMove.listen(onMouseMove);
-  if (onMouseOut != null) v.onMouseOut.listen(onMouseOut);
-  if (onMouseOver != null) v.onMouseOver.listen(onMouseOver);
-  if (onMouseUp != null) v.onMouseUp.listen(onMouseUp);
-  if (onMouseWheel != null) v.onMouseWheel.listen(onMouseWheel);
-  if (onPaste != null) v.onPaste.listen(onPaste);
-  if (onPause != null) v.onPause.listen(onPause);
-  if (onPlay != null) v.onPlay.listen(onPlay);
-  if (onPlaying != null) v.onPlaying.listen(onPlaying);
-  if (onRateChange != null) v.onRateChange.listen(onRateChange);
-  if (onReset != null) v.onReset.listen(onReset);
-  if (onResize != null) v.onResize.listen(onResize);
-  if (onScroll != null) v.onScroll.listen(onScroll);
-  if (onSearch != null) v.onSearch.listen(onSearch);
-  if (onSeeked != null) v.onSeeked.listen(onSeeked);
-  if (onSeeking != null) v.onSeeking.listen(onSeeking);
-  if (onSelect != null) v.onSelect.listen(onSelect);
-  if (onSelectStart != null) v.onSelectStart.listen(onSelectStart);
-  if (onStalled != null) v.onStalled.listen(onStalled);
-  if (onSubmit != null) v.onSubmit.listen(onSubmit);
-  if (onSuspend != null) v.onSuspend.listen(onSuspend);
-  if (onTimeUpdate != null) v.onTimeUpdate.listen(onTimeUpdate);
-  if (onTouchCancel != null) v.onTouchCancel.listen(onTouchCancel);
-  if (onTouchEnd != null) v.onTouchEnd.listen(onTouchEnd);
-  if (onTouchEnter != null) v.onTouchEnter.listen(onTouchEnter);
-  if (onTouchLeave != null) v.onTouchLeave.listen(onTouchLeave);
-  if (onTouchMove != null) v.onTouchMove.listen(onTouchMove);
-  if (onTouchStart != null) v.onTouchStart.listen(onTouchStart);
-  if (onTransitionEnd != null) v.onTransitionEnd.listen(onTransitionEnd);
-  if (onVolumeChange != null) v.onVolumeChange.listen(onVolumeChange);
-  if (onWaiting != null) v.onWaiting.listen(onWaiting);
-  if (onFullscreenChange != null)
-    v.onFullscreenChange.listen(onFullscreenChange);
-  if (onFullscreenError != null) v.onFullscreenError.listen(onFullscreenError);
-  if (onWheel != null) v.onWheel.listen(onWheel);
-  return v;
+class AreaElementWidget extends HtmlElementWidget {
+  AreaElementWidget(
+      {super.nonce,
+      super.attributes,
+      super.children,
+      super.classes,
+      super.dataset,
+      super.innerHtml,
+      super.innerText,
+      super.scrollLeft,
+      super.scrollTop,
+      super.contentEditable,
+      super.dir,
+      super.draggable,
+      super.hidden,
+      super.inert,
+      super.inputMode,
+      super.lang,
+      super.spellcheck,
+      super.tabIndex,
+      super.title,
+      super.translate,
+      super.className,
+      super.id,
+      super.slot,
+      super.nodes,
+      super.text,
+      super.onAbort,
+      super.onBeforeCopy,
+      super.onBeforeCut,
+      super.onBeforePaste,
+      super.onBlur,
+      super.onCanPlay,
+      super.onCanPlayThrough,
+      super.onChange,
+      super.onClick,
+      super.onContextMenu,
+      super.onCopy,
+      super.onCut,
+      super.onDoubleClick,
+      super.onDrag,
+      super.onDragEnd,
+      super.onDragEnter,
+      super.onDragLeave,
+      super.onDragOver,
+      super.onDragStart,
+      super.onDrop,
+      super.onDurationChange,
+      super.onEmptied,
+      super.onEnded,
+      super.onError,
+      super.onFocus,
+      super.onInput,
+      super.onInvalid,
+      super.onKeyDown,
+      super.onKeyPress,
+      super.onKeyUp,
+      super.onLoad,
+      super.onLoadedData,
+      super.onLoadedMetadata,
+      super.onMouseDown,
+      super.onMouseEnter,
+      super.onMouseLeave,
+      super.onMouseMove,
+      super.onMouseOut,
+      super.onMouseOver,
+      super.onMouseUp,
+      super.onMouseWheel,
+      super.onPaste,
+      super.onPause,
+      super.onPlay,
+      super.onPlaying,
+      super.onRateChange,
+      super.onReset,
+      super.onResize,
+      super.onScroll,
+      super.onSearch,
+      super.onSeeked,
+      super.onSeeking,
+      super.onSelect,
+      super.onSelectStart,
+      super.onStalled,
+      super.onSubmit,
+      super.onSuspend,
+      super.onTimeUpdate,
+      super.onTouchCancel,
+      super.onTouchEnd,
+      super.onTouchEnter,
+      super.onTouchLeave,
+      super.onTouchMove,
+      super.onTouchStart,
+      super.onTransitionEnd,
+      super.onVolumeChange,
+      super.onWaiting,
+      super.onFullscreenChange,
+      super.onFullscreenError,
+      super.onWheel});
+  @override
+  Element render() => hook(AreaElement());
 }
 
-BRElement bRElement(
-    {String? nonce,
-    Map<String, String>? attributes,
-    List<Element>? children,
-    Iterable<String>? classes,
-    Map<String, String>? dataset,
-    String? innerHtml,
-    String? innerText,
-    int? scrollLeft,
-    int? scrollTop,
-    String? contentEditable,
-    String? dir,
-    bool? draggable,
-    bool? hidden,
-    bool? inert,
-    String? inputMode,
-    String? lang,
-    bool? spellcheck,
-    int? tabIndex,
-    String? title,
-    bool? translate,
-    String? className,
-    String? id,
-    String? slot,
-    Iterable<Node>? nodes,
-    String? text,
-    void Function(Event)? onAbort,
-    void Function(Event)? onBeforeCopy,
-    void Function(Event)? onBeforeCut,
-    void Function(Event)? onBeforePaste,
-    void Function(Event)? onBlur,
-    void Function(Event)? onCanPlay,
-    void Function(Event)? onCanPlayThrough,
-    void Function(Event)? onChange,
-    void Function(MouseEvent)? onClick,
-    void Function(MouseEvent)? onContextMenu,
-    void Function(ClipboardEvent)? onCopy,
-    void Function(ClipboardEvent)? onCut,
-    void Function(Event)? onDoubleClick,
-    void Function(MouseEvent)? onDrag,
-    void Function(MouseEvent)? onDragEnd,
-    void Function(MouseEvent)? onDragEnter,
-    void Function(MouseEvent)? onDragLeave,
-    void Function(MouseEvent)? onDragOver,
-    void Function(MouseEvent)? onDragStart,
-    void Function(MouseEvent)? onDrop,
-    void Function(Event)? onDurationChange,
-    void Function(Event)? onEmptied,
-    void Function(Event)? onEnded,
-    void Function(Event)? onError,
-    void Function(Event)? onFocus,
-    void Function(Event)? onInput,
-    void Function(Event)? onInvalid,
-    void Function(KeyboardEvent)? onKeyDown,
-    void Function(KeyboardEvent)? onKeyPress,
-    void Function(KeyboardEvent)? onKeyUp,
-    void Function(Event)? onLoad,
-    void Function(Event)? onLoadedData,
-    void Function(Event)? onLoadedMetadata,
-    void Function(MouseEvent)? onMouseDown,
-    void Function(MouseEvent)? onMouseEnter,
-    void Function(MouseEvent)? onMouseLeave,
-    void Function(MouseEvent)? onMouseMove,
-    void Function(MouseEvent)? onMouseOut,
-    void Function(MouseEvent)? onMouseOver,
-    void Function(MouseEvent)? onMouseUp,
-    void Function(WheelEvent)? onMouseWheel,
-    void Function(ClipboardEvent)? onPaste,
-    void Function(Event)? onPause,
-    void Function(Event)? onPlay,
-    void Function(Event)? onPlaying,
-    void Function(Event)? onRateChange,
-    void Function(Event)? onReset,
-    void Function(Event)? onResize,
-    void Function(Event)? onScroll,
-    void Function(Event)? onSearch,
-    void Function(Event)? onSeeked,
-    void Function(Event)? onSeeking,
-    void Function(Event)? onSelect,
-    void Function(Event)? onSelectStart,
-    void Function(Event)? onStalled,
-    void Function(Event)? onSubmit,
-    void Function(Event)? onSuspend,
-    void Function(Event)? onTimeUpdate,
-    void Function(TouchEvent)? onTouchCancel,
-    void Function(TouchEvent)? onTouchEnd,
-    void Function(TouchEvent)? onTouchEnter,
-    void Function(TouchEvent)? onTouchLeave,
-    void Function(TouchEvent)? onTouchMove,
-    void Function(TouchEvent)? onTouchStart,
-    void Function(TransitionEvent)? onTransitionEnd,
-    void Function(Event)? onVolumeChange,
-    void Function(Event)? onWaiting,
-    void Function(Event)? onFullscreenChange,
-    void Function(Event)? onFullscreenError,
-    void Function(WheelEvent)? onWheel}) {
-  final v = BRElement();
-  if (nonce != null) v.nonce = nonce;
-  if (attributes != null) v.attributes = attributes;
-  if (children != null) v.children = children;
-  if (classes != null) v.classes = classes;
-  if (dataset != null) v.dataset = dataset;
-  if (innerHtml != null) v.innerHtml = innerHtml;
-  if (innerText != null) v.innerText = innerText;
-  if (scrollLeft != null) v.scrollLeft = scrollLeft;
-  if (scrollTop != null) v.scrollTop = scrollTop;
-  if (contentEditable != null) v.contentEditable = contentEditable;
-  if (dir != null) v.dir = dir;
-  if (draggable != null) v.draggable = draggable;
-  if (hidden != null) v.hidden = hidden;
-  if (inert != null) v.inert = inert;
-  if (inputMode != null) v.inputMode = inputMode;
-  if (lang != null) v.lang = lang;
-  if (spellcheck != null) v.spellcheck = spellcheck;
-  if (tabIndex != null) v.tabIndex = tabIndex;
-  if (title != null) v.title = title;
-  if (translate != null) v.translate = translate;
-  if (className != null) v.className = className;
-  if (id != null) v.id = id;
-  if (slot != null) v.slot = slot;
-  if (nodes != null) v.nodes = nodes;
-  if (text != null) v.text = text;
-  if (onAbort != null) v.onAbort.listen(onAbort);
-  if (onBeforeCopy != null) v.onBeforeCopy.listen(onBeforeCopy);
-  if (onBeforeCut != null) v.onBeforeCut.listen(onBeforeCut);
-  if (onBeforePaste != null) v.onBeforePaste.listen(onBeforePaste);
-  if (onBlur != null) v.onBlur.listen(onBlur);
-  if (onCanPlay != null) v.onCanPlay.listen(onCanPlay);
-  if (onCanPlayThrough != null) v.onCanPlayThrough.listen(onCanPlayThrough);
-  if (onChange != null) v.onChange.listen(onChange);
-  if (onClick != null) v.onClick.listen(onClick);
-  if (onContextMenu != null) v.onContextMenu.listen(onContextMenu);
-  if (onCopy != null) v.onCopy.listen(onCopy);
-  if (onCut != null) v.onCut.listen(onCut);
-  if (onDoubleClick != null) v.onDoubleClick.listen(onDoubleClick);
-  if (onDrag != null) v.onDrag.listen(onDrag);
-  if (onDragEnd != null) v.onDragEnd.listen(onDragEnd);
-  if (onDragEnter != null) v.onDragEnter.listen(onDragEnter);
-  if (onDragLeave != null) v.onDragLeave.listen(onDragLeave);
-  if (onDragOver != null) v.onDragOver.listen(onDragOver);
-  if (onDragStart != null) v.onDragStart.listen(onDragStart);
-  if (onDrop != null) v.onDrop.listen(onDrop);
-  if (onDurationChange != null) v.onDurationChange.listen(onDurationChange);
-  if (onEmptied != null) v.onEmptied.listen(onEmptied);
-  if (onEnded != null) v.onEnded.listen(onEnded);
-  if (onError != null) v.onError.listen(onError);
-  if (onFocus != null) v.onFocus.listen(onFocus);
-  if (onInput != null) v.onInput.listen(onInput);
-  if (onInvalid != null) v.onInvalid.listen(onInvalid);
-  if (onKeyDown != null) v.onKeyDown.listen(onKeyDown);
-  if (onKeyPress != null) v.onKeyPress.listen(onKeyPress);
-  if (onKeyUp != null) v.onKeyUp.listen(onKeyUp);
-  if (onLoad != null) v.onLoad.listen(onLoad);
-  if (onLoadedData != null) v.onLoadedData.listen(onLoadedData);
-  if (onLoadedMetadata != null) v.onLoadedMetadata.listen(onLoadedMetadata);
-  if (onMouseDown != null) v.onMouseDown.listen(onMouseDown);
-  if (onMouseEnter != null) v.onMouseEnter.listen(onMouseEnter);
-  if (onMouseLeave != null) v.onMouseLeave.listen(onMouseLeave);
-  if (onMouseMove != null) v.onMouseMove.listen(onMouseMove);
-  if (onMouseOut != null) v.onMouseOut.listen(onMouseOut);
-  if (onMouseOver != null) v.onMouseOver.listen(onMouseOver);
-  if (onMouseUp != null) v.onMouseUp.listen(onMouseUp);
-  if (onMouseWheel != null) v.onMouseWheel.listen(onMouseWheel);
-  if (onPaste != null) v.onPaste.listen(onPaste);
-  if (onPause != null) v.onPause.listen(onPause);
-  if (onPlay != null) v.onPlay.listen(onPlay);
-  if (onPlaying != null) v.onPlaying.listen(onPlaying);
-  if (onRateChange != null) v.onRateChange.listen(onRateChange);
-  if (onReset != null) v.onReset.listen(onReset);
-  if (onResize != null) v.onResize.listen(onResize);
-  if (onScroll != null) v.onScroll.listen(onScroll);
-  if (onSearch != null) v.onSearch.listen(onSearch);
-  if (onSeeked != null) v.onSeeked.listen(onSeeked);
-  if (onSeeking != null) v.onSeeking.listen(onSeeking);
-  if (onSelect != null) v.onSelect.listen(onSelect);
-  if (onSelectStart != null) v.onSelectStart.listen(onSelectStart);
-  if (onStalled != null) v.onStalled.listen(onStalled);
-  if (onSubmit != null) v.onSubmit.listen(onSubmit);
-  if (onSuspend != null) v.onSuspend.listen(onSuspend);
-  if (onTimeUpdate != null) v.onTimeUpdate.listen(onTimeUpdate);
-  if (onTouchCancel != null) v.onTouchCancel.listen(onTouchCancel);
-  if (onTouchEnd != null) v.onTouchEnd.listen(onTouchEnd);
-  if (onTouchEnter != null) v.onTouchEnter.listen(onTouchEnter);
-  if (onTouchLeave != null) v.onTouchLeave.listen(onTouchLeave);
-  if (onTouchMove != null) v.onTouchMove.listen(onTouchMove);
-  if (onTouchStart != null) v.onTouchStart.listen(onTouchStart);
-  if (onTransitionEnd != null) v.onTransitionEnd.listen(onTransitionEnd);
-  if (onVolumeChange != null) v.onVolumeChange.listen(onVolumeChange);
-  if (onWaiting != null) v.onWaiting.listen(onWaiting);
-  if (onFullscreenChange != null)
-    v.onFullscreenChange.listen(onFullscreenChange);
-  if (onFullscreenError != null) v.onFullscreenError.listen(onFullscreenError);
-  if (onWheel != null) v.onWheel.listen(onWheel);
-  return v;
+class AudioElementWidget extends HtmlElementWidget {
+  AudioElementWidget(
+      {super.nonce,
+      super.attributes,
+      super.children,
+      super.classes,
+      super.dataset,
+      super.innerHtml,
+      super.innerText,
+      super.scrollLeft,
+      super.scrollTop,
+      super.contentEditable,
+      super.dir,
+      super.draggable,
+      super.hidden,
+      super.inert,
+      super.inputMode,
+      super.lang,
+      super.spellcheck,
+      super.tabIndex,
+      super.title,
+      super.translate,
+      super.className,
+      super.id,
+      super.slot,
+      super.nodes,
+      super.text,
+      super.onAbort,
+      super.onBeforeCopy,
+      super.onBeforeCut,
+      super.onBeforePaste,
+      super.onBlur,
+      super.onCanPlay,
+      super.onCanPlayThrough,
+      super.onChange,
+      super.onClick,
+      super.onContextMenu,
+      super.onCopy,
+      super.onCut,
+      super.onDoubleClick,
+      super.onDrag,
+      super.onDragEnd,
+      super.onDragEnter,
+      super.onDragLeave,
+      super.onDragOver,
+      super.onDragStart,
+      super.onDrop,
+      super.onDurationChange,
+      super.onEmptied,
+      super.onEnded,
+      super.onError,
+      super.onFocus,
+      super.onInput,
+      super.onInvalid,
+      super.onKeyDown,
+      super.onKeyPress,
+      super.onKeyUp,
+      super.onLoad,
+      super.onLoadedData,
+      super.onLoadedMetadata,
+      super.onMouseDown,
+      super.onMouseEnter,
+      super.onMouseLeave,
+      super.onMouseMove,
+      super.onMouseOut,
+      super.onMouseOver,
+      super.onMouseUp,
+      super.onMouseWheel,
+      super.onPaste,
+      super.onPause,
+      super.onPlay,
+      super.onPlaying,
+      super.onRateChange,
+      super.onReset,
+      super.onResize,
+      super.onScroll,
+      super.onSearch,
+      super.onSeeked,
+      super.onSeeking,
+      super.onSelect,
+      super.onSelectStart,
+      super.onStalled,
+      super.onSubmit,
+      super.onSuspend,
+      super.onTimeUpdate,
+      super.onTouchCancel,
+      super.onTouchEnd,
+      super.onTouchEnter,
+      super.onTouchLeave,
+      super.onTouchMove,
+      super.onTouchStart,
+      super.onTransitionEnd,
+      super.onVolumeChange,
+      super.onWaiting,
+      super.onFullscreenChange,
+      super.onFullscreenError,
+      super.onWheel});
+  @override
+  Element render() => hook(AudioElement());
 }
 
-BaseElement baseElement(
-    {String? href,
-    String? target,
-    String? nonce,
-    Map<String, String>? attributes,
-    List<Element>? children,
-    Iterable<String>? classes,
-    Map<String, String>? dataset,
-    String? innerHtml,
-    String? innerText,
-    int? scrollLeft,
-    int? scrollTop,
-    String? contentEditable,
-    String? dir,
-    bool? draggable,
-    bool? hidden,
-    bool? inert,
-    String? inputMode,
-    String? lang,
-    bool? spellcheck,
-    int? tabIndex,
-    String? title,
-    bool? translate,
-    String? className,
-    String? id,
-    String? slot,
-    Iterable<Node>? nodes,
-    String? text,
-    void Function(Event)? onAbort,
-    void Function(Event)? onBeforeCopy,
-    void Function(Event)? onBeforeCut,
-    void Function(Event)? onBeforePaste,
-    void Function(Event)? onBlur,
-    void Function(Event)? onCanPlay,
-    void Function(Event)? onCanPlayThrough,
-    void Function(Event)? onChange,
-    void Function(MouseEvent)? onClick,
-    void Function(MouseEvent)? onContextMenu,
-    void Function(ClipboardEvent)? onCopy,
-    void Function(ClipboardEvent)? onCut,
-    void Function(Event)? onDoubleClick,
-    void Function(MouseEvent)? onDrag,
-    void Function(MouseEvent)? onDragEnd,
-    void Function(MouseEvent)? onDragEnter,
-    void Function(MouseEvent)? onDragLeave,
-    void Function(MouseEvent)? onDragOver,
-    void Function(MouseEvent)? onDragStart,
-    void Function(MouseEvent)? onDrop,
-    void Function(Event)? onDurationChange,
-    void Function(Event)? onEmptied,
-    void Function(Event)? onEnded,
-    void Function(Event)? onError,
-    void Function(Event)? onFocus,
-    void Function(Event)? onInput,
-    void Function(Event)? onInvalid,
-    void Function(KeyboardEvent)? onKeyDown,
-    void Function(KeyboardEvent)? onKeyPress,
-    void Function(KeyboardEvent)? onKeyUp,
-    void Function(Event)? onLoad,
-    void Function(Event)? onLoadedData,
-    void Function(Event)? onLoadedMetadata,
-    void Function(MouseEvent)? onMouseDown,
-    void Function(MouseEvent)? onMouseEnter,
-    void Function(MouseEvent)? onMouseLeave,
-    void Function(MouseEvent)? onMouseMove,
-    void Function(MouseEvent)? onMouseOut,
-    void Function(MouseEvent)? onMouseOver,
-    void Function(MouseEvent)? onMouseUp,
-    void Function(WheelEvent)? onMouseWheel,
-    void Function(ClipboardEvent)? onPaste,
-    void Function(Event)? onPause,
-    void Function(Event)? onPlay,
-    void Function(Event)? onPlaying,
-    void Function(Event)? onRateChange,
-    void Function(Event)? onReset,
-    void Function(Event)? onResize,
-    void Function(Event)? onScroll,
-    void Function(Event)? onSearch,
-    void Function(Event)? onSeeked,
-    void Function(Event)? onSeeking,
-    void Function(Event)? onSelect,
-    void Function(Event)? onSelectStart,
-    void Function(Event)? onStalled,
-    void Function(Event)? onSubmit,
-    void Function(Event)? onSuspend,
-    void Function(Event)? onTimeUpdate,
-    void Function(TouchEvent)? onTouchCancel,
-    void Function(TouchEvent)? onTouchEnd,
-    void Function(TouchEvent)? onTouchEnter,
-    void Function(TouchEvent)? onTouchLeave,
-    void Function(TouchEvent)? onTouchMove,
-    void Function(TouchEvent)? onTouchStart,
-    void Function(TransitionEvent)? onTransitionEnd,
-    void Function(Event)? onVolumeChange,
-    void Function(Event)? onWaiting,
-    void Function(Event)? onFullscreenChange,
-    void Function(Event)? onFullscreenError,
-    void Function(WheelEvent)? onWheel}) {
-  final v = BaseElement();
-  if (href != null) v.href = href;
-  if (target != null) v.target = target;
-  if (nonce != null) v.nonce = nonce;
-  if (attributes != null) v.attributes = attributes;
-  if (children != null) v.children = children;
-  if (classes != null) v.classes = classes;
-  if (dataset != null) v.dataset = dataset;
-  if (innerHtml != null) v.innerHtml = innerHtml;
-  if (innerText != null) v.innerText = innerText;
-  if (scrollLeft != null) v.scrollLeft = scrollLeft;
-  if (scrollTop != null) v.scrollTop = scrollTop;
-  if (contentEditable != null) v.contentEditable = contentEditable;
-  if (dir != null) v.dir = dir;
-  if (draggable != null) v.draggable = draggable;
-  if (hidden != null) v.hidden = hidden;
-  if (inert != null) v.inert = inert;
-  if (inputMode != null) v.inputMode = inputMode;
-  if (lang != null) v.lang = lang;
-  if (spellcheck != null) v.spellcheck = spellcheck;
-  if (tabIndex != null) v.tabIndex = tabIndex;
-  if (title != null) v.title = title;
-  if (translate != null) v.translate = translate;
-  if (className != null) v.className = className;
-  if (id != null) v.id = id;
-  if (slot != null) v.slot = slot;
-  if (nodes != null) v.nodes = nodes;
-  if (text != null) v.text = text;
-  if (onAbort != null) v.onAbort.listen(onAbort);
-  if (onBeforeCopy != null) v.onBeforeCopy.listen(onBeforeCopy);
-  if (onBeforeCut != null) v.onBeforeCut.listen(onBeforeCut);
-  if (onBeforePaste != null) v.onBeforePaste.listen(onBeforePaste);
-  if (onBlur != null) v.onBlur.listen(onBlur);
-  if (onCanPlay != null) v.onCanPlay.listen(onCanPlay);
-  if (onCanPlayThrough != null) v.onCanPlayThrough.listen(onCanPlayThrough);
-  if (onChange != null) v.onChange.listen(onChange);
-  if (onClick != null) v.onClick.listen(onClick);
-  if (onContextMenu != null) v.onContextMenu.listen(onContextMenu);
-  if (onCopy != null) v.onCopy.listen(onCopy);
-  if (onCut != null) v.onCut.listen(onCut);
-  if (onDoubleClick != null) v.onDoubleClick.listen(onDoubleClick);
-  if (onDrag != null) v.onDrag.listen(onDrag);
-  if (onDragEnd != null) v.onDragEnd.listen(onDragEnd);
-  if (onDragEnter != null) v.onDragEnter.listen(onDragEnter);
-  if (onDragLeave != null) v.onDragLeave.listen(onDragLeave);
-  if (onDragOver != null) v.onDragOver.listen(onDragOver);
-  if (onDragStart != null) v.onDragStart.listen(onDragStart);
-  if (onDrop != null) v.onDrop.listen(onDrop);
-  if (onDurationChange != null) v.onDurationChange.listen(onDurationChange);
-  if (onEmptied != null) v.onEmptied.listen(onEmptied);
-  if (onEnded != null) v.onEnded.listen(onEnded);
-  if (onError != null) v.onError.listen(onError);
-  if (onFocus != null) v.onFocus.listen(onFocus);
-  if (onInput != null) v.onInput.listen(onInput);
-  if (onInvalid != null) v.onInvalid.listen(onInvalid);
-  if (onKeyDown != null) v.onKeyDown.listen(onKeyDown);
-  if (onKeyPress != null) v.onKeyPress.listen(onKeyPress);
-  if (onKeyUp != null) v.onKeyUp.listen(onKeyUp);
-  if (onLoad != null) v.onLoad.listen(onLoad);
-  if (onLoadedData != null) v.onLoadedData.listen(onLoadedData);
-  if (onLoadedMetadata != null) v.onLoadedMetadata.listen(onLoadedMetadata);
-  if (onMouseDown != null) v.onMouseDown.listen(onMouseDown);
-  if (onMouseEnter != null) v.onMouseEnter.listen(onMouseEnter);
-  if (onMouseLeave != null) v.onMouseLeave.listen(onMouseLeave);
-  if (onMouseMove != null) v.onMouseMove.listen(onMouseMove);
-  if (onMouseOut != null) v.onMouseOut.listen(onMouseOut);
-  if (onMouseOver != null) v.onMouseOver.listen(onMouseOver);
-  if (onMouseUp != null) v.onMouseUp.listen(onMouseUp);
-  if (onMouseWheel != null) v.onMouseWheel.listen(onMouseWheel);
-  if (onPaste != null) v.onPaste.listen(onPaste);
-  if (onPause != null) v.onPause.listen(onPause);
-  if (onPlay != null) v.onPlay.listen(onPlay);
-  if (onPlaying != null) v.onPlaying.listen(onPlaying);
-  if (onRateChange != null) v.onRateChange.listen(onRateChange);
-  if (onReset != null) v.onReset.listen(onReset);
-  if (onResize != null) v.onResize.listen(onResize);
-  if (onScroll != null) v.onScroll.listen(onScroll);
-  if (onSearch != null) v.onSearch.listen(onSearch);
-  if (onSeeked != null) v.onSeeked.listen(onSeeked);
-  if (onSeeking != null) v.onSeeking.listen(onSeeking);
-  if (onSelect != null) v.onSelect.listen(onSelect);
-  if (onSelectStart != null) v.onSelectStart.listen(onSelectStart);
-  if (onStalled != null) v.onStalled.listen(onStalled);
-  if (onSubmit != null) v.onSubmit.listen(onSubmit);
-  if (onSuspend != null) v.onSuspend.listen(onSuspend);
-  if (onTimeUpdate != null) v.onTimeUpdate.listen(onTimeUpdate);
-  if (onTouchCancel != null) v.onTouchCancel.listen(onTouchCancel);
-  if (onTouchEnd != null) v.onTouchEnd.listen(onTouchEnd);
-  if (onTouchEnter != null) v.onTouchEnter.listen(onTouchEnter);
-  if (onTouchLeave != null) v.onTouchLeave.listen(onTouchLeave);
-  if (onTouchMove != null) v.onTouchMove.listen(onTouchMove);
-  if (onTouchStart != null) v.onTouchStart.listen(onTouchStart);
-  if (onTransitionEnd != null) v.onTransitionEnd.listen(onTransitionEnd);
-  if (onVolumeChange != null) v.onVolumeChange.listen(onVolumeChange);
-  if (onWaiting != null) v.onWaiting.listen(onWaiting);
-  if (onFullscreenChange != null)
-    v.onFullscreenChange.listen(onFullscreenChange);
-  if (onFullscreenError != null) v.onFullscreenError.listen(onFullscreenError);
-  if (onWheel != null) v.onWheel.listen(onWheel);
-  return v;
+class BRElementWidget extends HtmlElementWidget {
+  BRElementWidget(
+      {super.nonce,
+      super.attributes,
+      super.children,
+      super.classes,
+      super.dataset,
+      super.innerHtml,
+      super.innerText,
+      super.scrollLeft,
+      super.scrollTop,
+      super.contentEditable,
+      super.dir,
+      super.draggable,
+      super.hidden,
+      super.inert,
+      super.inputMode,
+      super.lang,
+      super.spellcheck,
+      super.tabIndex,
+      super.title,
+      super.translate,
+      super.className,
+      super.id,
+      super.slot,
+      super.nodes,
+      super.text,
+      super.onAbort,
+      super.onBeforeCopy,
+      super.onBeforeCut,
+      super.onBeforePaste,
+      super.onBlur,
+      super.onCanPlay,
+      super.onCanPlayThrough,
+      super.onChange,
+      super.onClick,
+      super.onContextMenu,
+      super.onCopy,
+      super.onCut,
+      super.onDoubleClick,
+      super.onDrag,
+      super.onDragEnd,
+      super.onDragEnter,
+      super.onDragLeave,
+      super.onDragOver,
+      super.onDragStart,
+      super.onDrop,
+      super.onDurationChange,
+      super.onEmptied,
+      super.onEnded,
+      super.onError,
+      super.onFocus,
+      super.onInput,
+      super.onInvalid,
+      super.onKeyDown,
+      super.onKeyPress,
+      super.onKeyUp,
+      super.onLoad,
+      super.onLoadedData,
+      super.onLoadedMetadata,
+      super.onMouseDown,
+      super.onMouseEnter,
+      super.onMouseLeave,
+      super.onMouseMove,
+      super.onMouseOut,
+      super.onMouseOver,
+      super.onMouseUp,
+      super.onMouseWheel,
+      super.onPaste,
+      super.onPause,
+      super.onPlay,
+      super.onPlaying,
+      super.onRateChange,
+      super.onReset,
+      super.onResize,
+      super.onScroll,
+      super.onSearch,
+      super.onSeeked,
+      super.onSeeking,
+      super.onSelect,
+      super.onSelectStart,
+      super.onStalled,
+      super.onSubmit,
+      super.onSuspend,
+      super.onTimeUpdate,
+      super.onTouchCancel,
+      super.onTouchEnd,
+      super.onTouchEnter,
+      super.onTouchLeave,
+      super.onTouchMove,
+      super.onTouchStart,
+      super.onTransitionEnd,
+      super.onVolumeChange,
+      super.onWaiting,
+      super.onFullscreenChange,
+      super.onFullscreenError,
+      super.onWheel});
+  @override
+  Element render() => hook(BRElement());
 }
 
-BodyElement bodyElement(
-    {String? nonce,
-    Map<String, String>? attributes,
-    List<Element>? children,
-    Iterable<String>? classes,
-    Map<String, String>? dataset,
-    String? innerHtml,
-    String? innerText,
-    int? scrollLeft,
-    int? scrollTop,
-    String? contentEditable,
-    String? dir,
-    bool? draggable,
-    bool? hidden,
-    bool? inert,
-    String? inputMode,
-    String? lang,
-    bool? spellcheck,
-    int? tabIndex,
-    String? title,
-    bool? translate,
-    String? className,
-    String? id,
-    String? slot,
-    Iterable<Node>? nodes,
-    String? text,
-    void Function(Event)? onBlur,
-    void Function(Event)? onError,
-    void Function(Event)? onFocus,
-    void Function(Event)? onHashChange,
-    void Function(Event)? onLoad,
-    void Function(MessageEvent)? onMessage,
-    void Function(Event)? onOffline,
-    void Function(Event)? onOnline,
-    void Function(PopStateEvent)? onPopState,
-    void Function(Event)? onResize,
-    void Function(Event)? onScroll,
-    void Function(StorageEvent)? onStorage,
-    void Function(Event)? onUnload,
-    void Function(Event)? onAbort,
-    void Function(Event)? onBeforeCopy,
-    void Function(Event)? onBeforeCut,
-    void Function(Event)? onBeforePaste,
-    void Function(Event)? onCanPlay,
-    void Function(Event)? onCanPlayThrough,
-    void Function(Event)? onChange,
-    void Function(MouseEvent)? onClick,
-    void Function(MouseEvent)? onContextMenu,
-    void Function(ClipboardEvent)? onCopy,
-    void Function(ClipboardEvent)? onCut,
-    void Function(Event)? onDoubleClick,
-    void Function(MouseEvent)? onDrag,
-    void Function(MouseEvent)? onDragEnd,
-    void Function(MouseEvent)? onDragEnter,
-    void Function(MouseEvent)? onDragLeave,
-    void Function(MouseEvent)? onDragOver,
-    void Function(MouseEvent)? onDragStart,
-    void Function(MouseEvent)? onDrop,
-    void Function(Event)? onDurationChange,
-    void Function(Event)? onEmptied,
-    void Function(Event)? onEnded,
-    void Function(Event)? onInput,
-    void Function(Event)? onInvalid,
-    void Function(KeyboardEvent)? onKeyDown,
-    void Function(KeyboardEvent)? onKeyPress,
-    void Function(KeyboardEvent)? onKeyUp,
-    void Function(Event)? onLoadedData,
-    void Function(Event)? onLoadedMetadata,
-    void Function(MouseEvent)? onMouseDown,
-    void Function(MouseEvent)? onMouseEnter,
-    void Function(MouseEvent)? onMouseLeave,
-    void Function(MouseEvent)? onMouseMove,
-    void Function(MouseEvent)? onMouseOut,
-    void Function(MouseEvent)? onMouseOver,
-    void Function(MouseEvent)? onMouseUp,
-    void Function(WheelEvent)? onMouseWheel,
-    void Function(ClipboardEvent)? onPaste,
-    void Function(Event)? onPause,
-    void Function(Event)? onPlay,
-    void Function(Event)? onPlaying,
-    void Function(Event)? onRateChange,
-    void Function(Event)? onReset,
-    void Function(Event)? onSearch,
-    void Function(Event)? onSeeked,
-    void Function(Event)? onSeeking,
-    void Function(Event)? onSelect,
-    void Function(Event)? onSelectStart,
-    void Function(Event)? onStalled,
-    void Function(Event)? onSubmit,
-    void Function(Event)? onSuspend,
-    void Function(Event)? onTimeUpdate,
-    void Function(TouchEvent)? onTouchCancel,
-    void Function(TouchEvent)? onTouchEnd,
-    void Function(TouchEvent)? onTouchEnter,
-    void Function(TouchEvent)? onTouchLeave,
-    void Function(TouchEvent)? onTouchMove,
-    void Function(TouchEvent)? onTouchStart,
-    void Function(TransitionEvent)? onTransitionEnd,
-    void Function(Event)? onVolumeChange,
-    void Function(Event)? onWaiting,
-    void Function(Event)? onFullscreenChange,
-    void Function(Event)? onFullscreenError,
-    void Function(WheelEvent)? onWheel}) {
-  final v = BodyElement();
-  if (nonce != null) v.nonce = nonce;
-  if (attributes != null) v.attributes = attributes;
-  if (children != null) v.children = children;
-  if (classes != null) v.classes = classes;
-  if (dataset != null) v.dataset = dataset;
-  if (innerHtml != null) v.innerHtml = innerHtml;
-  if (innerText != null) v.innerText = innerText;
-  if (scrollLeft != null) v.scrollLeft = scrollLeft;
-  if (scrollTop != null) v.scrollTop = scrollTop;
-  if (contentEditable != null) v.contentEditable = contentEditable;
-  if (dir != null) v.dir = dir;
-  if (draggable != null) v.draggable = draggable;
-  if (hidden != null) v.hidden = hidden;
-  if (inert != null) v.inert = inert;
-  if (inputMode != null) v.inputMode = inputMode;
-  if (lang != null) v.lang = lang;
-  if (spellcheck != null) v.spellcheck = spellcheck;
-  if (tabIndex != null) v.tabIndex = tabIndex;
-  if (title != null) v.title = title;
-  if (translate != null) v.translate = translate;
-  if (className != null) v.className = className;
-  if (id != null) v.id = id;
-  if (slot != null) v.slot = slot;
-  if (nodes != null) v.nodes = nodes;
-  if (text != null) v.text = text;
-  if (onBlur != null) v.onBlur.listen(onBlur);
-  if (onError != null) v.onError.listen(onError);
-  if (onFocus != null) v.onFocus.listen(onFocus);
-  if (onHashChange != null) v.onHashChange.listen(onHashChange);
-  if (onLoad != null) v.onLoad.listen(onLoad);
-  if (onMessage != null) v.onMessage.listen(onMessage);
-  if (onOffline != null) v.onOffline.listen(onOffline);
-  if (onOnline != null) v.onOnline.listen(onOnline);
-  if (onPopState != null) v.onPopState.listen(onPopState);
-  if (onResize != null) v.onResize.listen(onResize);
-  if (onScroll != null) v.onScroll.listen(onScroll);
-  if (onStorage != null) v.onStorage.listen(onStorage);
-  if (onUnload != null) v.onUnload.listen(onUnload);
-  if (onAbort != null) v.onAbort.listen(onAbort);
-  if (onBeforeCopy != null) v.onBeforeCopy.listen(onBeforeCopy);
-  if (onBeforeCut != null) v.onBeforeCut.listen(onBeforeCut);
-  if (onBeforePaste != null) v.onBeforePaste.listen(onBeforePaste);
-  if (onCanPlay != null) v.onCanPlay.listen(onCanPlay);
-  if (onCanPlayThrough != null) v.onCanPlayThrough.listen(onCanPlayThrough);
-  if (onChange != null) v.onChange.listen(onChange);
-  if (onClick != null) v.onClick.listen(onClick);
-  if (onContextMenu != null) v.onContextMenu.listen(onContextMenu);
-  if (onCopy != null) v.onCopy.listen(onCopy);
-  if (onCut != null) v.onCut.listen(onCut);
-  if (onDoubleClick != null) v.onDoubleClick.listen(onDoubleClick);
-  if (onDrag != null) v.onDrag.listen(onDrag);
-  if (onDragEnd != null) v.onDragEnd.listen(onDragEnd);
-  if (onDragEnter != null) v.onDragEnter.listen(onDragEnter);
-  if (onDragLeave != null) v.onDragLeave.listen(onDragLeave);
-  if (onDragOver != null) v.onDragOver.listen(onDragOver);
-  if (onDragStart != null) v.onDragStart.listen(onDragStart);
-  if (onDrop != null) v.onDrop.listen(onDrop);
-  if (onDurationChange != null) v.onDurationChange.listen(onDurationChange);
-  if (onEmptied != null) v.onEmptied.listen(onEmptied);
-  if (onEnded != null) v.onEnded.listen(onEnded);
-  if (onInput != null) v.onInput.listen(onInput);
-  if (onInvalid != null) v.onInvalid.listen(onInvalid);
-  if (onKeyDown != null) v.onKeyDown.listen(onKeyDown);
-  if (onKeyPress != null) v.onKeyPress.listen(onKeyPress);
-  if (onKeyUp != null) v.onKeyUp.listen(onKeyUp);
-  if (onLoadedData != null) v.onLoadedData.listen(onLoadedData);
-  if (onLoadedMetadata != null) v.onLoadedMetadata.listen(onLoadedMetadata);
-  if (onMouseDown != null) v.onMouseDown.listen(onMouseDown);
-  if (onMouseEnter != null) v.onMouseEnter.listen(onMouseEnter);
-  if (onMouseLeave != null) v.onMouseLeave.listen(onMouseLeave);
-  if (onMouseMove != null) v.onMouseMove.listen(onMouseMove);
-  if (onMouseOut != null) v.onMouseOut.listen(onMouseOut);
-  if (onMouseOver != null) v.onMouseOver.listen(onMouseOver);
-  if (onMouseUp != null) v.onMouseUp.listen(onMouseUp);
-  if (onMouseWheel != null) v.onMouseWheel.listen(onMouseWheel);
-  if (onPaste != null) v.onPaste.listen(onPaste);
-  if (onPause != null) v.onPause.listen(onPause);
-  if (onPlay != null) v.onPlay.listen(onPlay);
-  if (onPlaying != null) v.onPlaying.listen(onPlaying);
-  if (onRateChange != null) v.onRateChange.listen(onRateChange);
-  if (onReset != null) v.onReset.listen(onReset);
-  if (onSearch != null) v.onSearch.listen(onSearch);
-  if (onSeeked != null) v.onSeeked.listen(onSeeked);
-  if (onSeeking != null) v.onSeeking.listen(onSeeking);
-  if (onSelect != null) v.onSelect.listen(onSelect);
-  if (onSelectStart != null) v.onSelectStart.listen(onSelectStart);
-  if (onStalled != null) v.onStalled.listen(onStalled);
-  if (onSubmit != null) v.onSubmit.listen(onSubmit);
-  if (onSuspend != null) v.onSuspend.listen(onSuspend);
-  if (onTimeUpdate != null) v.onTimeUpdate.listen(onTimeUpdate);
-  if (onTouchCancel != null) v.onTouchCancel.listen(onTouchCancel);
-  if (onTouchEnd != null) v.onTouchEnd.listen(onTouchEnd);
-  if (onTouchEnter != null) v.onTouchEnter.listen(onTouchEnter);
-  if (onTouchLeave != null) v.onTouchLeave.listen(onTouchLeave);
-  if (onTouchMove != null) v.onTouchMove.listen(onTouchMove);
-  if (onTouchStart != null) v.onTouchStart.listen(onTouchStart);
-  if (onTransitionEnd != null) v.onTransitionEnd.listen(onTransitionEnd);
-  if (onVolumeChange != null) v.onVolumeChange.listen(onVolumeChange);
-  if (onWaiting != null) v.onWaiting.listen(onWaiting);
-  if (onFullscreenChange != null)
-    v.onFullscreenChange.listen(onFullscreenChange);
-  if (onFullscreenError != null) v.onFullscreenError.listen(onFullscreenError);
-  if (onWheel != null) v.onWheel.listen(onWheel);
-  return v;
+class BaseElementWidget extends HtmlElementWidget {
+  BaseElementWidget(
+      {super.nonce,
+      super.attributes,
+      super.children,
+      super.classes,
+      super.dataset,
+      super.innerHtml,
+      super.innerText,
+      super.scrollLeft,
+      super.scrollTop,
+      super.contentEditable,
+      super.dir,
+      super.draggable,
+      super.hidden,
+      super.inert,
+      super.inputMode,
+      super.lang,
+      super.spellcheck,
+      super.tabIndex,
+      super.title,
+      super.translate,
+      super.className,
+      super.id,
+      super.slot,
+      super.nodes,
+      super.text,
+      super.onAbort,
+      super.onBeforeCopy,
+      super.onBeforeCut,
+      super.onBeforePaste,
+      super.onBlur,
+      super.onCanPlay,
+      super.onCanPlayThrough,
+      super.onChange,
+      super.onClick,
+      super.onContextMenu,
+      super.onCopy,
+      super.onCut,
+      super.onDoubleClick,
+      super.onDrag,
+      super.onDragEnd,
+      super.onDragEnter,
+      super.onDragLeave,
+      super.onDragOver,
+      super.onDragStart,
+      super.onDrop,
+      super.onDurationChange,
+      super.onEmptied,
+      super.onEnded,
+      super.onError,
+      super.onFocus,
+      super.onInput,
+      super.onInvalid,
+      super.onKeyDown,
+      super.onKeyPress,
+      super.onKeyUp,
+      super.onLoad,
+      super.onLoadedData,
+      super.onLoadedMetadata,
+      super.onMouseDown,
+      super.onMouseEnter,
+      super.onMouseLeave,
+      super.onMouseMove,
+      super.onMouseOut,
+      super.onMouseOver,
+      super.onMouseUp,
+      super.onMouseWheel,
+      super.onPaste,
+      super.onPause,
+      super.onPlay,
+      super.onPlaying,
+      super.onRateChange,
+      super.onReset,
+      super.onResize,
+      super.onScroll,
+      super.onSearch,
+      super.onSeeked,
+      super.onSeeking,
+      super.onSelect,
+      super.onSelectStart,
+      super.onStalled,
+      super.onSubmit,
+      super.onSuspend,
+      super.onTimeUpdate,
+      super.onTouchCancel,
+      super.onTouchEnd,
+      super.onTouchEnter,
+      super.onTouchLeave,
+      super.onTouchMove,
+      super.onTouchStart,
+      super.onTransitionEnd,
+      super.onVolumeChange,
+      super.onWaiting,
+      super.onFullscreenChange,
+      super.onFullscreenError,
+      super.onWheel});
+  @override
+  Element render() => hook(BaseElement());
 }
 
-ButtonElement buttonElement(
-    {bool? autofocus,
-    bool? disabled,
-    String? formAction,
-    String? formEnctype,
-    String? formMethod,
-    bool? formNoValidate,
-    String? formTarget,
-    String? name,
-    String? type,
-    String? value,
-    String? nonce,
-    Map<String, String>? attributes,
-    List<Element>? children,
-    Iterable<String>? classes,
-    Map<String, String>? dataset,
-    String? innerHtml,
-    String? innerText,
-    int? scrollLeft,
-    int? scrollTop,
-    String? contentEditable,
-    String? dir,
-    bool? draggable,
-    bool? hidden,
-    bool? inert,
-    String? inputMode,
-    String? lang,
-    bool? spellcheck,
-    int? tabIndex,
-    String? title,
-    bool? translate,
-    String? className,
-    String? id,
-    String? slot,
-    Iterable<Node>? nodes,
-    String? text,
-    void Function(Event)? onAbort,
-    void Function(Event)? onBeforeCopy,
-    void Function(Event)? onBeforeCut,
-    void Function(Event)? onBeforePaste,
-    void Function(Event)? onBlur,
-    void Function(Event)? onCanPlay,
-    void Function(Event)? onCanPlayThrough,
-    void Function(Event)? onChange,
-    void Function(MouseEvent)? onClick,
-    void Function(MouseEvent)? onContextMenu,
-    void Function(ClipboardEvent)? onCopy,
-    void Function(ClipboardEvent)? onCut,
-    void Function(Event)? onDoubleClick,
-    void Function(MouseEvent)? onDrag,
-    void Function(MouseEvent)? onDragEnd,
-    void Function(MouseEvent)? onDragEnter,
-    void Function(MouseEvent)? onDragLeave,
-    void Function(MouseEvent)? onDragOver,
-    void Function(MouseEvent)? onDragStart,
-    void Function(MouseEvent)? onDrop,
-    void Function(Event)? onDurationChange,
-    void Function(Event)? onEmptied,
-    void Function(Event)? onEnded,
-    void Function(Event)? onError,
-    void Function(Event)? onFocus,
-    void Function(Event)? onInput,
-    void Function(Event)? onInvalid,
-    void Function(KeyboardEvent)? onKeyDown,
-    void Function(KeyboardEvent)? onKeyPress,
-    void Function(KeyboardEvent)? onKeyUp,
-    void Function(Event)? onLoad,
-    void Function(Event)? onLoadedData,
-    void Function(Event)? onLoadedMetadata,
-    void Function(MouseEvent)? onMouseDown,
-    void Function(MouseEvent)? onMouseEnter,
-    void Function(MouseEvent)? onMouseLeave,
-    void Function(MouseEvent)? onMouseMove,
-    void Function(MouseEvent)? onMouseOut,
-    void Function(MouseEvent)? onMouseOver,
-    void Function(MouseEvent)? onMouseUp,
-    void Function(WheelEvent)? onMouseWheel,
-    void Function(ClipboardEvent)? onPaste,
-    void Function(Event)? onPause,
-    void Function(Event)? onPlay,
-    void Function(Event)? onPlaying,
-    void Function(Event)? onRateChange,
-    void Function(Event)? onReset,
-    void Function(Event)? onResize,
-    void Function(Event)? onScroll,
-    void Function(Event)? onSearch,
-    void Function(Event)? onSeeked,
-    void Function(Event)? onSeeking,
-    void Function(Event)? onSelect,
-    void Function(Event)? onSelectStart,
-    void Function(Event)? onStalled,
-    void Function(Event)? onSubmit,
-    void Function(Event)? onSuspend,
-    void Function(Event)? onTimeUpdate,
-    void Function(TouchEvent)? onTouchCancel,
-    void Function(TouchEvent)? onTouchEnd,
-    void Function(TouchEvent)? onTouchEnter,
-    void Function(TouchEvent)? onTouchLeave,
-    void Function(TouchEvent)? onTouchMove,
-    void Function(TouchEvent)? onTouchStart,
-    void Function(TransitionEvent)? onTransitionEnd,
-    void Function(Event)? onVolumeChange,
-    void Function(Event)? onWaiting,
-    void Function(Event)? onFullscreenChange,
-    void Function(Event)? onFullscreenError,
-    void Function(WheelEvent)? onWheel}) {
-  final v = ButtonElement();
-  if (autofocus != null) v.autofocus = autofocus;
-  if (disabled != null) v.disabled = disabled;
-  if (formAction != null) v.formAction = formAction;
-  if (formEnctype != null) v.formEnctype = formEnctype;
-  if (formMethod != null) v.formMethod = formMethod;
-  if (formNoValidate != null) v.formNoValidate = formNoValidate;
-  if (formTarget != null) v.formTarget = formTarget;
-  if (name != null) v.name = name;
-  if (type != null) v.type = type;
-  if (value != null) v.value = value;
-  if (nonce != null) v.nonce = nonce;
-  if (attributes != null) v.attributes = attributes;
-  if (children != null) v.children = children;
-  if (classes != null) v.classes = classes;
-  if (dataset != null) v.dataset = dataset;
-  if (innerHtml != null) v.innerHtml = innerHtml;
-  if (innerText != null) v.innerText = innerText;
-  if (scrollLeft != null) v.scrollLeft = scrollLeft;
-  if (scrollTop != null) v.scrollTop = scrollTop;
-  if (contentEditable != null) v.contentEditable = contentEditable;
-  if (dir != null) v.dir = dir;
-  if (draggable != null) v.draggable = draggable;
-  if (hidden != null) v.hidden = hidden;
-  if (inert != null) v.inert = inert;
-  if (inputMode != null) v.inputMode = inputMode;
-  if (lang != null) v.lang = lang;
-  if (spellcheck != null) v.spellcheck = spellcheck;
-  if (tabIndex != null) v.tabIndex = tabIndex;
-  if (title != null) v.title = title;
-  if (translate != null) v.translate = translate;
-  if (className != null) v.className = className;
-  if (id != null) v.id = id;
-  if (slot != null) v.slot = slot;
-  if (nodes != null) v.nodes = nodes;
-  if (text != null) v.text = text;
-  if (onAbort != null) v.onAbort.listen(onAbort);
-  if (onBeforeCopy != null) v.onBeforeCopy.listen(onBeforeCopy);
-  if (onBeforeCut != null) v.onBeforeCut.listen(onBeforeCut);
-  if (onBeforePaste != null) v.onBeforePaste.listen(onBeforePaste);
-  if (onBlur != null) v.onBlur.listen(onBlur);
-  if (onCanPlay != null) v.onCanPlay.listen(onCanPlay);
-  if (onCanPlayThrough != null) v.onCanPlayThrough.listen(onCanPlayThrough);
-  if (onChange != null) v.onChange.listen(onChange);
-  if (onClick != null) v.onClick.listen(onClick);
-  if (onContextMenu != null) v.onContextMenu.listen(onContextMenu);
-  if (onCopy != null) v.onCopy.listen(onCopy);
-  if (onCut != null) v.onCut.listen(onCut);
-  if (onDoubleClick != null) v.onDoubleClick.listen(onDoubleClick);
-  if (onDrag != null) v.onDrag.listen(onDrag);
-  if (onDragEnd != null) v.onDragEnd.listen(onDragEnd);
-  if (onDragEnter != null) v.onDragEnter.listen(onDragEnter);
-  if (onDragLeave != null) v.onDragLeave.listen(onDragLeave);
-  if (onDragOver != null) v.onDragOver.listen(onDragOver);
-  if (onDragStart != null) v.onDragStart.listen(onDragStart);
-  if (onDrop != null) v.onDrop.listen(onDrop);
-  if (onDurationChange != null) v.onDurationChange.listen(onDurationChange);
-  if (onEmptied != null) v.onEmptied.listen(onEmptied);
-  if (onEnded != null) v.onEnded.listen(onEnded);
-  if (onError != null) v.onError.listen(onError);
-  if (onFocus != null) v.onFocus.listen(onFocus);
-  if (onInput != null) v.onInput.listen(onInput);
-  if (onInvalid != null) v.onInvalid.listen(onInvalid);
-  if (onKeyDown != null) v.onKeyDown.listen(onKeyDown);
-  if (onKeyPress != null) v.onKeyPress.listen(onKeyPress);
-  if (onKeyUp != null) v.onKeyUp.listen(onKeyUp);
-  if (onLoad != null) v.onLoad.listen(onLoad);
-  if (onLoadedData != null) v.onLoadedData.listen(onLoadedData);
-  if (onLoadedMetadata != null) v.onLoadedMetadata.listen(onLoadedMetadata);
-  if (onMouseDown != null) v.onMouseDown.listen(onMouseDown);
-  if (onMouseEnter != null) v.onMouseEnter.listen(onMouseEnter);
-  if (onMouseLeave != null) v.onMouseLeave.listen(onMouseLeave);
-  if (onMouseMove != null) v.onMouseMove.listen(onMouseMove);
-  if (onMouseOut != null) v.onMouseOut.listen(onMouseOut);
-  if (onMouseOver != null) v.onMouseOver.listen(onMouseOver);
-  if (onMouseUp != null) v.onMouseUp.listen(onMouseUp);
-  if (onMouseWheel != null) v.onMouseWheel.listen(onMouseWheel);
-  if (onPaste != null) v.onPaste.listen(onPaste);
-  if (onPause != null) v.onPause.listen(onPause);
-  if (onPlay != null) v.onPlay.listen(onPlay);
-  if (onPlaying != null) v.onPlaying.listen(onPlaying);
-  if (onRateChange != null) v.onRateChange.listen(onRateChange);
-  if (onReset != null) v.onReset.listen(onReset);
-  if (onResize != null) v.onResize.listen(onResize);
-  if (onScroll != null) v.onScroll.listen(onScroll);
-  if (onSearch != null) v.onSearch.listen(onSearch);
-  if (onSeeked != null) v.onSeeked.listen(onSeeked);
-  if (onSeeking != null) v.onSeeking.listen(onSeeking);
-  if (onSelect != null) v.onSelect.listen(onSelect);
-  if (onSelectStart != null) v.onSelectStart.listen(onSelectStart);
-  if (onStalled != null) v.onStalled.listen(onStalled);
-  if (onSubmit != null) v.onSubmit.listen(onSubmit);
-  if (onSuspend != null) v.onSuspend.listen(onSuspend);
-  if (onTimeUpdate != null) v.onTimeUpdate.listen(onTimeUpdate);
-  if (onTouchCancel != null) v.onTouchCancel.listen(onTouchCancel);
-  if (onTouchEnd != null) v.onTouchEnd.listen(onTouchEnd);
-  if (onTouchEnter != null) v.onTouchEnter.listen(onTouchEnter);
-  if (onTouchLeave != null) v.onTouchLeave.listen(onTouchLeave);
-  if (onTouchMove != null) v.onTouchMove.listen(onTouchMove);
-  if (onTouchStart != null) v.onTouchStart.listen(onTouchStart);
-  if (onTransitionEnd != null) v.onTransitionEnd.listen(onTransitionEnd);
-  if (onVolumeChange != null) v.onVolumeChange.listen(onVolumeChange);
-  if (onWaiting != null) v.onWaiting.listen(onWaiting);
-  if (onFullscreenChange != null)
-    v.onFullscreenChange.listen(onFullscreenChange);
-  if (onFullscreenError != null) v.onFullscreenError.listen(onFullscreenError);
-  if (onWheel != null) v.onWheel.listen(onWheel);
-  return v;
+class BodyElementWidget extends HtmlElementWidget {
+  BodyElementWidget(
+      {super.nonce,
+      super.attributes,
+      super.children,
+      super.classes,
+      super.dataset,
+      super.innerHtml,
+      super.innerText,
+      super.scrollLeft,
+      super.scrollTop,
+      super.contentEditable,
+      super.dir,
+      super.draggable,
+      super.hidden,
+      super.inert,
+      super.inputMode,
+      super.lang,
+      super.spellcheck,
+      super.tabIndex,
+      super.title,
+      super.translate,
+      super.className,
+      super.id,
+      super.slot,
+      super.nodes,
+      super.text,
+      super.onAbort,
+      super.onBeforeCopy,
+      super.onBeforeCut,
+      super.onBeforePaste,
+      super.onBlur,
+      super.onCanPlay,
+      super.onCanPlayThrough,
+      super.onChange,
+      super.onClick,
+      super.onContextMenu,
+      super.onCopy,
+      super.onCut,
+      super.onDoubleClick,
+      super.onDrag,
+      super.onDragEnd,
+      super.onDragEnter,
+      super.onDragLeave,
+      super.onDragOver,
+      super.onDragStart,
+      super.onDrop,
+      super.onDurationChange,
+      super.onEmptied,
+      super.onEnded,
+      super.onError,
+      super.onFocus,
+      super.onInput,
+      super.onInvalid,
+      super.onKeyDown,
+      super.onKeyPress,
+      super.onKeyUp,
+      super.onLoad,
+      super.onLoadedData,
+      super.onLoadedMetadata,
+      super.onMouseDown,
+      super.onMouseEnter,
+      super.onMouseLeave,
+      super.onMouseMove,
+      super.onMouseOut,
+      super.onMouseOver,
+      super.onMouseUp,
+      super.onMouseWheel,
+      super.onPaste,
+      super.onPause,
+      super.onPlay,
+      super.onPlaying,
+      super.onRateChange,
+      super.onReset,
+      super.onResize,
+      super.onScroll,
+      super.onSearch,
+      super.onSeeked,
+      super.onSeeking,
+      super.onSelect,
+      super.onSelectStart,
+      super.onStalled,
+      super.onSubmit,
+      super.onSuspend,
+      super.onTimeUpdate,
+      super.onTouchCancel,
+      super.onTouchEnd,
+      super.onTouchEnter,
+      super.onTouchLeave,
+      super.onTouchMove,
+      super.onTouchStart,
+      super.onTransitionEnd,
+      super.onVolumeChange,
+      super.onWaiting,
+      super.onFullscreenChange,
+      super.onFullscreenError,
+      super.onWheel});
+  @override
+  Element render() => hook(BodyElement());
 }
 
-CanvasElement canvasElement(
-    {int? height,
-    int? width,
-    String? nonce,
-    Map<String, String>? attributes,
-    List<Element>? children,
-    Iterable<String>? classes,
-    Map<String, String>? dataset,
-    String? innerHtml,
-    String? innerText,
-    int? scrollLeft,
-    int? scrollTop,
-    String? contentEditable,
-    String? dir,
-    bool? draggable,
-    bool? hidden,
-    bool? inert,
-    String? inputMode,
-    String? lang,
-    bool? spellcheck,
-    int? tabIndex,
-    String? title,
-    bool? translate,
-    String? className,
-    String? id,
-    String? slot,
-    Iterable<Node>? nodes,
-    String? text,
-    void Function(Event)? onAbort,
-    void Function(Event)? onBeforeCopy,
-    void Function(Event)? onBeforeCut,
-    void Function(Event)? onBeforePaste,
-    void Function(Event)? onBlur,
-    void Function(Event)? onCanPlay,
-    void Function(Event)? onCanPlayThrough,
-    void Function(Event)? onChange,
-    void Function(MouseEvent)? onClick,
-    void Function(MouseEvent)? onContextMenu,
-    void Function(ClipboardEvent)? onCopy,
-    void Function(ClipboardEvent)? onCut,
-    void Function(Event)? onDoubleClick,
-    void Function(MouseEvent)? onDrag,
-    void Function(MouseEvent)? onDragEnd,
-    void Function(MouseEvent)? onDragEnter,
-    void Function(MouseEvent)? onDragLeave,
-    void Function(MouseEvent)? onDragOver,
-    void Function(MouseEvent)? onDragStart,
-    void Function(MouseEvent)? onDrop,
-    void Function(Event)? onDurationChange,
-    void Function(Event)? onEmptied,
-    void Function(Event)? onEnded,
-    void Function(Event)? onError,
-    void Function(Event)? onFocus,
-    void Function(Event)? onInput,
-    void Function(Event)? onInvalid,
-    void Function(KeyboardEvent)? onKeyDown,
-    void Function(KeyboardEvent)? onKeyPress,
-    void Function(KeyboardEvent)? onKeyUp,
-    void Function(Event)? onLoad,
-    void Function(Event)? onLoadedData,
-    void Function(Event)? onLoadedMetadata,
-    void Function(MouseEvent)? onMouseDown,
-    void Function(MouseEvent)? onMouseEnter,
-    void Function(MouseEvent)? onMouseLeave,
-    void Function(MouseEvent)? onMouseMove,
-    void Function(MouseEvent)? onMouseOut,
-    void Function(MouseEvent)? onMouseOver,
-    void Function(MouseEvent)? onMouseUp,
-    void Function(WheelEvent)? onMouseWheel,
-    void Function(ClipboardEvent)? onPaste,
-    void Function(Event)? onPause,
-    void Function(Event)? onPlay,
-    void Function(Event)? onPlaying,
-    void Function(Event)? onRateChange,
-    void Function(Event)? onReset,
-    void Function(Event)? onResize,
-    void Function(Event)? onScroll,
-    void Function(Event)? onSearch,
-    void Function(Event)? onSeeked,
-    void Function(Event)? onSeeking,
-    void Function(Event)? onSelect,
-    void Function(Event)? onSelectStart,
-    void Function(Event)? onStalled,
-    void Function(Event)? onSubmit,
-    void Function(Event)? onSuspend,
-    void Function(Event)? onTimeUpdate,
-    void Function(TouchEvent)? onTouchCancel,
-    void Function(TouchEvent)? onTouchEnd,
-    void Function(TouchEvent)? onTouchEnter,
-    void Function(TouchEvent)? onTouchLeave,
-    void Function(TouchEvent)? onTouchMove,
-    void Function(TouchEvent)? onTouchStart,
-    void Function(TransitionEvent)? onTransitionEnd,
-    void Function(Event)? onVolumeChange,
-    void Function(Event)? onWaiting,
-    void Function(Event)? onFullscreenChange,
-    void Function(Event)? onFullscreenError,
-    void Function(WheelEvent)? onWheel}) {
-  final v = CanvasElement();
-  if (height != null) v.height = height;
-  if (width != null) v.width = width;
-  if (nonce != null) v.nonce = nonce;
-  if (attributes != null) v.attributes = attributes;
-  if (children != null) v.children = children;
-  if (classes != null) v.classes = classes;
-  if (dataset != null) v.dataset = dataset;
-  if (innerHtml != null) v.innerHtml = innerHtml;
-  if (innerText != null) v.innerText = innerText;
-  if (scrollLeft != null) v.scrollLeft = scrollLeft;
-  if (scrollTop != null) v.scrollTop = scrollTop;
-  if (contentEditable != null) v.contentEditable = contentEditable;
-  if (dir != null) v.dir = dir;
-  if (draggable != null) v.draggable = draggable;
-  if (hidden != null) v.hidden = hidden;
-  if (inert != null) v.inert = inert;
-  if (inputMode != null) v.inputMode = inputMode;
-  if (lang != null) v.lang = lang;
-  if (spellcheck != null) v.spellcheck = spellcheck;
-  if (tabIndex != null) v.tabIndex = tabIndex;
-  if (title != null) v.title = title;
-  if (translate != null) v.translate = translate;
-  if (className != null) v.className = className;
-  if (id != null) v.id = id;
-  if (slot != null) v.slot = slot;
-  if (nodes != null) v.nodes = nodes;
-  if (text != null) v.text = text;
-  if (onAbort != null) v.onAbort.listen(onAbort);
-  if (onBeforeCopy != null) v.onBeforeCopy.listen(onBeforeCopy);
-  if (onBeforeCut != null) v.onBeforeCut.listen(onBeforeCut);
-  if (onBeforePaste != null) v.onBeforePaste.listen(onBeforePaste);
-  if (onBlur != null) v.onBlur.listen(onBlur);
-  if (onCanPlay != null) v.onCanPlay.listen(onCanPlay);
-  if (onCanPlayThrough != null) v.onCanPlayThrough.listen(onCanPlayThrough);
-  if (onChange != null) v.onChange.listen(onChange);
-  if (onClick != null) v.onClick.listen(onClick);
-  if (onContextMenu != null) v.onContextMenu.listen(onContextMenu);
-  if (onCopy != null) v.onCopy.listen(onCopy);
-  if (onCut != null) v.onCut.listen(onCut);
-  if (onDoubleClick != null) v.onDoubleClick.listen(onDoubleClick);
-  if (onDrag != null) v.onDrag.listen(onDrag);
-  if (onDragEnd != null) v.onDragEnd.listen(onDragEnd);
-  if (onDragEnter != null) v.onDragEnter.listen(onDragEnter);
-  if (onDragLeave != null) v.onDragLeave.listen(onDragLeave);
-  if (onDragOver != null) v.onDragOver.listen(onDragOver);
-  if (onDragStart != null) v.onDragStart.listen(onDragStart);
-  if (onDrop != null) v.onDrop.listen(onDrop);
-  if (onDurationChange != null) v.onDurationChange.listen(onDurationChange);
-  if (onEmptied != null) v.onEmptied.listen(onEmptied);
-  if (onEnded != null) v.onEnded.listen(onEnded);
-  if (onError != null) v.onError.listen(onError);
-  if (onFocus != null) v.onFocus.listen(onFocus);
-  if (onInput != null) v.onInput.listen(onInput);
-  if (onInvalid != null) v.onInvalid.listen(onInvalid);
-  if (onKeyDown != null) v.onKeyDown.listen(onKeyDown);
-  if (onKeyPress != null) v.onKeyPress.listen(onKeyPress);
-  if (onKeyUp != null) v.onKeyUp.listen(onKeyUp);
-  if (onLoad != null) v.onLoad.listen(onLoad);
-  if (onLoadedData != null) v.onLoadedData.listen(onLoadedData);
-  if (onLoadedMetadata != null) v.onLoadedMetadata.listen(onLoadedMetadata);
-  if (onMouseDown != null) v.onMouseDown.listen(onMouseDown);
-  if (onMouseEnter != null) v.onMouseEnter.listen(onMouseEnter);
-  if (onMouseLeave != null) v.onMouseLeave.listen(onMouseLeave);
-  if (onMouseMove != null) v.onMouseMove.listen(onMouseMove);
-  if (onMouseOut != null) v.onMouseOut.listen(onMouseOut);
-  if (onMouseOver != null) v.onMouseOver.listen(onMouseOver);
-  if (onMouseUp != null) v.onMouseUp.listen(onMouseUp);
-  if (onMouseWheel != null) v.onMouseWheel.listen(onMouseWheel);
-  if (onPaste != null) v.onPaste.listen(onPaste);
-  if (onPause != null) v.onPause.listen(onPause);
-  if (onPlay != null) v.onPlay.listen(onPlay);
-  if (onPlaying != null) v.onPlaying.listen(onPlaying);
-  if (onRateChange != null) v.onRateChange.listen(onRateChange);
-  if (onReset != null) v.onReset.listen(onReset);
-  if (onResize != null) v.onResize.listen(onResize);
-  if (onScroll != null) v.onScroll.listen(onScroll);
-  if (onSearch != null) v.onSearch.listen(onSearch);
-  if (onSeeked != null) v.onSeeked.listen(onSeeked);
-  if (onSeeking != null) v.onSeeking.listen(onSeeking);
-  if (onSelect != null) v.onSelect.listen(onSelect);
-  if (onSelectStart != null) v.onSelectStart.listen(onSelectStart);
-  if (onStalled != null) v.onStalled.listen(onStalled);
-  if (onSubmit != null) v.onSubmit.listen(onSubmit);
-  if (onSuspend != null) v.onSuspend.listen(onSuspend);
-  if (onTimeUpdate != null) v.onTimeUpdate.listen(onTimeUpdate);
-  if (onTouchCancel != null) v.onTouchCancel.listen(onTouchCancel);
-  if (onTouchEnd != null) v.onTouchEnd.listen(onTouchEnd);
-  if (onTouchEnter != null) v.onTouchEnter.listen(onTouchEnter);
-  if (onTouchLeave != null) v.onTouchLeave.listen(onTouchLeave);
-  if (onTouchMove != null) v.onTouchMove.listen(onTouchMove);
-  if (onTouchStart != null) v.onTouchStart.listen(onTouchStart);
-  if (onTransitionEnd != null) v.onTransitionEnd.listen(onTransitionEnd);
-  if (onVolumeChange != null) v.onVolumeChange.listen(onVolumeChange);
-  if (onWaiting != null) v.onWaiting.listen(onWaiting);
-  if (onFullscreenChange != null)
-    v.onFullscreenChange.listen(onFullscreenChange);
-  if (onFullscreenError != null) v.onFullscreenError.listen(onFullscreenError);
-  if (onWheel != null) v.onWheel.listen(onWheel);
-  return v;
+class ButtonElementWidget extends HtmlElementWidget {
+  ButtonElementWidget(
+      {super.nonce,
+      super.attributes,
+      super.children,
+      super.classes,
+      super.dataset,
+      super.innerHtml,
+      super.innerText,
+      super.scrollLeft,
+      super.scrollTop,
+      super.contentEditable,
+      super.dir,
+      super.draggable,
+      super.hidden,
+      super.inert,
+      super.inputMode,
+      super.lang,
+      super.spellcheck,
+      super.tabIndex,
+      super.title,
+      super.translate,
+      super.className,
+      super.id,
+      super.slot,
+      super.nodes,
+      super.text,
+      super.onAbort,
+      super.onBeforeCopy,
+      super.onBeforeCut,
+      super.onBeforePaste,
+      super.onBlur,
+      super.onCanPlay,
+      super.onCanPlayThrough,
+      super.onChange,
+      super.onClick,
+      super.onContextMenu,
+      super.onCopy,
+      super.onCut,
+      super.onDoubleClick,
+      super.onDrag,
+      super.onDragEnd,
+      super.onDragEnter,
+      super.onDragLeave,
+      super.onDragOver,
+      super.onDragStart,
+      super.onDrop,
+      super.onDurationChange,
+      super.onEmptied,
+      super.onEnded,
+      super.onError,
+      super.onFocus,
+      super.onInput,
+      super.onInvalid,
+      super.onKeyDown,
+      super.onKeyPress,
+      super.onKeyUp,
+      super.onLoad,
+      super.onLoadedData,
+      super.onLoadedMetadata,
+      super.onMouseDown,
+      super.onMouseEnter,
+      super.onMouseLeave,
+      super.onMouseMove,
+      super.onMouseOut,
+      super.onMouseOver,
+      super.onMouseUp,
+      super.onMouseWheel,
+      super.onPaste,
+      super.onPause,
+      super.onPlay,
+      super.onPlaying,
+      super.onRateChange,
+      super.onReset,
+      super.onResize,
+      super.onScroll,
+      super.onSearch,
+      super.onSeeked,
+      super.onSeeking,
+      super.onSelect,
+      super.onSelectStart,
+      super.onStalled,
+      super.onSubmit,
+      super.onSuspend,
+      super.onTimeUpdate,
+      super.onTouchCancel,
+      super.onTouchEnd,
+      super.onTouchEnter,
+      super.onTouchLeave,
+      super.onTouchMove,
+      super.onTouchStart,
+      super.onTransitionEnd,
+      super.onVolumeChange,
+      super.onWaiting,
+      super.onFullscreenChange,
+      super.onFullscreenError,
+      super.onWheel});
+  @override
+  Element render() => hook(ButtonElement());
 }
 
-ContentElement contentElement(
-    {String? select,
-    String? nonce,
-    Map<String, String>? attributes,
-    List<Element>? children,
-    Iterable<String>? classes,
-    Map<String, String>? dataset,
-    String? innerHtml,
-    String? innerText,
-    int? scrollLeft,
-    int? scrollTop,
-    String? contentEditable,
-    String? dir,
-    bool? draggable,
-    bool? hidden,
-    bool? inert,
-    String? inputMode,
-    String? lang,
-    bool? spellcheck,
-    int? tabIndex,
-    String? title,
-    bool? translate,
-    String? className,
-    String? id,
-    String? slot,
-    Iterable<Node>? nodes,
-    String? text,
-    void Function(Event)? onAbort,
-    void Function(Event)? onBeforeCopy,
-    void Function(Event)? onBeforeCut,
-    void Function(Event)? onBeforePaste,
-    void Function(Event)? onBlur,
-    void Function(Event)? onCanPlay,
-    void Function(Event)? onCanPlayThrough,
-    void Function(Event)? onChange,
-    void Function(MouseEvent)? onClick,
-    void Function(MouseEvent)? onContextMenu,
-    void Function(ClipboardEvent)? onCopy,
-    void Function(ClipboardEvent)? onCut,
-    void Function(Event)? onDoubleClick,
-    void Function(MouseEvent)? onDrag,
-    void Function(MouseEvent)? onDragEnd,
-    void Function(MouseEvent)? onDragEnter,
-    void Function(MouseEvent)? onDragLeave,
-    void Function(MouseEvent)? onDragOver,
-    void Function(MouseEvent)? onDragStart,
-    void Function(MouseEvent)? onDrop,
-    void Function(Event)? onDurationChange,
-    void Function(Event)? onEmptied,
-    void Function(Event)? onEnded,
-    void Function(Event)? onError,
-    void Function(Event)? onFocus,
-    void Function(Event)? onInput,
-    void Function(Event)? onInvalid,
-    void Function(KeyboardEvent)? onKeyDown,
-    void Function(KeyboardEvent)? onKeyPress,
-    void Function(KeyboardEvent)? onKeyUp,
-    void Function(Event)? onLoad,
-    void Function(Event)? onLoadedData,
-    void Function(Event)? onLoadedMetadata,
-    void Function(MouseEvent)? onMouseDown,
-    void Function(MouseEvent)? onMouseEnter,
-    void Function(MouseEvent)? onMouseLeave,
-    void Function(MouseEvent)? onMouseMove,
-    void Function(MouseEvent)? onMouseOut,
-    void Function(MouseEvent)? onMouseOver,
-    void Function(MouseEvent)? onMouseUp,
-    void Function(WheelEvent)? onMouseWheel,
-    void Function(ClipboardEvent)? onPaste,
-    void Function(Event)? onPause,
-    void Function(Event)? onPlay,
-    void Function(Event)? onPlaying,
-    void Function(Event)? onRateChange,
-    void Function(Event)? onReset,
-    void Function(Event)? onResize,
-    void Function(Event)? onScroll,
-    void Function(Event)? onSearch,
-    void Function(Event)? onSeeked,
-    void Function(Event)? onSeeking,
-    void Function(Event)? onSelect,
-    void Function(Event)? onSelectStart,
-    void Function(Event)? onStalled,
-    void Function(Event)? onSubmit,
-    void Function(Event)? onSuspend,
-    void Function(Event)? onTimeUpdate,
-    void Function(TouchEvent)? onTouchCancel,
-    void Function(TouchEvent)? onTouchEnd,
-    void Function(TouchEvent)? onTouchEnter,
-    void Function(TouchEvent)? onTouchLeave,
-    void Function(TouchEvent)? onTouchMove,
-    void Function(TouchEvent)? onTouchStart,
-    void Function(TransitionEvent)? onTransitionEnd,
-    void Function(Event)? onVolumeChange,
-    void Function(Event)? onWaiting,
-    void Function(Event)? onFullscreenChange,
-    void Function(Event)? onFullscreenError,
-    void Function(WheelEvent)? onWheel}) {
-  final v = ContentElement();
-  if (select != null) v.select = select;
-  if (nonce != null) v.nonce = nonce;
-  if (attributes != null) v.attributes = attributes;
-  if (children != null) v.children = children;
-  if (classes != null) v.classes = classes;
-  if (dataset != null) v.dataset = dataset;
-  if (innerHtml != null) v.innerHtml = innerHtml;
-  if (innerText != null) v.innerText = innerText;
-  if (scrollLeft != null) v.scrollLeft = scrollLeft;
-  if (scrollTop != null) v.scrollTop = scrollTop;
-  if (contentEditable != null) v.contentEditable = contentEditable;
-  if (dir != null) v.dir = dir;
-  if (draggable != null) v.draggable = draggable;
-  if (hidden != null) v.hidden = hidden;
-  if (inert != null) v.inert = inert;
-  if (inputMode != null) v.inputMode = inputMode;
-  if (lang != null) v.lang = lang;
-  if (spellcheck != null) v.spellcheck = spellcheck;
-  if (tabIndex != null) v.tabIndex = tabIndex;
-  if (title != null) v.title = title;
-  if (translate != null) v.translate = translate;
-  if (className != null) v.className = className;
-  if (id != null) v.id = id;
-  if (slot != null) v.slot = slot;
-  if (nodes != null) v.nodes = nodes;
-  if (text != null) v.text = text;
-  if (onAbort != null) v.onAbort.listen(onAbort);
-  if (onBeforeCopy != null) v.onBeforeCopy.listen(onBeforeCopy);
-  if (onBeforeCut != null) v.onBeforeCut.listen(onBeforeCut);
-  if (onBeforePaste != null) v.onBeforePaste.listen(onBeforePaste);
-  if (onBlur != null) v.onBlur.listen(onBlur);
-  if (onCanPlay != null) v.onCanPlay.listen(onCanPlay);
-  if (onCanPlayThrough != null) v.onCanPlayThrough.listen(onCanPlayThrough);
-  if (onChange != null) v.onChange.listen(onChange);
-  if (onClick != null) v.onClick.listen(onClick);
-  if (onContextMenu != null) v.onContextMenu.listen(onContextMenu);
-  if (onCopy != null) v.onCopy.listen(onCopy);
-  if (onCut != null) v.onCut.listen(onCut);
-  if (onDoubleClick != null) v.onDoubleClick.listen(onDoubleClick);
-  if (onDrag != null) v.onDrag.listen(onDrag);
-  if (onDragEnd != null) v.onDragEnd.listen(onDragEnd);
-  if (onDragEnter != null) v.onDragEnter.listen(onDragEnter);
-  if (onDragLeave != null) v.onDragLeave.listen(onDragLeave);
-  if (onDragOver != null) v.onDragOver.listen(onDragOver);
-  if (onDragStart != null) v.onDragStart.listen(onDragStart);
-  if (onDrop != null) v.onDrop.listen(onDrop);
-  if (onDurationChange != null) v.onDurationChange.listen(onDurationChange);
-  if (onEmptied != null) v.onEmptied.listen(onEmptied);
-  if (onEnded != null) v.onEnded.listen(onEnded);
-  if (onError != null) v.onError.listen(onError);
-  if (onFocus != null) v.onFocus.listen(onFocus);
-  if (onInput != null) v.onInput.listen(onInput);
-  if (onInvalid != null) v.onInvalid.listen(onInvalid);
-  if (onKeyDown != null) v.onKeyDown.listen(onKeyDown);
-  if (onKeyPress != null) v.onKeyPress.listen(onKeyPress);
-  if (onKeyUp != null) v.onKeyUp.listen(onKeyUp);
-  if (onLoad != null) v.onLoad.listen(onLoad);
-  if (onLoadedData != null) v.onLoadedData.listen(onLoadedData);
-  if (onLoadedMetadata != null) v.onLoadedMetadata.listen(onLoadedMetadata);
-  if (onMouseDown != null) v.onMouseDown.listen(onMouseDown);
-  if (onMouseEnter != null) v.onMouseEnter.listen(onMouseEnter);
-  if (onMouseLeave != null) v.onMouseLeave.listen(onMouseLeave);
-  if (onMouseMove != null) v.onMouseMove.listen(onMouseMove);
-  if (onMouseOut != null) v.onMouseOut.listen(onMouseOut);
-  if (onMouseOver != null) v.onMouseOver.listen(onMouseOver);
-  if (onMouseUp != null) v.onMouseUp.listen(onMouseUp);
-  if (onMouseWheel != null) v.onMouseWheel.listen(onMouseWheel);
-  if (onPaste != null) v.onPaste.listen(onPaste);
-  if (onPause != null) v.onPause.listen(onPause);
-  if (onPlay != null) v.onPlay.listen(onPlay);
-  if (onPlaying != null) v.onPlaying.listen(onPlaying);
-  if (onRateChange != null) v.onRateChange.listen(onRateChange);
-  if (onReset != null) v.onReset.listen(onReset);
-  if (onResize != null) v.onResize.listen(onResize);
-  if (onScroll != null) v.onScroll.listen(onScroll);
-  if (onSearch != null) v.onSearch.listen(onSearch);
-  if (onSeeked != null) v.onSeeked.listen(onSeeked);
-  if (onSeeking != null) v.onSeeking.listen(onSeeking);
-  if (onSelect != null) v.onSelect.listen(onSelect);
-  if (onSelectStart != null) v.onSelectStart.listen(onSelectStart);
-  if (onStalled != null) v.onStalled.listen(onStalled);
-  if (onSubmit != null) v.onSubmit.listen(onSubmit);
-  if (onSuspend != null) v.onSuspend.listen(onSuspend);
-  if (onTimeUpdate != null) v.onTimeUpdate.listen(onTimeUpdate);
-  if (onTouchCancel != null) v.onTouchCancel.listen(onTouchCancel);
-  if (onTouchEnd != null) v.onTouchEnd.listen(onTouchEnd);
-  if (onTouchEnter != null) v.onTouchEnter.listen(onTouchEnter);
-  if (onTouchLeave != null) v.onTouchLeave.listen(onTouchLeave);
-  if (onTouchMove != null) v.onTouchMove.listen(onTouchMove);
-  if (onTouchStart != null) v.onTouchStart.listen(onTouchStart);
-  if (onTransitionEnd != null) v.onTransitionEnd.listen(onTransitionEnd);
-  if (onVolumeChange != null) v.onVolumeChange.listen(onVolumeChange);
-  if (onWaiting != null) v.onWaiting.listen(onWaiting);
-  if (onFullscreenChange != null)
-    v.onFullscreenChange.listen(onFullscreenChange);
-  if (onFullscreenError != null) v.onFullscreenError.listen(onFullscreenError);
-  if (onWheel != null) v.onWheel.listen(onWheel);
-  return v;
+class CanvasElementWidget extends HtmlElementWidget {
+  CanvasElementWidget(
+      {super.nonce,
+      super.attributes,
+      super.children,
+      super.classes,
+      super.dataset,
+      super.innerHtml,
+      super.innerText,
+      super.scrollLeft,
+      super.scrollTop,
+      super.contentEditable,
+      super.dir,
+      super.draggable,
+      super.hidden,
+      super.inert,
+      super.inputMode,
+      super.lang,
+      super.spellcheck,
+      super.tabIndex,
+      super.title,
+      super.translate,
+      super.className,
+      super.id,
+      super.slot,
+      super.nodes,
+      super.text,
+      super.onAbort,
+      super.onBeforeCopy,
+      super.onBeforeCut,
+      super.onBeforePaste,
+      super.onBlur,
+      super.onCanPlay,
+      super.onCanPlayThrough,
+      super.onChange,
+      super.onClick,
+      super.onContextMenu,
+      super.onCopy,
+      super.onCut,
+      super.onDoubleClick,
+      super.onDrag,
+      super.onDragEnd,
+      super.onDragEnter,
+      super.onDragLeave,
+      super.onDragOver,
+      super.onDragStart,
+      super.onDrop,
+      super.onDurationChange,
+      super.onEmptied,
+      super.onEnded,
+      super.onError,
+      super.onFocus,
+      super.onInput,
+      super.onInvalid,
+      super.onKeyDown,
+      super.onKeyPress,
+      super.onKeyUp,
+      super.onLoad,
+      super.onLoadedData,
+      super.onLoadedMetadata,
+      super.onMouseDown,
+      super.onMouseEnter,
+      super.onMouseLeave,
+      super.onMouseMove,
+      super.onMouseOut,
+      super.onMouseOver,
+      super.onMouseUp,
+      super.onMouseWheel,
+      super.onPaste,
+      super.onPause,
+      super.onPlay,
+      super.onPlaying,
+      super.onRateChange,
+      super.onReset,
+      super.onResize,
+      super.onScroll,
+      super.onSearch,
+      super.onSeeked,
+      super.onSeeking,
+      super.onSelect,
+      super.onSelectStart,
+      super.onStalled,
+      super.onSubmit,
+      super.onSuspend,
+      super.onTimeUpdate,
+      super.onTouchCancel,
+      super.onTouchEnd,
+      super.onTouchEnter,
+      super.onTouchLeave,
+      super.onTouchMove,
+      super.onTouchStart,
+      super.onTransitionEnd,
+      super.onVolumeChange,
+      super.onWaiting,
+      super.onFullscreenChange,
+      super.onFullscreenError,
+      super.onWheel});
+  @override
+  Element render() => hook(CanvasElement());
 }
 
-DListElement dListElement(
-    {String? nonce,
-    Map<String, String>? attributes,
-    List<Element>? children,
-    Iterable<String>? classes,
-    Map<String, String>? dataset,
-    String? innerHtml,
-    String? innerText,
-    int? scrollLeft,
-    int? scrollTop,
-    String? contentEditable,
-    String? dir,
-    bool? draggable,
-    bool? hidden,
-    bool? inert,
-    String? inputMode,
-    String? lang,
-    bool? spellcheck,
-    int? tabIndex,
-    String? title,
-    bool? translate,
-    String? className,
-    String? id,
-    String? slot,
-    Iterable<Node>? nodes,
-    String? text,
-    void Function(Event)? onAbort,
-    void Function(Event)? onBeforeCopy,
-    void Function(Event)? onBeforeCut,
-    void Function(Event)? onBeforePaste,
-    void Function(Event)? onBlur,
-    void Function(Event)? onCanPlay,
-    void Function(Event)? onCanPlayThrough,
-    void Function(Event)? onChange,
-    void Function(MouseEvent)? onClick,
-    void Function(MouseEvent)? onContextMenu,
-    void Function(ClipboardEvent)? onCopy,
-    void Function(ClipboardEvent)? onCut,
-    void Function(Event)? onDoubleClick,
-    void Function(MouseEvent)? onDrag,
-    void Function(MouseEvent)? onDragEnd,
-    void Function(MouseEvent)? onDragEnter,
-    void Function(MouseEvent)? onDragLeave,
-    void Function(MouseEvent)? onDragOver,
-    void Function(MouseEvent)? onDragStart,
-    void Function(MouseEvent)? onDrop,
-    void Function(Event)? onDurationChange,
-    void Function(Event)? onEmptied,
-    void Function(Event)? onEnded,
-    void Function(Event)? onError,
-    void Function(Event)? onFocus,
-    void Function(Event)? onInput,
-    void Function(Event)? onInvalid,
-    void Function(KeyboardEvent)? onKeyDown,
-    void Function(KeyboardEvent)? onKeyPress,
-    void Function(KeyboardEvent)? onKeyUp,
-    void Function(Event)? onLoad,
-    void Function(Event)? onLoadedData,
-    void Function(Event)? onLoadedMetadata,
-    void Function(MouseEvent)? onMouseDown,
-    void Function(MouseEvent)? onMouseEnter,
-    void Function(MouseEvent)? onMouseLeave,
-    void Function(MouseEvent)? onMouseMove,
-    void Function(MouseEvent)? onMouseOut,
-    void Function(MouseEvent)? onMouseOver,
-    void Function(MouseEvent)? onMouseUp,
-    void Function(WheelEvent)? onMouseWheel,
-    void Function(ClipboardEvent)? onPaste,
-    void Function(Event)? onPause,
-    void Function(Event)? onPlay,
-    void Function(Event)? onPlaying,
-    void Function(Event)? onRateChange,
-    void Function(Event)? onReset,
-    void Function(Event)? onResize,
-    void Function(Event)? onScroll,
-    void Function(Event)? onSearch,
-    void Function(Event)? onSeeked,
-    void Function(Event)? onSeeking,
-    void Function(Event)? onSelect,
-    void Function(Event)? onSelectStart,
-    void Function(Event)? onStalled,
-    void Function(Event)? onSubmit,
-    void Function(Event)? onSuspend,
-    void Function(Event)? onTimeUpdate,
-    void Function(TouchEvent)? onTouchCancel,
-    void Function(TouchEvent)? onTouchEnd,
-    void Function(TouchEvent)? onTouchEnter,
-    void Function(TouchEvent)? onTouchLeave,
-    void Function(TouchEvent)? onTouchMove,
-    void Function(TouchEvent)? onTouchStart,
-    void Function(TransitionEvent)? onTransitionEnd,
-    void Function(Event)? onVolumeChange,
-    void Function(Event)? onWaiting,
-    void Function(Event)? onFullscreenChange,
-    void Function(Event)? onFullscreenError,
-    void Function(WheelEvent)? onWheel}) {
-  final v = DListElement();
-  if (nonce != null) v.nonce = nonce;
-  if (attributes != null) v.attributes = attributes;
-  if (children != null) v.children = children;
-  if (classes != null) v.classes = classes;
-  if (dataset != null) v.dataset = dataset;
-  if (innerHtml != null) v.innerHtml = innerHtml;
-  if (innerText != null) v.innerText = innerText;
-  if (scrollLeft != null) v.scrollLeft = scrollLeft;
-  if (scrollTop != null) v.scrollTop = scrollTop;
-  if (contentEditable != null) v.contentEditable = contentEditable;
-  if (dir != null) v.dir = dir;
-  if (draggable != null) v.draggable = draggable;
-  if (hidden != null) v.hidden = hidden;
-  if (inert != null) v.inert = inert;
-  if (inputMode != null) v.inputMode = inputMode;
-  if (lang != null) v.lang = lang;
-  if (spellcheck != null) v.spellcheck = spellcheck;
-  if (tabIndex != null) v.tabIndex = tabIndex;
-  if (title != null) v.title = title;
-  if (translate != null) v.translate = translate;
-  if (className != null) v.className = className;
-  if (id != null) v.id = id;
-  if (slot != null) v.slot = slot;
-  if (nodes != null) v.nodes = nodes;
-  if (text != null) v.text = text;
-  if (onAbort != null) v.onAbort.listen(onAbort);
-  if (onBeforeCopy != null) v.onBeforeCopy.listen(onBeforeCopy);
-  if (onBeforeCut != null) v.onBeforeCut.listen(onBeforeCut);
-  if (onBeforePaste != null) v.onBeforePaste.listen(onBeforePaste);
-  if (onBlur != null) v.onBlur.listen(onBlur);
-  if (onCanPlay != null) v.onCanPlay.listen(onCanPlay);
-  if (onCanPlayThrough != null) v.onCanPlayThrough.listen(onCanPlayThrough);
-  if (onChange != null) v.onChange.listen(onChange);
-  if (onClick != null) v.onClick.listen(onClick);
-  if (onContextMenu != null) v.onContextMenu.listen(onContextMenu);
-  if (onCopy != null) v.onCopy.listen(onCopy);
-  if (onCut != null) v.onCut.listen(onCut);
-  if (onDoubleClick != null) v.onDoubleClick.listen(onDoubleClick);
-  if (onDrag != null) v.onDrag.listen(onDrag);
-  if (onDragEnd != null) v.onDragEnd.listen(onDragEnd);
-  if (onDragEnter != null) v.onDragEnter.listen(onDragEnter);
-  if (onDragLeave != null) v.onDragLeave.listen(onDragLeave);
-  if (onDragOver != null) v.onDragOver.listen(onDragOver);
-  if (onDragStart != null) v.onDragStart.listen(onDragStart);
-  if (onDrop != null) v.onDrop.listen(onDrop);
-  if (onDurationChange != null) v.onDurationChange.listen(onDurationChange);
-  if (onEmptied != null) v.onEmptied.listen(onEmptied);
-  if (onEnded != null) v.onEnded.listen(onEnded);
-  if (onError != null) v.onError.listen(onError);
-  if (onFocus != null) v.onFocus.listen(onFocus);
-  if (onInput != null) v.onInput.listen(onInput);
-  if (onInvalid != null) v.onInvalid.listen(onInvalid);
-  if (onKeyDown != null) v.onKeyDown.listen(onKeyDown);
-  if (onKeyPress != null) v.onKeyPress.listen(onKeyPress);
-  if (onKeyUp != null) v.onKeyUp.listen(onKeyUp);
-  if (onLoad != null) v.onLoad.listen(onLoad);
-  if (onLoadedData != null) v.onLoadedData.listen(onLoadedData);
-  if (onLoadedMetadata != null) v.onLoadedMetadata.listen(onLoadedMetadata);
-  if (onMouseDown != null) v.onMouseDown.listen(onMouseDown);
-  if (onMouseEnter != null) v.onMouseEnter.listen(onMouseEnter);
-  if (onMouseLeave != null) v.onMouseLeave.listen(onMouseLeave);
-  if (onMouseMove != null) v.onMouseMove.listen(onMouseMove);
-  if (onMouseOut != null) v.onMouseOut.listen(onMouseOut);
-  if (onMouseOver != null) v.onMouseOver.listen(onMouseOver);
-  if (onMouseUp != null) v.onMouseUp.listen(onMouseUp);
-  if (onMouseWheel != null) v.onMouseWheel.listen(onMouseWheel);
-  if (onPaste != null) v.onPaste.listen(onPaste);
-  if (onPause != null) v.onPause.listen(onPause);
-  if (onPlay != null) v.onPlay.listen(onPlay);
-  if (onPlaying != null) v.onPlaying.listen(onPlaying);
-  if (onRateChange != null) v.onRateChange.listen(onRateChange);
-  if (onReset != null) v.onReset.listen(onReset);
-  if (onResize != null) v.onResize.listen(onResize);
-  if (onScroll != null) v.onScroll.listen(onScroll);
-  if (onSearch != null) v.onSearch.listen(onSearch);
-  if (onSeeked != null) v.onSeeked.listen(onSeeked);
-  if (onSeeking != null) v.onSeeking.listen(onSeeking);
-  if (onSelect != null) v.onSelect.listen(onSelect);
-  if (onSelectStart != null) v.onSelectStart.listen(onSelectStart);
-  if (onStalled != null) v.onStalled.listen(onStalled);
-  if (onSubmit != null) v.onSubmit.listen(onSubmit);
-  if (onSuspend != null) v.onSuspend.listen(onSuspend);
-  if (onTimeUpdate != null) v.onTimeUpdate.listen(onTimeUpdate);
-  if (onTouchCancel != null) v.onTouchCancel.listen(onTouchCancel);
-  if (onTouchEnd != null) v.onTouchEnd.listen(onTouchEnd);
-  if (onTouchEnter != null) v.onTouchEnter.listen(onTouchEnter);
-  if (onTouchLeave != null) v.onTouchLeave.listen(onTouchLeave);
-  if (onTouchMove != null) v.onTouchMove.listen(onTouchMove);
-  if (onTouchStart != null) v.onTouchStart.listen(onTouchStart);
-  if (onTransitionEnd != null) v.onTransitionEnd.listen(onTransitionEnd);
-  if (onVolumeChange != null) v.onVolumeChange.listen(onVolumeChange);
-  if (onWaiting != null) v.onWaiting.listen(onWaiting);
-  if (onFullscreenChange != null)
-    v.onFullscreenChange.listen(onFullscreenChange);
-  if (onFullscreenError != null) v.onFullscreenError.listen(onFullscreenError);
-  if (onWheel != null) v.onWheel.listen(onWheel);
-  return v;
+class ContentElementWidget extends HtmlElementWidget {
+  ContentElementWidget(
+      {super.nonce,
+      super.attributes,
+      super.children,
+      super.classes,
+      super.dataset,
+      super.innerHtml,
+      super.innerText,
+      super.scrollLeft,
+      super.scrollTop,
+      super.contentEditable,
+      super.dir,
+      super.draggable,
+      super.hidden,
+      super.inert,
+      super.inputMode,
+      super.lang,
+      super.spellcheck,
+      super.tabIndex,
+      super.title,
+      super.translate,
+      super.className,
+      super.id,
+      super.slot,
+      super.nodes,
+      super.text,
+      super.onAbort,
+      super.onBeforeCopy,
+      super.onBeforeCut,
+      super.onBeforePaste,
+      super.onBlur,
+      super.onCanPlay,
+      super.onCanPlayThrough,
+      super.onChange,
+      super.onClick,
+      super.onContextMenu,
+      super.onCopy,
+      super.onCut,
+      super.onDoubleClick,
+      super.onDrag,
+      super.onDragEnd,
+      super.onDragEnter,
+      super.onDragLeave,
+      super.onDragOver,
+      super.onDragStart,
+      super.onDrop,
+      super.onDurationChange,
+      super.onEmptied,
+      super.onEnded,
+      super.onError,
+      super.onFocus,
+      super.onInput,
+      super.onInvalid,
+      super.onKeyDown,
+      super.onKeyPress,
+      super.onKeyUp,
+      super.onLoad,
+      super.onLoadedData,
+      super.onLoadedMetadata,
+      super.onMouseDown,
+      super.onMouseEnter,
+      super.onMouseLeave,
+      super.onMouseMove,
+      super.onMouseOut,
+      super.onMouseOver,
+      super.onMouseUp,
+      super.onMouseWheel,
+      super.onPaste,
+      super.onPause,
+      super.onPlay,
+      super.onPlaying,
+      super.onRateChange,
+      super.onReset,
+      super.onResize,
+      super.onScroll,
+      super.onSearch,
+      super.onSeeked,
+      super.onSeeking,
+      super.onSelect,
+      super.onSelectStart,
+      super.onStalled,
+      super.onSubmit,
+      super.onSuspend,
+      super.onTimeUpdate,
+      super.onTouchCancel,
+      super.onTouchEnd,
+      super.onTouchEnter,
+      super.onTouchLeave,
+      super.onTouchMove,
+      super.onTouchStart,
+      super.onTransitionEnd,
+      super.onVolumeChange,
+      super.onWaiting,
+      super.onFullscreenChange,
+      super.onFullscreenError,
+      super.onWheel});
+  @override
+  Element render() => hook(ContentElement());
 }
 
-DataListElement dataListElement(
-    {String? nonce,
-    Map<String, String>? attributes,
-    List<Element>? children,
-    Iterable<String>? classes,
-    Map<String, String>? dataset,
-    String? innerHtml,
-    String? innerText,
-    int? scrollLeft,
-    int? scrollTop,
-    String? contentEditable,
-    String? dir,
-    bool? draggable,
-    bool? hidden,
-    bool? inert,
-    String? inputMode,
-    String? lang,
-    bool? spellcheck,
-    int? tabIndex,
-    String? title,
-    bool? translate,
-    String? className,
-    String? id,
-    String? slot,
-    Iterable<Node>? nodes,
-    String? text,
-    void Function(Event)? onAbort,
-    void Function(Event)? onBeforeCopy,
-    void Function(Event)? onBeforeCut,
-    void Function(Event)? onBeforePaste,
-    void Function(Event)? onBlur,
-    void Function(Event)? onCanPlay,
-    void Function(Event)? onCanPlayThrough,
-    void Function(Event)? onChange,
-    void Function(MouseEvent)? onClick,
-    void Function(MouseEvent)? onContextMenu,
-    void Function(ClipboardEvent)? onCopy,
-    void Function(ClipboardEvent)? onCut,
-    void Function(Event)? onDoubleClick,
-    void Function(MouseEvent)? onDrag,
-    void Function(MouseEvent)? onDragEnd,
-    void Function(MouseEvent)? onDragEnter,
-    void Function(MouseEvent)? onDragLeave,
-    void Function(MouseEvent)? onDragOver,
-    void Function(MouseEvent)? onDragStart,
-    void Function(MouseEvent)? onDrop,
-    void Function(Event)? onDurationChange,
-    void Function(Event)? onEmptied,
-    void Function(Event)? onEnded,
-    void Function(Event)? onError,
-    void Function(Event)? onFocus,
-    void Function(Event)? onInput,
-    void Function(Event)? onInvalid,
-    void Function(KeyboardEvent)? onKeyDown,
-    void Function(KeyboardEvent)? onKeyPress,
-    void Function(KeyboardEvent)? onKeyUp,
-    void Function(Event)? onLoad,
-    void Function(Event)? onLoadedData,
-    void Function(Event)? onLoadedMetadata,
-    void Function(MouseEvent)? onMouseDown,
-    void Function(MouseEvent)? onMouseEnter,
-    void Function(MouseEvent)? onMouseLeave,
-    void Function(MouseEvent)? onMouseMove,
-    void Function(MouseEvent)? onMouseOut,
-    void Function(MouseEvent)? onMouseOver,
-    void Function(MouseEvent)? onMouseUp,
-    void Function(WheelEvent)? onMouseWheel,
-    void Function(ClipboardEvent)? onPaste,
-    void Function(Event)? onPause,
-    void Function(Event)? onPlay,
-    void Function(Event)? onPlaying,
-    void Function(Event)? onRateChange,
-    void Function(Event)? onReset,
-    void Function(Event)? onResize,
-    void Function(Event)? onScroll,
-    void Function(Event)? onSearch,
-    void Function(Event)? onSeeked,
-    void Function(Event)? onSeeking,
-    void Function(Event)? onSelect,
-    void Function(Event)? onSelectStart,
-    void Function(Event)? onStalled,
-    void Function(Event)? onSubmit,
-    void Function(Event)? onSuspend,
-    void Function(Event)? onTimeUpdate,
-    void Function(TouchEvent)? onTouchCancel,
-    void Function(TouchEvent)? onTouchEnd,
-    void Function(TouchEvent)? onTouchEnter,
-    void Function(TouchEvent)? onTouchLeave,
-    void Function(TouchEvent)? onTouchMove,
-    void Function(TouchEvent)? onTouchStart,
-    void Function(TransitionEvent)? onTransitionEnd,
-    void Function(Event)? onVolumeChange,
-    void Function(Event)? onWaiting,
-    void Function(Event)? onFullscreenChange,
-    void Function(Event)? onFullscreenError,
-    void Function(WheelEvent)? onWheel}) {
-  final v = DataListElement();
-  if (nonce != null) v.nonce = nonce;
-  if (attributes != null) v.attributes = attributes;
-  if (children != null) v.children = children;
-  if (classes != null) v.classes = classes;
-  if (dataset != null) v.dataset = dataset;
-  if (innerHtml != null) v.innerHtml = innerHtml;
-  if (innerText != null) v.innerText = innerText;
-  if (scrollLeft != null) v.scrollLeft = scrollLeft;
-  if (scrollTop != null) v.scrollTop = scrollTop;
-  if (contentEditable != null) v.contentEditable = contentEditable;
-  if (dir != null) v.dir = dir;
-  if (draggable != null) v.draggable = draggable;
-  if (hidden != null) v.hidden = hidden;
-  if (inert != null) v.inert = inert;
-  if (inputMode != null) v.inputMode = inputMode;
-  if (lang != null) v.lang = lang;
-  if (spellcheck != null) v.spellcheck = spellcheck;
-  if (tabIndex != null) v.tabIndex = tabIndex;
-  if (title != null) v.title = title;
-  if (translate != null) v.translate = translate;
-  if (className != null) v.className = className;
-  if (id != null) v.id = id;
-  if (slot != null) v.slot = slot;
-  if (nodes != null) v.nodes = nodes;
-  if (text != null) v.text = text;
-  if (onAbort != null) v.onAbort.listen(onAbort);
-  if (onBeforeCopy != null) v.onBeforeCopy.listen(onBeforeCopy);
-  if (onBeforeCut != null) v.onBeforeCut.listen(onBeforeCut);
-  if (onBeforePaste != null) v.onBeforePaste.listen(onBeforePaste);
-  if (onBlur != null) v.onBlur.listen(onBlur);
-  if (onCanPlay != null) v.onCanPlay.listen(onCanPlay);
-  if (onCanPlayThrough != null) v.onCanPlayThrough.listen(onCanPlayThrough);
-  if (onChange != null) v.onChange.listen(onChange);
-  if (onClick != null) v.onClick.listen(onClick);
-  if (onContextMenu != null) v.onContextMenu.listen(onContextMenu);
-  if (onCopy != null) v.onCopy.listen(onCopy);
-  if (onCut != null) v.onCut.listen(onCut);
-  if (onDoubleClick != null) v.onDoubleClick.listen(onDoubleClick);
-  if (onDrag != null) v.onDrag.listen(onDrag);
-  if (onDragEnd != null) v.onDragEnd.listen(onDragEnd);
-  if (onDragEnter != null) v.onDragEnter.listen(onDragEnter);
-  if (onDragLeave != null) v.onDragLeave.listen(onDragLeave);
-  if (onDragOver != null) v.onDragOver.listen(onDragOver);
-  if (onDragStart != null) v.onDragStart.listen(onDragStart);
-  if (onDrop != null) v.onDrop.listen(onDrop);
-  if (onDurationChange != null) v.onDurationChange.listen(onDurationChange);
-  if (onEmptied != null) v.onEmptied.listen(onEmptied);
-  if (onEnded != null) v.onEnded.listen(onEnded);
-  if (onError != null) v.onError.listen(onError);
-  if (onFocus != null) v.onFocus.listen(onFocus);
-  if (onInput != null) v.onInput.listen(onInput);
-  if (onInvalid != null) v.onInvalid.listen(onInvalid);
-  if (onKeyDown != null) v.onKeyDown.listen(onKeyDown);
-  if (onKeyPress != null) v.onKeyPress.listen(onKeyPress);
-  if (onKeyUp != null) v.onKeyUp.listen(onKeyUp);
-  if (onLoad != null) v.onLoad.listen(onLoad);
-  if (onLoadedData != null) v.onLoadedData.listen(onLoadedData);
-  if (onLoadedMetadata != null) v.onLoadedMetadata.listen(onLoadedMetadata);
-  if (onMouseDown != null) v.onMouseDown.listen(onMouseDown);
-  if (onMouseEnter != null) v.onMouseEnter.listen(onMouseEnter);
-  if (onMouseLeave != null) v.onMouseLeave.listen(onMouseLeave);
-  if (onMouseMove != null) v.onMouseMove.listen(onMouseMove);
-  if (onMouseOut != null) v.onMouseOut.listen(onMouseOut);
-  if (onMouseOver != null) v.onMouseOver.listen(onMouseOver);
-  if (onMouseUp != null) v.onMouseUp.listen(onMouseUp);
-  if (onMouseWheel != null) v.onMouseWheel.listen(onMouseWheel);
-  if (onPaste != null) v.onPaste.listen(onPaste);
-  if (onPause != null) v.onPause.listen(onPause);
-  if (onPlay != null) v.onPlay.listen(onPlay);
-  if (onPlaying != null) v.onPlaying.listen(onPlaying);
-  if (onRateChange != null) v.onRateChange.listen(onRateChange);
-  if (onReset != null) v.onReset.listen(onReset);
-  if (onResize != null) v.onResize.listen(onResize);
-  if (onScroll != null) v.onScroll.listen(onScroll);
-  if (onSearch != null) v.onSearch.listen(onSearch);
-  if (onSeeked != null) v.onSeeked.listen(onSeeked);
-  if (onSeeking != null) v.onSeeking.listen(onSeeking);
-  if (onSelect != null) v.onSelect.listen(onSelect);
-  if (onSelectStart != null) v.onSelectStart.listen(onSelectStart);
-  if (onStalled != null) v.onStalled.listen(onStalled);
-  if (onSubmit != null) v.onSubmit.listen(onSubmit);
-  if (onSuspend != null) v.onSuspend.listen(onSuspend);
-  if (onTimeUpdate != null) v.onTimeUpdate.listen(onTimeUpdate);
-  if (onTouchCancel != null) v.onTouchCancel.listen(onTouchCancel);
-  if (onTouchEnd != null) v.onTouchEnd.listen(onTouchEnd);
-  if (onTouchEnter != null) v.onTouchEnter.listen(onTouchEnter);
-  if (onTouchLeave != null) v.onTouchLeave.listen(onTouchLeave);
-  if (onTouchMove != null) v.onTouchMove.listen(onTouchMove);
-  if (onTouchStart != null) v.onTouchStart.listen(onTouchStart);
-  if (onTransitionEnd != null) v.onTransitionEnd.listen(onTransitionEnd);
-  if (onVolumeChange != null) v.onVolumeChange.listen(onVolumeChange);
-  if (onWaiting != null) v.onWaiting.listen(onWaiting);
-  if (onFullscreenChange != null)
-    v.onFullscreenChange.listen(onFullscreenChange);
-  if (onFullscreenError != null) v.onFullscreenError.listen(onFullscreenError);
-  if (onWheel != null) v.onWheel.listen(onWheel);
-  return v;
+class DListElementWidget extends HtmlElementWidget {
+  DListElementWidget(
+      {super.nonce,
+      super.attributes,
+      super.children,
+      super.classes,
+      super.dataset,
+      super.innerHtml,
+      super.innerText,
+      super.scrollLeft,
+      super.scrollTop,
+      super.contentEditable,
+      super.dir,
+      super.draggable,
+      super.hidden,
+      super.inert,
+      super.inputMode,
+      super.lang,
+      super.spellcheck,
+      super.tabIndex,
+      super.title,
+      super.translate,
+      super.className,
+      super.id,
+      super.slot,
+      super.nodes,
+      super.text,
+      super.onAbort,
+      super.onBeforeCopy,
+      super.onBeforeCut,
+      super.onBeforePaste,
+      super.onBlur,
+      super.onCanPlay,
+      super.onCanPlayThrough,
+      super.onChange,
+      super.onClick,
+      super.onContextMenu,
+      super.onCopy,
+      super.onCut,
+      super.onDoubleClick,
+      super.onDrag,
+      super.onDragEnd,
+      super.onDragEnter,
+      super.onDragLeave,
+      super.onDragOver,
+      super.onDragStart,
+      super.onDrop,
+      super.onDurationChange,
+      super.onEmptied,
+      super.onEnded,
+      super.onError,
+      super.onFocus,
+      super.onInput,
+      super.onInvalid,
+      super.onKeyDown,
+      super.onKeyPress,
+      super.onKeyUp,
+      super.onLoad,
+      super.onLoadedData,
+      super.onLoadedMetadata,
+      super.onMouseDown,
+      super.onMouseEnter,
+      super.onMouseLeave,
+      super.onMouseMove,
+      super.onMouseOut,
+      super.onMouseOver,
+      super.onMouseUp,
+      super.onMouseWheel,
+      super.onPaste,
+      super.onPause,
+      super.onPlay,
+      super.onPlaying,
+      super.onRateChange,
+      super.onReset,
+      super.onResize,
+      super.onScroll,
+      super.onSearch,
+      super.onSeeked,
+      super.onSeeking,
+      super.onSelect,
+      super.onSelectStart,
+      super.onStalled,
+      super.onSubmit,
+      super.onSuspend,
+      super.onTimeUpdate,
+      super.onTouchCancel,
+      super.onTouchEnd,
+      super.onTouchEnter,
+      super.onTouchLeave,
+      super.onTouchMove,
+      super.onTouchStart,
+      super.onTransitionEnd,
+      super.onVolumeChange,
+      super.onWaiting,
+      super.onFullscreenChange,
+      super.onFullscreenError,
+      super.onWheel});
+  @override
+  Element render() => hook(DListElement());
 }
 
-DetailsElement detailsElement(
-    {bool? open,
-    String? nonce,
-    Map<String, String>? attributes,
-    List<Element>? children,
-    Iterable<String>? classes,
-    Map<String, String>? dataset,
-    String? innerHtml,
-    String? innerText,
-    int? scrollLeft,
-    int? scrollTop,
-    String? contentEditable,
-    String? dir,
-    bool? draggable,
-    bool? hidden,
-    bool? inert,
-    String? inputMode,
-    String? lang,
-    bool? spellcheck,
-    int? tabIndex,
-    String? title,
-    bool? translate,
-    String? className,
-    String? id,
-    String? slot,
-    Iterable<Node>? nodes,
-    String? text,
-    void Function(Event)? onAbort,
-    void Function(Event)? onBeforeCopy,
-    void Function(Event)? onBeforeCut,
-    void Function(Event)? onBeforePaste,
-    void Function(Event)? onBlur,
-    void Function(Event)? onCanPlay,
-    void Function(Event)? onCanPlayThrough,
-    void Function(Event)? onChange,
-    void Function(MouseEvent)? onClick,
-    void Function(MouseEvent)? onContextMenu,
-    void Function(ClipboardEvent)? onCopy,
-    void Function(ClipboardEvent)? onCut,
-    void Function(Event)? onDoubleClick,
-    void Function(MouseEvent)? onDrag,
-    void Function(MouseEvent)? onDragEnd,
-    void Function(MouseEvent)? onDragEnter,
-    void Function(MouseEvent)? onDragLeave,
-    void Function(MouseEvent)? onDragOver,
-    void Function(MouseEvent)? onDragStart,
-    void Function(MouseEvent)? onDrop,
-    void Function(Event)? onDurationChange,
-    void Function(Event)? onEmptied,
-    void Function(Event)? onEnded,
-    void Function(Event)? onError,
-    void Function(Event)? onFocus,
-    void Function(Event)? onInput,
-    void Function(Event)? onInvalid,
-    void Function(KeyboardEvent)? onKeyDown,
-    void Function(KeyboardEvent)? onKeyPress,
-    void Function(KeyboardEvent)? onKeyUp,
-    void Function(Event)? onLoad,
-    void Function(Event)? onLoadedData,
-    void Function(Event)? onLoadedMetadata,
-    void Function(MouseEvent)? onMouseDown,
-    void Function(MouseEvent)? onMouseEnter,
-    void Function(MouseEvent)? onMouseLeave,
-    void Function(MouseEvent)? onMouseMove,
-    void Function(MouseEvent)? onMouseOut,
-    void Function(MouseEvent)? onMouseOver,
-    void Function(MouseEvent)? onMouseUp,
-    void Function(WheelEvent)? onMouseWheel,
-    void Function(ClipboardEvent)? onPaste,
-    void Function(Event)? onPause,
-    void Function(Event)? onPlay,
-    void Function(Event)? onPlaying,
-    void Function(Event)? onRateChange,
-    void Function(Event)? onReset,
-    void Function(Event)? onResize,
-    void Function(Event)? onScroll,
-    void Function(Event)? onSearch,
-    void Function(Event)? onSeeked,
-    void Function(Event)? onSeeking,
-    void Function(Event)? onSelect,
-    void Function(Event)? onSelectStart,
-    void Function(Event)? onStalled,
-    void Function(Event)? onSubmit,
-    void Function(Event)? onSuspend,
-    void Function(Event)? onTimeUpdate,
-    void Function(TouchEvent)? onTouchCancel,
-    void Function(TouchEvent)? onTouchEnd,
-    void Function(TouchEvent)? onTouchEnter,
-    void Function(TouchEvent)? onTouchLeave,
-    void Function(TouchEvent)? onTouchMove,
-    void Function(TouchEvent)? onTouchStart,
-    void Function(TransitionEvent)? onTransitionEnd,
-    void Function(Event)? onVolumeChange,
-    void Function(Event)? onWaiting,
-    void Function(Event)? onFullscreenChange,
-    void Function(Event)? onFullscreenError,
-    void Function(WheelEvent)? onWheel}) {
-  final v = DetailsElement();
-  if (open != null) v.open = open;
-  if (nonce != null) v.nonce = nonce;
-  if (attributes != null) v.attributes = attributes;
-  if (children != null) v.children = children;
-  if (classes != null) v.classes = classes;
-  if (dataset != null) v.dataset = dataset;
-  if (innerHtml != null) v.innerHtml = innerHtml;
-  if (innerText != null) v.innerText = innerText;
-  if (scrollLeft != null) v.scrollLeft = scrollLeft;
-  if (scrollTop != null) v.scrollTop = scrollTop;
-  if (contentEditable != null) v.contentEditable = contentEditable;
-  if (dir != null) v.dir = dir;
-  if (draggable != null) v.draggable = draggable;
-  if (hidden != null) v.hidden = hidden;
-  if (inert != null) v.inert = inert;
-  if (inputMode != null) v.inputMode = inputMode;
-  if (lang != null) v.lang = lang;
-  if (spellcheck != null) v.spellcheck = spellcheck;
-  if (tabIndex != null) v.tabIndex = tabIndex;
-  if (title != null) v.title = title;
-  if (translate != null) v.translate = translate;
-  if (className != null) v.className = className;
-  if (id != null) v.id = id;
-  if (slot != null) v.slot = slot;
-  if (nodes != null) v.nodes = nodes;
-  if (text != null) v.text = text;
-  if (onAbort != null) v.onAbort.listen(onAbort);
-  if (onBeforeCopy != null) v.onBeforeCopy.listen(onBeforeCopy);
-  if (onBeforeCut != null) v.onBeforeCut.listen(onBeforeCut);
-  if (onBeforePaste != null) v.onBeforePaste.listen(onBeforePaste);
-  if (onBlur != null) v.onBlur.listen(onBlur);
-  if (onCanPlay != null) v.onCanPlay.listen(onCanPlay);
-  if (onCanPlayThrough != null) v.onCanPlayThrough.listen(onCanPlayThrough);
-  if (onChange != null) v.onChange.listen(onChange);
-  if (onClick != null) v.onClick.listen(onClick);
-  if (onContextMenu != null) v.onContextMenu.listen(onContextMenu);
-  if (onCopy != null) v.onCopy.listen(onCopy);
-  if (onCut != null) v.onCut.listen(onCut);
-  if (onDoubleClick != null) v.onDoubleClick.listen(onDoubleClick);
-  if (onDrag != null) v.onDrag.listen(onDrag);
-  if (onDragEnd != null) v.onDragEnd.listen(onDragEnd);
-  if (onDragEnter != null) v.onDragEnter.listen(onDragEnter);
-  if (onDragLeave != null) v.onDragLeave.listen(onDragLeave);
-  if (onDragOver != null) v.onDragOver.listen(onDragOver);
-  if (onDragStart != null) v.onDragStart.listen(onDragStart);
-  if (onDrop != null) v.onDrop.listen(onDrop);
-  if (onDurationChange != null) v.onDurationChange.listen(onDurationChange);
-  if (onEmptied != null) v.onEmptied.listen(onEmptied);
-  if (onEnded != null) v.onEnded.listen(onEnded);
-  if (onError != null) v.onError.listen(onError);
-  if (onFocus != null) v.onFocus.listen(onFocus);
-  if (onInput != null) v.onInput.listen(onInput);
-  if (onInvalid != null) v.onInvalid.listen(onInvalid);
-  if (onKeyDown != null) v.onKeyDown.listen(onKeyDown);
-  if (onKeyPress != null) v.onKeyPress.listen(onKeyPress);
-  if (onKeyUp != null) v.onKeyUp.listen(onKeyUp);
-  if (onLoad != null) v.onLoad.listen(onLoad);
-  if (onLoadedData != null) v.onLoadedData.listen(onLoadedData);
-  if (onLoadedMetadata != null) v.onLoadedMetadata.listen(onLoadedMetadata);
-  if (onMouseDown != null) v.onMouseDown.listen(onMouseDown);
-  if (onMouseEnter != null) v.onMouseEnter.listen(onMouseEnter);
-  if (onMouseLeave != null) v.onMouseLeave.listen(onMouseLeave);
-  if (onMouseMove != null) v.onMouseMove.listen(onMouseMove);
-  if (onMouseOut != null) v.onMouseOut.listen(onMouseOut);
-  if (onMouseOver != null) v.onMouseOver.listen(onMouseOver);
-  if (onMouseUp != null) v.onMouseUp.listen(onMouseUp);
-  if (onMouseWheel != null) v.onMouseWheel.listen(onMouseWheel);
-  if (onPaste != null) v.onPaste.listen(onPaste);
-  if (onPause != null) v.onPause.listen(onPause);
-  if (onPlay != null) v.onPlay.listen(onPlay);
-  if (onPlaying != null) v.onPlaying.listen(onPlaying);
-  if (onRateChange != null) v.onRateChange.listen(onRateChange);
-  if (onReset != null) v.onReset.listen(onReset);
-  if (onResize != null) v.onResize.listen(onResize);
-  if (onScroll != null) v.onScroll.listen(onScroll);
-  if (onSearch != null) v.onSearch.listen(onSearch);
-  if (onSeeked != null) v.onSeeked.listen(onSeeked);
-  if (onSeeking != null) v.onSeeking.listen(onSeeking);
-  if (onSelect != null) v.onSelect.listen(onSelect);
-  if (onSelectStart != null) v.onSelectStart.listen(onSelectStart);
-  if (onStalled != null) v.onStalled.listen(onStalled);
-  if (onSubmit != null) v.onSubmit.listen(onSubmit);
-  if (onSuspend != null) v.onSuspend.listen(onSuspend);
-  if (onTimeUpdate != null) v.onTimeUpdate.listen(onTimeUpdate);
-  if (onTouchCancel != null) v.onTouchCancel.listen(onTouchCancel);
-  if (onTouchEnd != null) v.onTouchEnd.listen(onTouchEnd);
-  if (onTouchEnter != null) v.onTouchEnter.listen(onTouchEnter);
-  if (onTouchLeave != null) v.onTouchLeave.listen(onTouchLeave);
-  if (onTouchMove != null) v.onTouchMove.listen(onTouchMove);
-  if (onTouchStart != null) v.onTouchStart.listen(onTouchStart);
-  if (onTransitionEnd != null) v.onTransitionEnd.listen(onTransitionEnd);
-  if (onVolumeChange != null) v.onVolumeChange.listen(onVolumeChange);
-  if (onWaiting != null) v.onWaiting.listen(onWaiting);
-  if (onFullscreenChange != null)
-    v.onFullscreenChange.listen(onFullscreenChange);
-  if (onFullscreenError != null) v.onFullscreenError.listen(onFullscreenError);
-  if (onWheel != null) v.onWheel.listen(onWheel);
-  return v;
+class DataListElementWidget extends HtmlElementWidget {
+  DataListElementWidget(
+      {super.nonce,
+      super.attributes,
+      super.children,
+      super.classes,
+      super.dataset,
+      super.innerHtml,
+      super.innerText,
+      super.scrollLeft,
+      super.scrollTop,
+      super.contentEditable,
+      super.dir,
+      super.draggable,
+      super.hidden,
+      super.inert,
+      super.inputMode,
+      super.lang,
+      super.spellcheck,
+      super.tabIndex,
+      super.title,
+      super.translate,
+      super.className,
+      super.id,
+      super.slot,
+      super.nodes,
+      super.text,
+      super.onAbort,
+      super.onBeforeCopy,
+      super.onBeforeCut,
+      super.onBeforePaste,
+      super.onBlur,
+      super.onCanPlay,
+      super.onCanPlayThrough,
+      super.onChange,
+      super.onClick,
+      super.onContextMenu,
+      super.onCopy,
+      super.onCut,
+      super.onDoubleClick,
+      super.onDrag,
+      super.onDragEnd,
+      super.onDragEnter,
+      super.onDragLeave,
+      super.onDragOver,
+      super.onDragStart,
+      super.onDrop,
+      super.onDurationChange,
+      super.onEmptied,
+      super.onEnded,
+      super.onError,
+      super.onFocus,
+      super.onInput,
+      super.onInvalid,
+      super.onKeyDown,
+      super.onKeyPress,
+      super.onKeyUp,
+      super.onLoad,
+      super.onLoadedData,
+      super.onLoadedMetadata,
+      super.onMouseDown,
+      super.onMouseEnter,
+      super.onMouseLeave,
+      super.onMouseMove,
+      super.onMouseOut,
+      super.onMouseOver,
+      super.onMouseUp,
+      super.onMouseWheel,
+      super.onPaste,
+      super.onPause,
+      super.onPlay,
+      super.onPlaying,
+      super.onRateChange,
+      super.onReset,
+      super.onResize,
+      super.onScroll,
+      super.onSearch,
+      super.onSeeked,
+      super.onSeeking,
+      super.onSelect,
+      super.onSelectStart,
+      super.onStalled,
+      super.onSubmit,
+      super.onSuspend,
+      super.onTimeUpdate,
+      super.onTouchCancel,
+      super.onTouchEnd,
+      super.onTouchEnter,
+      super.onTouchLeave,
+      super.onTouchMove,
+      super.onTouchStart,
+      super.onTransitionEnd,
+      super.onVolumeChange,
+      super.onWaiting,
+      super.onFullscreenChange,
+      super.onFullscreenError,
+      super.onWheel});
+  @override
+  Element render() => hook(DataListElement());
 }
 
-DivElement divElement(
-    {String? nonce,
-    Map<String, String>? attributes,
-    List<Element>? children,
-    Iterable<String>? classes,
-    Map<String, String>? dataset,
-    String? innerHtml,
-    String? innerText,
-    int? scrollLeft,
-    int? scrollTop,
-    String? contentEditable,
-    String? dir,
-    bool? draggable,
-    bool? hidden,
-    bool? inert,
-    String? inputMode,
-    String? lang,
-    bool? spellcheck,
-    int? tabIndex,
-    String? title,
-    bool? translate,
-    String? className,
-    String? id,
-    String? slot,
-    Iterable<Node>? nodes,
-    String? text,
-    void Function(Event)? onAbort,
-    void Function(Event)? onBeforeCopy,
-    void Function(Event)? onBeforeCut,
-    void Function(Event)? onBeforePaste,
-    void Function(Event)? onBlur,
-    void Function(Event)? onCanPlay,
-    void Function(Event)? onCanPlayThrough,
-    void Function(Event)? onChange,
-    void Function(MouseEvent)? onClick,
-    void Function(MouseEvent)? onContextMenu,
-    void Function(ClipboardEvent)? onCopy,
-    void Function(ClipboardEvent)? onCut,
-    void Function(Event)? onDoubleClick,
-    void Function(MouseEvent)? onDrag,
-    void Function(MouseEvent)? onDragEnd,
-    void Function(MouseEvent)? onDragEnter,
-    void Function(MouseEvent)? onDragLeave,
-    void Function(MouseEvent)? onDragOver,
-    void Function(MouseEvent)? onDragStart,
-    void Function(MouseEvent)? onDrop,
-    void Function(Event)? onDurationChange,
-    void Function(Event)? onEmptied,
-    void Function(Event)? onEnded,
-    void Function(Event)? onError,
-    void Function(Event)? onFocus,
-    void Function(Event)? onInput,
-    void Function(Event)? onInvalid,
-    void Function(KeyboardEvent)? onKeyDown,
-    void Function(KeyboardEvent)? onKeyPress,
-    void Function(KeyboardEvent)? onKeyUp,
-    void Function(Event)? onLoad,
-    void Function(Event)? onLoadedData,
-    void Function(Event)? onLoadedMetadata,
-    void Function(MouseEvent)? onMouseDown,
-    void Function(MouseEvent)? onMouseEnter,
-    void Function(MouseEvent)? onMouseLeave,
-    void Function(MouseEvent)? onMouseMove,
-    void Function(MouseEvent)? onMouseOut,
-    void Function(MouseEvent)? onMouseOver,
-    void Function(MouseEvent)? onMouseUp,
-    void Function(WheelEvent)? onMouseWheel,
-    void Function(ClipboardEvent)? onPaste,
-    void Function(Event)? onPause,
-    void Function(Event)? onPlay,
-    void Function(Event)? onPlaying,
-    void Function(Event)? onRateChange,
-    void Function(Event)? onReset,
-    void Function(Event)? onResize,
-    void Function(Event)? onScroll,
-    void Function(Event)? onSearch,
-    void Function(Event)? onSeeked,
-    void Function(Event)? onSeeking,
-    void Function(Event)? onSelect,
-    void Function(Event)? onSelectStart,
-    void Function(Event)? onStalled,
-    void Function(Event)? onSubmit,
-    void Function(Event)? onSuspend,
-    void Function(Event)? onTimeUpdate,
-    void Function(TouchEvent)? onTouchCancel,
-    void Function(TouchEvent)? onTouchEnd,
-    void Function(TouchEvent)? onTouchEnter,
-    void Function(TouchEvent)? onTouchLeave,
-    void Function(TouchEvent)? onTouchMove,
-    void Function(TouchEvent)? onTouchStart,
-    void Function(TransitionEvent)? onTransitionEnd,
-    void Function(Event)? onVolumeChange,
-    void Function(Event)? onWaiting,
-    void Function(Event)? onFullscreenChange,
-    void Function(Event)? onFullscreenError,
-    void Function(WheelEvent)? onWheel}) {
-  final v = DivElement();
-  if (nonce != null) v.nonce = nonce;
-  if (attributes != null) v.attributes = attributes;
-  if (children != null) v.children = children;
-  if (classes != null) v.classes = classes;
-  if (dataset != null) v.dataset = dataset;
-  if (innerHtml != null) v.innerHtml = innerHtml;
-  if (innerText != null) v.innerText = innerText;
-  if (scrollLeft != null) v.scrollLeft = scrollLeft;
-  if (scrollTop != null) v.scrollTop = scrollTop;
-  if (contentEditable != null) v.contentEditable = contentEditable;
-  if (dir != null) v.dir = dir;
-  if (draggable != null) v.draggable = draggable;
-  if (hidden != null) v.hidden = hidden;
-  if (inert != null) v.inert = inert;
-  if (inputMode != null) v.inputMode = inputMode;
-  if (lang != null) v.lang = lang;
-  if (spellcheck != null) v.spellcheck = spellcheck;
-  if (tabIndex != null) v.tabIndex = tabIndex;
-  if (title != null) v.title = title;
-  if (translate != null) v.translate = translate;
-  if (className != null) v.className = className;
-  if (id != null) v.id = id;
-  if (slot != null) v.slot = slot;
-  if (nodes != null) v.nodes = nodes;
-  if (text != null) v.text = text;
-  if (onAbort != null) v.onAbort.listen(onAbort);
-  if (onBeforeCopy != null) v.onBeforeCopy.listen(onBeforeCopy);
-  if (onBeforeCut != null) v.onBeforeCut.listen(onBeforeCut);
-  if (onBeforePaste != null) v.onBeforePaste.listen(onBeforePaste);
-  if (onBlur != null) v.onBlur.listen(onBlur);
-  if (onCanPlay != null) v.onCanPlay.listen(onCanPlay);
-  if (onCanPlayThrough != null) v.onCanPlayThrough.listen(onCanPlayThrough);
-  if (onChange != null) v.onChange.listen(onChange);
-  if (onClick != null) v.onClick.listen(onClick);
-  if (onContextMenu != null) v.onContextMenu.listen(onContextMenu);
-  if (onCopy != null) v.onCopy.listen(onCopy);
-  if (onCut != null) v.onCut.listen(onCut);
-  if (onDoubleClick != null) v.onDoubleClick.listen(onDoubleClick);
-  if (onDrag != null) v.onDrag.listen(onDrag);
-  if (onDragEnd != null) v.onDragEnd.listen(onDragEnd);
-  if (onDragEnter != null) v.onDragEnter.listen(onDragEnter);
-  if (onDragLeave != null) v.onDragLeave.listen(onDragLeave);
-  if (onDragOver != null) v.onDragOver.listen(onDragOver);
-  if (onDragStart != null) v.onDragStart.listen(onDragStart);
-  if (onDrop != null) v.onDrop.listen(onDrop);
-  if (onDurationChange != null) v.onDurationChange.listen(onDurationChange);
-  if (onEmptied != null) v.onEmptied.listen(onEmptied);
-  if (onEnded != null) v.onEnded.listen(onEnded);
-  if (onError != null) v.onError.listen(onError);
-  if (onFocus != null) v.onFocus.listen(onFocus);
-  if (onInput != null) v.onInput.listen(onInput);
-  if (onInvalid != null) v.onInvalid.listen(onInvalid);
-  if (onKeyDown != null) v.onKeyDown.listen(onKeyDown);
-  if (onKeyPress != null) v.onKeyPress.listen(onKeyPress);
-  if (onKeyUp != null) v.onKeyUp.listen(onKeyUp);
-  if (onLoad != null) v.onLoad.listen(onLoad);
-  if (onLoadedData != null) v.onLoadedData.listen(onLoadedData);
-  if (onLoadedMetadata != null) v.onLoadedMetadata.listen(onLoadedMetadata);
-  if (onMouseDown != null) v.onMouseDown.listen(onMouseDown);
-  if (onMouseEnter != null) v.onMouseEnter.listen(onMouseEnter);
-  if (onMouseLeave != null) v.onMouseLeave.listen(onMouseLeave);
-  if (onMouseMove != null) v.onMouseMove.listen(onMouseMove);
-  if (onMouseOut != null) v.onMouseOut.listen(onMouseOut);
-  if (onMouseOver != null) v.onMouseOver.listen(onMouseOver);
-  if (onMouseUp != null) v.onMouseUp.listen(onMouseUp);
-  if (onMouseWheel != null) v.onMouseWheel.listen(onMouseWheel);
-  if (onPaste != null) v.onPaste.listen(onPaste);
-  if (onPause != null) v.onPause.listen(onPause);
-  if (onPlay != null) v.onPlay.listen(onPlay);
-  if (onPlaying != null) v.onPlaying.listen(onPlaying);
-  if (onRateChange != null) v.onRateChange.listen(onRateChange);
-  if (onReset != null) v.onReset.listen(onReset);
-  if (onResize != null) v.onResize.listen(onResize);
-  if (onScroll != null) v.onScroll.listen(onScroll);
-  if (onSearch != null) v.onSearch.listen(onSearch);
-  if (onSeeked != null) v.onSeeked.listen(onSeeked);
-  if (onSeeking != null) v.onSeeking.listen(onSeeking);
-  if (onSelect != null) v.onSelect.listen(onSelect);
-  if (onSelectStart != null) v.onSelectStart.listen(onSelectStart);
-  if (onStalled != null) v.onStalled.listen(onStalled);
-  if (onSubmit != null) v.onSubmit.listen(onSubmit);
-  if (onSuspend != null) v.onSuspend.listen(onSuspend);
-  if (onTimeUpdate != null) v.onTimeUpdate.listen(onTimeUpdate);
-  if (onTouchCancel != null) v.onTouchCancel.listen(onTouchCancel);
-  if (onTouchEnd != null) v.onTouchEnd.listen(onTouchEnd);
-  if (onTouchEnter != null) v.onTouchEnter.listen(onTouchEnter);
-  if (onTouchLeave != null) v.onTouchLeave.listen(onTouchLeave);
-  if (onTouchMove != null) v.onTouchMove.listen(onTouchMove);
-  if (onTouchStart != null) v.onTouchStart.listen(onTouchStart);
-  if (onTransitionEnd != null) v.onTransitionEnd.listen(onTransitionEnd);
-  if (onVolumeChange != null) v.onVolumeChange.listen(onVolumeChange);
-  if (onWaiting != null) v.onWaiting.listen(onWaiting);
-  if (onFullscreenChange != null)
-    v.onFullscreenChange.listen(onFullscreenChange);
-  if (onFullscreenError != null) v.onFullscreenError.listen(onFullscreenError);
-  if (onWheel != null) v.onWheel.listen(onWheel);
-  return v;
+class DetailsElementWidget extends HtmlElementWidget {
+  DetailsElementWidget(
+      {super.nonce,
+      super.attributes,
+      super.children,
+      super.classes,
+      super.dataset,
+      super.innerHtml,
+      super.innerText,
+      super.scrollLeft,
+      super.scrollTop,
+      super.contentEditable,
+      super.dir,
+      super.draggable,
+      super.hidden,
+      super.inert,
+      super.inputMode,
+      super.lang,
+      super.spellcheck,
+      super.tabIndex,
+      super.title,
+      super.translate,
+      super.className,
+      super.id,
+      super.slot,
+      super.nodes,
+      super.text,
+      super.onAbort,
+      super.onBeforeCopy,
+      super.onBeforeCut,
+      super.onBeforePaste,
+      super.onBlur,
+      super.onCanPlay,
+      super.onCanPlayThrough,
+      super.onChange,
+      super.onClick,
+      super.onContextMenu,
+      super.onCopy,
+      super.onCut,
+      super.onDoubleClick,
+      super.onDrag,
+      super.onDragEnd,
+      super.onDragEnter,
+      super.onDragLeave,
+      super.onDragOver,
+      super.onDragStart,
+      super.onDrop,
+      super.onDurationChange,
+      super.onEmptied,
+      super.onEnded,
+      super.onError,
+      super.onFocus,
+      super.onInput,
+      super.onInvalid,
+      super.onKeyDown,
+      super.onKeyPress,
+      super.onKeyUp,
+      super.onLoad,
+      super.onLoadedData,
+      super.onLoadedMetadata,
+      super.onMouseDown,
+      super.onMouseEnter,
+      super.onMouseLeave,
+      super.onMouseMove,
+      super.onMouseOut,
+      super.onMouseOver,
+      super.onMouseUp,
+      super.onMouseWheel,
+      super.onPaste,
+      super.onPause,
+      super.onPlay,
+      super.onPlaying,
+      super.onRateChange,
+      super.onReset,
+      super.onResize,
+      super.onScroll,
+      super.onSearch,
+      super.onSeeked,
+      super.onSeeking,
+      super.onSelect,
+      super.onSelectStart,
+      super.onStalled,
+      super.onSubmit,
+      super.onSuspend,
+      super.onTimeUpdate,
+      super.onTouchCancel,
+      super.onTouchEnd,
+      super.onTouchEnter,
+      super.onTouchLeave,
+      super.onTouchMove,
+      super.onTouchStart,
+      super.onTransitionEnd,
+      super.onVolumeChange,
+      super.onWaiting,
+      super.onFullscreenChange,
+      super.onFullscreenError,
+      super.onWheel});
+  @override
+  Element render() => hook(DetailsElement());
 }
 
-EmbedElement embedElement(
-    {String? height,
-    String? name,
-    String? src,
-    String? type,
-    String? width,
-    String? nonce,
-    Map<String, String>? attributes,
-    List<Element>? children,
-    Iterable<String>? classes,
-    Map<String, String>? dataset,
-    String? innerHtml,
-    String? innerText,
-    int? scrollLeft,
-    int? scrollTop,
-    String? contentEditable,
-    String? dir,
-    bool? draggable,
-    bool? hidden,
-    bool? inert,
-    String? inputMode,
-    String? lang,
-    bool? spellcheck,
-    int? tabIndex,
-    String? title,
-    bool? translate,
-    String? className,
-    String? id,
-    String? slot,
-    Iterable<Node>? nodes,
-    String? text,
-    void Function(Event)? onAbort,
-    void Function(Event)? onBeforeCopy,
-    void Function(Event)? onBeforeCut,
-    void Function(Event)? onBeforePaste,
-    void Function(Event)? onBlur,
-    void Function(Event)? onCanPlay,
-    void Function(Event)? onCanPlayThrough,
-    void Function(Event)? onChange,
-    void Function(MouseEvent)? onClick,
-    void Function(MouseEvent)? onContextMenu,
-    void Function(ClipboardEvent)? onCopy,
-    void Function(ClipboardEvent)? onCut,
-    void Function(Event)? onDoubleClick,
-    void Function(MouseEvent)? onDrag,
-    void Function(MouseEvent)? onDragEnd,
-    void Function(MouseEvent)? onDragEnter,
-    void Function(MouseEvent)? onDragLeave,
-    void Function(MouseEvent)? onDragOver,
-    void Function(MouseEvent)? onDragStart,
-    void Function(MouseEvent)? onDrop,
-    void Function(Event)? onDurationChange,
-    void Function(Event)? onEmptied,
-    void Function(Event)? onEnded,
-    void Function(Event)? onError,
-    void Function(Event)? onFocus,
-    void Function(Event)? onInput,
-    void Function(Event)? onInvalid,
-    void Function(KeyboardEvent)? onKeyDown,
-    void Function(KeyboardEvent)? onKeyPress,
-    void Function(KeyboardEvent)? onKeyUp,
-    void Function(Event)? onLoad,
-    void Function(Event)? onLoadedData,
-    void Function(Event)? onLoadedMetadata,
-    void Function(MouseEvent)? onMouseDown,
-    void Function(MouseEvent)? onMouseEnter,
-    void Function(MouseEvent)? onMouseLeave,
-    void Function(MouseEvent)? onMouseMove,
-    void Function(MouseEvent)? onMouseOut,
-    void Function(MouseEvent)? onMouseOver,
-    void Function(MouseEvent)? onMouseUp,
-    void Function(WheelEvent)? onMouseWheel,
-    void Function(ClipboardEvent)? onPaste,
-    void Function(Event)? onPause,
-    void Function(Event)? onPlay,
-    void Function(Event)? onPlaying,
-    void Function(Event)? onRateChange,
-    void Function(Event)? onReset,
-    void Function(Event)? onResize,
-    void Function(Event)? onScroll,
-    void Function(Event)? onSearch,
-    void Function(Event)? onSeeked,
-    void Function(Event)? onSeeking,
-    void Function(Event)? onSelect,
-    void Function(Event)? onSelectStart,
-    void Function(Event)? onStalled,
-    void Function(Event)? onSubmit,
-    void Function(Event)? onSuspend,
-    void Function(Event)? onTimeUpdate,
-    void Function(TouchEvent)? onTouchCancel,
-    void Function(TouchEvent)? onTouchEnd,
-    void Function(TouchEvent)? onTouchEnter,
-    void Function(TouchEvent)? onTouchLeave,
-    void Function(TouchEvent)? onTouchMove,
-    void Function(TouchEvent)? onTouchStart,
-    void Function(TransitionEvent)? onTransitionEnd,
-    void Function(Event)? onVolumeChange,
-    void Function(Event)? onWaiting,
-    void Function(Event)? onFullscreenChange,
-    void Function(Event)? onFullscreenError,
-    void Function(WheelEvent)? onWheel}) {
-  final v = EmbedElement();
-  if (height != null) v.height = height;
-  if (name != null) v.name = name;
-  if (src != null) v.src = src;
-  if (type != null) v.type = type;
-  if (width != null) v.width = width;
-  if (nonce != null) v.nonce = nonce;
-  if (attributes != null) v.attributes = attributes;
-  if (children != null) v.children = children;
-  if (classes != null) v.classes = classes;
-  if (dataset != null) v.dataset = dataset;
-  if (innerHtml != null) v.innerHtml = innerHtml;
-  if (innerText != null) v.innerText = innerText;
-  if (scrollLeft != null) v.scrollLeft = scrollLeft;
-  if (scrollTop != null) v.scrollTop = scrollTop;
-  if (contentEditable != null) v.contentEditable = contentEditable;
-  if (dir != null) v.dir = dir;
-  if (draggable != null) v.draggable = draggable;
-  if (hidden != null) v.hidden = hidden;
-  if (inert != null) v.inert = inert;
-  if (inputMode != null) v.inputMode = inputMode;
-  if (lang != null) v.lang = lang;
-  if (spellcheck != null) v.spellcheck = spellcheck;
-  if (tabIndex != null) v.tabIndex = tabIndex;
-  if (title != null) v.title = title;
-  if (translate != null) v.translate = translate;
-  if (className != null) v.className = className;
-  if (id != null) v.id = id;
-  if (slot != null) v.slot = slot;
-  if (nodes != null) v.nodes = nodes;
-  if (text != null) v.text = text;
-  if (onAbort != null) v.onAbort.listen(onAbort);
-  if (onBeforeCopy != null) v.onBeforeCopy.listen(onBeforeCopy);
-  if (onBeforeCut != null) v.onBeforeCut.listen(onBeforeCut);
-  if (onBeforePaste != null) v.onBeforePaste.listen(onBeforePaste);
-  if (onBlur != null) v.onBlur.listen(onBlur);
-  if (onCanPlay != null) v.onCanPlay.listen(onCanPlay);
-  if (onCanPlayThrough != null) v.onCanPlayThrough.listen(onCanPlayThrough);
-  if (onChange != null) v.onChange.listen(onChange);
-  if (onClick != null) v.onClick.listen(onClick);
-  if (onContextMenu != null) v.onContextMenu.listen(onContextMenu);
-  if (onCopy != null) v.onCopy.listen(onCopy);
-  if (onCut != null) v.onCut.listen(onCut);
-  if (onDoubleClick != null) v.onDoubleClick.listen(onDoubleClick);
-  if (onDrag != null) v.onDrag.listen(onDrag);
-  if (onDragEnd != null) v.onDragEnd.listen(onDragEnd);
-  if (onDragEnter != null) v.onDragEnter.listen(onDragEnter);
-  if (onDragLeave != null) v.onDragLeave.listen(onDragLeave);
-  if (onDragOver != null) v.onDragOver.listen(onDragOver);
-  if (onDragStart != null) v.onDragStart.listen(onDragStart);
-  if (onDrop != null) v.onDrop.listen(onDrop);
-  if (onDurationChange != null) v.onDurationChange.listen(onDurationChange);
-  if (onEmptied != null) v.onEmptied.listen(onEmptied);
-  if (onEnded != null) v.onEnded.listen(onEnded);
-  if (onError != null) v.onError.listen(onError);
-  if (onFocus != null) v.onFocus.listen(onFocus);
-  if (onInput != null) v.onInput.listen(onInput);
-  if (onInvalid != null) v.onInvalid.listen(onInvalid);
-  if (onKeyDown != null) v.onKeyDown.listen(onKeyDown);
-  if (onKeyPress != null) v.onKeyPress.listen(onKeyPress);
-  if (onKeyUp != null) v.onKeyUp.listen(onKeyUp);
-  if (onLoad != null) v.onLoad.listen(onLoad);
-  if (onLoadedData != null) v.onLoadedData.listen(onLoadedData);
-  if (onLoadedMetadata != null) v.onLoadedMetadata.listen(onLoadedMetadata);
-  if (onMouseDown != null) v.onMouseDown.listen(onMouseDown);
-  if (onMouseEnter != null) v.onMouseEnter.listen(onMouseEnter);
-  if (onMouseLeave != null) v.onMouseLeave.listen(onMouseLeave);
-  if (onMouseMove != null) v.onMouseMove.listen(onMouseMove);
-  if (onMouseOut != null) v.onMouseOut.listen(onMouseOut);
-  if (onMouseOver != null) v.onMouseOver.listen(onMouseOver);
-  if (onMouseUp != null) v.onMouseUp.listen(onMouseUp);
-  if (onMouseWheel != null) v.onMouseWheel.listen(onMouseWheel);
-  if (onPaste != null) v.onPaste.listen(onPaste);
-  if (onPause != null) v.onPause.listen(onPause);
-  if (onPlay != null) v.onPlay.listen(onPlay);
-  if (onPlaying != null) v.onPlaying.listen(onPlaying);
-  if (onRateChange != null) v.onRateChange.listen(onRateChange);
-  if (onReset != null) v.onReset.listen(onReset);
-  if (onResize != null) v.onResize.listen(onResize);
-  if (onScroll != null) v.onScroll.listen(onScroll);
-  if (onSearch != null) v.onSearch.listen(onSearch);
-  if (onSeeked != null) v.onSeeked.listen(onSeeked);
-  if (onSeeking != null) v.onSeeking.listen(onSeeking);
-  if (onSelect != null) v.onSelect.listen(onSelect);
-  if (onSelectStart != null) v.onSelectStart.listen(onSelectStart);
-  if (onStalled != null) v.onStalled.listen(onStalled);
-  if (onSubmit != null) v.onSubmit.listen(onSubmit);
-  if (onSuspend != null) v.onSuspend.listen(onSuspend);
-  if (onTimeUpdate != null) v.onTimeUpdate.listen(onTimeUpdate);
-  if (onTouchCancel != null) v.onTouchCancel.listen(onTouchCancel);
-  if (onTouchEnd != null) v.onTouchEnd.listen(onTouchEnd);
-  if (onTouchEnter != null) v.onTouchEnter.listen(onTouchEnter);
-  if (onTouchLeave != null) v.onTouchLeave.listen(onTouchLeave);
-  if (onTouchMove != null) v.onTouchMove.listen(onTouchMove);
-  if (onTouchStart != null) v.onTouchStart.listen(onTouchStart);
-  if (onTransitionEnd != null) v.onTransitionEnd.listen(onTransitionEnd);
-  if (onVolumeChange != null) v.onVolumeChange.listen(onVolumeChange);
-  if (onWaiting != null) v.onWaiting.listen(onWaiting);
-  if (onFullscreenChange != null)
-    v.onFullscreenChange.listen(onFullscreenChange);
-  if (onFullscreenError != null) v.onFullscreenError.listen(onFullscreenError);
-  if (onWheel != null) v.onWheel.listen(onWheel);
-  return v;
+class DivElementWidget extends HtmlElementWidget {
+  DivElementWidget(
+      {super.nonce,
+      super.attributes,
+      super.children,
+      super.classes,
+      super.dataset,
+      super.innerHtml,
+      super.innerText,
+      super.scrollLeft,
+      super.scrollTop,
+      super.contentEditable,
+      super.dir,
+      super.draggable,
+      super.hidden,
+      super.inert,
+      super.inputMode,
+      super.lang,
+      super.spellcheck,
+      super.tabIndex,
+      super.title,
+      super.translate,
+      super.className,
+      super.id,
+      super.slot,
+      super.nodes,
+      super.text,
+      super.onAbort,
+      super.onBeforeCopy,
+      super.onBeforeCut,
+      super.onBeforePaste,
+      super.onBlur,
+      super.onCanPlay,
+      super.onCanPlayThrough,
+      super.onChange,
+      super.onClick,
+      super.onContextMenu,
+      super.onCopy,
+      super.onCut,
+      super.onDoubleClick,
+      super.onDrag,
+      super.onDragEnd,
+      super.onDragEnter,
+      super.onDragLeave,
+      super.onDragOver,
+      super.onDragStart,
+      super.onDrop,
+      super.onDurationChange,
+      super.onEmptied,
+      super.onEnded,
+      super.onError,
+      super.onFocus,
+      super.onInput,
+      super.onInvalid,
+      super.onKeyDown,
+      super.onKeyPress,
+      super.onKeyUp,
+      super.onLoad,
+      super.onLoadedData,
+      super.onLoadedMetadata,
+      super.onMouseDown,
+      super.onMouseEnter,
+      super.onMouseLeave,
+      super.onMouseMove,
+      super.onMouseOut,
+      super.onMouseOver,
+      super.onMouseUp,
+      super.onMouseWheel,
+      super.onPaste,
+      super.onPause,
+      super.onPlay,
+      super.onPlaying,
+      super.onRateChange,
+      super.onReset,
+      super.onResize,
+      super.onScroll,
+      super.onSearch,
+      super.onSeeked,
+      super.onSeeking,
+      super.onSelect,
+      super.onSelectStart,
+      super.onStalled,
+      super.onSubmit,
+      super.onSuspend,
+      super.onTimeUpdate,
+      super.onTouchCancel,
+      super.onTouchEnd,
+      super.onTouchEnter,
+      super.onTouchLeave,
+      super.onTouchMove,
+      super.onTouchStart,
+      super.onTransitionEnd,
+      super.onVolumeChange,
+      super.onWaiting,
+      super.onFullscreenChange,
+      super.onFullscreenError,
+      super.onWheel});
+  @override
+  Element render() => hook(DivElement());
 }
 
-FieldSetElement fieldSetElement(
-    {bool? disabled,
-    String? name,
-    String? nonce,
-    Map<String, String>? attributes,
-    List<Element>? children,
-    Iterable<String>? classes,
-    Map<String, String>? dataset,
-    String? innerHtml,
-    String? innerText,
-    int? scrollLeft,
-    int? scrollTop,
-    String? contentEditable,
-    String? dir,
-    bool? draggable,
-    bool? hidden,
-    bool? inert,
-    String? inputMode,
-    String? lang,
-    bool? spellcheck,
-    int? tabIndex,
-    String? title,
-    bool? translate,
-    String? className,
-    String? id,
-    String? slot,
-    Iterable<Node>? nodes,
-    String? text,
-    void Function(Event)? onAbort,
-    void Function(Event)? onBeforeCopy,
-    void Function(Event)? onBeforeCut,
-    void Function(Event)? onBeforePaste,
-    void Function(Event)? onBlur,
-    void Function(Event)? onCanPlay,
-    void Function(Event)? onCanPlayThrough,
-    void Function(Event)? onChange,
-    void Function(MouseEvent)? onClick,
-    void Function(MouseEvent)? onContextMenu,
-    void Function(ClipboardEvent)? onCopy,
-    void Function(ClipboardEvent)? onCut,
-    void Function(Event)? onDoubleClick,
-    void Function(MouseEvent)? onDrag,
-    void Function(MouseEvent)? onDragEnd,
-    void Function(MouseEvent)? onDragEnter,
-    void Function(MouseEvent)? onDragLeave,
-    void Function(MouseEvent)? onDragOver,
-    void Function(MouseEvent)? onDragStart,
-    void Function(MouseEvent)? onDrop,
-    void Function(Event)? onDurationChange,
-    void Function(Event)? onEmptied,
-    void Function(Event)? onEnded,
-    void Function(Event)? onError,
-    void Function(Event)? onFocus,
-    void Function(Event)? onInput,
-    void Function(Event)? onInvalid,
-    void Function(KeyboardEvent)? onKeyDown,
-    void Function(KeyboardEvent)? onKeyPress,
-    void Function(KeyboardEvent)? onKeyUp,
-    void Function(Event)? onLoad,
-    void Function(Event)? onLoadedData,
-    void Function(Event)? onLoadedMetadata,
-    void Function(MouseEvent)? onMouseDown,
-    void Function(MouseEvent)? onMouseEnter,
-    void Function(MouseEvent)? onMouseLeave,
-    void Function(MouseEvent)? onMouseMove,
-    void Function(MouseEvent)? onMouseOut,
-    void Function(MouseEvent)? onMouseOver,
-    void Function(MouseEvent)? onMouseUp,
-    void Function(WheelEvent)? onMouseWheel,
-    void Function(ClipboardEvent)? onPaste,
-    void Function(Event)? onPause,
-    void Function(Event)? onPlay,
-    void Function(Event)? onPlaying,
-    void Function(Event)? onRateChange,
-    void Function(Event)? onReset,
-    void Function(Event)? onResize,
-    void Function(Event)? onScroll,
-    void Function(Event)? onSearch,
-    void Function(Event)? onSeeked,
-    void Function(Event)? onSeeking,
-    void Function(Event)? onSelect,
-    void Function(Event)? onSelectStart,
-    void Function(Event)? onStalled,
-    void Function(Event)? onSubmit,
-    void Function(Event)? onSuspend,
-    void Function(Event)? onTimeUpdate,
-    void Function(TouchEvent)? onTouchCancel,
-    void Function(TouchEvent)? onTouchEnd,
-    void Function(TouchEvent)? onTouchEnter,
-    void Function(TouchEvent)? onTouchLeave,
-    void Function(TouchEvent)? onTouchMove,
-    void Function(TouchEvent)? onTouchStart,
-    void Function(TransitionEvent)? onTransitionEnd,
-    void Function(Event)? onVolumeChange,
-    void Function(Event)? onWaiting,
-    void Function(Event)? onFullscreenChange,
-    void Function(Event)? onFullscreenError,
-    void Function(WheelEvent)? onWheel}) {
-  final v = FieldSetElement();
-  if (disabled != null) v.disabled = disabled;
-  if (name != null) v.name = name;
-  if (nonce != null) v.nonce = nonce;
-  if (attributes != null) v.attributes = attributes;
-  if (children != null) v.children = children;
-  if (classes != null) v.classes = classes;
-  if (dataset != null) v.dataset = dataset;
-  if (innerHtml != null) v.innerHtml = innerHtml;
-  if (innerText != null) v.innerText = innerText;
-  if (scrollLeft != null) v.scrollLeft = scrollLeft;
-  if (scrollTop != null) v.scrollTop = scrollTop;
-  if (contentEditable != null) v.contentEditable = contentEditable;
-  if (dir != null) v.dir = dir;
-  if (draggable != null) v.draggable = draggable;
-  if (hidden != null) v.hidden = hidden;
-  if (inert != null) v.inert = inert;
-  if (inputMode != null) v.inputMode = inputMode;
-  if (lang != null) v.lang = lang;
-  if (spellcheck != null) v.spellcheck = spellcheck;
-  if (tabIndex != null) v.tabIndex = tabIndex;
-  if (title != null) v.title = title;
-  if (translate != null) v.translate = translate;
-  if (className != null) v.className = className;
-  if (id != null) v.id = id;
-  if (slot != null) v.slot = slot;
-  if (nodes != null) v.nodes = nodes;
-  if (text != null) v.text = text;
-  if (onAbort != null) v.onAbort.listen(onAbort);
-  if (onBeforeCopy != null) v.onBeforeCopy.listen(onBeforeCopy);
-  if (onBeforeCut != null) v.onBeforeCut.listen(onBeforeCut);
-  if (onBeforePaste != null) v.onBeforePaste.listen(onBeforePaste);
-  if (onBlur != null) v.onBlur.listen(onBlur);
-  if (onCanPlay != null) v.onCanPlay.listen(onCanPlay);
-  if (onCanPlayThrough != null) v.onCanPlayThrough.listen(onCanPlayThrough);
-  if (onChange != null) v.onChange.listen(onChange);
-  if (onClick != null) v.onClick.listen(onClick);
-  if (onContextMenu != null) v.onContextMenu.listen(onContextMenu);
-  if (onCopy != null) v.onCopy.listen(onCopy);
-  if (onCut != null) v.onCut.listen(onCut);
-  if (onDoubleClick != null) v.onDoubleClick.listen(onDoubleClick);
-  if (onDrag != null) v.onDrag.listen(onDrag);
-  if (onDragEnd != null) v.onDragEnd.listen(onDragEnd);
-  if (onDragEnter != null) v.onDragEnter.listen(onDragEnter);
-  if (onDragLeave != null) v.onDragLeave.listen(onDragLeave);
-  if (onDragOver != null) v.onDragOver.listen(onDragOver);
-  if (onDragStart != null) v.onDragStart.listen(onDragStart);
-  if (onDrop != null) v.onDrop.listen(onDrop);
-  if (onDurationChange != null) v.onDurationChange.listen(onDurationChange);
-  if (onEmptied != null) v.onEmptied.listen(onEmptied);
-  if (onEnded != null) v.onEnded.listen(onEnded);
-  if (onError != null) v.onError.listen(onError);
-  if (onFocus != null) v.onFocus.listen(onFocus);
-  if (onInput != null) v.onInput.listen(onInput);
-  if (onInvalid != null) v.onInvalid.listen(onInvalid);
-  if (onKeyDown != null) v.onKeyDown.listen(onKeyDown);
-  if (onKeyPress != null) v.onKeyPress.listen(onKeyPress);
-  if (onKeyUp != null) v.onKeyUp.listen(onKeyUp);
-  if (onLoad != null) v.onLoad.listen(onLoad);
-  if (onLoadedData != null) v.onLoadedData.listen(onLoadedData);
-  if (onLoadedMetadata != null) v.onLoadedMetadata.listen(onLoadedMetadata);
-  if (onMouseDown != null) v.onMouseDown.listen(onMouseDown);
-  if (onMouseEnter != null) v.onMouseEnter.listen(onMouseEnter);
-  if (onMouseLeave != null) v.onMouseLeave.listen(onMouseLeave);
-  if (onMouseMove != null) v.onMouseMove.listen(onMouseMove);
-  if (onMouseOut != null) v.onMouseOut.listen(onMouseOut);
-  if (onMouseOver != null) v.onMouseOver.listen(onMouseOver);
-  if (onMouseUp != null) v.onMouseUp.listen(onMouseUp);
-  if (onMouseWheel != null) v.onMouseWheel.listen(onMouseWheel);
-  if (onPaste != null) v.onPaste.listen(onPaste);
-  if (onPause != null) v.onPause.listen(onPause);
-  if (onPlay != null) v.onPlay.listen(onPlay);
-  if (onPlaying != null) v.onPlaying.listen(onPlaying);
-  if (onRateChange != null) v.onRateChange.listen(onRateChange);
-  if (onReset != null) v.onReset.listen(onReset);
-  if (onResize != null) v.onResize.listen(onResize);
-  if (onScroll != null) v.onScroll.listen(onScroll);
-  if (onSearch != null) v.onSearch.listen(onSearch);
-  if (onSeeked != null) v.onSeeked.listen(onSeeked);
-  if (onSeeking != null) v.onSeeking.listen(onSeeking);
-  if (onSelect != null) v.onSelect.listen(onSelect);
-  if (onSelectStart != null) v.onSelectStart.listen(onSelectStart);
-  if (onStalled != null) v.onStalled.listen(onStalled);
-  if (onSubmit != null) v.onSubmit.listen(onSubmit);
-  if (onSuspend != null) v.onSuspend.listen(onSuspend);
-  if (onTimeUpdate != null) v.onTimeUpdate.listen(onTimeUpdate);
-  if (onTouchCancel != null) v.onTouchCancel.listen(onTouchCancel);
-  if (onTouchEnd != null) v.onTouchEnd.listen(onTouchEnd);
-  if (onTouchEnter != null) v.onTouchEnter.listen(onTouchEnter);
-  if (onTouchLeave != null) v.onTouchLeave.listen(onTouchLeave);
-  if (onTouchMove != null) v.onTouchMove.listen(onTouchMove);
-  if (onTouchStart != null) v.onTouchStart.listen(onTouchStart);
-  if (onTransitionEnd != null) v.onTransitionEnd.listen(onTransitionEnd);
-  if (onVolumeChange != null) v.onVolumeChange.listen(onVolumeChange);
-  if (onWaiting != null) v.onWaiting.listen(onWaiting);
-  if (onFullscreenChange != null)
-    v.onFullscreenChange.listen(onFullscreenChange);
-  if (onFullscreenError != null) v.onFullscreenError.listen(onFullscreenError);
-  if (onWheel != null) v.onWheel.listen(onWheel);
-  return v;
+class EmbedElementWidget extends HtmlElementWidget {
+  EmbedElementWidget(
+      {super.nonce,
+      super.attributes,
+      super.children,
+      super.classes,
+      super.dataset,
+      super.innerHtml,
+      super.innerText,
+      super.scrollLeft,
+      super.scrollTop,
+      super.contentEditable,
+      super.dir,
+      super.draggable,
+      super.hidden,
+      super.inert,
+      super.inputMode,
+      super.lang,
+      super.spellcheck,
+      super.tabIndex,
+      super.title,
+      super.translate,
+      super.className,
+      super.id,
+      super.slot,
+      super.nodes,
+      super.text,
+      super.onAbort,
+      super.onBeforeCopy,
+      super.onBeforeCut,
+      super.onBeforePaste,
+      super.onBlur,
+      super.onCanPlay,
+      super.onCanPlayThrough,
+      super.onChange,
+      super.onClick,
+      super.onContextMenu,
+      super.onCopy,
+      super.onCut,
+      super.onDoubleClick,
+      super.onDrag,
+      super.onDragEnd,
+      super.onDragEnter,
+      super.onDragLeave,
+      super.onDragOver,
+      super.onDragStart,
+      super.onDrop,
+      super.onDurationChange,
+      super.onEmptied,
+      super.onEnded,
+      super.onError,
+      super.onFocus,
+      super.onInput,
+      super.onInvalid,
+      super.onKeyDown,
+      super.onKeyPress,
+      super.onKeyUp,
+      super.onLoad,
+      super.onLoadedData,
+      super.onLoadedMetadata,
+      super.onMouseDown,
+      super.onMouseEnter,
+      super.onMouseLeave,
+      super.onMouseMove,
+      super.onMouseOut,
+      super.onMouseOver,
+      super.onMouseUp,
+      super.onMouseWheel,
+      super.onPaste,
+      super.onPause,
+      super.onPlay,
+      super.onPlaying,
+      super.onRateChange,
+      super.onReset,
+      super.onResize,
+      super.onScroll,
+      super.onSearch,
+      super.onSeeked,
+      super.onSeeking,
+      super.onSelect,
+      super.onSelectStart,
+      super.onStalled,
+      super.onSubmit,
+      super.onSuspend,
+      super.onTimeUpdate,
+      super.onTouchCancel,
+      super.onTouchEnd,
+      super.onTouchEnter,
+      super.onTouchLeave,
+      super.onTouchMove,
+      super.onTouchStart,
+      super.onTransitionEnd,
+      super.onVolumeChange,
+      super.onWaiting,
+      super.onFullscreenChange,
+      super.onFullscreenError,
+      super.onWheel});
+  @override
+  Element render() => hook(EmbedElement());
 }
 
-FormElement formElement(
-    {String? acceptCharset,
-    String? action,
-    String? autocomplete,
-    String? encoding,
-    String? enctype,
-    String? method,
-    String? name,
-    bool? noValidate,
-    String? target,
-    String? nonce,
-    Map<String, String>? attributes,
-    List<Element>? children,
-    Iterable<String>? classes,
-    Map<String, String>? dataset,
-    String? innerHtml,
-    String? innerText,
-    int? scrollLeft,
-    int? scrollTop,
-    String? contentEditable,
-    String? dir,
-    bool? draggable,
-    bool? hidden,
-    bool? inert,
-    String? inputMode,
-    String? lang,
-    bool? spellcheck,
-    int? tabIndex,
-    String? title,
-    bool? translate,
-    String? className,
-    String? id,
-    String? slot,
-    Iterable<Node>? nodes,
-    String? text,
-    void Function(Event)? onAbort,
-    void Function(Event)? onBeforeCopy,
-    void Function(Event)? onBeforeCut,
-    void Function(Event)? onBeforePaste,
-    void Function(Event)? onBlur,
-    void Function(Event)? onCanPlay,
-    void Function(Event)? onCanPlayThrough,
-    void Function(Event)? onChange,
-    void Function(MouseEvent)? onClick,
-    void Function(MouseEvent)? onContextMenu,
-    void Function(ClipboardEvent)? onCopy,
-    void Function(ClipboardEvent)? onCut,
-    void Function(Event)? onDoubleClick,
-    void Function(MouseEvent)? onDrag,
-    void Function(MouseEvent)? onDragEnd,
-    void Function(MouseEvent)? onDragEnter,
-    void Function(MouseEvent)? onDragLeave,
-    void Function(MouseEvent)? onDragOver,
-    void Function(MouseEvent)? onDragStart,
-    void Function(MouseEvent)? onDrop,
-    void Function(Event)? onDurationChange,
-    void Function(Event)? onEmptied,
-    void Function(Event)? onEnded,
-    void Function(Event)? onError,
-    void Function(Event)? onFocus,
-    void Function(Event)? onInput,
-    void Function(Event)? onInvalid,
-    void Function(KeyboardEvent)? onKeyDown,
-    void Function(KeyboardEvent)? onKeyPress,
-    void Function(KeyboardEvent)? onKeyUp,
-    void Function(Event)? onLoad,
-    void Function(Event)? onLoadedData,
-    void Function(Event)? onLoadedMetadata,
-    void Function(MouseEvent)? onMouseDown,
-    void Function(MouseEvent)? onMouseEnter,
-    void Function(MouseEvent)? onMouseLeave,
-    void Function(MouseEvent)? onMouseMove,
-    void Function(MouseEvent)? onMouseOut,
-    void Function(MouseEvent)? onMouseOver,
-    void Function(MouseEvent)? onMouseUp,
-    void Function(WheelEvent)? onMouseWheel,
-    void Function(ClipboardEvent)? onPaste,
-    void Function(Event)? onPause,
-    void Function(Event)? onPlay,
-    void Function(Event)? onPlaying,
-    void Function(Event)? onRateChange,
-    void Function(Event)? onReset,
-    void Function(Event)? onResize,
-    void Function(Event)? onScroll,
-    void Function(Event)? onSearch,
-    void Function(Event)? onSeeked,
-    void Function(Event)? onSeeking,
-    void Function(Event)? onSelect,
-    void Function(Event)? onSelectStart,
-    void Function(Event)? onStalled,
-    void Function(Event)? onSubmit,
-    void Function(Event)? onSuspend,
-    void Function(Event)? onTimeUpdate,
-    void Function(TouchEvent)? onTouchCancel,
-    void Function(TouchEvent)? onTouchEnd,
-    void Function(TouchEvent)? onTouchEnter,
-    void Function(TouchEvent)? onTouchLeave,
-    void Function(TouchEvent)? onTouchMove,
-    void Function(TouchEvent)? onTouchStart,
-    void Function(TransitionEvent)? onTransitionEnd,
-    void Function(Event)? onVolumeChange,
-    void Function(Event)? onWaiting,
-    void Function(Event)? onFullscreenChange,
-    void Function(Event)? onFullscreenError,
-    void Function(WheelEvent)? onWheel}) {
-  final v = FormElement();
-  if (acceptCharset != null) v.acceptCharset = acceptCharset;
-  if (action != null) v.action = action;
-  if (autocomplete != null) v.autocomplete = autocomplete;
-  if (encoding != null) v.encoding = encoding;
-  if (enctype != null) v.enctype = enctype;
-  if (method != null) v.method = method;
-  if (name != null) v.name = name;
-  if (noValidate != null) v.noValidate = noValidate;
-  if (target != null) v.target = target;
-  if (nonce != null) v.nonce = nonce;
-  if (attributes != null) v.attributes = attributes;
-  if (children != null) v.children = children;
-  if (classes != null) v.classes = classes;
-  if (dataset != null) v.dataset = dataset;
-  if (innerHtml != null) v.innerHtml = innerHtml;
-  if (innerText != null) v.innerText = innerText;
-  if (scrollLeft != null) v.scrollLeft = scrollLeft;
-  if (scrollTop != null) v.scrollTop = scrollTop;
-  if (contentEditable != null) v.contentEditable = contentEditable;
-  if (dir != null) v.dir = dir;
-  if (draggable != null) v.draggable = draggable;
-  if (hidden != null) v.hidden = hidden;
-  if (inert != null) v.inert = inert;
-  if (inputMode != null) v.inputMode = inputMode;
-  if (lang != null) v.lang = lang;
-  if (spellcheck != null) v.spellcheck = spellcheck;
-  if (tabIndex != null) v.tabIndex = tabIndex;
-  if (title != null) v.title = title;
-  if (translate != null) v.translate = translate;
-  if (className != null) v.className = className;
-  if (id != null) v.id = id;
-  if (slot != null) v.slot = slot;
-  if (nodes != null) v.nodes = nodes;
-  if (text != null) v.text = text;
-  if (onAbort != null) v.onAbort.listen(onAbort);
-  if (onBeforeCopy != null) v.onBeforeCopy.listen(onBeforeCopy);
-  if (onBeforeCut != null) v.onBeforeCut.listen(onBeforeCut);
-  if (onBeforePaste != null) v.onBeforePaste.listen(onBeforePaste);
-  if (onBlur != null) v.onBlur.listen(onBlur);
-  if (onCanPlay != null) v.onCanPlay.listen(onCanPlay);
-  if (onCanPlayThrough != null) v.onCanPlayThrough.listen(onCanPlayThrough);
-  if (onChange != null) v.onChange.listen(onChange);
-  if (onClick != null) v.onClick.listen(onClick);
-  if (onContextMenu != null) v.onContextMenu.listen(onContextMenu);
-  if (onCopy != null) v.onCopy.listen(onCopy);
-  if (onCut != null) v.onCut.listen(onCut);
-  if (onDoubleClick != null) v.onDoubleClick.listen(onDoubleClick);
-  if (onDrag != null) v.onDrag.listen(onDrag);
-  if (onDragEnd != null) v.onDragEnd.listen(onDragEnd);
-  if (onDragEnter != null) v.onDragEnter.listen(onDragEnter);
-  if (onDragLeave != null) v.onDragLeave.listen(onDragLeave);
-  if (onDragOver != null) v.onDragOver.listen(onDragOver);
-  if (onDragStart != null) v.onDragStart.listen(onDragStart);
-  if (onDrop != null) v.onDrop.listen(onDrop);
-  if (onDurationChange != null) v.onDurationChange.listen(onDurationChange);
-  if (onEmptied != null) v.onEmptied.listen(onEmptied);
-  if (onEnded != null) v.onEnded.listen(onEnded);
-  if (onError != null) v.onError.listen(onError);
-  if (onFocus != null) v.onFocus.listen(onFocus);
-  if (onInput != null) v.onInput.listen(onInput);
-  if (onInvalid != null) v.onInvalid.listen(onInvalid);
-  if (onKeyDown != null) v.onKeyDown.listen(onKeyDown);
-  if (onKeyPress != null) v.onKeyPress.listen(onKeyPress);
-  if (onKeyUp != null) v.onKeyUp.listen(onKeyUp);
-  if (onLoad != null) v.onLoad.listen(onLoad);
-  if (onLoadedData != null) v.onLoadedData.listen(onLoadedData);
-  if (onLoadedMetadata != null) v.onLoadedMetadata.listen(onLoadedMetadata);
-  if (onMouseDown != null) v.onMouseDown.listen(onMouseDown);
-  if (onMouseEnter != null) v.onMouseEnter.listen(onMouseEnter);
-  if (onMouseLeave != null) v.onMouseLeave.listen(onMouseLeave);
-  if (onMouseMove != null) v.onMouseMove.listen(onMouseMove);
-  if (onMouseOut != null) v.onMouseOut.listen(onMouseOut);
-  if (onMouseOver != null) v.onMouseOver.listen(onMouseOver);
-  if (onMouseUp != null) v.onMouseUp.listen(onMouseUp);
-  if (onMouseWheel != null) v.onMouseWheel.listen(onMouseWheel);
-  if (onPaste != null) v.onPaste.listen(onPaste);
-  if (onPause != null) v.onPause.listen(onPause);
-  if (onPlay != null) v.onPlay.listen(onPlay);
-  if (onPlaying != null) v.onPlaying.listen(onPlaying);
-  if (onRateChange != null) v.onRateChange.listen(onRateChange);
-  if (onReset != null) v.onReset.listen(onReset);
-  if (onResize != null) v.onResize.listen(onResize);
-  if (onScroll != null) v.onScroll.listen(onScroll);
-  if (onSearch != null) v.onSearch.listen(onSearch);
-  if (onSeeked != null) v.onSeeked.listen(onSeeked);
-  if (onSeeking != null) v.onSeeking.listen(onSeeking);
-  if (onSelect != null) v.onSelect.listen(onSelect);
-  if (onSelectStart != null) v.onSelectStart.listen(onSelectStart);
-  if (onStalled != null) v.onStalled.listen(onStalled);
-  if (onSubmit != null) v.onSubmit.listen(onSubmit);
-  if (onSuspend != null) v.onSuspend.listen(onSuspend);
-  if (onTimeUpdate != null) v.onTimeUpdate.listen(onTimeUpdate);
-  if (onTouchCancel != null) v.onTouchCancel.listen(onTouchCancel);
-  if (onTouchEnd != null) v.onTouchEnd.listen(onTouchEnd);
-  if (onTouchEnter != null) v.onTouchEnter.listen(onTouchEnter);
-  if (onTouchLeave != null) v.onTouchLeave.listen(onTouchLeave);
-  if (onTouchMove != null) v.onTouchMove.listen(onTouchMove);
-  if (onTouchStart != null) v.onTouchStart.listen(onTouchStart);
-  if (onTransitionEnd != null) v.onTransitionEnd.listen(onTransitionEnd);
-  if (onVolumeChange != null) v.onVolumeChange.listen(onVolumeChange);
-  if (onWaiting != null) v.onWaiting.listen(onWaiting);
-  if (onFullscreenChange != null)
-    v.onFullscreenChange.listen(onFullscreenChange);
-  if (onFullscreenError != null) v.onFullscreenError.listen(onFullscreenError);
-  if (onWheel != null) v.onWheel.listen(onWheel);
-  return v;
+class FieldSetElementWidget extends HtmlElementWidget {
+  FieldSetElementWidget(
+      {super.nonce,
+      super.attributes,
+      super.children,
+      super.classes,
+      super.dataset,
+      super.innerHtml,
+      super.innerText,
+      super.scrollLeft,
+      super.scrollTop,
+      super.contentEditable,
+      super.dir,
+      super.draggable,
+      super.hidden,
+      super.inert,
+      super.inputMode,
+      super.lang,
+      super.spellcheck,
+      super.tabIndex,
+      super.title,
+      super.translate,
+      super.className,
+      super.id,
+      super.slot,
+      super.nodes,
+      super.text,
+      super.onAbort,
+      super.onBeforeCopy,
+      super.onBeforeCut,
+      super.onBeforePaste,
+      super.onBlur,
+      super.onCanPlay,
+      super.onCanPlayThrough,
+      super.onChange,
+      super.onClick,
+      super.onContextMenu,
+      super.onCopy,
+      super.onCut,
+      super.onDoubleClick,
+      super.onDrag,
+      super.onDragEnd,
+      super.onDragEnter,
+      super.onDragLeave,
+      super.onDragOver,
+      super.onDragStart,
+      super.onDrop,
+      super.onDurationChange,
+      super.onEmptied,
+      super.onEnded,
+      super.onError,
+      super.onFocus,
+      super.onInput,
+      super.onInvalid,
+      super.onKeyDown,
+      super.onKeyPress,
+      super.onKeyUp,
+      super.onLoad,
+      super.onLoadedData,
+      super.onLoadedMetadata,
+      super.onMouseDown,
+      super.onMouseEnter,
+      super.onMouseLeave,
+      super.onMouseMove,
+      super.onMouseOut,
+      super.onMouseOver,
+      super.onMouseUp,
+      super.onMouseWheel,
+      super.onPaste,
+      super.onPause,
+      super.onPlay,
+      super.onPlaying,
+      super.onRateChange,
+      super.onReset,
+      super.onResize,
+      super.onScroll,
+      super.onSearch,
+      super.onSeeked,
+      super.onSeeking,
+      super.onSelect,
+      super.onSelectStart,
+      super.onStalled,
+      super.onSubmit,
+      super.onSuspend,
+      super.onTimeUpdate,
+      super.onTouchCancel,
+      super.onTouchEnd,
+      super.onTouchEnter,
+      super.onTouchLeave,
+      super.onTouchMove,
+      super.onTouchStart,
+      super.onTransitionEnd,
+      super.onVolumeChange,
+      super.onWaiting,
+      super.onFullscreenChange,
+      super.onFullscreenError,
+      super.onWheel});
+  @override
+  Element render() => hook(FieldSetElement());
 }
 
-HRElement hRElement(
-    {String? color,
-    String? nonce,
-    Map<String, String>? attributes,
-    List<Element>? children,
-    Iterable<String>? classes,
-    Map<String, String>? dataset,
-    String? innerHtml,
-    String? innerText,
-    int? scrollLeft,
-    int? scrollTop,
-    String? contentEditable,
-    String? dir,
-    bool? draggable,
-    bool? hidden,
-    bool? inert,
-    String? inputMode,
-    String? lang,
-    bool? spellcheck,
-    int? tabIndex,
-    String? title,
-    bool? translate,
-    String? className,
-    String? id,
-    String? slot,
-    Iterable<Node>? nodes,
-    String? text,
-    void Function(Event)? onAbort,
-    void Function(Event)? onBeforeCopy,
-    void Function(Event)? onBeforeCut,
-    void Function(Event)? onBeforePaste,
-    void Function(Event)? onBlur,
-    void Function(Event)? onCanPlay,
-    void Function(Event)? onCanPlayThrough,
-    void Function(Event)? onChange,
-    void Function(MouseEvent)? onClick,
-    void Function(MouseEvent)? onContextMenu,
-    void Function(ClipboardEvent)? onCopy,
-    void Function(ClipboardEvent)? onCut,
-    void Function(Event)? onDoubleClick,
-    void Function(MouseEvent)? onDrag,
-    void Function(MouseEvent)? onDragEnd,
-    void Function(MouseEvent)? onDragEnter,
-    void Function(MouseEvent)? onDragLeave,
-    void Function(MouseEvent)? onDragOver,
-    void Function(MouseEvent)? onDragStart,
-    void Function(MouseEvent)? onDrop,
-    void Function(Event)? onDurationChange,
-    void Function(Event)? onEmptied,
-    void Function(Event)? onEnded,
-    void Function(Event)? onError,
-    void Function(Event)? onFocus,
-    void Function(Event)? onInput,
-    void Function(Event)? onInvalid,
-    void Function(KeyboardEvent)? onKeyDown,
-    void Function(KeyboardEvent)? onKeyPress,
-    void Function(KeyboardEvent)? onKeyUp,
-    void Function(Event)? onLoad,
-    void Function(Event)? onLoadedData,
-    void Function(Event)? onLoadedMetadata,
-    void Function(MouseEvent)? onMouseDown,
-    void Function(MouseEvent)? onMouseEnter,
-    void Function(MouseEvent)? onMouseLeave,
-    void Function(MouseEvent)? onMouseMove,
-    void Function(MouseEvent)? onMouseOut,
-    void Function(MouseEvent)? onMouseOver,
-    void Function(MouseEvent)? onMouseUp,
-    void Function(WheelEvent)? onMouseWheel,
-    void Function(ClipboardEvent)? onPaste,
-    void Function(Event)? onPause,
-    void Function(Event)? onPlay,
-    void Function(Event)? onPlaying,
-    void Function(Event)? onRateChange,
-    void Function(Event)? onReset,
-    void Function(Event)? onResize,
-    void Function(Event)? onScroll,
-    void Function(Event)? onSearch,
-    void Function(Event)? onSeeked,
-    void Function(Event)? onSeeking,
-    void Function(Event)? onSelect,
-    void Function(Event)? onSelectStart,
-    void Function(Event)? onStalled,
-    void Function(Event)? onSubmit,
-    void Function(Event)? onSuspend,
-    void Function(Event)? onTimeUpdate,
-    void Function(TouchEvent)? onTouchCancel,
-    void Function(TouchEvent)? onTouchEnd,
-    void Function(TouchEvent)? onTouchEnter,
-    void Function(TouchEvent)? onTouchLeave,
-    void Function(TouchEvent)? onTouchMove,
-    void Function(TouchEvent)? onTouchStart,
-    void Function(TransitionEvent)? onTransitionEnd,
-    void Function(Event)? onVolumeChange,
-    void Function(Event)? onWaiting,
-    void Function(Event)? onFullscreenChange,
-    void Function(Event)? onFullscreenError,
-    void Function(WheelEvent)? onWheel}) {
-  final v = HRElement();
-  if (color != null) v.color = color;
-  if (nonce != null) v.nonce = nonce;
-  if (attributes != null) v.attributes = attributes;
-  if (children != null) v.children = children;
-  if (classes != null) v.classes = classes;
-  if (dataset != null) v.dataset = dataset;
-  if (innerHtml != null) v.innerHtml = innerHtml;
-  if (innerText != null) v.innerText = innerText;
-  if (scrollLeft != null) v.scrollLeft = scrollLeft;
-  if (scrollTop != null) v.scrollTop = scrollTop;
-  if (contentEditable != null) v.contentEditable = contentEditable;
-  if (dir != null) v.dir = dir;
-  if (draggable != null) v.draggable = draggable;
-  if (hidden != null) v.hidden = hidden;
-  if (inert != null) v.inert = inert;
-  if (inputMode != null) v.inputMode = inputMode;
-  if (lang != null) v.lang = lang;
-  if (spellcheck != null) v.spellcheck = spellcheck;
-  if (tabIndex != null) v.tabIndex = tabIndex;
-  if (title != null) v.title = title;
-  if (translate != null) v.translate = translate;
-  if (className != null) v.className = className;
-  if (id != null) v.id = id;
-  if (slot != null) v.slot = slot;
-  if (nodes != null) v.nodes = nodes;
-  if (text != null) v.text = text;
-  if (onAbort != null) v.onAbort.listen(onAbort);
-  if (onBeforeCopy != null) v.onBeforeCopy.listen(onBeforeCopy);
-  if (onBeforeCut != null) v.onBeforeCut.listen(onBeforeCut);
-  if (onBeforePaste != null) v.onBeforePaste.listen(onBeforePaste);
-  if (onBlur != null) v.onBlur.listen(onBlur);
-  if (onCanPlay != null) v.onCanPlay.listen(onCanPlay);
-  if (onCanPlayThrough != null) v.onCanPlayThrough.listen(onCanPlayThrough);
-  if (onChange != null) v.onChange.listen(onChange);
-  if (onClick != null) v.onClick.listen(onClick);
-  if (onContextMenu != null) v.onContextMenu.listen(onContextMenu);
-  if (onCopy != null) v.onCopy.listen(onCopy);
-  if (onCut != null) v.onCut.listen(onCut);
-  if (onDoubleClick != null) v.onDoubleClick.listen(onDoubleClick);
-  if (onDrag != null) v.onDrag.listen(onDrag);
-  if (onDragEnd != null) v.onDragEnd.listen(onDragEnd);
-  if (onDragEnter != null) v.onDragEnter.listen(onDragEnter);
-  if (onDragLeave != null) v.onDragLeave.listen(onDragLeave);
-  if (onDragOver != null) v.onDragOver.listen(onDragOver);
-  if (onDragStart != null) v.onDragStart.listen(onDragStart);
-  if (onDrop != null) v.onDrop.listen(onDrop);
-  if (onDurationChange != null) v.onDurationChange.listen(onDurationChange);
-  if (onEmptied != null) v.onEmptied.listen(onEmptied);
-  if (onEnded != null) v.onEnded.listen(onEnded);
-  if (onError != null) v.onError.listen(onError);
-  if (onFocus != null) v.onFocus.listen(onFocus);
-  if (onInput != null) v.onInput.listen(onInput);
-  if (onInvalid != null) v.onInvalid.listen(onInvalid);
-  if (onKeyDown != null) v.onKeyDown.listen(onKeyDown);
-  if (onKeyPress != null) v.onKeyPress.listen(onKeyPress);
-  if (onKeyUp != null) v.onKeyUp.listen(onKeyUp);
-  if (onLoad != null) v.onLoad.listen(onLoad);
-  if (onLoadedData != null) v.onLoadedData.listen(onLoadedData);
-  if (onLoadedMetadata != null) v.onLoadedMetadata.listen(onLoadedMetadata);
-  if (onMouseDown != null) v.onMouseDown.listen(onMouseDown);
-  if (onMouseEnter != null) v.onMouseEnter.listen(onMouseEnter);
-  if (onMouseLeave != null) v.onMouseLeave.listen(onMouseLeave);
-  if (onMouseMove != null) v.onMouseMove.listen(onMouseMove);
-  if (onMouseOut != null) v.onMouseOut.listen(onMouseOut);
-  if (onMouseOver != null) v.onMouseOver.listen(onMouseOver);
-  if (onMouseUp != null) v.onMouseUp.listen(onMouseUp);
-  if (onMouseWheel != null) v.onMouseWheel.listen(onMouseWheel);
-  if (onPaste != null) v.onPaste.listen(onPaste);
-  if (onPause != null) v.onPause.listen(onPause);
-  if (onPlay != null) v.onPlay.listen(onPlay);
-  if (onPlaying != null) v.onPlaying.listen(onPlaying);
-  if (onRateChange != null) v.onRateChange.listen(onRateChange);
-  if (onReset != null) v.onReset.listen(onReset);
-  if (onResize != null) v.onResize.listen(onResize);
-  if (onScroll != null) v.onScroll.listen(onScroll);
-  if (onSearch != null) v.onSearch.listen(onSearch);
-  if (onSeeked != null) v.onSeeked.listen(onSeeked);
-  if (onSeeking != null) v.onSeeking.listen(onSeeking);
-  if (onSelect != null) v.onSelect.listen(onSelect);
-  if (onSelectStart != null) v.onSelectStart.listen(onSelectStart);
-  if (onStalled != null) v.onStalled.listen(onStalled);
-  if (onSubmit != null) v.onSubmit.listen(onSubmit);
-  if (onSuspend != null) v.onSuspend.listen(onSuspend);
-  if (onTimeUpdate != null) v.onTimeUpdate.listen(onTimeUpdate);
-  if (onTouchCancel != null) v.onTouchCancel.listen(onTouchCancel);
-  if (onTouchEnd != null) v.onTouchEnd.listen(onTouchEnd);
-  if (onTouchEnter != null) v.onTouchEnter.listen(onTouchEnter);
-  if (onTouchLeave != null) v.onTouchLeave.listen(onTouchLeave);
-  if (onTouchMove != null) v.onTouchMove.listen(onTouchMove);
-  if (onTouchStart != null) v.onTouchStart.listen(onTouchStart);
-  if (onTransitionEnd != null) v.onTransitionEnd.listen(onTransitionEnd);
-  if (onVolumeChange != null) v.onVolumeChange.listen(onVolumeChange);
-  if (onWaiting != null) v.onWaiting.listen(onWaiting);
-  if (onFullscreenChange != null)
-    v.onFullscreenChange.listen(onFullscreenChange);
-  if (onFullscreenError != null) v.onFullscreenError.listen(onFullscreenError);
-  if (onWheel != null) v.onWheel.listen(onWheel);
-  return v;
+class FormElementWidget extends HtmlElementWidget {
+  FormElementWidget(
+      {super.nonce,
+      super.attributes,
+      super.children,
+      super.classes,
+      super.dataset,
+      super.innerHtml,
+      super.innerText,
+      super.scrollLeft,
+      super.scrollTop,
+      super.contentEditable,
+      super.dir,
+      super.draggable,
+      super.hidden,
+      super.inert,
+      super.inputMode,
+      super.lang,
+      super.spellcheck,
+      super.tabIndex,
+      super.title,
+      super.translate,
+      super.className,
+      super.id,
+      super.slot,
+      super.nodes,
+      super.text,
+      super.onAbort,
+      super.onBeforeCopy,
+      super.onBeforeCut,
+      super.onBeforePaste,
+      super.onBlur,
+      super.onCanPlay,
+      super.onCanPlayThrough,
+      super.onChange,
+      super.onClick,
+      super.onContextMenu,
+      super.onCopy,
+      super.onCut,
+      super.onDoubleClick,
+      super.onDrag,
+      super.onDragEnd,
+      super.onDragEnter,
+      super.onDragLeave,
+      super.onDragOver,
+      super.onDragStart,
+      super.onDrop,
+      super.onDurationChange,
+      super.onEmptied,
+      super.onEnded,
+      super.onError,
+      super.onFocus,
+      super.onInput,
+      super.onInvalid,
+      super.onKeyDown,
+      super.onKeyPress,
+      super.onKeyUp,
+      super.onLoad,
+      super.onLoadedData,
+      super.onLoadedMetadata,
+      super.onMouseDown,
+      super.onMouseEnter,
+      super.onMouseLeave,
+      super.onMouseMove,
+      super.onMouseOut,
+      super.onMouseOver,
+      super.onMouseUp,
+      super.onMouseWheel,
+      super.onPaste,
+      super.onPause,
+      super.onPlay,
+      super.onPlaying,
+      super.onRateChange,
+      super.onReset,
+      super.onResize,
+      super.onScroll,
+      super.onSearch,
+      super.onSeeked,
+      super.onSeeking,
+      super.onSelect,
+      super.onSelectStart,
+      super.onStalled,
+      super.onSubmit,
+      super.onSuspend,
+      super.onTimeUpdate,
+      super.onTouchCancel,
+      super.onTouchEnd,
+      super.onTouchEnter,
+      super.onTouchLeave,
+      super.onTouchMove,
+      super.onTouchStart,
+      super.onTransitionEnd,
+      super.onVolumeChange,
+      super.onWaiting,
+      super.onFullscreenChange,
+      super.onFullscreenError,
+      super.onWheel});
+  @override
+  Element render() => hook(FormElement());
 }
 
-HeadElement headElement(
-    {String? nonce,
-    Map<String, String>? attributes,
-    List<Element>? children,
-    Iterable<String>? classes,
-    Map<String, String>? dataset,
-    String? innerHtml,
-    String? innerText,
-    int? scrollLeft,
-    int? scrollTop,
-    String? contentEditable,
-    String? dir,
-    bool? draggable,
-    bool? hidden,
-    bool? inert,
-    String? inputMode,
-    String? lang,
-    bool? spellcheck,
-    int? tabIndex,
-    String? title,
-    bool? translate,
-    String? className,
-    String? id,
-    String? slot,
-    Iterable<Node>? nodes,
-    String? text,
-    void Function(Event)? onAbort,
-    void Function(Event)? onBeforeCopy,
-    void Function(Event)? onBeforeCut,
-    void Function(Event)? onBeforePaste,
-    void Function(Event)? onBlur,
-    void Function(Event)? onCanPlay,
-    void Function(Event)? onCanPlayThrough,
-    void Function(Event)? onChange,
-    void Function(MouseEvent)? onClick,
-    void Function(MouseEvent)? onContextMenu,
-    void Function(ClipboardEvent)? onCopy,
-    void Function(ClipboardEvent)? onCut,
-    void Function(Event)? onDoubleClick,
-    void Function(MouseEvent)? onDrag,
-    void Function(MouseEvent)? onDragEnd,
-    void Function(MouseEvent)? onDragEnter,
-    void Function(MouseEvent)? onDragLeave,
-    void Function(MouseEvent)? onDragOver,
-    void Function(MouseEvent)? onDragStart,
-    void Function(MouseEvent)? onDrop,
-    void Function(Event)? onDurationChange,
-    void Function(Event)? onEmptied,
-    void Function(Event)? onEnded,
-    void Function(Event)? onError,
-    void Function(Event)? onFocus,
-    void Function(Event)? onInput,
-    void Function(Event)? onInvalid,
-    void Function(KeyboardEvent)? onKeyDown,
-    void Function(KeyboardEvent)? onKeyPress,
-    void Function(KeyboardEvent)? onKeyUp,
-    void Function(Event)? onLoad,
-    void Function(Event)? onLoadedData,
-    void Function(Event)? onLoadedMetadata,
-    void Function(MouseEvent)? onMouseDown,
-    void Function(MouseEvent)? onMouseEnter,
-    void Function(MouseEvent)? onMouseLeave,
-    void Function(MouseEvent)? onMouseMove,
-    void Function(MouseEvent)? onMouseOut,
-    void Function(MouseEvent)? onMouseOver,
-    void Function(MouseEvent)? onMouseUp,
-    void Function(WheelEvent)? onMouseWheel,
-    void Function(ClipboardEvent)? onPaste,
-    void Function(Event)? onPause,
-    void Function(Event)? onPlay,
-    void Function(Event)? onPlaying,
-    void Function(Event)? onRateChange,
-    void Function(Event)? onReset,
-    void Function(Event)? onResize,
-    void Function(Event)? onScroll,
-    void Function(Event)? onSearch,
-    void Function(Event)? onSeeked,
-    void Function(Event)? onSeeking,
-    void Function(Event)? onSelect,
-    void Function(Event)? onSelectStart,
-    void Function(Event)? onStalled,
-    void Function(Event)? onSubmit,
-    void Function(Event)? onSuspend,
-    void Function(Event)? onTimeUpdate,
-    void Function(TouchEvent)? onTouchCancel,
-    void Function(TouchEvent)? onTouchEnd,
-    void Function(TouchEvent)? onTouchEnter,
-    void Function(TouchEvent)? onTouchLeave,
-    void Function(TouchEvent)? onTouchMove,
-    void Function(TouchEvent)? onTouchStart,
-    void Function(TransitionEvent)? onTransitionEnd,
-    void Function(Event)? onVolumeChange,
-    void Function(Event)? onWaiting,
-    void Function(Event)? onFullscreenChange,
-    void Function(Event)? onFullscreenError,
-    void Function(WheelEvent)? onWheel}) {
-  final v = HeadElement();
-  if (nonce != null) v.nonce = nonce;
-  if (attributes != null) v.attributes = attributes;
-  if (children != null) v.children = children;
-  if (classes != null) v.classes = classes;
-  if (dataset != null) v.dataset = dataset;
-  if (innerHtml != null) v.innerHtml = innerHtml;
-  if (innerText != null) v.innerText = innerText;
-  if (scrollLeft != null) v.scrollLeft = scrollLeft;
-  if (scrollTop != null) v.scrollTop = scrollTop;
-  if (contentEditable != null) v.contentEditable = contentEditable;
-  if (dir != null) v.dir = dir;
-  if (draggable != null) v.draggable = draggable;
-  if (hidden != null) v.hidden = hidden;
-  if (inert != null) v.inert = inert;
-  if (inputMode != null) v.inputMode = inputMode;
-  if (lang != null) v.lang = lang;
-  if (spellcheck != null) v.spellcheck = spellcheck;
-  if (tabIndex != null) v.tabIndex = tabIndex;
-  if (title != null) v.title = title;
-  if (translate != null) v.translate = translate;
-  if (className != null) v.className = className;
-  if (id != null) v.id = id;
-  if (slot != null) v.slot = slot;
-  if (nodes != null) v.nodes = nodes;
-  if (text != null) v.text = text;
-  if (onAbort != null) v.onAbort.listen(onAbort);
-  if (onBeforeCopy != null) v.onBeforeCopy.listen(onBeforeCopy);
-  if (onBeforeCut != null) v.onBeforeCut.listen(onBeforeCut);
-  if (onBeforePaste != null) v.onBeforePaste.listen(onBeforePaste);
-  if (onBlur != null) v.onBlur.listen(onBlur);
-  if (onCanPlay != null) v.onCanPlay.listen(onCanPlay);
-  if (onCanPlayThrough != null) v.onCanPlayThrough.listen(onCanPlayThrough);
-  if (onChange != null) v.onChange.listen(onChange);
-  if (onClick != null) v.onClick.listen(onClick);
-  if (onContextMenu != null) v.onContextMenu.listen(onContextMenu);
-  if (onCopy != null) v.onCopy.listen(onCopy);
-  if (onCut != null) v.onCut.listen(onCut);
-  if (onDoubleClick != null) v.onDoubleClick.listen(onDoubleClick);
-  if (onDrag != null) v.onDrag.listen(onDrag);
-  if (onDragEnd != null) v.onDragEnd.listen(onDragEnd);
-  if (onDragEnter != null) v.onDragEnter.listen(onDragEnter);
-  if (onDragLeave != null) v.onDragLeave.listen(onDragLeave);
-  if (onDragOver != null) v.onDragOver.listen(onDragOver);
-  if (onDragStart != null) v.onDragStart.listen(onDragStart);
-  if (onDrop != null) v.onDrop.listen(onDrop);
-  if (onDurationChange != null) v.onDurationChange.listen(onDurationChange);
-  if (onEmptied != null) v.onEmptied.listen(onEmptied);
-  if (onEnded != null) v.onEnded.listen(onEnded);
-  if (onError != null) v.onError.listen(onError);
-  if (onFocus != null) v.onFocus.listen(onFocus);
-  if (onInput != null) v.onInput.listen(onInput);
-  if (onInvalid != null) v.onInvalid.listen(onInvalid);
-  if (onKeyDown != null) v.onKeyDown.listen(onKeyDown);
-  if (onKeyPress != null) v.onKeyPress.listen(onKeyPress);
-  if (onKeyUp != null) v.onKeyUp.listen(onKeyUp);
-  if (onLoad != null) v.onLoad.listen(onLoad);
-  if (onLoadedData != null) v.onLoadedData.listen(onLoadedData);
-  if (onLoadedMetadata != null) v.onLoadedMetadata.listen(onLoadedMetadata);
-  if (onMouseDown != null) v.onMouseDown.listen(onMouseDown);
-  if (onMouseEnter != null) v.onMouseEnter.listen(onMouseEnter);
-  if (onMouseLeave != null) v.onMouseLeave.listen(onMouseLeave);
-  if (onMouseMove != null) v.onMouseMove.listen(onMouseMove);
-  if (onMouseOut != null) v.onMouseOut.listen(onMouseOut);
-  if (onMouseOver != null) v.onMouseOver.listen(onMouseOver);
-  if (onMouseUp != null) v.onMouseUp.listen(onMouseUp);
-  if (onMouseWheel != null) v.onMouseWheel.listen(onMouseWheel);
-  if (onPaste != null) v.onPaste.listen(onPaste);
-  if (onPause != null) v.onPause.listen(onPause);
-  if (onPlay != null) v.onPlay.listen(onPlay);
-  if (onPlaying != null) v.onPlaying.listen(onPlaying);
-  if (onRateChange != null) v.onRateChange.listen(onRateChange);
-  if (onReset != null) v.onReset.listen(onReset);
-  if (onResize != null) v.onResize.listen(onResize);
-  if (onScroll != null) v.onScroll.listen(onScroll);
-  if (onSearch != null) v.onSearch.listen(onSearch);
-  if (onSeeked != null) v.onSeeked.listen(onSeeked);
-  if (onSeeking != null) v.onSeeking.listen(onSeeking);
-  if (onSelect != null) v.onSelect.listen(onSelect);
-  if (onSelectStart != null) v.onSelectStart.listen(onSelectStart);
-  if (onStalled != null) v.onStalled.listen(onStalled);
-  if (onSubmit != null) v.onSubmit.listen(onSubmit);
-  if (onSuspend != null) v.onSuspend.listen(onSuspend);
-  if (onTimeUpdate != null) v.onTimeUpdate.listen(onTimeUpdate);
-  if (onTouchCancel != null) v.onTouchCancel.listen(onTouchCancel);
-  if (onTouchEnd != null) v.onTouchEnd.listen(onTouchEnd);
-  if (onTouchEnter != null) v.onTouchEnter.listen(onTouchEnter);
-  if (onTouchLeave != null) v.onTouchLeave.listen(onTouchLeave);
-  if (onTouchMove != null) v.onTouchMove.listen(onTouchMove);
-  if (onTouchStart != null) v.onTouchStart.listen(onTouchStart);
-  if (onTransitionEnd != null) v.onTransitionEnd.listen(onTransitionEnd);
-  if (onVolumeChange != null) v.onVolumeChange.listen(onVolumeChange);
-  if (onWaiting != null) v.onWaiting.listen(onWaiting);
-  if (onFullscreenChange != null)
-    v.onFullscreenChange.listen(onFullscreenChange);
-  if (onFullscreenError != null) v.onFullscreenError.listen(onFullscreenError);
-  if (onWheel != null) v.onWheel.listen(onWheel);
-  return v;
+class HRElementWidget extends HtmlElementWidget {
+  HRElementWidget(
+      {super.nonce,
+      super.attributes,
+      super.children,
+      super.classes,
+      super.dataset,
+      super.innerHtml,
+      super.innerText,
+      super.scrollLeft,
+      super.scrollTop,
+      super.contentEditable,
+      super.dir,
+      super.draggable,
+      super.hidden,
+      super.inert,
+      super.inputMode,
+      super.lang,
+      super.spellcheck,
+      super.tabIndex,
+      super.title,
+      super.translate,
+      super.className,
+      super.id,
+      super.slot,
+      super.nodes,
+      super.text,
+      super.onAbort,
+      super.onBeforeCopy,
+      super.onBeforeCut,
+      super.onBeforePaste,
+      super.onBlur,
+      super.onCanPlay,
+      super.onCanPlayThrough,
+      super.onChange,
+      super.onClick,
+      super.onContextMenu,
+      super.onCopy,
+      super.onCut,
+      super.onDoubleClick,
+      super.onDrag,
+      super.onDragEnd,
+      super.onDragEnter,
+      super.onDragLeave,
+      super.onDragOver,
+      super.onDragStart,
+      super.onDrop,
+      super.onDurationChange,
+      super.onEmptied,
+      super.onEnded,
+      super.onError,
+      super.onFocus,
+      super.onInput,
+      super.onInvalid,
+      super.onKeyDown,
+      super.onKeyPress,
+      super.onKeyUp,
+      super.onLoad,
+      super.onLoadedData,
+      super.onLoadedMetadata,
+      super.onMouseDown,
+      super.onMouseEnter,
+      super.onMouseLeave,
+      super.onMouseMove,
+      super.onMouseOut,
+      super.onMouseOver,
+      super.onMouseUp,
+      super.onMouseWheel,
+      super.onPaste,
+      super.onPause,
+      super.onPlay,
+      super.onPlaying,
+      super.onRateChange,
+      super.onReset,
+      super.onResize,
+      super.onScroll,
+      super.onSearch,
+      super.onSeeked,
+      super.onSeeking,
+      super.onSelect,
+      super.onSelectStart,
+      super.onStalled,
+      super.onSubmit,
+      super.onSuspend,
+      super.onTimeUpdate,
+      super.onTouchCancel,
+      super.onTouchEnd,
+      super.onTouchEnter,
+      super.onTouchLeave,
+      super.onTouchMove,
+      super.onTouchStart,
+      super.onTransitionEnd,
+      super.onVolumeChange,
+      super.onWaiting,
+      super.onFullscreenChange,
+      super.onFullscreenError,
+      super.onWheel});
+  @override
+  Element render() => hook(HRElement());
 }
 
-HeadingElement headingElementH1(
-    {String? nonce,
-    Map<String, String>? attributes,
-    List<Element>? children,
-    Iterable<String>? classes,
-    Map<String, String>? dataset,
-    String? innerHtml,
-    String? innerText,
-    int? scrollLeft,
-    int? scrollTop,
-    String? contentEditable,
-    String? dir,
-    bool? draggable,
-    bool? hidden,
-    bool? inert,
-    String? inputMode,
-    String? lang,
-    bool? spellcheck,
-    int? tabIndex,
-    String? title,
-    bool? translate,
-    String? className,
-    String? id,
-    String? slot,
-    Iterable<Node>? nodes,
-    String? text,
-    void Function(Event)? onAbort,
-    void Function(Event)? onBeforeCopy,
-    void Function(Event)? onBeforeCut,
-    void Function(Event)? onBeforePaste,
-    void Function(Event)? onBlur,
-    void Function(Event)? onCanPlay,
-    void Function(Event)? onCanPlayThrough,
-    void Function(Event)? onChange,
-    void Function(MouseEvent)? onClick,
-    void Function(MouseEvent)? onContextMenu,
-    void Function(ClipboardEvent)? onCopy,
-    void Function(ClipboardEvent)? onCut,
-    void Function(Event)? onDoubleClick,
-    void Function(MouseEvent)? onDrag,
-    void Function(MouseEvent)? onDragEnd,
-    void Function(MouseEvent)? onDragEnter,
-    void Function(MouseEvent)? onDragLeave,
-    void Function(MouseEvent)? onDragOver,
-    void Function(MouseEvent)? onDragStart,
-    void Function(MouseEvent)? onDrop,
-    void Function(Event)? onDurationChange,
-    void Function(Event)? onEmptied,
-    void Function(Event)? onEnded,
-    void Function(Event)? onError,
-    void Function(Event)? onFocus,
-    void Function(Event)? onInput,
-    void Function(Event)? onInvalid,
-    void Function(KeyboardEvent)? onKeyDown,
-    void Function(KeyboardEvent)? onKeyPress,
-    void Function(KeyboardEvent)? onKeyUp,
-    void Function(Event)? onLoad,
-    void Function(Event)? onLoadedData,
-    void Function(Event)? onLoadedMetadata,
-    void Function(MouseEvent)? onMouseDown,
-    void Function(MouseEvent)? onMouseEnter,
-    void Function(MouseEvent)? onMouseLeave,
-    void Function(MouseEvent)? onMouseMove,
-    void Function(MouseEvent)? onMouseOut,
-    void Function(MouseEvent)? onMouseOver,
-    void Function(MouseEvent)? onMouseUp,
-    void Function(WheelEvent)? onMouseWheel,
-    void Function(ClipboardEvent)? onPaste,
-    void Function(Event)? onPause,
-    void Function(Event)? onPlay,
-    void Function(Event)? onPlaying,
-    void Function(Event)? onRateChange,
-    void Function(Event)? onReset,
-    void Function(Event)? onResize,
-    void Function(Event)? onScroll,
-    void Function(Event)? onSearch,
-    void Function(Event)? onSeeked,
-    void Function(Event)? onSeeking,
-    void Function(Event)? onSelect,
-    void Function(Event)? onSelectStart,
-    void Function(Event)? onStalled,
-    void Function(Event)? onSubmit,
-    void Function(Event)? onSuspend,
-    void Function(Event)? onTimeUpdate,
-    void Function(TouchEvent)? onTouchCancel,
-    void Function(TouchEvent)? onTouchEnd,
-    void Function(TouchEvent)? onTouchEnter,
-    void Function(TouchEvent)? onTouchLeave,
-    void Function(TouchEvent)? onTouchMove,
-    void Function(TouchEvent)? onTouchStart,
-    void Function(TransitionEvent)? onTransitionEnd,
-    void Function(Event)? onVolumeChange,
-    void Function(Event)? onWaiting,
-    void Function(Event)? onFullscreenChange,
-    void Function(Event)? onFullscreenError,
-    void Function(WheelEvent)? onWheel}) {
-  final v = HeadingElement.h1();
-  if (nonce != null) v.nonce = nonce;
-  if (attributes != null) v.attributes = attributes;
-  if (children != null) v.children = children;
-  if (classes != null) v.classes = classes;
-  if (dataset != null) v.dataset = dataset;
-  if (innerHtml != null) v.innerHtml = innerHtml;
-  if (innerText != null) v.innerText = innerText;
-  if (scrollLeft != null) v.scrollLeft = scrollLeft;
-  if (scrollTop != null) v.scrollTop = scrollTop;
-  if (contentEditable != null) v.contentEditable = contentEditable;
-  if (dir != null) v.dir = dir;
-  if (draggable != null) v.draggable = draggable;
-  if (hidden != null) v.hidden = hidden;
-  if (inert != null) v.inert = inert;
-  if (inputMode != null) v.inputMode = inputMode;
-  if (lang != null) v.lang = lang;
-  if (spellcheck != null) v.spellcheck = spellcheck;
-  if (tabIndex != null) v.tabIndex = tabIndex;
-  if (title != null) v.title = title;
-  if (translate != null) v.translate = translate;
-  if (className != null) v.className = className;
-  if (id != null) v.id = id;
-  if (slot != null) v.slot = slot;
-  if (nodes != null) v.nodes = nodes;
-  if (text != null) v.text = text;
-  if (onAbort != null) v.onAbort.listen(onAbort);
-  if (onBeforeCopy != null) v.onBeforeCopy.listen(onBeforeCopy);
-  if (onBeforeCut != null) v.onBeforeCut.listen(onBeforeCut);
-  if (onBeforePaste != null) v.onBeforePaste.listen(onBeforePaste);
-  if (onBlur != null) v.onBlur.listen(onBlur);
-  if (onCanPlay != null) v.onCanPlay.listen(onCanPlay);
-  if (onCanPlayThrough != null) v.onCanPlayThrough.listen(onCanPlayThrough);
-  if (onChange != null) v.onChange.listen(onChange);
-  if (onClick != null) v.onClick.listen(onClick);
-  if (onContextMenu != null) v.onContextMenu.listen(onContextMenu);
-  if (onCopy != null) v.onCopy.listen(onCopy);
-  if (onCut != null) v.onCut.listen(onCut);
-  if (onDoubleClick != null) v.onDoubleClick.listen(onDoubleClick);
-  if (onDrag != null) v.onDrag.listen(onDrag);
-  if (onDragEnd != null) v.onDragEnd.listen(onDragEnd);
-  if (onDragEnter != null) v.onDragEnter.listen(onDragEnter);
-  if (onDragLeave != null) v.onDragLeave.listen(onDragLeave);
-  if (onDragOver != null) v.onDragOver.listen(onDragOver);
-  if (onDragStart != null) v.onDragStart.listen(onDragStart);
-  if (onDrop != null) v.onDrop.listen(onDrop);
-  if (onDurationChange != null) v.onDurationChange.listen(onDurationChange);
-  if (onEmptied != null) v.onEmptied.listen(onEmptied);
-  if (onEnded != null) v.onEnded.listen(onEnded);
-  if (onError != null) v.onError.listen(onError);
-  if (onFocus != null) v.onFocus.listen(onFocus);
-  if (onInput != null) v.onInput.listen(onInput);
-  if (onInvalid != null) v.onInvalid.listen(onInvalid);
-  if (onKeyDown != null) v.onKeyDown.listen(onKeyDown);
-  if (onKeyPress != null) v.onKeyPress.listen(onKeyPress);
-  if (onKeyUp != null) v.onKeyUp.listen(onKeyUp);
-  if (onLoad != null) v.onLoad.listen(onLoad);
-  if (onLoadedData != null) v.onLoadedData.listen(onLoadedData);
-  if (onLoadedMetadata != null) v.onLoadedMetadata.listen(onLoadedMetadata);
-  if (onMouseDown != null) v.onMouseDown.listen(onMouseDown);
-  if (onMouseEnter != null) v.onMouseEnter.listen(onMouseEnter);
-  if (onMouseLeave != null) v.onMouseLeave.listen(onMouseLeave);
-  if (onMouseMove != null) v.onMouseMove.listen(onMouseMove);
-  if (onMouseOut != null) v.onMouseOut.listen(onMouseOut);
-  if (onMouseOver != null) v.onMouseOver.listen(onMouseOver);
-  if (onMouseUp != null) v.onMouseUp.listen(onMouseUp);
-  if (onMouseWheel != null) v.onMouseWheel.listen(onMouseWheel);
-  if (onPaste != null) v.onPaste.listen(onPaste);
-  if (onPause != null) v.onPause.listen(onPause);
-  if (onPlay != null) v.onPlay.listen(onPlay);
-  if (onPlaying != null) v.onPlaying.listen(onPlaying);
-  if (onRateChange != null) v.onRateChange.listen(onRateChange);
-  if (onReset != null) v.onReset.listen(onReset);
-  if (onResize != null) v.onResize.listen(onResize);
-  if (onScroll != null) v.onScroll.listen(onScroll);
-  if (onSearch != null) v.onSearch.listen(onSearch);
-  if (onSeeked != null) v.onSeeked.listen(onSeeked);
-  if (onSeeking != null) v.onSeeking.listen(onSeeking);
-  if (onSelect != null) v.onSelect.listen(onSelect);
-  if (onSelectStart != null) v.onSelectStart.listen(onSelectStart);
-  if (onStalled != null) v.onStalled.listen(onStalled);
-  if (onSubmit != null) v.onSubmit.listen(onSubmit);
-  if (onSuspend != null) v.onSuspend.listen(onSuspend);
-  if (onTimeUpdate != null) v.onTimeUpdate.listen(onTimeUpdate);
-  if (onTouchCancel != null) v.onTouchCancel.listen(onTouchCancel);
-  if (onTouchEnd != null) v.onTouchEnd.listen(onTouchEnd);
-  if (onTouchEnter != null) v.onTouchEnter.listen(onTouchEnter);
-  if (onTouchLeave != null) v.onTouchLeave.listen(onTouchLeave);
-  if (onTouchMove != null) v.onTouchMove.listen(onTouchMove);
-  if (onTouchStart != null) v.onTouchStart.listen(onTouchStart);
-  if (onTransitionEnd != null) v.onTransitionEnd.listen(onTransitionEnd);
-  if (onVolumeChange != null) v.onVolumeChange.listen(onVolumeChange);
-  if (onWaiting != null) v.onWaiting.listen(onWaiting);
-  if (onFullscreenChange != null)
-    v.onFullscreenChange.listen(onFullscreenChange);
-  if (onFullscreenError != null) v.onFullscreenError.listen(onFullscreenError);
-  if (onWheel != null) v.onWheel.listen(onWheel);
-  return v;
+class HeadElementWidget extends HtmlElementWidget {
+  HeadElementWidget(
+      {super.nonce,
+      super.attributes,
+      super.children,
+      super.classes,
+      super.dataset,
+      super.innerHtml,
+      super.innerText,
+      super.scrollLeft,
+      super.scrollTop,
+      super.contentEditable,
+      super.dir,
+      super.draggable,
+      super.hidden,
+      super.inert,
+      super.inputMode,
+      super.lang,
+      super.spellcheck,
+      super.tabIndex,
+      super.title,
+      super.translate,
+      super.className,
+      super.id,
+      super.slot,
+      super.nodes,
+      super.text,
+      super.onAbort,
+      super.onBeforeCopy,
+      super.onBeforeCut,
+      super.onBeforePaste,
+      super.onBlur,
+      super.onCanPlay,
+      super.onCanPlayThrough,
+      super.onChange,
+      super.onClick,
+      super.onContextMenu,
+      super.onCopy,
+      super.onCut,
+      super.onDoubleClick,
+      super.onDrag,
+      super.onDragEnd,
+      super.onDragEnter,
+      super.onDragLeave,
+      super.onDragOver,
+      super.onDragStart,
+      super.onDrop,
+      super.onDurationChange,
+      super.onEmptied,
+      super.onEnded,
+      super.onError,
+      super.onFocus,
+      super.onInput,
+      super.onInvalid,
+      super.onKeyDown,
+      super.onKeyPress,
+      super.onKeyUp,
+      super.onLoad,
+      super.onLoadedData,
+      super.onLoadedMetadata,
+      super.onMouseDown,
+      super.onMouseEnter,
+      super.onMouseLeave,
+      super.onMouseMove,
+      super.onMouseOut,
+      super.onMouseOver,
+      super.onMouseUp,
+      super.onMouseWheel,
+      super.onPaste,
+      super.onPause,
+      super.onPlay,
+      super.onPlaying,
+      super.onRateChange,
+      super.onReset,
+      super.onResize,
+      super.onScroll,
+      super.onSearch,
+      super.onSeeked,
+      super.onSeeking,
+      super.onSelect,
+      super.onSelectStart,
+      super.onStalled,
+      super.onSubmit,
+      super.onSuspend,
+      super.onTimeUpdate,
+      super.onTouchCancel,
+      super.onTouchEnd,
+      super.onTouchEnter,
+      super.onTouchLeave,
+      super.onTouchMove,
+      super.onTouchStart,
+      super.onTransitionEnd,
+      super.onVolumeChange,
+      super.onWaiting,
+      super.onFullscreenChange,
+      super.onFullscreenError,
+      super.onWheel});
+  @override
+  Element render() => hook(HeadElement());
 }
 
-HeadingElement headingElementH2(
-    {String? nonce,
-    Map<String, String>? attributes,
-    List<Element>? children,
-    Iterable<String>? classes,
-    Map<String, String>? dataset,
-    String? innerHtml,
-    String? innerText,
-    int? scrollLeft,
-    int? scrollTop,
-    String? contentEditable,
-    String? dir,
-    bool? draggable,
-    bool? hidden,
-    bool? inert,
-    String? inputMode,
-    String? lang,
-    bool? spellcheck,
-    int? tabIndex,
-    String? title,
-    bool? translate,
-    String? className,
-    String? id,
-    String? slot,
-    Iterable<Node>? nodes,
-    String? text,
-    void Function(Event)? onAbort,
-    void Function(Event)? onBeforeCopy,
-    void Function(Event)? onBeforeCut,
-    void Function(Event)? onBeforePaste,
-    void Function(Event)? onBlur,
-    void Function(Event)? onCanPlay,
-    void Function(Event)? onCanPlayThrough,
-    void Function(Event)? onChange,
-    void Function(MouseEvent)? onClick,
-    void Function(MouseEvent)? onContextMenu,
-    void Function(ClipboardEvent)? onCopy,
-    void Function(ClipboardEvent)? onCut,
-    void Function(Event)? onDoubleClick,
-    void Function(MouseEvent)? onDrag,
-    void Function(MouseEvent)? onDragEnd,
-    void Function(MouseEvent)? onDragEnter,
-    void Function(MouseEvent)? onDragLeave,
-    void Function(MouseEvent)? onDragOver,
-    void Function(MouseEvent)? onDragStart,
-    void Function(MouseEvent)? onDrop,
-    void Function(Event)? onDurationChange,
-    void Function(Event)? onEmptied,
-    void Function(Event)? onEnded,
-    void Function(Event)? onError,
-    void Function(Event)? onFocus,
-    void Function(Event)? onInput,
-    void Function(Event)? onInvalid,
-    void Function(KeyboardEvent)? onKeyDown,
-    void Function(KeyboardEvent)? onKeyPress,
-    void Function(KeyboardEvent)? onKeyUp,
-    void Function(Event)? onLoad,
-    void Function(Event)? onLoadedData,
-    void Function(Event)? onLoadedMetadata,
-    void Function(MouseEvent)? onMouseDown,
-    void Function(MouseEvent)? onMouseEnter,
-    void Function(MouseEvent)? onMouseLeave,
-    void Function(MouseEvent)? onMouseMove,
-    void Function(MouseEvent)? onMouseOut,
-    void Function(MouseEvent)? onMouseOver,
-    void Function(MouseEvent)? onMouseUp,
-    void Function(WheelEvent)? onMouseWheel,
-    void Function(ClipboardEvent)? onPaste,
-    void Function(Event)? onPause,
-    void Function(Event)? onPlay,
-    void Function(Event)? onPlaying,
-    void Function(Event)? onRateChange,
-    void Function(Event)? onReset,
-    void Function(Event)? onResize,
-    void Function(Event)? onScroll,
-    void Function(Event)? onSearch,
-    void Function(Event)? onSeeked,
-    void Function(Event)? onSeeking,
-    void Function(Event)? onSelect,
-    void Function(Event)? onSelectStart,
-    void Function(Event)? onStalled,
-    void Function(Event)? onSubmit,
-    void Function(Event)? onSuspend,
-    void Function(Event)? onTimeUpdate,
-    void Function(TouchEvent)? onTouchCancel,
-    void Function(TouchEvent)? onTouchEnd,
-    void Function(TouchEvent)? onTouchEnter,
-    void Function(TouchEvent)? onTouchLeave,
-    void Function(TouchEvent)? onTouchMove,
-    void Function(TouchEvent)? onTouchStart,
-    void Function(TransitionEvent)? onTransitionEnd,
-    void Function(Event)? onVolumeChange,
-    void Function(Event)? onWaiting,
-    void Function(Event)? onFullscreenChange,
-    void Function(Event)? onFullscreenError,
-    void Function(WheelEvent)? onWheel}) {
-  final v = HeadingElement.h2();
-  if (nonce != null) v.nonce = nonce;
-  if (attributes != null) v.attributes = attributes;
-  if (children != null) v.children = children;
-  if (classes != null) v.classes = classes;
-  if (dataset != null) v.dataset = dataset;
-  if (innerHtml != null) v.innerHtml = innerHtml;
-  if (innerText != null) v.innerText = innerText;
-  if (scrollLeft != null) v.scrollLeft = scrollLeft;
-  if (scrollTop != null) v.scrollTop = scrollTop;
-  if (contentEditable != null) v.contentEditable = contentEditable;
-  if (dir != null) v.dir = dir;
-  if (draggable != null) v.draggable = draggable;
-  if (hidden != null) v.hidden = hidden;
-  if (inert != null) v.inert = inert;
-  if (inputMode != null) v.inputMode = inputMode;
-  if (lang != null) v.lang = lang;
-  if (spellcheck != null) v.spellcheck = spellcheck;
-  if (tabIndex != null) v.tabIndex = tabIndex;
-  if (title != null) v.title = title;
-  if (translate != null) v.translate = translate;
-  if (className != null) v.className = className;
-  if (id != null) v.id = id;
-  if (slot != null) v.slot = slot;
-  if (nodes != null) v.nodes = nodes;
-  if (text != null) v.text = text;
-  if (onAbort != null) v.onAbort.listen(onAbort);
-  if (onBeforeCopy != null) v.onBeforeCopy.listen(onBeforeCopy);
-  if (onBeforeCut != null) v.onBeforeCut.listen(onBeforeCut);
-  if (onBeforePaste != null) v.onBeforePaste.listen(onBeforePaste);
-  if (onBlur != null) v.onBlur.listen(onBlur);
-  if (onCanPlay != null) v.onCanPlay.listen(onCanPlay);
-  if (onCanPlayThrough != null) v.onCanPlayThrough.listen(onCanPlayThrough);
-  if (onChange != null) v.onChange.listen(onChange);
-  if (onClick != null) v.onClick.listen(onClick);
-  if (onContextMenu != null) v.onContextMenu.listen(onContextMenu);
-  if (onCopy != null) v.onCopy.listen(onCopy);
-  if (onCut != null) v.onCut.listen(onCut);
-  if (onDoubleClick != null) v.onDoubleClick.listen(onDoubleClick);
-  if (onDrag != null) v.onDrag.listen(onDrag);
-  if (onDragEnd != null) v.onDragEnd.listen(onDragEnd);
-  if (onDragEnter != null) v.onDragEnter.listen(onDragEnter);
-  if (onDragLeave != null) v.onDragLeave.listen(onDragLeave);
-  if (onDragOver != null) v.onDragOver.listen(onDragOver);
-  if (onDragStart != null) v.onDragStart.listen(onDragStart);
-  if (onDrop != null) v.onDrop.listen(onDrop);
-  if (onDurationChange != null) v.onDurationChange.listen(onDurationChange);
-  if (onEmptied != null) v.onEmptied.listen(onEmptied);
-  if (onEnded != null) v.onEnded.listen(onEnded);
-  if (onError != null) v.onError.listen(onError);
-  if (onFocus != null) v.onFocus.listen(onFocus);
-  if (onInput != null) v.onInput.listen(onInput);
-  if (onInvalid != null) v.onInvalid.listen(onInvalid);
-  if (onKeyDown != null) v.onKeyDown.listen(onKeyDown);
-  if (onKeyPress != null) v.onKeyPress.listen(onKeyPress);
-  if (onKeyUp != null) v.onKeyUp.listen(onKeyUp);
-  if (onLoad != null) v.onLoad.listen(onLoad);
-  if (onLoadedData != null) v.onLoadedData.listen(onLoadedData);
-  if (onLoadedMetadata != null) v.onLoadedMetadata.listen(onLoadedMetadata);
-  if (onMouseDown != null) v.onMouseDown.listen(onMouseDown);
-  if (onMouseEnter != null) v.onMouseEnter.listen(onMouseEnter);
-  if (onMouseLeave != null) v.onMouseLeave.listen(onMouseLeave);
-  if (onMouseMove != null) v.onMouseMove.listen(onMouseMove);
-  if (onMouseOut != null) v.onMouseOut.listen(onMouseOut);
-  if (onMouseOver != null) v.onMouseOver.listen(onMouseOver);
-  if (onMouseUp != null) v.onMouseUp.listen(onMouseUp);
-  if (onMouseWheel != null) v.onMouseWheel.listen(onMouseWheel);
-  if (onPaste != null) v.onPaste.listen(onPaste);
-  if (onPause != null) v.onPause.listen(onPause);
-  if (onPlay != null) v.onPlay.listen(onPlay);
-  if (onPlaying != null) v.onPlaying.listen(onPlaying);
-  if (onRateChange != null) v.onRateChange.listen(onRateChange);
-  if (onReset != null) v.onReset.listen(onReset);
-  if (onResize != null) v.onResize.listen(onResize);
-  if (onScroll != null) v.onScroll.listen(onScroll);
-  if (onSearch != null) v.onSearch.listen(onSearch);
-  if (onSeeked != null) v.onSeeked.listen(onSeeked);
-  if (onSeeking != null) v.onSeeking.listen(onSeeking);
-  if (onSelect != null) v.onSelect.listen(onSelect);
-  if (onSelectStart != null) v.onSelectStart.listen(onSelectStart);
-  if (onStalled != null) v.onStalled.listen(onStalled);
-  if (onSubmit != null) v.onSubmit.listen(onSubmit);
-  if (onSuspend != null) v.onSuspend.listen(onSuspend);
-  if (onTimeUpdate != null) v.onTimeUpdate.listen(onTimeUpdate);
-  if (onTouchCancel != null) v.onTouchCancel.listen(onTouchCancel);
-  if (onTouchEnd != null) v.onTouchEnd.listen(onTouchEnd);
-  if (onTouchEnter != null) v.onTouchEnter.listen(onTouchEnter);
-  if (onTouchLeave != null) v.onTouchLeave.listen(onTouchLeave);
-  if (onTouchMove != null) v.onTouchMove.listen(onTouchMove);
-  if (onTouchStart != null) v.onTouchStart.listen(onTouchStart);
-  if (onTransitionEnd != null) v.onTransitionEnd.listen(onTransitionEnd);
-  if (onVolumeChange != null) v.onVolumeChange.listen(onVolumeChange);
-  if (onWaiting != null) v.onWaiting.listen(onWaiting);
-  if (onFullscreenChange != null)
-    v.onFullscreenChange.listen(onFullscreenChange);
-  if (onFullscreenError != null) v.onFullscreenError.listen(onFullscreenError);
-  if (onWheel != null) v.onWheel.listen(onWheel);
-  return v;
+class HeadingElementH1Widget extends HtmlElementWidget {
+  HeadingElementH1Widget(
+      {super.nonce,
+      super.attributes,
+      super.children,
+      super.classes,
+      super.dataset,
+      super.innerHtml,
+      super.innerText,
+      super.scrollLeft,
+      super.scrollTop,
+      super.contentEditable,
+      super.dir,
+      super.draggable,
+      super.hidden,
+      super.inert,
+      super.inputMode,
+      super.lang,
+      super.spellcheck,
+      super.tabIndex,
+      super.title,
+      super.translate,
+      super.className,
+      super.id,
+      super.slot,
+      super.nodes,
+      super.text,
+      super.onAbort,
+      super.onBeforeCopy,
+      super.onBeforeCut,
+      super.onBeforePaste,
+      super.onBlur,
+      super.onCanPlay,
+      super.onCanPlayThrough,
+      super.onChange,
+      super.onClick,
+      super.onContextMenu,
+      super.onCopy,
+      super.onCut,
+      super.onDoubleClick,
+      super.onDrag,
+      super.onDragEnd,
+      super.onDragEnter,
+      super.onDragLeave,
+      super.onDragOver,
+      super.onDragStart,
+      super.onDrop,
+      super.onDurationChange,
+      super.onEmptied,
+      super.onEnded,
+      super.onError,
+      super.onFocus,
+      super.onInput,
+      super.onInvalid,
+      super.onKeyDown,
+      super.onKeyPress,
+      super.onKeyUp,
+      super.onLoad,
+      super.onLoadedData,
+      super.onLoadedMetadata,
+      super.onMouseDown,
+      super.onMouseEnter,
+      super.onMouseLeave,
+      super.onMouseMove,
+      super.onMouseOut,
+      super.onMouseOver,
+      super.onMouseUp,
+      super.onMouseWheel,
+      super.onPaste,
+      super.onPause,
+      super.onPlay,
+      super.onPlaying,
+      super.onRateChange,
+      super.onReset,
+      super.onResize,
+      super.onScroll,
+      super.onSearch,
+      super.onSeeked,
+      super.onSeeking,
+      super.onSelect,
+      super.onSelectStart,
+      super.onStalled,
+      super.onSubmit,
+      super.onSuspend,
+      super.onTimeUpdate,
+      super.onTouchCancel,
+      super.onTouchEnd,
+      super.onTouchEnter,
+      super.onTouchLeave,
+      super.onTouchMove,
+      super.onTouchStart,
+      super.onTransitionEnd,
+      super.onVolumeChange,
+      super.onWaiting,
+      super.onFullscreenChange,
+      super.onFullscreenError,
+      super.onWheel});
+  @override
+  Element render() => hook(HeadingElement.h1());
 }
 
-HeadingElement headingElementH3(
-    {String? nonce,
-    Map<String, String>? attributes,
-    List<Element>? children,
-    Iterable<String>? classes,
-    Map<String, String>? dataset,
-    String? innerHtml,
-    String? innerText,
-    int? scrollLeft,
-    int? scrollTop,
-    String? contentEditable,
-    String? dir,
-    bool? draggable,
-    bool? hidden,
-    bool? inert,
-    String? inputMode,
-    String? lang,
-    bool? spellcheck,
-    int? tabIndex,
-    String? title,
-    bool? translate,
-    String? className,
-    String? id,
-    String? slot,
-    Iterable<Node>? nodes,
-    String? text,
-    void Function(Event)? onAbort,
-    void Function(Event)? onBeforeCopy,
-    void Function(Event)? onBeforeCut,
-    void Function(Event)? onBeforePaste,
-    void Function(Event)? onBlur,
-    void Function(Event)? onCanPlay,
-    void Function(Event)? onCanPlayThrough,
-    void Function(Event)? onChange,
-    void Function(MouseEvent)? onClick,
-    void Function(MouseEvent)? onContextMenu,
-    void Function(ClipboardEvent)? onCopy,
-    void Function(ClipboardEvent)? onCut,
-    void Function(Event)? onDoubleClick,
-    void Function(MouseEvent)? onDrag,
-    void Function(MouseEvent)? onDragEnd,
-    void Function(MouseEvent)? onDragEnter,
-    void Function(MouseEvent)? onDragLeave,
-    void Function(MouseEvent)? onDragOver,
-    void Function(MouseEvent)? onDragStart,
-    void Function(MouseEvent)? onDrop,
-    void Function(Event)? onDurationChange,
-    void Function(Event)? onEmptied,
-    void Function(Event)? onEnded,
-    void Function(Event)? onError,
-    void Function(Event)? onFocus,
-    void Function(Event)? onInput,
-    void Function(Event)? onInvalid,
-    void Function(KeyboardEvent)? onKeyDown,
-    void Function(KeyboardEvent)? onKeyPress,
-    void Function(KeyboardEvent)? onKeyUp,
-    void Function(Event)? onLoad,
-    void Function(Event)? onLoadedData,
-    void Function(Event)? onLoadedMetadata,
-    void Function(MouseEvent)? onMouseDown,
-    void Function(MouseEvent)? onMouseEnter,
-    void Function(MouseEvent)? onMouseLeave,
-    void Function(MouseEvent)? onMouseMove,
-    void Function(MouseEvent)? onMouseOut,
-    void Function(MouseEvent)? onMouseOver,
-    void Function(MouseEvent)? onMouseUp,
-    void Function(WheelEvent)? onMouseWheel,
-    void Function(ClipboardEvent)? onPaste,
-    void Function(Event)? onPause,
-    void Function(Event)? onPlay,
-    void Function(Event)? onPlaying,
-    void Function(Event)? onRateChange,
-    void Function(Event)? onReset,
-    void Function(Event)? onResize,
-    void Function(Event)? onScroll,
-    void Function(Event)? onSearch,
-    void Function(Event)? onSeeked,
-    void Function(Event)? onSeeking,
-    void Function(Event)? onSelect,
-    void Function(Event)? onSelectStart,
-    void Function(Event)? onStalled,
-    void Function(Event)? onSubmit,
-    void Function(Event)? onSuspend,
-    void Function(Event)? onTimeUpdate,
-    void Function(TouchEvent)? onTouchCancel,
-    void Function(TouchEvent)? onTouchEnd,
-    void Function(TouchEvent)? onTouchEnter,
-    void Function(TouchEvent)? onTouchLeave,
-    void Function(TouchEvent)? onTouchMove,
-    void Function(TouchEvent)? onTouchStart,
-    void Function(TransitionEvent)? onTransitionEnd,
-    void Function(Event)? onVolumeChange,
-    void Function(Event)? onWaiting,
-    void Function(Event)? onFullscreenChange,
-    void Function(Event)? onFullscreenError,
-    void Function(WheelEvent)? onWheel}) {
-  final v = HeadingElement.h3();
-  if (nonce != null) v.nonce = nonce;
-  if (attributes != null) v.attributes = attributes;
-  if (children != null) v.children = children;
-  if (classes != null) v.classes = classes;
-  if (dataset != null) v.dataset = dataset;
-  if (innerHtml != null) v.innerHtml = innerHtml;
-  if (innerText != null) v.innerText = innerText;
-  if (scrollLeft != null) v.scrollLeft = scrollLeft;
-  if (scrollTop != null) v.scrollTop = scrollTop;
-  if (contentEditable != null) v.contentEditable = contentEditable;
-  if (dir != null) v.dir = dir;
-  if (draggable != null) v.draggable = draggable;
-  if (hidden != null) v.hidden = hidden;
-  if (inert != null) v.inert = inert;
-  if (inputMode != null) v.inputMode = inputMode;
-  if (lang != null) v.lang = lang;
-  if (spellcheck != null) v.spellcheck = spellcheck;
-  if (tabIndex != null) v.tabIndex = tabIndex;
-  if (title != null) v.title = title;
-  if (translate != null) v.translate = translate;
-  if (className != null) v.className = className;
-  if (id != null) v.id = id;
-  if (slot != null) v.slot = slot;
-  if (nodes != null) v.nodes = nodes;
-  if (text != null) v.text = text;
-  if (onAbort != null) v.onAbort.listen(onAbort);
-  if (onBeforeCopy != null) v.onBeforeCopy.listen(onBeforeCopy);
-  if (onBeforeCut != null) v.onBeforeCut.listen(onBeforeCut);
-  if (onBeforePaste != null) v.onBeforePaste.listen(onBeforePaste);
-  if (onBlur != null) v.onBlur.listen(onBlur);
-  if (onCanPlay != null) v.onCanPlay.listen(onCanPlay);
-  if (onCanPlayThrough != null) v.onCanPlayThrough.listen(onCanPlayThrough);
-  if (onChange != null) v.onChange.listen(onChange);
-  if (onClick != null) v.onClick.listen(onClick);
-  if (onContextMenu != null) v.onContextMenu.listen(onContextMenu);
-  if (onCopy != null) v.onCopy.listen(onCopy);
-  if (onCut != null) v.onCut.listen(onCut);
-  if (onDoubleClick != null) v.onDoubleClick.listen(onDoubleClick);
-  if (onDrag != null) v.onDrag.listen(onDrag);
-  if (onDragEnd != null) v.onDragEnd.listen(onDragEnd);
-  if (onDragEnter != null) v.onDragEnter.listen(onDragEnter);
-  if (onDragLeave != null) v.onDragLeave.listen(onDragLeave);
-  if (onDragOver != null) v.onDragOver.listen(onDragOver);
-  if (onDragStart != null) v.onDragStart.listen(onDragStart);
-  if (onDrop != null) v.onDrop.listen(onDrop);
-  if (onDurationChange != null) v.onDurationChange.listen(onDurationChange);
-  if (onEmptied != null) v.onEmptied.listen(onEmptied);
-  if (onEnded != null) v.onEnded.listen(onEnded);
-  if (onError != null) v.onError.listen(onError);
-  if (onFocus != null) v.onFocus.listen(onFocus);
-  if (onInput != null) v.onInput.listen(onInput);
-  if (onInvalid != null) v.onInvalid.listen(onInvalid);
-  if (onKeyDown != null) v.onKeyDown.listen(onKeyDown);
-  if (onKeyPress != null) v.onKeyPress.listen(onKeyPress);
-  if (onKeyUp != null) v.onKeyUp.listen(onKeyUp);
-  if (onLoad != null) v.onLoad.listen(onLoad);
-  if (onLoadedData != null) v.onLoadedData.listen(onLoadedData);
-  if (onLoadedMetadata != null) v.onLoadedMetadata.listen(onLoadedMetadata);
-  if (onMouseDown != null) v.onMouseDown.listen(onMouseDown);
-  if (onMouseEnter != null) v.onMouseEnter.listen(onMouseEnter);
-  if (onMouseLeave != null) v.onMouseLeave.listen(onMouseLeave);
-  if (onMouseMove != null) v.onMouseMove.listen(onMouseMove);
-  if (onMouseOut != null) v.onMouseOut.listen(onMouseOut);
-  if (onMouseOver != null) v.onMouseOver.listen(onMouseOver);
-  if (onMouseUp != null) v.onMouseUp.listen(onMouseUp);
-  if (onMouseWheel != null) v.onMouseWheel.listen(onMouseWheel);
-  if (onPaste != null) v.onPaste.listen(onPaste);
-  if (onPause != null) v.onPause.listen(onPause);
-  if (onPlay != null) v.onPlay.listen(onPlay);
-  if (onPlaying != null) v.onPlaying.listen(onPlaying);
-  if (onRateChange != null) v.onRateChange.listen(onRateChange);
-  if (onReset != null) v.onReset.listen(onReset);
-  if (onResize != null) v.onResize.listen(onResize);
-  if (onScroll != null) v.onScroll.listen(onScroll);
-  if (onSearch != null) v.onSearch.listen(onSearch);
-  if (onSeeked != null) v.onSeeked.listen(onSeeked);
-  if (onSeeking != null) v.onSeeking.listen(onSeeking);
-  if (onSelect != null) v.onSelect.listen(onSelect);
-  if (onSelectStart != null) v.onSelectStart.listen(onSelectStart);
-  if (onStalled != null) v.onStalled.listen(onStalled);
-  if (onSubmit != null) v.onSubmit.listen(onSubmit);
-  if (onSuspend != null) v.onSuspend.listen(onSuspend);
-  if (onTimeUpdate != null) v.onTimeUpdate.listen(onTimeUpdate);
-  if (onTouchCancel != null) v.onTouchCancel.listen(onTouchCancel);
-  if (onTouchEnd != null) v.onTouchEnd.listen(onTouchEnd);
-  if (onTouchEnter != null) v.onTouchEnter.listen(onTouchEnter);
-  if (onTouchLeave != null) v.onTouchLeave.listen(onTouchLeave);
-  if (onTouchMove != null) v.onTouchMove.listen(onTouchMove);
-  if (onTouchStart != null) v.onTouchStart.listen(onTouchStart);
-  if (onTransitionEnd != null) v.onTransitionEnd.listen(onTransitionEnd);
-  if (onVolumeChange != null) v.onVolumeChange.listen(onVolumeChange);
-  if (onWaiting != null) v.onWaiting.listen(onWaiting);
-  if (onFullscreenChange != null)
-    v.onFullscreenChange.listen(onFullscreenChange);
-  if (onFullscreenError != null) v.onFullscreenError.listen(onFullscreenError);
-  if (onWheel != null) v.onWheel.listen(onWheel);
-  return v;
+class HeadingElementH2Widget extends HtmlElementWidget {
+  HeadingElementH2Widget(
+      {super.nonce,
+      super.attributes,
+      super.children,
+      super.classes,
+      super.dataset,
+      super.innerHtml,
+      super.innerText,
+      super.scrollLeft,
+      super.scrollTop,
+      super.contentEditable,
+      super.dir,
+      super.draggable,
+      super.hidden,
+      super.inert,
+      super.inputMode,
+      super.lang,
+      super.spellcheck,
+      super.tabIndex,
+      super.title,
+      super.translate,
+      super.className,
+      super.id,
+      super.slot,
+      super.nodes,
+      super.text,
+      super.onAbort,
+      super.onBeforeCopy,
+      super.onBeforeCut,
+      super.onBeforePaste,
+      super.onBlur,
+      super.onCanPlay,
+      super.onCanPlayThrough,
+      super.onChange,
+      super.onClick,
+      super.onContextMenu,
+      super.onCopy,
+      super.onCut,
+      super.onDoubleClick,
+      super.onDrag,
+      super.onDragEnd,
+      super.onDragEnter,
+      super.onDragLeave,
+      super.onDragOver,
+      super.onDragStart,
+      super.onDrop,
+      super.onDurationChange,
+      super.onEmptied,
+      super.onEnded,
+      super.onError,
+      super.onFocus,
+      super.onInput,
+      super.onInvalid,
+      super.onKeyDown,
+      super.onKeyPress,
+      super.onKeyUp,
+      super.onLoad,
+      super.onLoadedData,
+      super.onLoadedMetadata,
+      super.onMouseDown,
+      super.onMouseEnter,
+      super.onMouseLeave,
+      super.onMouseMove,
+      super.onMouseOut,
+      super.onMouseOver,
+      super.onMouseUp,
+      super.onMouseWheel,
+      super.onPaste,
+      super.onPause,
+      super.onPlay,
+      super.onPlaying,
+      super.onRateChange,
+      super.onReset,
+      super.onResize,
+      super.onScroll,
+      super.onSearch,
+      super.onSeeked,
+      super.onSeeking,
+      super.onSelect,
+      super.onSelectStart,
+      super.onStalled,
+      super.onSubmit,
+      super.onSuspend,
+      super.onTimeUpdate,
+      super.onTouchCancel,
+      super.onTouchEnd,
+      super.onTouchEnter,
+      super.onTouchLeave,
+      super.onTouchMove,
+      super.onTouchStart,
+      super.onTransitionEnd,
+      super.onVolumeChange,
+      super.onWaiting,
+      super.onFullscreenChange,
+      super.onFullscreenError,
+      super.onWheel});
+  @override
+  Element render() => hook(HeadingElement.h2());
 }
 
-HeadingElement headingElementH4(
-    {String? nonce,
-    Map<String, String>? attributes,
-    List<Element>? children,
-    Iterable<String>? classes,
-    Map<String, String>? dataset,
-    String? innerHtml,
-    String? innerText,
-    int? scrollLeft,
-    int? scrollTop,
-    String? contentEditable,
-    String? dir,
-    bool? draggable,
-    bool? hidden,
-    bool? inert,
-    String? inputMode,
-    String? lang,
-    bool? spellcheck,
-    int? tabIndex,
-    String? title,
-    bool? translate,
-    String? className,
-    String? id,
-    String? slot,
-    Iterable<Node>? nodes,
-    String? text,
-    void Function(Event)? onAbort,
-    void Function(Event)? onBeforeCopy,
-    void Function(Event)? onBeforeCut,
-    void Function(Event)? onBeforePaste,
-    void Function(Event)? onBlur,
-    void Function(Event)? onCanPlay,
-    void Function(Event)? onCanPlayThrough,
-    void Function(Event)? onChange,
-    void Function(MouseEvent)? onClick,
-    void Function(MouseEvent)? onContextMenu,
-    void Function(ClipboardEvent)? onCopy,
-    void Function(ClipboardEvent)? onCut,
-    void Function(Event)? onDoubleClick,
-    void Function(MouseEvent)? onDrag,
-    void Function(MouseEvent)? onDragEnd,
-    void Function(MouseEvent)? onDragEnter,
-    void Function(MouseEvent)? onDragLeave,
-    void Function(MouseEvent)? onDragOver,
-    void Function(MouseEvent)? onDragStart,
-    void Function(MouseEvent)? onDrop,
-    void Function(Event)? onDurationChange,
-    void Function(Event)? onEmptied,
-    void Function(Event)? onEnded,
-    void Function(Event)? onError,
-    void Function(Event)? onFocus,
-    void Function(Event)? onInput,
-    void Function(Event)? onInvalid,
-    void Function(KeyboardEvent)? onKeyDown,
-    void Function(KeyboardEvent)? onKeyPress,
-    void Function(KeyboardEvent)? onKeyUp,
-    void Function(Event)? onLoad,
-    void Function(Event)? onLoadedData,
-    void Function(Event)? onLoadedMetadata,
-    void Function(MouseEvent)? onMouseDown,
-    void Function(MouseEvent)? onMouseEnter,
-    void Function(MouseEvent)? onMouseLeave,
-    void Function(MouseEvent)? onMouseMove,
-    void Function(MouseEvent)? onMouseOut,
-    void Function(MouseEvent)? onMouseOver,
-    void Function(MouseEvent)? onMouseUp,
-    void Function(WheelEvent)? onMouseWheel,
-    void Function(ClipboardEvent)? onPaste,
-    void Function(Event)? onPause,
-    void Function(Event)? onPlay,
-    void Function(Event)? onPlaying,
-    void Function(Event)? onRateChange,
-    void Function(Event)? onReset,
-    void Function(Event)? onResize,
-    void Function(Event)? onScroll,
-    void Function(Event)? onSearch,
-    void Function(Event)? onSeeked,
-    void Function(Event)? onSeeking,
-    void Function(Event)? onSelect,
-    void Function(Event)? onSelectStart,
-    void Function(Event)? onStalled,
-    void Function(Event)? onSubmit,
-    void Function(Event)? onSuspend,
-    void Function(Event)? onTimeUpdate,
-    void Function(TouchEvent)? onTouchCancel,
-    void Function(TouchEvent)? onTouchEnd,
-    void Function(TouchEvent)? onTouchEnter,
-    void Function(TouchEvent)? onTouchLeave,
-    void Function(TouchEvent)? onTouchMove,
-    void Function(TouchEvent)? onTouchStart,
-    void Function(TransitionEvent)? onTransitionEnd,
-    void Function(Event)? onVolumeChange,
-    void Function(Event)? onWaiting,
-    void Function(Event)? onFullscreenChange,
-    void Function(Event)? onFullscreenError,
-    void Function(WheelEvent)? onWheel}) {
-  final v = HeadingElement.h4();
-  if (nonce != null) v.nonce = nonce;
-  if (attributes != null) v.attributes = attributes;
-  if (children != null) v.children = children;
-  if (classes != null) v.classes = classes;
-  if (dataset != null) v.dataset = dataset;
-  if (innerHtml != null) v.innerHtml = innerHtml;
-  if (innerText != null) v.innerText = innerText;
-  if (scrollLeft != null) v.scrollLeft = scrollLeft;
-  if (scrollTop != null) v.scrollTop = scrollTop;
-  if (contentEditable != null) v.contentEditable = contentEditable;
-  if (dir != null) v.dir = dir;
-  if (draggable != null) v.draggable = draggable;
-  if (hidden != null) v.hidden = hidden;
-  if (inert != null) v.inert = inert;
-  if (inputMode != null) v.inputMode = inputMode;
-  if (lang != null) v.lang = lang;
-  if (spellcheck != null) v.spellcheck = spellcheck;
-  if (tabIndex != null) v.tabIndex = tabIndex;
-  if (title != null) v.title = title;
-  if (translate != null) v.translate = translate;
-  if (className != null) v.className = className;
-  if (id != null) v.id = id;
-  if (slot != null) v.slot = slot;
-  if (nodes != null) v.nodes = nodes;
-  if (text != null) v.text = text;
-  if (onAbort != null) v.onAbort.listen(onAbort);
-  if (onBeforeCopy != null) v.onBeforeCopy.listen(onBeforeCopy);
-  if (onBeforeCut != null) v.onBeforeCut.listen(onBeforeCut);
-  if (onBeforePaste != null) v.onBeforePaste.listen(onBeforePaste);
-  if (onBlur != null) v.onBlur.listen(onBlur);
-  if (onCanPlay != null) v.onCanPlay.listen(onCanPlay);
-  if (onCanPlayThrough != null) v.onCanPlayThrough.listen(onCanPlayThrough);
-  if (onChange != null) v.onChange.listen(onChange);
-  if (onClick != null) v.onClick.listen(onClick);
-  if (onContextMenu != null) v.onContextMenu.listen(onContextMenu);
-  if (onCopy != null) v.onCopy.listen(onCopy);
-  if (onCut != null) v.onCut.listen(onCut);
-  if (onDoubleClick != null) v.onDoubleClick.listen(onDoubleClick);
-  if (onDrag != null) v.onDrag.listen(onDrag);
-  if (onDragEnd != null) v.onDragEnd.listen(onDragEnd);
-  if (onDragEnter != null) v.onDragEnter.listen(onDragEnter);
-  if (onDragLeave != null) v.onDragLeave.listen(onDragLeave);
-  if (onDragOver != null) v.onDragOver.listen(onDragOver);
-  if (onDragStart != null) v.onDragStart.listen(onDragStart);
-  if (onDrop != null) v.onDrop.listen(onDrop);
-  if (onDurationChange != null) v.onDurationChange.listen(onDurationChange);
-  if (onEmptied != null) v.onEmptied.listen(onEmptied);
-  if (onEnded != null) v.onEnded.listen(onEnded);
-  if (onError != null) v.onError.listen(onError);
-  if (onFocus != null) v.onFocus.listen(onFocus);
-  if (onInput != null) v.onInput.listen(onInput);
-  if (onInvalid != null) v.onInvalid.listen(onInvalid);
-  if (onKeyDown != null) v.onKeyDown.listen(onKeyDown);
-  if (onKeyPress != null) v.onKeyPress.listen(onKeyPress);
-  if (onKeyUp != null) v.onKeyUp.listen(onKeyUp);
-  if (onLoad != null) v.onLoad.listen(onLoad);
-  if (onLoadedData != null) v.onLoadedData.listen(onLoadedData);
-  if (onLoadedMetadata != null) v.onLoadedMetadata.listen(onLoadedMetadata);
-  if (onMouseDown != null) v.onMouseDown.listen(onMouseDown);
-  if (onMouseEnter != null) v.onMouseEnter.listen(onMouseEnter);
-  if (onMouseLeave != null) v.onMouseLeave.listen(onMouseLeave);
-  if (onMouseMove != null) v.onMouseMove.listen(onMouseMove);
-  if (onMouseOut != null) v.onMouseOut.listen(onMouseOut);
-  if (onMouseOver != null) v.onMouseOver.listen(onMouseOver);
-  if (onMouseUp != null) v.onMouseUp.listen(onMouseUp);
-  if (onMouseWheel != null) v.onMouseWheel.listen(onMouseWheel);
-  if (onPaste != null) v.onPaste.listen(onPaste);
-  if (onPause != null) v.onPause.listen(onPause);
-  if (onPlay != null) v.onPlay.listen(onPlay);
-  if (onPlaying != null) v.onPlaying.listen(onPlaying);
-  if (onRateChange != null) v.onRateChange.listen(onRateChange);
-  if (onReset != null) v.onReset.listen(onReset);
-  if (onResize != null) v.onResize.listen(onResize);
-  if (onScroll != null) v.onScroll.listen(onScroll);
-  if (onSearch != null) v.onSearch.listen(onSearch);
-  if (onSeeked != null) v.onSeeked.listen(onSeeked);
-  if (onSeeking != null) v.onSeeking.listen(onSeeking);
-  if (onSelect != null) v.onSelect.listen(onSelect);
-  if (onSelectStart != null) v.onSelectStart.listen(onSelectStart);
-  if (onStalled != null) v.onStalled.listen(onStalled);
-  if (onSubmit != null) v.onSubmit.listen(onSubmit);
-  if (onSuspend != null) v.onSuspend.listen(onSuspend);
-  if (onTimeUpdate != null) v.onTimeUpdate.listen(onTimeUpdate);
-  if (onTouchCancel != null) v.onTouchCancel.listen(onTouchCancel);
-  if (onTouchEnd != null) v.onTouchEnd.listen(onTouchEnd);
-  if (onTouchEnter != null) v.onTouchEnter.listen(onTouchEnter);
-  if (onTouchLeave != null) v.onTouchLeave.listen(onTouchLeave);
-  if (onTouchMove != null) v.onTouchMove.listen(onTouchMove);
-  if (onTouchStart != null) v.onTouchStart.listen(onTouchStart);
-  if (onTransitionEnd != null) v.onTransitionEnd.listen(onTransitionEnd);
-  if (onVolumeChange != null) v.onVolumeChange.listen(onVolumeChange);
-  if (onWaiting != null) v.onWaiting.listen(onWaiting);
-  if (onFullscreenChange != null)
-    v.onFullscreenChange.listen(onFullscreenChange);
-  if (onFullscreenError != null) v.onFullscreenError.listen(onFullscreenError);
-  if (onWheel != null) v.onWheel.listen(onWheel);
-  return v;
+class HeadingElementH3Widget extends HtmlElementWidget {
+  HeadingElementH3Widget(
+      {super.nonce,
+      super.attributes,
+      super.children,
+      super.classes,
+      super.dataset,
+      super.innerHtml,
+      super.innerText,
+      super.scrollLeft,
+      super.scrollTop,
+      super.contentEditable,
+      super.dir,
+      super.draggable,
+      super.hidden,
+      super.inert,
+      super.inputMode,
+      super.lang,
+      super.spellcheck,
+      super.tabIndex,
+      super.title,
+      super.translate,
+      super.className,
+      super.id,
+      super.slot,
+      super.nodes,
+      super.text,
+      super.onAbort,
+      super.onBeforeCopy,
+      super.onBeforeCut,
+      super.onBeforePaste,
+      super.onBlur,
+      super.onCanPlay,
+      super.onCanPlayThrough,
+      super.onChange,
+      super.onClick,
+      super.onContextMenu,
+      super.onCopy,
+      super.onCut,
+      super.onDoubleClick,
+      super.onDrag,
+      super.onDragEnd,
+      super.onDragEnter,
+      super.onDragLeave,
+      super.onDragOver,
+      super.onDragStart,
+      super.onDrop,
+      super.onDurationChange,
+      super.onEmptied,
+      super.onEnded,
+      super.onError,
+      super.onFocus,
+      super.onInput,
+      super.onInvalid,
+      super.onKeyDown,
+      super.onKeyPress,
+      super.onKeyUp,
+      super.onLoad,
+      super.onLoadedData,
+      super.onLoadedMetadata,
+      super.onMouseDown,
+      super.onMouseEnter,
+      super.onMouseLeave,
+      super.onMouseMove,
+      super.onMouseOut,
+      super.onMouseOver,
+      super.onMouseUp,
+      super.onMouseWheel,
+      super.onPaste,
+      super.onPause,
+      super.onPlay,
+      super.onPlaying,
+      super.onRateChange,
+      super.onReset,
+      super.onResize,
+      super.onScroll,
+      super.onSearch,
+      super.onSeeked,
+      super.onSeeking,
+      super.onSelect,
+      super.onSelectStart,
+      super.onStalled,
+      super.onSubmit,
+      super.onSuspend,
+      super.onTimeUpdate,
+      super.onTouchCancel,
+      super.onTouchEnd,
+      super.onTouchEnter,
+      super.onTouchLeave,
+      super.onTouchMove,
+      super.onTouchStart,
+      super.onTransitionEnd,
+      super.onVolumeChange,
+      super.onWaiting,
+      super.onFullscreenChange,
+      super.onFullscreenError,
+      super.onWheel});
+  @override
+  Element render() => hook(HeadingElement.h3());
 }
 
-HeadingElement headingElementH5(
-    {String? nonce,
-    Map<String, String>? attributes,
-    List<Element>? children,
-    Iterable<String>? classes,
-    Map<String, String>? dataset,
-    String? innerHtml,
-    String? innerText,
-    int? scrollLeft,
-    int? scrollTop,
-    String? contentEditable,
-    String? dir,
-    bool? draggable,
-    bool? hidden,
-    bool? inert,
-    String? inputMode,
-    String? lang,
-    bool? spellcheck,
-    int? tabIndex,
-    String? title,
-    bool? translate,
-    String? className,
-    String? id,
-    String? slot,
-    Iterable<Node>? nodes,
-    String? text,
-    void Function(Event)? onAbort,
-    void Function(Event)? onBeforeCopy,
-    void Function(Event)? onBeforeCut,
-    void Function(Event)? onBeforePaste,
-    void Function(Event)? onBlur,
-    void Function(Event)? onCanPlay,
-    void Function(Event)? onCanPlayThrough,
-    void Function(Event)? onChange,
-    void Function(MouseEvent)? onClick,
-    void Function(MouseEvent)? onContextMenu,
-    void Function(ClipboardEvent)? onCopy,
-    void Function(ClipboardEvent)? onCut,
-    void Function(Event)? onDoubleClick,
-    void Function(MouseEvent)? onDrag,
-    void Function(MouseEvent)? onDragEnd,
-    void Function(MouseEvent)? onDragEnter,
-    void Function(MouseEvent)? onDragLeave,
-    void Function(MouseEvent)? onDragOver,
-    void Function(MouseEvent)? onDragStart,
-    void Function(MouseEvent)? onDrop,
-    void Function(Event)? onDurationChange,
-    void Function(Event)? onEmptied,
-    void Function(Event)? onEnded,
-    void Function(Event)? onError,
-    void Function(Event)? onFocus,
-    void Function(Event)? onInput,
-    void Function(Event)? onInvalid,
-    void Function(KeyboardEvent)? onKeyDown,
-    void Function(KeyboardEvent)? onKeyPress,
-    void Function(KeyboardEvent)? onKeyUp,
-    void Function(Event)? onLoad,
-    void Function(Event)? onLoadedData,
-    void Function(Event)? onLoadedMetadata,
-    void Function(MouseEvent)? onMouseDown,
-    void Function(MouseEvent)? onMouseEnter,
-    void Function(MouseEvent)? onMouseLeave,
-    void Function(MouseEvent)? onMouseMove,
-    void Function(MouseEvent)? onMouseOut,
-    void Function(MouseEvent)? onMouseOver,
-    void Function(MouseEvent)? onMouseUp,
-    void Function(WheelEvent)? onMouseWheel,
-    void Function(ClipboardEvent)? onPaste,
-    void Function(Event)? onPause,
-    void Function(Event)? onPlay,
-    void Function(Event)? onPlaying,
-    void Function(Event)? onRateChange,
-    void Function(Event)? onReset,
-    void Function(Event)? onResize,
-    void Function(Event)? onScroll,
-    void Function(Event)? onSearch,
-    void Function(Event)? onSeeked,
-    void Function(Event)? onSeeking,
-    void Function(Event)? onSelect,
-    void Function(Event)? onSelectStart,
-    void Function(Event)? onStalled,
-    void Function(Event)? onSubmit,
-    void Function(Event)? onSuspend,
-    void Function(Event)? onTimeUpdate,
-    void Function(TouchEvent)? onTouchCancel,
-    void Function(TouchEvent)? onTouchEnd,
-    void Function(TouchEvent)? onTouchEnter,
-    void Function(TouchEvent)? onTouchLeave,
-    void Function(TouchEvent)? onTouchMove,
-    void Function(TouchEvent)? onTouchStart,
-    void Function(TransitionEvent)? onTransitionEnd,
-    void Function(Event)? onVolumeChange,
-    void Function(Event)? onWaiting,
-    void Function(Event)? onFullscreenChange,
-    void Function(Event)? onFullscreenError,
-    void Function(WheelEvent)? onWheel}) {
-  final v = HeadingElement.h5();
-  if (nonce != null) v.nonce = nonce;
-  if (attributes != null) v.attributes = attributes;
-  if (children != null) v.children = children;
-  if (classes != null) v.classes = classes;
-  if (dataset != null) v.dataset = dataset;
-  if (innerHtml != null) v.innerHtml = innerHtml;
-  if (innerText != null) v.innerText = innerText;
-  if (scrollLeft != null) v.scrollLeft = scrollLeft;
-  if (scrollTop != null) v.scrollTop = scrollTop;
-  if (contentEditable != null) v.contentEditable = contentEditable;
-  if (dir != null) v.dir = dir;
-  if (draggable != null) v.draggable = draggable;
-  if (hidden != null) v.hidden = hidden;
-  if (inert != null) v.inert = inert;
-  if (inputMode != null) v.inputMode = inputMode;
-  if (lang != null) v.lang = lang;
-  if (spellcheck != null) v.spellcheck = spellcheck;
-  if (tabIndex != null) v.tabIndex = tabIndex;
-  if (title != null) v.title = title;
-  if (translate != null) v.translate = translate;
-  if (className != null) v.className = className;
-  if (id != null) v.id = id;
-  if (slot != null) v.slot = slot;
-  if (nodes != null) v.nodes = nodes;
-  if (text != null) v.text = text;
-  if (onAbort != null) v.onAbort.listen(onAbort);
-  if (onBeforeCopy != null) v.onBeforeCopy.listen(onBeforeCopy);
-  if (onBeforeCut != null) v.onBeforeCut.listen(onBeforeCut);
-  if (onBeforePaste != null) v.onBeforePaste.listen(onBeforePaste);
-  if (onBlur != null) v.onBlur.listen(onBlur);
-  if (onCanPlay != null) v.onCanPlay.listen(onCanPlay);
-  if (onCanPlayThrough != null) v.onCanPlayThrough.listen(onCanPlayThrough);
-  if (onChange != null) v.onChange.listen(onChange);
-  if (onClick != null) v.onClick.listen(onClick);
-  if (onContextMenu != null) v.onContextMenu.listen(onContextMenu);
-  if (onCopy != null) v.onCopy.listen(onCopy);
-  if (onCut != null) v.onCut.listen(onCut);
-  if (onDoubleClick != null) v.onDoubleClick.listen(onDoubleClick);
-  if (onDrag != null) v.onDrag.listen(onDrag);
-  if (onDragEnd != null) v.onDragEnd.listen(onDragEnd);
-  if (onDragEnter != null) v.onDragEnter.listen(onDragEnter);
-  if (onDragLeave != null) v.onDragLeave.listen(onDragLeave);
-  if (onDragOver != null) v.onDragOver.listen(onDragOver);
-  if (onDragStart != null) v.onDragStart.listen(onDragStart);
-  if (onDrop != null) v.onDrop.listen(onDrop);
-  if (onDurationChange != null) v.onDurationChange.listen(onDurationChange);
-  if (onEmptied != null) v.onEmptied.listen(onEmptied);
-  if (onEnded != null) v.onEnded.listen(onEnded);
-  if (onError != null) v.onError.listen(onError);
-  if (onFocus != null) v.onFocus.listen(onFocus);
-  if (onInput != null) v.onInput.listen(onInput);
-  if (onInvalid != null) v.onInvalid.listen(onInvalid);
-  if (onKeyDown != null) v.onKeyDown.listen(onKeyDown);
-  if (onKeyPress != null) v.onKeyPress.listen(onKeyPress);
-  if (onKeyUp != null) v.onKeyUp.listen(onKeyUp);
-  if (onLoad != null) v.onLoad.listen(onLoad);
-  if (onLoadedData != null) v.onLoadedData.listen(onLoadedData);
-  if (onLoadedMetadata != null) v.onLoadedMetadata.listen(onLoadedMetadata);
-  if (onMouseDown != null) v.onMouseDown.listen(onMouseDown);
-  if (onMouseEnter != null) v.onMouseEnter.listen(onMouseEnter);
-  if (onMouseLeave != null) v.onMouseLeave.listen(onMouseLeave);
-  if (onMouseMove != null) v.onMouseMove.listen(onMouseMove);
-  if (onMouseOut != null) v.onMouseOut.listen(onMouseOut);
-  if (onMouseOver != null) v.onMouseOver.listen(onMouseOver);
-  if (onMouseUp != null) v.onMouseUp.listen(onMouseUp);
-  if (onMouseWheel != null) v.onMouseWheel.listen(onMouseWheel);
-  if (onPaste != null) v.onPaste.listen(onPaste);
-  if (onPause != null) v.onPause.listen(onPause);
-  if (onPlay != null) v.onPlay.listen(onPlay);
-  if (onPlaying != null) v.onPlaying.listen(onPlaying);
-  if (onRateChange != null) v.onRateChange.listen(onRateChange);
-  if (onReset != null) v.onReset.listen(onReset);
-  if (onResize != null) v.onResize.listen(onResize);
-  if (onScroll != null) v.onScroll.listen(onScroll);
-  if (onSearch != null) v.onSearch.listen(onSearch);
-  if (onSeeked != null) v.onSeeked.listen(onSeeked);
-  if (onSeeking != null) v.onSeeking.listen(onSeeking);
-  if (onSelect != null) v.onSelect.listen(onSelect);
-  if (onSelectStart != null) v.onSelectStart.listen(onSelectStart);
-  if (onStalled != null) v.onStalled.listen(onStalled);
-  if (onSubmit != null) v.onSubmit.listen(onSubmit);
-  if (onSuspend != null) v.onSuspend.listen(onSuspend);
-  if (onTimeUpdate != null) v.onTimeUpdate.listen(onTimeUpdate);
-  if (onTouchCancel != null) v.onTouchCancel.listen(onTouchCancel);
-  if (onTouchEnd != null) v.onTouchEnd.listen(onTouchEnd);
-  if (onTouchEnter != null) v.onTouchEnter.listen(onTouchEnter);
-  if (onTouchLeave != null) v.onTouchLeave.listen(onTouchLeave);
-  if (onTouchMove != null) v.onTouchMove.listen(onTouchMove);
-  if (onTouchStart != null) v.onTouchStart.listen(onTouchStart);
-  if (onTransitionEnd != null) v.onTransitionEnd.listen(onTransitionEnd);
-  if (onVolumeChange != null) v.onVolumeChange.listen(onVolumeChange);
-  if (onWaiting != null) v.onWaiting.listen(onWaiting);
-  if (onFullscreenChange != null)
-    v.onFullscreenChange.listen(onFullscreenChange);
-  if (onFullscreenError != null) v.onFullscreenError.listen(onFullscreenError);
-  if (onWheel != null) v.onWheel.listen(onWheel);
-  return v;
+class HeadingElementH4Widget extends HtmlElementWidget {
+  HeadingElementH4Widget(
+      {super.nonce,
+      super.attributes,
+      super.children,
+      super.classes,
+      super.dataset,
+      super.innerHtml,
+      super.innerText,
+      super.scrollLeft,
+      super.scrollTop,
+      super.contentEditable,
+      super.dir,
+      super.draggable,
+      super.hidden,
+      super.inert,
+      super.inputMode,
+      super.lang,
+      super.spellcheck,
+      super.tabIndex,
+      super.title,
+      super.translate,
+      super.className,
+      super.id,
+      super.slot,
+      super.nodes,
+      super.text,
+      super.onAbort,
+      super.onBeforeCopy,
+      super.onBeforeCut,
+      super.onBeforePaste,
+      super.onBlur,
+      super.onCanPlay,
+      super.onCanPlayThrough,
+      super.onChange,
+      super.onClick,
+      super.onContextMenu,
+      super.onCopy,
+      super.onCut,
+      super.onDoubleClick,
+      super.onDrag,
+      super.onDragEnd,
+      super.onDragEnter,
+      super.onDragLeave,
+      super.onDragOver,
+      super.onDragStart,
+      super.onDrop,
+      super.onDurationChange,
+      super.onEmptied,
+      super.onEnded,
+      super.onError,
+      super.onFocus,
+      super.onInput,
+      super.onInvalid,
+      super.onKeyDown,
+      super.onKeyPress,
+      super.onKeyUp,
+      super.onLoad,
+      super.onLoadedData,
+      super.onLoadedMetadata,
+      super.onMouseDown,
+      super.onMouseEnter,
+      super.onMouseLeave,
+      super.onMouseMove,
+      super.onMouseOut,
+      super.onMouseOver,
+      super.onMouseUp,
+      super.onMouseWheel,
+      super.onPaste,
+      super.onPause,
+      super.onPlay,
+      super.onPlaying,
+      super.onRateChange,
+      super.onReset,
+      super.onResize,
+      super.onScroll,
+      super.onSearch,
+      super.onSeeked,
+      super.onSeeking,
+      super.onSelect,
+      super.onSelectStart,
+      super.onStalled,
+      super.onSubmit,
+      super.onSuspend,
+      super.onTimeUpdate,
+      super.onTouchCancel,
+      super.onTouchEnd,
+      super.onTouchEnter,
+      super.onTouchLeave,
+      super.onTouchMove,
+      super.onTouchStart,
+      super.onTransitionEnd,
+      super.onVolumeChange,
+      super.onWaiting,
+      super.onFullscreenChange,
+      super.onFullscreenError,
+      super.onWheel});
+  @override
+  Element render() => hook(HeadingElement.h4());
 }
 
-HeadingElement headingElementH6(
-    {String? nonce,
-    Map<String, String>? attributes,
-    List<Element>? children,
-    Iterable<String>? classes,
-    Map<String, String>? dataset,
-    String? innerHtml,
-    String? innerText,
-    int? scrollLeft,
-    int? scrollTop,
-    String? contentEditable,
-    String? dir,
-    bool? draggable,
-    bool? hidden,
-    bool? inert,
-    String? inputMode,
-    String? lang,
-    bool? spellcheck,
-    int? tabIndex,
-    String? title,
-    bool? translate,
-    String? className,
-    String? id,
-    String? slot,
-    Iterable<Node>? nodes,
-    String? text,
-    void Function(Event)? onAbort,
-    void Function(Event)? onBeforeCopy,
-    void Function(Event)? onBeforeCut,
-    void Function(Event)? onBeforePaste,
-    void Function(Event)? onBlur,
-    void Function(Event)? onCanPlay,
-    void Function(Event)? onCanPlayThrough,
-    void Function(Event)? onChange,
-    void Function(MouseEvent)? onClick,
-    void Function(MouseEvent)? onContextMenu,
-    void Function(ClipboardEvent)? onCopy,
-    void Function(ClipboardEvent)? onCut,
-    void Function(Event)? onDoubleClick,
-    void Function(MouseEvent)? onDrag,
-    void Function(MouseEvent)? onDragEnd,
-    void Function(MouseEvent)? onDragEnter,
-    void Function(MouseEvent)? onDragLeave,
-    void Function(MouseEvent)? onDragOver,
-    void Function(MouseEvent)? onDragStart,
-    void Function(MouseEvent)? onDrop,
-    void Function(Event)? onDurationChange,
-    void Function(Event)? onEmptied,
-    void Function(Event)? onEnded,
-    void Function(Event)? onError,
-    void Function(Event)? onFocus,
-    void Function(Event)? onInput,
-    void Function(Event)? onInvalid,
-    void Function(KeyboardEvent)? onKeyDown,
-    void Function(KeyboardEvent)? onKeyPress,
-    void Function(KeyboardEvent)? onKeyUp,
-    void Function(Event)? onLoad,
-    void Function(Event)? onLoadedData,
-    void Function(Event)? onLoadedMetadata,
-    void Function(MouseEvent)? onMouseDown,
-    void Function(MouseEvent)? onMouseEnter,
-    void Function(MouseEvent)? onMouseLeave,
-    void Function(MouseEvent)? onMouseMove,
-    void Function(MouseEvent)? onMouseOut,
-    void Function(MouseEvent)? onMouseOver,
-    void Function(MouseEvent)? onMouseUp,
-    void Function(WheelEvent)? onMouseWheel,
-    void Function(ClipboardEvent)? onPaste,
-    void Function(Event)? onPause,
-    void Function(Event)? onPlay,
-    void Function(Event)? onPlaying,
-    void Function(Event)? onRateChange,
-    void Function(Event)? onReset,
-    void Function(Event)? onResize,
-    void Function(Event)? onScroll,
-    void Function(Event)? onSearch,
-    void Function(Event)? onSeeked,
-    void Function(Event)? onSeeking,
-    void Function(Event)? onSelect,
-    void Function(Event)? onSelectStart,
-    void Function(Event)? onStalled,
-    void Function(Event)? onSubmit,
-    void Function(Event)? onSuspend,
-    void Function(Event)? onTimeUpdate,
-    void Function(TouchEvent)? onTouchCancel,
-    void Function(TouchEvent)? onTouchEnd,
-    void Function(TouchEvent)? onTouchEnter,
-    void Function(TouchEvent)? onTouchLeave,
-    void Function(TouchEvent)? onTouchMove,
-    void Function(TouchEvent)? onTouchStart,
-    void Function(TransitionEvent)? onTransitionEnd,
-    void Function(Event)? onVolumeChange,
-    void Function(Event)? onWaiting,
-    void Function(Event)? onFullscreenChange,
-    void Function(Event)? onFullscreenError,
-    void Function(WheelEvent)? onWheel}) {
-  final v = HeadingElement.h6();
-  if (nonce != null) v.nonce = nonce;
-  if (attributes != null) v.attributes = attributes;
-  if (children != null) v.children = children;
-  if (classes != null) v.classes = classes;
-  if (dataset != null) v.dataset = dataset;
-  if (innerHtml != null) v.innerHtml = innerHtml;
-  if (innerText != null) v.innerText = innerText;
-  if (scrollLeft != null) v.scrollLeft = scrollLeft;
-  if (scrollTop != null) v.scrollTop = scrollTop;
-  if (contentEditable != null) v.contentEditable = contentEditable;
-  if (dir != null) v.dir = dir;
-  if (draggable != null) v.draggable = draggable;
-  if (hidden != null) v.hidden = hidden;
-  if (inert != null) v.inert = inert;
-  if (inputMode != null) v.inputMode = inputMode;
-  if (lang != null) v.lang = lang;
-  if (spellcheck != null) v.spellcheck = spellcheck;
-  if (tabIndex != null) v.tabIndex = tabIndex;
-  if (title != null) v.title = title;
-  if (translate != null) v.translate = translate;
-  if (className != null) v.className = className;
-  if (id != null) v.id = id;
-  if (slot != null) v.slot = slot;
-  if (nodes != null) v.nodes = nodes;
-  if (text != null) v.text = text;
-  if (onAbort != null) v.onAbort.listen(onAbort);
-  if (onBeforeCopy != null) v.onBeforeCopy.listen(onBeforeCopy);
-  if (onBeforeCut != null) v.onBeforeCut.listen(onBeforeCut);
-  if (onBeforePaste != null) v.onBeforePaste.listen(onBeforePaste);
-  if (onBlur != null) v.onBlur.listen(onBlur);
-  if (onCanPlay != null) v.onCanPlay.listen(onCanPlay);
-  if (onCanPlayThrough != null) v.onCanPlayThrough.listen(onCanPlayThrough);
-  if (onChange != null) v.onChange.listen(onChange);
-  if (onClick != null) v.onClick.listen(onClick);
-  if (onContextMenu != null) v.onContextMenu.listen(onContextMenu);
-  if (onCopy != null) v.onCopy.listen(onCopy);
-  if (onCut != null) v.onCut.listen(onCut);
-  if (onDoubleClick != null) v.onDoubleClick.listen(onDoubleClick);
-  if (onDrag != null) v.onDrag.listen(onDrag);
-  if (onDragEnd != null) v.onDragEnd.listen(onDragEnd);
-  if (onDragEnter != null) v.onDragEnter.listen(onDragEnter);
-  if (onDragLeave != null) v.onDragLeave.listen(onDragLeave);
-  if (onDragOver != null) v.onDragOver.listen(onDragOver);
-  if (onDragStart != null) v.onDragStart.listen(onDragStart);
-  if (onDrop != null) v.onDrop.listen(onDrop);
-  if (onDurationChange != null) v.onDurationChange.listen(onDurationChange);
-  if (onEmptied != null) v.onEmptied.listen(onEmptied);
-  if (onEnded != null) v.onEnded.listen(onEnded);
-  if (onError != null) v.onError.listen(onError);
-  if (onFocus != null) v.onFocus.listen(onFocus);
-  if (onInput != null) v.onInput.listen(onInput);
-  if (onInvalid != null) v.onInvalid.listen(onInvalid);
-  if (onKeyDown != null) v.onKeyDown.listen(onKeyDown);
-  if (onKeyPress != null) v.onKeyPress.listen(onKeyPress);
-  if (onKeyUp != null) v.onKeyUp.listen(onKeyUp);
-  if (onLoad != null) v.onLoad.listen(onLoad);
-  if (onLoadedData != null) v.onLoadedData.listen(onLoadedData);
-  if (onLoadedMetadata != null) v.onLoadedMetadata.listen(onLoadedMetadata);
-  if (onMouseDown != null) v.onMouseDown.listen(onMouseDown);
-  if (onMouseEnter != null) v.onMouseEnter.listen(onMouseEnter);
-  if (onMouseLeave != null) v.onMouseLeave.listen(onMouseLeave);
-  if (onMouseMove != null) v.onMouseMove.listen(onMouseMove);
-  if (onMouseOut != null) v.onMouseOut.listen(onMouseOut);
-  if (onMouseOver != null) v.onMouseOver.listen(onMouseOver);
-  if (onMouseUp != null) v.onMouseUp.listen(onMouseUp);
-  if (onMouseWheel != null) v.onMouseWheel.listen(onMouseWheel);
-  if (onPaste != null) v.onPaste.listen(onPaste);
-  if (onPause != null) v.onPause.listen(onPause);
-  if (onPlay != null) v.onPlay.listen(onPlay);
-  if (onPlaying != null) v.onPlaying.listen(onPlaying);
-  if (onRateChange != null) v.onRateChange.listen(onRateChange);
-  if (onReset != null) v.onReset.listen(onReset);
-  if (onResize != null) v.onResize.listen(onResize);
-  if (onScroll != null) v.onScroll.listen(onScroll);
-  if (onSearch != null) v.onSearch.listen(onSearch);
-  if (onSeeked != null) v.onSeeked.listen(onSeeked);
-  if (onSeeking != null) v.onSeeking.listen(onSeeking);
-  if (onSelect != null) v.onSelect.listen(onSelect);
-  if (onSelectStart != null) v.onSelectStart.listen(onSelectStart);
-  if (onStalled != null) v.onStalled.listen(onStalled);
-  if (onSubmit != null) v.onSubmit.listen(onSubmit);
-  if (onSuspend != null) v.onSuspend.listen(onSuspend);
-  if (onTimeUpdate != null) v.onTimeUpdate.listen(onTimeUpdate);
-  if (onTouchCancel != null) v.onTouchCancel.listen(onTouchCancel);
-  if (onTouchEnd != null) v.onTouchEnd.listen(onTouchEnd);
-  if (onTouchEnter != null) v.onTouchEnter.listen(onTouchEnter);
-  if (onTouchLeave != null) v.onTouchLeave.listen(onTouchLeave);
-  if (onTouchMove != null) v.onTouchMove.listen(onTouchMove);
-  if (onTouchStart != null) v.onTouchStart.listen(onTouchStart);
-  if (onTransitionEnd != null) v.onTransitionEnd.listen(onTransitionEnd);
-  if (onVolumeChange != null) v.onVolumeChange.listen(onVolumeChange);
-  if (onWaiting != null) v.onWaiting.listen(onWaiting);
-  if (onFullscreenChange != null)
-    v.onFullscreenChange.listen(onFullscreenChange);
-  if (onFullscreenError != null) v.onFullscreenError.listen(onFullscreenError);
-  if (onWheel != null) v.onWheel.listen(onWheel);
-  return v;
+class HeadingElementH5Widget extends HtmlElementWidget {
+  HeadingElementH5Widget(
+      {super.nonce,
+      super.attributes,
+      super.children,
+      super.classes,
+      super.dataset,
+      super.innerHtml,
+      super.innerText,
+      super.scrollLeft,
+      super.scrollTop,
+      super.contentEditable,
+      super.dir,
+      super.draggable,
+      super.hidden,
+      super.inert,
+      super.inputMode,
+      super.lang,
+      super.spellcheck,
+      super.tabIndex,
+      super.title,
+      super.translate,
+      super.className,
+      super.id,
+      super.slot,
+      super.nodes,
+      super.text,
+      super.onAbort,
+      super.onBeforeCopy,
+      super.onBeforeCut,
+      super.onBeforePaste,
+      super.onBlur,
+      super.onCanPlay,
+      super.onCanPlayThrough,
+      super.onChange,
+      super.onClick,
+      super.onContextMenu,
+      super.onCopy,
+      super.onCut,
+      super.onDoubleClick,
+      super.onDrag,
+      super.onDragEnd,
+      super.onDragEnter,
+      super.onDragLeave,
+      super.onDragOver,
+      super.onDragStart,
+      super.onDrop,
+      super.onDurationChange,
+      super.onEmptied,
+      super.onEnded,
+      super.onError,
+      super.onFocus,
+      super.onInput,
+      super.onInvalid,
+      super.onKeyDown,
+      super.onKeyPress,
+      super.onKeyUp,
+      super.onLoad,
+      super.onLoadedData,
+      super.onLoadedMetadata,
+      super.onMouseDown,
+      super.onMouseEnter,
+      super.onMouseLeave,
+      super.onMouseMove,
+      super.onMouseOut,
+      super.onMouseOver,
+      super.onMouseUp,
+      super.onMouseWheel,
+      super.onPaste,
+      super.onPause,
+      super.onPlay,
+      super.onPlaying,
+      super.onRateChange,
+      super.onReset,
+      super.onResize,
+      super.onScroll,
+      super.onSearch,
+      super.onSeeked,
+      super.onSeeking,
+      super.onSelect,
+      super.onSelectStart,
+      super.onStalled,
+      super.onSubmit,
+      super.onSuspend,
+      super.onTimeUpdate,
+      super.onTouchCancel,
+      super.onTouchEnd,
+      super.onTouchEnter,
+      super.onTouchLeave,
+      super.onTouchMove,
+      super.onTouchStart,
+      super.onTransitionEnd,
+      super.onVolumeChange,
+      super.onWaiting,
+      super.onFullscreenChange,
+      super.onFullscreenError,
+      super.onWheel});
+  @override
+  Element render() => hook(HeadingElement.h5());
 }
 
-HtmlHtmlElement htmlHtmlElement(
-    {String? nonce,
-    Map<String, String>? attributes,
-    List<Element>? children,
-    Iterable<String>? classes,
-    Map<String, String>? dataset,
-    String? innerHtml,
-    String? innerText,
-    int? scrollLeft,
-    int? scrollTop,
-    String? contentEditable,
-    String? dir,
-    bool? draggable,
-    bool? hidden,
-    bool? inert,
-    String? inputMode,
-    String? lang,
-    bool? spellcheck,
-    int? tabIndex,
-    String? title,
-    bool? translate,
-    String? className,
-    String? id,
-    String? slot,
-    Iterable<Node>? nodes,
-    String? text,
-    void Function(Event)? onAbort,
-    void Function(Event)? onBeforeCopy,
-    void Function(Event)? onBeforeCut,
-    void Function(Event)? onBeforePaste,
-    void Function(Event)? onBlur,
-    void Function(Event)? onCanPlay,
-    void Function(Event)? onCanPlayThrough,
-    void Function(Event)? onChange,
-    void Function(MouseEvent)? onClick,
-    void Function(MouseEvent)? onContextMenu,
-    void Function(ClipboardEvent)? onCopy,
-    void Function(ClipboardEvent)? onCut,
-    void Function(Event)? onDoubleClick,
-    void Function(MouseEvent)? onDrag,
-    void Function(MouseEvent)? onDragEnd,
-    void Function(MouseEvent)? onDragEnter,
-    void Function(MouseEvent)? onDragLeave,
-    void Function(MouseEvent)? onDragOver,
-    void Function(MouseEvent)? onDragStart,
-    void Function(MouseEvent)? onDrop,
-    void Function(Event)? onDurationChange,
-    void Function(Event)? onEmptied,
-    void Function(Event)? onEnded,
-    void Function(Event)? onError,
-    void Function(Event)? onFocus,
-    void Function(Event)? onInput,
-    void Function(Event)? onInvalid,
-    void Function(KeyboardEvent)? onKeyDown,
-    void Function(KeyboardEvent)? onKeyPress,
-    void Function(KeyboardEvent)? onKeyUp,
-    void Function(Event)? onLoad,
-    void Function(Event)? onLoadedData,
-    void Function(Event)? onLoadedMetadata,
-    void Function(MouseEvent)? onMouseDown,
-    void Function(MouseEvent)? onMouseEnter,
-    void Function(MouseEvent)? onMouseLeave,
-    void Function(MouseEvent)? onMouseMove,
-    void Function(MouseEvent)? onMouseOut,
-    void Function(MouseEvent)? onMouseOver,
-    void Function(MouseEvent)? onMouseUp,
-    void Function(WheelEvent)? onMouseWheel,
-    void Function(ClipboardEvent)? onPaste,
-    void Function(Event)? onPause,
-    void Function(Event)? onPlay,
-    void Function(Event)? onPlaying,
-    void Function(Event)? onRateChange,
-    void Function(Event)? onReset,
-    void Function(Event)? onResize,
-    void Function(Event)? onScroll,
-    void Function(Event)? onSearch,
-    void Function(Event)? onSeeked,
-    void Function(Event)? onSeeking,
-    void Function(Event)? onSelect,
-    void Function(Event)? onSelectStart,
-    void Function(Event)? onStalled,
-    void Function(Event)? onSubmit,
-    void Function(Event)? onSuspend,
-    void Function(Event)? onTimeUpdate,
-    void Function(TouchEvent)? onTouchCancel,
-    void Function(TouchEvent)? onTouchEnd,
-    void Function(TouchEvent)? onTouchEnter,
-    void Function(TouchEvent)? onTouchLeave,
-    void Function(TouchEvent)? onTouchMove,
-    void Function(TouchEvent)? onTouchStart,
-    void Function(TransitionEvent)? onTransitionEnd,
-    void Function(Event)? onVolumeChange,
-    void Function(Event)? onWaiting,
-    void Function(Event)? onFullscreenChange,
-    void Function(Event)? onFullscreenError,
-    void Function(WheelEvent)? onWheel}) {
-  final v = HtmlHtmlElement();
-  if (nonce != null) v.nonce = nonce;
-  if (attributes != null) v.attributes = attributes;
-  if (children != null) v.children = children;
-  if (classes != null) v.classes = classes;
-  if (dataset != null) v.dataset = dataset;
-  if (innerHtml != null) v.innerHtml = innerHtml;
-  if (innerText != null) v.innerText = innerText;
-  if (scrollLeft != null) v.scrollLeft = scrollLeft;
-  if (scrollTop != null) v.scrollTop = scrollTop;
-  if (contentEditable != null) v.contentEditable = contentEditable;
-  if (dir != null) v.dir = dir;
-  if (draggable != null) v.draggable = draggable;
-  if (hidden != null) v.hidden = hidden;
-  if (inert != null) v.inert = inert;
-  if (inputMode != null) v.inputMode = inputMode;
-  if (lang != null) v.lang = lang;
-  if (spellcheck != null) v.spellcheck = spellcheck;
-  if (tabIndex != null) v.tabIndex = tabIndex;
-  if (title != null) v.title = title;
-  if (translate != null) v.translate = translate;
-  if (className != null) v.className = className;
-  if (id != null) v.id = id;
-  if (slot != null) v.slot = slot;
-  if (nodes != null) v.nodes = nodes;
-  if (text != null) v.text = text;
-  if (onAbort != null) v.onAbort.listen(onAbort);
-  if (onBeforeCopy != null) v.onBeforeCopy.listen(onBeforeCopy);
-  if (onBeforeCut != null) v.onBeforeCut.listen(onBeforeCut);
-  if (onBeforePaste != null) v.onBeforePaste.listen(onBeforePaste);
-  if (onBlur != null) v.onBlur.listen(onBlur);
-  if (onCanPlay != null) v.onCanPlay.listen(onCanPlay);
-  if (onCanPlayThrough != null) v.onCanPlayThrough.listen(onCanPlayThrough);
-  if (onChange != null) v.onChange.listen(onChange);
-  if (onClick != null) v.onClick.listen(onClick);
-  if (onContextMenu != null) v.onContextMenu.listen(onContextMenu);
-  if (onCopy != null) v.onCopy.listen(onCopy);
-  if (onCut != null) v.onCut.listen(onCut);
-  if (onDoubleClick != null) v.onDoubleClick.listen(onDoubleClick);
-  if (onDrag != null) v.onDrag.listen(onDrag);
-  if (onDragEnd != null) v.onDragEnd.listen(onDragEnd);
-  if (onDragEnter != null) v.onDragEnter.listen(onDragEnter);
-  if (onDragLeave != null) v.onDragLeave.listen(onDragLeave);
-  if (onDragOver != null) v.onDragOver.listen(onDragOver);
-  if (onDragStart != null) v.onDragStart.listen(onDragStart);
-  if (onDrop != null) v.onDrop.listen(onDrop);
-  if (onDurationChange != null) v.onDurationChange.listen(onDurationChange);
-  if (onEmptied != null) v.onEmptied.listen(onEmptied);
-  if (onEnded != null) v.onEnded.listen(onEnded);
-  if (onError != null) v.onError.listen(onError);
-  if (onFocus != null) v.onFocus.listen(onFocus);
-  if (onInput != null) v.onInput.listen(onInput);
-  if (onInvalid != null) v.onInvalid.listen(onInvalid);
-  if (onKeyDown != null) v.onKeyDown.listen(onKeyDown);
-  if (onKeyPress != null) v.onKeyPress.listen(onKeyPress);
-  if (onKeyUp != null) v.onKeyUp.listen(onKeyUp);
-  if (onLoad != null) v.onLoad.listen(onLoad);
-  if (onLoadedData != null) v.onLoadedData.listen(onLoadedData);
-  if (onLoadedMetadata != null) v.onLoadedMetadata.listen(onLoadedMetadata);
-  if (onMouseDown != null) v.onMouseDown.listen(onMouseDown);
-  if (onMouseEnter != null) v.onMouseEnter.listen(onMouseEnter);
-  if (onMouseLeave != null) v.onMouseLeave.listen(onMouseLeave);
-  if (onMouseMove != null) v.onMouseMove.listen(onMouseMove);
-  if (onMouseOut != null) v.onMouseOut.listen(onMouseOut);
-  if (onMouseOver != null) v.onMouseOver.listen(onMouseOver);
-  if (onMouseUp != null) v.onMouseUp.listen(onMouseUp);
-  if (onMouseWheel != null) v.onMouseWheel.listen(onMouseWheel);
-  if (onPaste != null) v.onPaste.listen(onPaste);
-  if (onPause != null) v.onPause.listen(onPause);
-  if (onPlay != null) v.onPlay.listen(onPlay);
-  if (onPlaying != null) v.onPlaying.listen(onPlaying);
-  if (onRateChange != null) v.onRateChange.listen(onRateChange);
-  if (onReset != null) v.onReset.listen(onReset);
-  if (onResize != null) v.onResize.listen(onResize);
-  if (onScroll != null) v.onScroll.listen(onScroll);
-  if (onSearch != null) v.onSearch.listen(onSearch);
-  if (onSeeked != null) v.onSeeked.listen(onSeeked);
-  if (onSeeking != null) v.onSeeking.listen(onSeeking);
-  if (onSelect != null) v.onSelect.listen(onSelect);
-  if (onSelectStart != null) v.onSelectStart.listen(onSelectStart);
-  if (onStalled != null) v.onStalled.listen(onStalled);
-  if (onSubmit != null) v.onSubmit.listen(onSubmit);
-  if (onSuspend != null) v.onSuspend.listen(onSuspend);
-  if (onTimeUpdate != null) v.onTimeUpdate.listen(onTimeUpdate);
-  if (onTouchCancel != null) v.onTouchCancel.listen(onTouchCancel);
-  if (onTouchEnd != null) v.onTouchEnd.listen(onTouchEnd);
-  if (onTouchEnter != null) v.onTouchEnter.listen(onTouchEnter);
-  if (onTouchLeave != null) v.onTouchLeave.listen(onTouchLeave);
-  if (onTouchMove != null) v.onTouchMove.listen(onTouchMove);
-  if (onTouchStart != null) v.onTouchStart.listen(onTouchStart);
-  if (onTransitionEnd != null) v.onTransitionEnd.listen(onTransitionEnd);
-  if (onVolumeChange != null) v.onVolumeChange.listen(onVolumeChange);
-  if (onWaiting != null) v.onWaiting.listen(onWaiting);
-  if (onFullscreenChange != null)
-    v.onFullscreenChange.listen(onFullscreenChange);
-  if (onFullscreenError != null) v.onFullscreenError.listen(onFullscreenError);
-  if (onWheel != null) v.onWheel.listen(onWheel);
-  return v;
+class HeadingElementH6Widget extends HtmlElementWidget {
+  HeadingElementH6Widget(
+      {super.nonce,
+      super.attributes,
+      super.children,
+      super.classes,
+      super.dataset,
+      super.innerHtml,
+      super.innerText,
+      super.scrollLeft,
+      super.scrollTop,
+      super.contentEditable,
+      super.dir,
+      super.draggable,
+      super.hidden,
+      super.inert,
+      super.inputMode,
+      super.lang,
+      super.spellcheck,
+      super.tabIndex,
+      super.title,
+      super.translate,
+      super.className,
+      super.id,
+      super.slot,
+      super.nodes,
+      super.text,
+      super.onAbort,
+      super.onBeforeCopy,
+      super.onBeforeCut,
+      super.onBeforePaste,
+      super.onBlur,
+      super.onCanPlay,
+      super.onCanPlayThrough,
+      super.onChange,
+      super.onClick,
+      super.onContextMenu,
+      super.onCopy,
+      super.onCut,
+      super.onDoubleClick,
+      super.onDrag,
+      super.onDragEnd,
+      super.onDragEnter,
+      super.onDragLeave,
+      super.onDragOver,
+      super.onDragStart,
+      super.onDrop,
+      super.onDurationChange,
+      super.onEmptied,
+      super.onEnded,
+      super.onError,
+      super.onFocus,
+      super.onInput,
+      super.onInvalid,
+      super.onKeyDown,
+      super.onKeyPress,
+      super.onKeyUp,
+      super.onLoad,
+      super.onLoadedData,
+      super.onLoadedMetadata,
+      super.onMouseDown,
+      super.onMouseEnter,
+      super.onMouseLeave,
+      super.onMouseMove,
+      super.onMouseOut,
+      super.onMouseOver,
+      super.onMouseUp,
+      super.onMouseWheel,
+      super.onPaste,
+      super.onPause,
+      super.onPlay,
+      super.onPlaying,
+      super.onRateChange,
+      super.onReset,
+      super.onResize,
+      super.onScroll,
+      super.onSearch,
+      super.onSeeked,
+      super.onSeeking,
+      super.onSelect,
+      super.onSelectStart,
+      super.onStalled,
+      super.onSubmit,
+      super.onSuspend,
+      super.onTimeUpdate,
+      super.onTouchCancel,
+      super.onTouchEnd,
+      super.onTouchEnter,
+      super.onTouchLeave,
+      super.onTouchMove,
+      super.onTouchStart,
+      super.onTransitionEnd,
+      super.onVolumeChange,
+      super.onWaiting,
+      super.onFullscreenChange,
+      super.onFullscreenError,
+      super.onWheel});
+  @override
+  Element render() => hook(HeadingElement.h6());
 }
 
-IFrameElement iFrameElement(
-    {String? allow,
-    bool? allowFullscreen,
-    bool? allowPaymentRequest,
-    String? csp,
-    String? height,
-    String? name,
-    String? referrerPolicy,
-    String? src,
-    String? srcdoc,
-    String? width,
-    String? nonce,
-    Map<String, String>? attributes,
-    List<Element>? children,
-    Iterable<String>? classes,
-    Map<String, String>? dataset,
-    String? innerHtml,
-    String? innerText,
-    int? scrollLeft,
-    int? scrollTop,
-    String? contentEditable,
-    String? dir,
-    bool? draggable,
-    bool? hidden,
-    bool? inert,
-    String? inputMode,
-    String? lang,
-    bool? spellcheck,
-    int? tabIndex,
-    String? title,
-    bool? translate,
-    String? className,
-    String? id,
-    String? slot,
-    Iterable<Node>? nodes,
-    String? text,
-    void Function(Event)? onAbort,
-    void Function(Event)? onBeforeCopy,
-    void Function(Event)? onBeforeCut,
-    void Function(Event)? onBeforePaste,
-    void Function(Event)? onBlur,
-    void Function(Event)? onCanPlay,
-    void Function(Event)? onCanPlayThrough,
-    void Function(Event)? onChange,
-    void Function(MouseEvent)? onClick,
-    void Function(MouseEvent)? onContextMenu,
-    void Function(ClipboardEvent)? onCopy,
-    void Function(ClipboardEvent)? onCut,
-    void Function(Event)? onDoubleClick,
-    void Function(MouseEvent)? onDrag,
-    void Function(MouseEvent)? onDragEnd,
-    void Function(MouseEvent)? onDragEnter,
-    void Function(MouseEvent)? onDragLeave,
-    void Function(MouseEvent)? onDragOver,
-    void Function(MouseEvent)? onDragStart,
-    void Function(MouseEvent)? onDrop,
-    void Function(Event)? onDurationChange,
-    void Function(Event)? onEmptied,
-    void Function(Event)? onEnded,
-    void Function(Event)? onError,
-    void Function(Event)? onFocus,
-    void Function(Event)? onInput,
-    void Function(Event)? onInvalid,
-    void Function(KeyboardEvent)? onKeyDown,
-    void Function(KeyboardEvent)? onKeyPress,
-    void Function(KeyboardEvent)? onKeyUp,
-    void Function(Event)? onLoad,
-    void Function(Event)? onLoadedData,
-    void Function(Event)? onLoadedMetadata,
-    void Function(MouseEvent)? onMouseDown,
-    void Function(MouseEvent)? onMouseEnter,
-    void Function(MouseEvent)? onMouseLeave,
-    void Function(MouseEvent)? onMouseMove,
-    void Function(MouseEvent)? onMouseOut,
-    void Function(MouseEvent)? onMouseOver,
-    void Function(MouseEvent)? onMouseUp,
-    void Function(WheelEvent)? onMouseWheel,
-    void Function(ClipboardEvent)? onPaste,
-    void Function(Event)? onPause,
-    void Function(Event)? onPlay,
-    void Function(Event)? onPlaying,
-    void Function(Event)? onRateChange,
-    void Function(Event)? onReset,
-    void Function(Event)? onResize,
-    void Function(Event)? onScroll,
-    void Function(Event)? onSearch,
-    void Function(Event)? onSeeked,
-    void Function(Event)? onSeeking,
-    void Function(Event)? onSelect,
-    void Function(Event)? onSelectStart,
-    void Function(Event)? onStalled,
-    void Function(Event)? onSubmit,
-    void Function(Event)? onSuspend,
-    void Function(Event)? onTimeUpdate,
-    void Function(TouchEvent)? onTouchCancel,
-    void Function(TouchEvent)? onTouchEnd,
-    void Function(TouchEvent)? onTouchEnter,
-    void Function(TouchEvent)? onTouchLeave,
-    void Function(TouchEvent)? onTouchMove,
-    void Function(TouchEvent)? onTouchStart,
-    void Function(TransitionEvent)? onTransitionEnd,
-    void Function(Event)? onVolumeChange,
-    void Function(Event)? onWaiting,
-    void Function(Event)? onFullscreenChange,
-    void Function(Event)? onFullscreenError,
-    void Function(WheelEvent)? onWheel}) {
-  final v = IFrameElement();
-  if (allow != null) v.allow = allow;
-  if (allowFullscreen != null) v.allowFullscreen = allowFullscreen;
-  if (allowPaymentRequest != null) v.allowPaymentRequest = allowPaymentRequest;
-  if (csp != null) v.csp = csp;
-  if (height != null) v.height = height;
-  if (name != null) v.name = name;
-  if (referrerPolicy != null) v.referrerPolicy = referrerPolicy;
-  if (src != null) v.src = src;
-  if (srcdoc != null) v.srcdoc = srcdoc;
-  if (width != null) v.width = width;
-  if (nonce != null) v.nonce = nonce;
-  if (attributes != null) v.attributes = attributes;
-  if (children != null) v.children = children;
-  if (classes != null) v.classes = classes;
-  if (dataset != null) v.dataset = dataset;
-  if (innerHtml != null) v.innerHtml = innerHtml;
-  if (innerText != null) v.innerText = innerText;
-  if (scrollLeft != null) v.scrollLeft = scrollLeft;
-  if (scrollTop != null) v.scrollTop = scrollTop;
-  if (contentEditable != null) v.contentEditable = contentEditable;
-  if (dir != null) v.dir = dir;
-  if (draggable != null) v.draggable = draggable;
-  if (hidden != null) v.hidden = hidden;
-  if (inert != null) v.inert = inert;
-  if (inputMode != null) v.inputMode = inputMode;
-  if (lang != null) v.lang = lang;
-  if (spellcheck != null) v.spellcheck = spellcheck;
-  if (tabIndex != null) v.tabIndex = tabIndex;
-  if (title != null) v.title = title;
-  if (translate != null) v.translate = translate;
-  if (className != null) v.className = className;
-  if (id != null) v.id = id;
-  if (slot != null) v.slot = slot;
-  if (nodes != null) v.nodes = nodes;
-  if (text != null) v.text = text;
-  if (onAbort != null) v.onAbort.listen(onAbort);
-  if (onBeforeCopy != null) v.onBeforeCopy.listen(onBeforeCopy);
-  if (onBeforeCut != null) v.onBeforeCut.listen(onBeforeCut);
-  if (onBeforePaste != null) v.onBeforePaste.listen(onBeforePaste);
-  if (onBlur != null) v.onBlur.listen(onBlur);
-  if (onCanPlay != null) v.onCanPlay.listen(onCanPlay);
-  if (onCanPlayThrough != null) v.onCanPlayThrough.listen(onCanPlayThrough);
-  if (onChange != null) v.onChange.listen(onChange);
-  if (onClick != null) v.onClick.listen(onClick);
-  if (onContextMenu != null) v.onContextMenu.listen(onContextMenu);
-  if (onCopy != null) v.onCopy.listen(onCopy);
-  if (onCut != null) v.onCut.listen(onCut);
-  if (onDoubleClick != null) v.onDoubleClick.listen(onDoubleClick);
-  if (onDrag != null) v.onDrag.listen(onDrag);
-  if (onDragEnd != null) v.onDragEnd.listen(onDragEnd);
-  if (onDragEnter != null) v.onDragEnter.listen(onDragEnter);
-  if (onDragLeave != null) v.onDragLeave.listen(onDragLeave);
-  if (onDragOver != null) v.onDragOver.listen(onDragOver);
-  if (onDragStart != null) v.onDragStart.listen(onDragStart);
-  if (onDrop != null) v.onDrop.listen(onDrop);
-  if (onDurationChange != null) v.onDurationChange.listen(onDurationChange);
-  if (onEmptied != null) v.onEmptied.listen(onEmptied);
-  if (onEnded != null) v.onEnded.listen(onEnded);
-  if (onError != null) v.onError.listen(onError);
-  if (onFocus != null) v.onFocus.listen(onFocus);
-  if (onInput != null) v.onInput.listen(onInput);
-  if (onInvalid != null) v.onInvalid.listen(onInvalid);
-  if (onKeyDown != null) v.onKeyDown.listen(onKeyDown);
-  if (onKeyPress != null) v.onKeyPress.listen(onKeyPress);
-  if (onKeyUp != null) v.onKeyUp.listen(onKeyUp);
-  if (onLoad != null) v.onLoad.listen(onLoad);
-  if (onLoadedData != null) v.onLoadedData.listen(onLoadedData);
-  if (onLoadedMetadata != null) v.onLoadedMetadata.listen(onLoadedMetadata);
-  if (onMouseDown != null) v.onMouseDown.listen(onMouseDown);
-  if (onMouseEnter != null) v.onMouseEnter.listen(onMouseEnter);
-  if (onMouseLeave != null) v.onMouseLeave.listen(onMouseLeave);
-  if (onMouseMove != null) v.onMouseMove.listen(onMouseMove);
-  if (onMouseOut != null) v.onMouseOut.listen(onMouseOut);
-  if (onMouseOver != null) v.onMouseOver.listen(onMouseOver);
-  if (onMouseUp != null) v.onMouseUp.listen(onMouseUp);
-  if (onMouseWheel != null) v.onMouseWheel.listen(onMouseWheel);
-  if (onPaste != null) v.onPaste.listen(onPaste);
-  if (onPause != null) v.onPause.listen(onPause);
-  if (onPlay != null) v.onPlay.listen(onPlay);
-  if (onPlaying != null) v.onPlaying.listen(onPlaying);
-  if (onRateChange != null) v.onRateChange.listen(onRateChange);
-  if (onReset != null) v.onReset.listen(onReset);
-  if (onResize != null) v.onResize.listen(onResize);
-  if (onScroll != null) v.onScroll.listen(onScroll);
-  if (onSearch != null) v.onSearch.listen(onSearch);
-  if (onSeeked != null) v.onSeeked.listen(onSeeked);
-  if (onSeeking != null) v.onSeeking.listen(onSeeking);
-  if (onSelect != null) v.onSelect.listen(onSelect);
-  if (onSelectStart != null) v.onSelectStart.listen(onSelectStart);
-  if (onStalled != null) v.onStalled.listen(onStalled);
-  if (onSubmit != null) v.onSubmit.listen(onSubmit);
-  if (onSuspend != null) v.onSuspend.listen(onSuspend);
-  if (onTimeUpdate != null) v.onTimeUpdate.listen(onTimeUpdate);
-  if (onTouchCancel != null) v.onTouchCancel.listen(onTouchCancel);
-  if (onTouchEnd != null) v.onTouchEnd.listen(onTouchEnd);
-  if (onTouchEnter != null) v.onTouchEnter.listen(onTouchEnter);
-  if (onTouchLeave != null) v.onTouchLeave.listen(onTouchLeave);
-  if (onTouchMove != null) v.onTouchMove.listen(onTouchMove);
-  if (onTouchStart != null) v.onTouchStart.listen(onTouchStart);
-  if (onTransitionEnd != null) v.onTransitionEnd.listen(onTransitionEnd);
-  if (onVolumeChange != null) v.onVolumeChange.listen(onVolumeChange);
-  if (onWaiting != null) v.onWaiting.listen(onWaiting);
-  if (onFullscreenChange != null)
-    v.onFullscreenChange.listen(onFullscreenChange);
-  if (onFullscreenError != null) v.onFullscreenError.listen(onFullscreenError);
-  if (onWheel != null) v.onWheel.listen(onWheel);
-  return v;
+class HtmlHtmlElementWidget extends HtmlElementWidget {
+  HtmlHtmlElementWidget(
+      {super.nonce,
+      super.attributes,
+      super.children,
+      super.classes,
+      super.dataset,
+      super.innerHtml,
+      super.innerText,
+      super.scrollLeft,
+      super.scrollTop,
+      super.contentEditable,
+      super.dir,
+      super.draggable,
+      super.hidden,
+      super.inert,
+      super.inputMode,
+      super.lang,
+      super.spellcheck,
+      super.tabIndex,
+      super.title,
+      super.translate,
+      super.className,
+      super.id,
+      super.slot,
+      super.nodes,
+      super.text,
+      super.onAbort,
+      super.onBeforeCopy,
+      super.onBeforeCut,
+      super.onBeforePaste,
+      super.onBlur,
+      super.onCanPlay,
+      super.onCanPlayThrough,
+      super.onChange,
+      super.onClick,
+      super.onContextMenu,
+      super.onCopy,
+      super.onCut,
+      super.onDoubleClick,
+      super.onDrag,
+      super.onDragEnd,
+      super.onDragEnter,
+      super.onDragLeave,
+      super.onDragOver,
+      super.onDragStart,
+      super.onDrop,
+      super.onDurationChange,
+      super.onEmptied,
+      super.onEnded,
+      super.onError,
+      super.onFocus,
+      super.onInput,
+      super.onInvalid,
+      super.onKeyDown,
+      super.onKeyPress,
+      super.onKeyUp,
+      super.onLoad,
+      super.onLoadedData,
+      super.onLoadedMetadata,
+      super.onMouseDown,
+      super.onMouseEnter,
+      super.onMouseLeave,
+      super.onMouseMove,
+      super.onMouseOut,
+      super.onMouseOver,
+      super.onMouseUp,
+      super.onMouseWheel,
+      super.onPaste,
+      super.onPause,
+      super.onPlay,
+      super.onPlaying,
+      super.onRateChange,
+      super.onReset,
+      super.onResize,
+      super.onScroll,
+      super.onSearch,
+      super.onSeeked,
+      super.onSeeking,
+      super.onSelect,
+      super.onSelectStart,
+      super.onStalled,
+      super.onSubmit,
+      super.onSuspend,
+      super.onTimeUpdate,
+      super.onTouchCancel,
+      super.onTouchEnd,
+      super.onTouchEnter,
+      super.onTouchLeave,
+      super.onTouchMove,
+      super.onTouchStart,
+      super.onTransitionEnd,
+      super.onVolumeChange,
+      super.onWaiting,
+      super.onFullscreenChange,
+      super.onFullscreenError,
+      super.onWheel});
+  @override
+  Element render() => hook(HtmlHtmlElement());
 }
 
-ImageElement imageElement(
-    {String? alt,
-    String? async,
-    String? crossOrigin,
-    int? height,
-    bool? isMap,
-    String? referrerPolicy,
-    String? sizes,
-    String? src,
-    String? srcset,
-    String? useMap,
-    int? width,
-    String? nonce,
-    Map<String, String>? attributes,
-    List<Element>? children,
-    Iterable<String>? classes,
-    Map<String, String>? dataset,
-    String? innerHtml,
-    String? innerText,
-    int? scrollLeft,
-    int? scrollTop,
-    String? contentEditable,
-    String? dir,
-    bool? draggable,
-    bool? hidden,
-    bool? inert,
-    String? inputMode,
-    String? lang,
-    bool? spellcheck,
-    int? tabIndex,
-    String? title,
-    bool? translate,
-    String? className,
-    String? id,
-    String? slot,
-    Iterable<Node>? nodes,
-    String? text,
-    void Function(Event)? onAbort,
-    void Function(Event)? onBeforeCopy,
-    void Function(Event)? onBeforeCut,
-    void Function(Event)? onBeforePaste,
-    void Function(Event)? onBlur,
-    void Function(Event)? onCanPlay,
-    void Function(Event)? onCanPlayThrough,
-    void Function(Event)? onChange,
-    void Function(MouseEvent)? onClick,
-    void Function(MouseEvent)? onContextMenu,
-    void Function(ClipboardEvent)? onCopy,
-    void Function(ClipboardEvent)? onCut,
-    void Function(Event)? onDoubleClick,
-    void Function(MouseEvent)? onDrag,
-    void Function(MouseEvent)? onDragEnd,
-    void Function(MouseEvent)? onDragEnter,
-    void Function(MouseEvent)? onDragLeave,
-    void Function(MouseEvent)? onDragOver,
-    void Function(MouseEvent)? onDragStart,
-    void Function(MouseEvent)? onDrop,
-    void Function(Event)? onDurationChange,
-    void Function(Event)? onEmptied,
-    void Function(Event)? onEnded,
-    void Function(Event)? onError,
-    void Function(Event)? onFocus,
-    void Function(Event)? onInput,
-    void Function(Event)? onInvalid,
-    void Function(KeyboardEvent)? onKeyDown,
-    void Function(KeyboardEvent)? onKeyPress,
-    void Function(KeyboardEvent)? onKeyUp,
-    void Function(Event)? onLoad,
-    void Function(Event)? onLoadedData,
-    void Function(Event)? onLoadedMetadata,
-    void Function(MouseEvent)? onMouseDown,
-    void Function(MouseEvent)? onMouseEnter,
-    void Function(MouseEvent)? onMouseLeave,
-    void Function(MouseEvent)? onMouseMove,
-    void Function(MouseEvent)? onMouseOut,
-    void Function(MouseEvent)? onMouseOver,
-    void Function(MouseEvent)? onMouseUp,
-    void Function(WheelEvent)? onMouseWheel,
-    void Function(ClipboardEvent)? onPaste,
-    void Function(Event)? onPause,
-    void Function(Event)? onPlay,
-    void Function(Event)? onPlaying,
-    void Function(Event)? onRateChange,
-    void Function(Event)? onReset,
-    void Function(Event)? onResize,
-    void Function(Event)? onScroll,
-    void Function(Event)? onSearch,
-    void Function(Event)? onSeeked,
-    void Function(Event)? onSeeking,
-    void Function(Event)? onSelect,
-    void Function(Event)? onSelectStart,
-    void Function(Event)? onStalled,
-    void Function(Event)? onSubmit,
-    void Function(Event)? onSuspend,
-    void Function(Event)? onTimeUpdate,
-    void Function(TouchEvent)? onTouchCancel,
-    void Function(TouchEvent)? onTouchEnd,
-    void Function(TouchEvent)? onTouchEnter,
-    void Function(TouchEvent)? onTouchLeave,
-    void Function(TouchEvent)? onTouchMove,
-    void Function(TouchEvent)? onTouchStart,
-    void Function(TransitionEvent)? onTransitionEnd,
-    void Function(Event)? onVolumeChange,
-    void Function(Event)? onWaiting,
-    void Function(Event)? onFullscreenChange,
-    void Function(Event)? onFullscreenError,
-    void Function(WheelEvent)? onWheel}) {
-  final v = ImageElement();
-  if (alt != null) v.alt = alt;
-  if (async != null) v.async = async;
-  if (crossOrigin != null) v.crossOrigin = crossOrigin;
-  if (height != null) v.height = height;
-  if (isMap != null) v.isMap = isMap;
-  if (referrerPolicy != null) v.referrerPolicy = referrerPolicy;
-  if (sizes != null) v.sizes = sizes;
-  if (src != null) v.src = src;
-  if (srcset != null) v.srcset = srcset;
-  if (useMap != null) v.useMap = useMap;
-  if (width != null) v.width = width;
-  if (nonce != null) v.nonce = nonce;
-  if (attributes != null) v.attributes = attributes;
-  if (children != null) v.children = children;
-  if (classes != null) v.classes = classes;
-  if (dataset != null) v.dataset = dataset;
-  if (innerHtml != null) v.innerHtml = innerHtml;
-  if (innerText != null) v.innerText = innerText;
-  if (scrollLeft != null) v.scrollLeft = scrollLeft;
-  if (scrollTop != null) v.scrollTop = scrollTop;
-  if (contentEditable != null) v.contentEditable = contentEditable;
-  if (dir != null) v.dir = dir;
-  if (draggable != null) v.draggable = draggable;
-  if (hidden != null) v.hidden = hidden;
-  if (inert != null) v.inert = inert;
-  if (inputMode != null) v.inputMode = inputMode;
-  if (lang != null) v.lang = lang;
-  if (spellcheck != null) v.spellcheck = spellcheck;
-  if (tabIndex != null) v.tabIndex = tabIndex;
-  if (title != null) v.title = title;
-  if (translate != null) v.translate = translate;
-  if (className != null) v.className = className;
-  if (id != null) v.id = id;
-  if (slot != null) v.slot = slot;
-  if (nodes != null) v.nodes = nodes;
-  if (text != null) v.text = text;
-  if (onAbort != null) v.onAbort.listen(onAbort);
-  if (onBeforeCopy != null) v.onBeforeCopy.listen(onBeforeCopy);
-  if (onBeforeCut != null) v.onBeforeCut.listen(onBeforeCut);
-  if (onBeforePaste != null) v.onBeforePaste.listen(onBeforePaste);
-  if (onBlur != null) v.onBlur.listen(onBlur);
-  if (onCanPlay != null) v.onCanPlay.listen(onCanPlay);
-  if (onCanPlayThrough != null) v.onCanPlayThrough.listen(onCanPlayThrough);
-  if (onChange != null) v.onChange.listen(onChange);
-  if (onClick != null) v.onClick.listen(onClick);
-  if (onContextMenu != null) v.onContextMenu.listen(onContextMenu);
-  if (onCopy != null) v.onCopy.listen(onCopy);
-  if (onCut != null) v.onCut.listen(onCut);
-  if (onDoubleClick != null) v.onDoubleClick.listen(onDoubleClick);
-  if (onDrag != null) v.onDrag.listen(onDrag);
-  if (onDragEnd != null) v.onDragEnd.listen(onDragEnd);
-  if (onDragEnter != null) v.onDragEnter.listen(onDragEnter);
-  if (onDragLeave != null) v.onDragLeave.listen(onDragLeave);
-  if (onDragOver != null) v.onDragOver.listen(onDragOver);
-  if (onDragStart != null) v.onDragStart.listen(onDragStart);
-  if (onDrop != null) v.onDrop.listen(onDrop);
-  if (onDurationChange != null) v.onDurationChange.listen(onDurationChange);
-  if (onEmptied != null) v.onEmptied.listen(onEmptied);
-  if (onEnded != null) v.onEnded.listen(onEnded);
-  if (onError != null) v.onError.listen(onError);
-  if (onFocus != null) v.onFocus.listen(onFocus);
-  if (onInput != null) v.onInput.listen(onInput);
-  if (onInvalid != null) v.onInvalid.listen(onInvalid);
-  if (onKeyDown != null) v.onKeyDown.listen(onKeyDown);
-  if (onKeyPress != null) v.onKeyPress.listen(onKeyPress);
-  if (onKeyUp != null) v.onKeyUp.listen(onKeyUp);
-  if (onLoad != null) v.onLoad.listen(onLoad);
-  if (onLoadedData != null) v.onLoadedData.listen(onLoadedData);
-  if (onLoadedMetadata != null) v.onLoadedMetadata.listen(onLoadedMetadata);
-  if (onMouseDown != null) v.onMouseDown.listen(onMouseDown);
-  if (onMouseEnter != null) v.onMouseEnter.listen(onMouseEnter);
-  if (onMouseLeave != null) v.onMouseLeave.listen(onMouseLeave);
-  if (onMouseMove != null) v.onMouseMove.listen(onMouseMove);
-  if (onMouseOut != null) v.onMouseOut.listen(onMouseOut);
-  if (onMouseOver != null) v.onMouseOver.listen(onMouseOver);
-  if (onMouseUp != null) v.onMouseUp.listen(onMouseUp);
-  if (onMouseWheel != null) v.onMouseWheel.listen(onMouseWheel);
-  if (onPaste != null) v.onPaste.listen(onPaste);
-  if (onPause != null) v.onPause.listen(onPause);
-  if (onPlay != null) v.onPlay.listen(onPlay);
-  if (onPlaying != null) v.onPlaying.listen(onPlaying);
-  if (onRateChange != null) v.onRateChange.listen(onRateChange);
-  if (onReset != null) v.onReset.listen(onReset);
-  if (onResize != null) v.onResize.listen(onResize);
-  if (onScroll != null) v.onScroll.listen(onScroll);
-  if (onSearch != null) v.onSearch.listen(onSearch);
-  if (onSeeked != null) v.onSeeked.listen(onSeeked);
-  if (onSeeking != null) v.onSeeking.listen(onSeeking);
-  if (onSelect != null) v.onSelect.listen(onSelect);
-  if (onSelectStart != null) v.onSelectStart.listen(onSelectStart);
-  if (onStalled != null) v.onStalled.listen(onStalled);
-  if (onSubmit != null) v.onSubmit.listen(onSubmit);
-  if (onSuspend != null) v.onSuspend.listen(onSuspend);
-  if (onTimeUpdate != null) v.onTimeUpdate.listen(onTimeUpdate);
-  if (onTouchCancel != null) v.onTouchCancel.listen(onTouchCancel);
-  if (onTouchEnd != null) v.onTouchEnd.listen(onTouchEnd);
-  if (onTouchEnter != null) v.onTouchEnter.listen(onTouchEnter);
-  if (onTouchLeave != null) v.onTouchLeave.listen(onTouchLeave);
-  if (onTouchMove != null) v.onTouchMove.listen(onTouchMove);
-  if (onTouchStart != null) v.onTouchStart.listen(onTouchStart);
-  if (onTransitionEnd != null) v.onTransitionEnd.listen(onTransitionEnd);
-  if (onVolumeChange != null) v.onVolumeChange.listen(onVolumeChange);
-  if (onWaiting != null) v.onWaiting.listen(onWaiting);
-  if (onFullscreenChange != null)
-    v.onFullscreenChange.listen(onFullscreenChange);
-  if (onFullscreenError != null) v.onFullscreenError.listen(onFullscreenError);
-  if (onWheel != null) v.onWheel.listen(onWheel);
-  return v;
+class IFrameElementWidget extends HtmlElementWidget {
+  IFrameElementWidget(
+      {super.nonce,
+      super.attributes,
+      super.children,
+      super.classes,
+      super.dataset,
+      super.innerHtml,
+      super.innerText,
+      super.scrollLeft,
+      super.scrollTop,
+      super.contentEditable,
+      super.dir,
+      super.draggable,
+      super.hidden,
+      super.inert,
+      super.inputMode,
+      super.lang,
+      super.spellcheck,
+      super.tabIndex,
+      super.title,
+      super.translate,
+      super.className,
+      super.id,
+      super.slot,
+      super.nodes,
+      super.text,
+      super.onAbort,
+      super.onBeforeCopy,
+      super.onBeforeCut,
+      super.onBeforePaste,
+      super.onBlur,
+      super.onCanPlay,
+      super.onCanPlayThrough,
+      super.onChange,
+      super.onClick,
+      super.onContextMenu,
+      super.onCopy,
+      super.onCut,
+      super.onDoubleClick,
+      super.onDrag,
+      super.onDragEnd,
+      super.onDragEnter,
+      super.onDragLeave,
+      super.onDragOver,
+      super.onDragStart,
+      super.onDrop,
+      super.onDurationChange,
+      super.onEmptied,
+      super.onEnded,
+      super.onError,
+      super.onFocus,
+      super.onInput,
+      super.onInvalid,
+      super.onKeyDown,
+      super.onKeyPress,
+      super.onKeyUp,
+      super.onLoad,
+      super.onLoadedData,
+      super.onLoadedMetadata,
+      super.onMouseDown,
+      super.onMouseEnter,
+      super.onMouseLeave,
+      super.onMouseMove,
+      super.onMouseOut,
+      super.onMouseOver,
+      super.onMouseUp,
+      super.onMouseWheel,
+      super.onPaste,
+      super.onPause,
+      super.onPlay,
+      super.onPlaying,
+      super.onRateChange,
+      super.onReset,
+      super.onResize,
+      super.onScroll,
+      super.onSearch,
+      super.onSeeked,
+      super.onSeeking,
+      super.onSelect,
+      super.onSelectStart,
+      super.onStalled,
+      super.onSubmit,
+      super.onSuspend,
+      super.onTimeUpdate,
+      super.onTouchCancel,
+      super.onTouchEnd,
+      super.onTouchEnter,
+      super.onTouchLeave,
+      super.onTouchMove,
+      super.onTouchStart,
+      super.onTransitionEnd,
+      super.onVolumeChange,
+      super.onWaiting,
+      super.onFullscreenChange,
+      super.onFullscreenError,
+      super.onWheel});
+  @override
+  Element render() => hook(IFrameElement());
 }
 
-InputElement inputElement(
-    {String? accept,
-    String? alt,
-    String? autocapitalize,
-    String? autocomplete,
-    bool? autofocus,
-    String? capture,
-    bool? checked,
-    bool? defaultChecked,
-    String? defaultValue,
-    String? dirName,
-    bool? disabled,
-    List<File>? files,
-    String? formAction,
-    String? formEnctype,
-    String? formMethod,
-    bool? formNoValidate,
-    String? formTarget,
-    int? height,
-    bool? incremental,
-    bool? indeterminate,
-    String? max,
-    int? maxLength,
-    String? min,
-    int? minLength,
-    bool? multiple,
-    String? name,
-    String? pattern,
-    String? placeholder,
-    bool? readOnly,
-    bool? required,
-    String? selectionDirection,
-    int? selectionEnd,
-    int? selectionStart,
-    int? size,
-    String? src,
-    String? step,
-    String? type,
-    String? value,
-    DateTime? valueAsDate,
-    num? valueAsNumber,
-    bool? directory,
-    int? width,
-    String? nonce,
-    Map<String, String>? attributes,
-    List<Element>? children,
-    Iterable<String>? classes,
-    Map<String, String>? dataset,
-    String? innerHtml,
-    String? innerText,
-    int? scrollLeft,
-    int? scrollTop,
-    String? contentEditable,
-    String? dir,
-    bool? draggable,
-    bool? hidden,
-    bool? inert,
-    String? inputMode,
-    String? lang,
-    bool? spellcheck,
-    int? tabIndex,
-    String? title,
-    bool? translate,
-    String? className,
-    String? id,
-    String? slot,
-    Iterable<Node>? nodes,
-    String? text,
-    void Function(Event)? onAbort,
-    void Function(Event)? onBeforeCopy,
-    void Function(Event)? onBeforeCut,
-    void Function(Event)? onBeforePaste,
-    void Function(Event)? onBlur,
-    void Function(Event)? onCanPlay,
-    void Function(Event)? onCanPlayThrough,
-    void Function(Event)? onChange,
-    void Function(MouseEvent)? onClick,
-    void Function(MouseEvent)? onContextMenu,
-    void Function(ClipboardEvent)? onCopy,
-    void Function(ClipboardEvent)? onCut,
-    void Function(Event)? onDoubleClick,
-    void Function(MouseEvent)? onDrag,
-    void Function(MouseEvent)? onDragEnd,
-    void Function(MouseEvent)? onDragEnter,
-    void Function(MouseEvent)? onDragLeave,
-    void Function(MouseEvent)? onDragOver,
-    void Function(MouseEvent)? onDragStart,
-    void Function(MouseEvent)? onDrop,
-    void Function(Event)? onDurationChange,
-    void Function(Event)? onEmptied,
-    void Function(Event)? onEnded,
-    void Function(Event)? onError,
-    void Function(Event)? onFocus,
-    void Function(Event)? onInput,
-    void Function(Event)? onInvalid,
-    void Function(KeyboardEvent)? onKeyDown,
-    void Function(KeyboardEvent)? onKeyPress,
-    void Function(KeyboardEvent)? onKeyUp,
-    void Function(Event)? onLoad,
-    void Function(Event)? onLoadedData,
-    void Function(Event)? onLoadedMetadata,
-    void Function(MouseEvent)? onMouseDown,
-    void Function(MouseEvent)? onMouseEnter,
-    void Function(MouseEvent)? onMouseLeave,
-    void Function(MouseEvent)? onMouseMove,
-    void Function(MouseEvent)? onMouseOut,
-    void Function(MouseEvent)? onMouseOver,
-    void Function(MouseEvent)? onMouseUp,
-    void Function(WheelEvent)? onMouseWheel,
-    void Function(ClipboardEvent)? onPaste,
-    void Function(Event)? onPause,
-    void Function(Event)? onPlay,
-    void Function(Event)? onPlaying,
-    void Function(Event)? onRateChange,
-    void Function(Event)? onReset,
-    void Function(Event)? onResize,
-    void Function(Event)? onScroll,
-    void Function(Event)? onSearch,
-    void Function(Event)? onSeeked,
-    void Function(Event)? onSeeking,
-    void Function(Event)? onSelect,
-    void Function(Event)? onSelectStart,
-    void Function(Event)? onStalled,
-    void Function(Event)? onSubmit,
-    void Function(Event)? onSuspend,
-    void Function(Event)? onTimeUpdate,
-    void Function(TouchEvent)? onTouchCancel,
-    void Function(TouchEvent)? onTouchEnd,
-    void Function(TouchEvent)? onTouchEnter,
-    void Function(TouchEvent)? onTouchLeave,
-    void Function(TouchEvent)? onTouchMove,
-    void Function(TouchEvent)? onTouchStart,
-    void Function(TransitionEvent)? onTransitionEnd,
-    void Function(Event)? onVolumeChange,
-    void Function(Event)? onWaiting,
-    void Function(Event)? onFullscreenChange,
-    void Function(Event)? onFullscreenError,
-    void Function(WheelEvent)? onWheel}) {
-  final v = InputElement();
-  if (accept != null) v.accept = accept;
-  if (alt != null) v.alt = alt;
-  if (autocapitalize != null) v.autocapitalize = autocapitalize;
-  if (autocomplete != null) v.autocomplete = autocomplete;
-  if (autofocus != null) v.autofocus = autofocus;
-  if (capture != null) v.capture = capture;
-  if (checked != null) v.checked = checked;
-  if (defaultChecked != null) v.defaultChecked = defaultChecked;
-  if (defaultValue != null) v.defaultValue = defaultValue;
-  if (dirName != null) v.dirName = dirName;
-  if (disabled != null) v.disabled = disabled;
-  if (files != null) v.files = files;
-  if (formAction != null) v.formAction = formAction;
-  if (formEnctype != null) v.formEnctype = formEnctype;
-  if (formMethod != null) v.formMethod = formMethod;
-  if (formNoValidate != null) v.formNoValidate = formNoValidate;
-  if (formTarget != null) v.formTarget = formTarget;
-  if (height != null) v.height = height;
-  if (incremental != null) v.incremental = incremental;
-  if (indeterminate != null) v.indeterminate = indeterminate;
-  if (max != null) v.max = max;
-  if (maxLength != null) v.maxLength = maxLength;
-  if (min != null) v.min = min;
-  if (minLength != null) v.minLength = minLength;
-  if (multiple != null) v.multiple = multiple;
-  if (name != null) v.name = name;
-  if (pattern != null) v.pattern = pattern;
-  if (placeholder != null) v.placeholder = placeholder;
-  if (readOnly != null) v.readOnly = readOnly;
-  if (required != null) v.required = required;
-  if (selectionDirection != null) v.selectionDirection = selectionDirection;
-  if (selectionEnd != null) v.selectionEnd = selectionEnd;
-  if (selectionStart != null) v.selectionStart = selectionStart;
-  if (size != null) v.size = size;
-  if (src != null) v.src = src;
-  if (step != null) v.step = step;
-  if (type != null) v.type = type;
-  if (value != null) v.value = value;
-  if (valueAsDate != null) v.valueAsDate = valueAsDate;
-  if (valueAsNumber != null) v.valueAsNumber = valueAsNumber;
-  if (directory != null) v.directory = directory;
-  if (width != null) v.width = width;
-  if (nonce != null) v.nonce = nonce;
-  if (attributes != null) v.attributes = attributes;
-  if (children != null) v.children = children;
-  if (classes != null) v.classes = classes;
-  if (dataset != null) v.dataset = dataset;
-  if (innerHtml != null) v.innerHtml = innerHtml;
-  if (innerText != null) v.innerText = innerText;
-  if (scrollLeft != null) v.scrollLeft = scrollLeft;
-  if (scrollTop != null) v.scrollTop = scrollTop;
-  if (contentEditable != null) v.contentEditable = contentEditable;
-  if (dir != null) v.dir = dir;
-  if (draggable != null) v.draggable = draggable;
-  if (hidden != null) v.hidden = hidden;
-  if (inert != null) v.inert = inert;
-  if (inputMode != null) v.inputMode = inputMode;
-  if (lang != null) v.lang = lang;
-  if (spellcheck != null) v.spellcheck = spellcheck;
-  if (tabIndex != null) v.tabIndex = tabIndex;
-  if (title != null) v.title = title;
-  if (translate != null) v.translate = translate;
-  if (className != null) v.className = className;
-  if (id != null) v.id = id;
-  if (slot != null) v.slot = slot;
-  if (nodes != null) v.nodes = nodes;
-  if (text != null) v.text = text;
-  if (onAbort != null) v.onAbort.listen(onAbort);
-  if (onBeforeCopy != null) v.onBeforeCopy.listen(onBeforeCopy);
-  if (onBeforeCut != null) v.onBeforeCut.listen(onBeforeCut);
-  if (onBeforePaste != null) v.onBeforePaste.listen(onBeforePaste);
-  if (onBlur != null) v.onBlur.listen(onBlur);
-  if (onCanPlay != null) v.onCanPlay.listen(onCanPlay);
-  if (onCanPlayThrough != null) v.onCanPlayThrough.listen(onCanPlayThrough);
-  if (onChange != null) v.onChange.listen(onChange);
-  if (onClick != null) v.onClick.listen(onClick);
-  if (onContextMenu != null) v.onContextMenu.listen(onContextMenu);
-  if (onCopy != null) v.onCopy.listen(onCopy);
-  if (onCut != null) v.onCut.listen(onCut);
-  if (onDoubleClick != null) v.onDoubleClick.listen(onDoubleClick);
-  if (onDrag != null) v.onDrag.listen(onDrag);
-  if (onDragEnd != null) v.onDragEnd.listen(onDragEnd);
-  if (onDragEnter != null) v.onDragEnter.listen(onDragEnter);
-  if (onDragLeave != null) v.onDragLeave.listen(onDragLeave);
-  if (onDragOver != null) v.onDragOver.listen(onDragOver);
-  if (onDragStart != null) v.onDragStart.listen(onDragStart);
-  if (onDrop != null) v.onDrop.listen(onDrop);
-  if (onDurationChange != null) v.onDurationChange.listen(onDurationChange);
-  if (onEmptied != null) v.onEmptied.listen(onEmptied);
-  if (onEnded != null) v.onEnded.listen(onEnded);
-  if (onError != null) v.onError.listen(onError);
-  if (onFocus != null) v.onFocus.listen(onFocus);
-  if (onInput != null) v.onInput.listen(onInput);
-  if (onInvalid != null) v.onInvalid.listen(onInvalid);
-  if (onKeyDown != null) v.onKeyDown.listen(onKeyDown);
-  if (onKeyPress != null) v.onKeyPress.listen(onKeyPress);
-  if (onKeyUp != null) v.onKeyUp.listen(onKeyUp);
-  if (onLoad != null) v.onLoad.listen(onLoad);
-  if (onLoadedData != null) v.onLoadedData.listen(onLoadedData);
-  if (onLoadedMetadata != null) v.onLoadedMetadata.listen(onLoadedMetadata);
-  if (onMouseDown != null) v.onMouseDown.listen(onMouseDown);
-  if (onMouseEnter != null) v.onMouseEnter.listen(onMouseEnter);
-  if (onMouseLeave != null) v.onMouseLeave.listen(onMouseLeave);
-  if (onMouseMove != null) v.onMouseMove.listen(onMouseMove);
-  if (onMouseOut != null) v.onMouseOut.listen(onMouseOut);
-  if (onMouseOver != null) v.onMouseOver.listen(onMouseOver);
-  if (onMouseUp != null) v.onMouseUp.listen(onMouseUp);
-  if (onMouseWheel != null) v.onMouseWheel.listen(onMouseWheel);
-  if (onPaste != null) v.onPaste.listen(onPaste);
-  if (onPause != null) v.onPause.listen(onPause);
-  if (onPlay != null) v.onPlay.listen(onPlay);
-  if (onPlaying != null) v.onPlaying.listen(onPlaying);
-  if (onRateChange != null) v.onRateChange.listen(onRateChange);
-  if (onReset != null) v.onReset.listen(onReset);
-  if (onResize != null) v.onResize.listen(onResize);
-  if (onScroll != null) v.onScroll.listen(onScroll);
-  if (onSearch != null) v.onSearch.listen(onSearch);
-  if (onSeeked != null) v.onSeeked.listen(onSeeked);
-  if (onSeeking != null) v.onSeeking.listen(onSeeking);
-  if (onSelect != null) v.onSelect.listen(onSelect);
-  if (onSelectStart != null) v.onSelectStart.listen(onSelectStart);
-  if (onStalled != null) v.onStalled.listen(onStalled);
-  if (onSubmit != null) v.onSubmit.listen(onSubmit);
-  if (onSuspend != null) v.onSuspend.listen(onSuspend);
-  if (onTimeUpdate != null) v.onTimeUpdate.listen(onTimeUpdate);
-  if (onTouchCancel != null) v.onTouchCancel.listen(onTouchCancel);
-  if (onTouchEnd != null) v.onTouchEnd.listen(onTouchEnd);
-  if (onTouchEnter != null) v.onTouchEnter.listen(onTouchEnter);
-  if (onTouchLeave != null) v.onTouchLeave.listen(onTouchLeave);
-  if (onTouchMove != null) v.onTouchMove.listen(onTouchMove);
-  if (onTouchStart != null) v.onTouchStart.listen(onTouchStart);
-  if (onTransitionEnd != null) v.onTransitionEnd.listen(onTransitionEnd);
-  if (onVolumeChange != null) v.onVolumeChange.listen(onVolumeChange);
-  if (onWaiting != null) v.onWaiting.listen(onWaiting);
-  if (onFullscreenChange != null)
-    v.onFullscreenChange.listen(onFullscreenChange);
-  if (onFullscreenError != null) v.onFullscreenError.listen(onFullscreenError);
-  if (onWheel != null) v.onWheel.listen(onWheel);
-  return v;
+class ImageElementWidget extends HtmlElementWidget {
+  ImageElementWidget(
+      {super.nonce,
+      super.attributes,
+      super.children,
+      super.classes,
+      super.dataset,
+      super.innerHtml,
+      super.innerText,
+      super.scrollLeft,
+      super.scrollTop,
+      super.contentEditable,
+      super.dir,
+      super.draggable,
+      super.hidden,
+      super.inert,
+      super.inputMode,
+      super.lang,
+      super.spellcheck,
+      super.tabIndex,
+      super.title,
+      super.translate,
+      super.className,
+      super.id,
+      super.slot,
+      super.nodes,
+      super.text,
+      super.onAbort,
+      super.onBeforeCopy,
+      super.onBeforeCut,
+      super.onBeforePaste,
+      super.onBlur,
+      super.onCanPlay,
+      super.onCanPlayThrough,
+      super.onChange,
+      super.onClick,
+      super.onContextMenu,
+      super.onCopy,
+      super.onCut,
+      super.onDoubleClick,
+      super.onDrag,
+      super.onDragEnd,
+      super.onDragEnter,
+      super.onDragLeave,
+      super.onDragOver,
+      super.onDragStart,
+      super.onDrop,
+      super.onDurationChange,
+      super.onEmptied,
+      super.onEnded,
+      super.onError,
+      super.onFocus,
+      super.onInput,
+      super.onInvalid,
+      super.onKeyDown,
+      super.onKeyPress,
+      super.onKeyUp,
+      super.onLoad,
+      super.onLoadedData,
+      super.onLoadedMetadata,
+      super.onMouseDown,
+      super.onMouseEnter,
+      super.onMouseLeave,
+      super.onMouseMove,
+      super.onMouseOut,
+      super.onMouseOver,
+      super.onMouseUp,
+      super.onMouseWheel,
+      super.onPaste,
+      super.onPause,
+      super.onPlay,
+      super.onPlaying,
+      super.onRateChange,
+      super.onReset,
+      super.onResize,
+      super.onScroll,
+      super.onSearch,
+      super.onSeeked,
+      super.onSeeking,
+      super.onSelect,
+      super.onSelectStart,
+      super.onStalled,
+      super.onSubmit,
+      super.onSuspend,
+      super.onTimeUpdate,
+      super.onTouchCancel,
+      super.onTouchEnd,
+      super.onTouchEnter,
+      super.onTouchLeave,
+      super.onTouchMove,
+      super.onTouchStart,
+      super.onTransitionEnd,
+      super.onVolumeChange,
+      super.onWaiting,
+      super.onFullscreenChange,
+      super.onFullscreenError,
+      super.onWheel});
+  @override
+  Element render() => hook(ImageElement());
 }
 
-LIElement lIElement(
-    {int? value,
-    String? nonce,
-    Map<String, String>? attributes,
-    List<Element>? children,
-    Iterable<String>? classes,
-    Map<String, String>? dataset,
-    String? innerHtml,
-    String? innerText,
-    int? scrollLeft,
-    int? scrollTop,
-    String? contentEditable,
-    String? dir,
-    bool? draggable,
-    bool? hidden,
-    bool? inert,
-    String? inputMode,
-    String? lang,
-    bool? spellcheck,
-    int? tabIndex,
-    String? title,
-    bool? translate,
-    String? className,
-    String? id,
-    String? slot,
-    Iterable<Node>? nodes,
-    String? text,
-    void Function(Event)? onAbort,
-    void Function(Event)? onBeforeCopy,
-    void Function(Event)? onBeforeCut,
-    void Function(Event)? onBeforePaste,
-    void Function(Event)? onBlur,
-    void Function(Event)? onCanPlay,
-    void Function(Event)? onCanPlayThrough,
-    void Function(Event)? onChange,
-    void Function(MouseEvent)? onClick,
-    void Function(MouseEvent)? onContextMenu,
-    void Function(ClipboardEvent)? onCopy,
-    void Function(ClipboardEvent)? onCut,
-    void Function(Event)? onDoubleClick,
-    void Function(MouseEvent)? onDrag,
-    void Function(MouseEvent)? onDragEnd,
-    void Function(MouseEvent)? onDragEnter,
-    void Function(MouseEvent)? onDragLeave,
-    void Function(MouseEvent)? onDragOver,
-    void Function(MouseEvent)? onDragStart,
-    void Function(MouseEvent)? onDrop,
-    void Function(Event)? onDurationChange,
-    void Function(Event)? onEmptied,
-    void Function(Event)? onEnded,
-    void Function(Event)? onError,
-    void Function(Event)? onFocus,
-    void Function(Event)? onInput,
-    void Function(Event)? onInvalid,
-    void Function(KeyboardEvent)? onKeyDown,
-    void Function(KeyboardEvent)? onKeyPress,
-    void Function(KeyboardEvent)? onKeyUp,
-    void Function(Event)? onLoad,
-    void Function(Event)? onLoadedData,
-    void Function(Event)? onLoadedMetadata,
-    void Function(MouseEvent)? onMouseDown,
-    void Function(MouseEvent)? onMouseEnter,
-    void Function(MouseEvent)? onMouseLeave,
-    void Function(MouseEvent)? onMouseMove,
-    void Function(MouseEvent)? onMouseOut,
-    void Function(MouseEvent)? onMouseOver,
-    void Function(MouseEvent)? onMouseUp,
-    void Function(WheelEvent)? onMouseWheel,
-    void Function(ClipboardEvent)? onPaste,
-    void Function(Event)? onPause,
-    void Function(Event)? onPlay,
-    void Function(Event)? onPlaying,
-    void Function(Event)? onRateChange,
-    void Function(Event)? onReset,
-    void Function(Event)? onResize,
-    void Function(Event)? onScroll,
-    void Function(Event)? onSearch,
-    void Function(Event)? onSeeked,
-    void Function(Event)? onSeeking,
-    void Function(Event)? onSelect,
-    void Function(Event)? onSelectStart,
-    void Function(Event)? onStalled,
-    void Function(Event)? onSubmit,
-    void Function(Event)? onSuspend,
-    void Function(Event)? onTimeUpdate,
-    void Function(TouchEvent)? onTouchCancel,
-    void Function(TouchEvent)? onTouchEnd,
-    void Function(TouchEvent)? onTouchEnter,
-    void Function(TouchEvent)? onTouchLeave,
-    void Function(TouchEvent)? onTouchMove,
-    void Function(TouchEvent)? onTouchStart,
-    void Function(TransitionEvent)? onTransitionEnd,
-    void Function(Event)? onVolumeChange,
-    void Function(Event)? onWaiting,
-    void Function(Event)? onFullscreenChange,
-    void Function(Event)? onFullscreenError,
-    void Function(WheelEvent)? onWheel}) {
-  final v = LIElement();
-  if (value != null) v.value = value;
-  if (nonce != null) v.nonce = nonce;
-  if (attributes != null) v.attributes = attributes;
-  if (children != null) v.children = children;
-  if (classes != null) v.classes = classes;
-  if (dataset != null) v.dataset = dataset;
-  if (innerHtml != null) v.innerHtml = innerHtml;
-  if (innerText != null) v.innerText = innerText;
-  if (scrollLeft != null) v.scrollLeft = scrollLeft;
-  if (scrollTop != null) v.scrollTop = scrollTop;
-  if (contentEditable != null) v.contentEditable = contentEditable;
-  if (dir != null) v.dir = dir;
-  if (draggable != null) v.draggable = draggable;
-  if (hidden != null) v.hidden = hidden;
-  if (inert != null) v.inert = inert;
-  if (inputMode != null) v.inputMode = inputMode;
-  if (lang != null) v.lang = lang;
-  if (spellcheck != null) v.spellcheck = spellcheck;
-  if (tabIndex != null) v.tabIndex = tabIndex;
-  if (title != null) v.title = title;
-  if (translate != null) v.translate = translate;
-  if (className != null) v.className = className;
-  if (id != null) v.id = id;
-  if (slot != null) v.slot = slot;
-  if (nodes != null) v.nodes = nodes;
-  if (text != null) v.text = text;
-  if (onAbort != null) v.onAbort.listen(onAbort);
-  if (onBeforeCopy != null) v.onBeforeCopy.listen(onBeforeCopy);
-  if (onBeforeCut != null) v.onBeforeCut.listen(onBeforeCut);
-  if (onBeforePaste != null) v.onBeforePaste.listen(onBeforePaste);
-  if (onBlur != null) v.onBlur.listen(onBlur);
-  if (onCanPlay != null) v.onCanPlay.listen(onCanPlay);
-  if (onCanPlayThrough != null) v.onCanPlayThrough.listen(onCanPlayThrough);
-  if (onChange != null) v.onChange.listen(onChange);
-  if (onClick != null) v.onClick.listen(onClick);
-  if (onContextMenu != null) v.onContextMenu.listen(onContextMenu);
-  if (onCopy != null) v.onCopy.listen(onCopy);
-  if (onCut != null) v.onCut.listen(onCut);
-  if (onDoubleClick != null) v.onDoubleClick.listen(onDoubleClick);
-  if (onDrag != null) v.onDrag.listen(onDrag);
-  if (onDragEnd != null) v.onDragEnd.listen(onDragEnd);
-  if (onDragEnter != null) v.onDragEnter.listen(onDragEnter);
-  if (onDragLeave != null) v.onDragLeave.listen(onDragLeave);
-  if (onDragOver != null) v.onDragOver.listen(onDragOver);
-  if (onDragStart != null) v.onDragStart.listen(onDragStart);
-  if (onDrop != null) v.onDrop.listen(onDrop);
-  if (onDurationChange != null) v.onDurationChange.listen(onDurationChange);
-  if (onEmptied != null) v.onEmptied.listen(onEmptied);
-  if (onEnded != null) v.onEnded.listen(onEnded);
-  if (onError != null) v.onError.listen(onError);
-  if (onFocus != null) v.onFocus.listen(onFocus);
-  if (onInput != null) v.onInput.listen(onInput);
-  if (onInvalid != null) v.onInvalid.listen(onInvalid);
-  if (onKeyDown != null) v.onKeyDown.listen(onKeyDown);
-  if (onKeyPress != null) v.onKeyPress.listen(onKeyPress);
-  if (onKeyUp != null) v.onKeyUp.listen(onKeyUp);
-  if (onLoad != null) v.onLoad.listen(onLoad);
-  if (onLoadedData != null) v.onLoadedData.listen(onLoadedData);
-  if (onLoadedMetadata != null) v.onLoadedMetadata.listen(onLoadedMetadata);
-  if (onMouseDown != null) v.onMouseDown.listen(onMouseDown);
-  if (onMouseEnter != null) v.onMouseEnter.listen(onMouseEnter);
-  if (onMouseLeave != null) v.onMouseLeave.listen(onMouseLeave);
-  if (onMouseMove != null) v.onMouseMove.listen(onMouseMove);
-  if (onMouseOut != null) v.onMouseOut.listen(onMouseOut);
-  if (onMouseOver != null) v.onMouseOver.listen(onMouseOver);
-  if (onMouseUp != null) v.onMouseUp.listen(onMouseUp);
-  if (onMouseWheel != null) v.onMouseWheel.listen(onMouseWheel);
-  if (onPaste != null) v.onPaste.listen(onPaste);
-  if (onPause != null) v.onPause.listen(onPause);
-  if (onPlay != null) v.onPlay.listen(onPlay);
-  if (onPlaying != null) v.onPlaying.listen(onPlaying);
-  if (onRateChange != null) v.onRateChange.listen(onRateChange);
-  if (onReset != null) v.onReset.listen(onReset);
-  if (onResize != null) v.onResize.listen(onResize);
-  if (onScroll != null) v.onScroll.listen(onScroll);
-  if (onSearch != null) v.onSearch.listen(onSearch);
-  if (onSeeked != null) v.onSeeked.listen(onSeeked);
-  if (onSeeking != null) v.onSeeking.listen(onSeeking);
-  if (onSelect != null) v.onSelect.listen(onSelect);
-  if (onSelectStart != null) v.onSelectStart.listen(onSelectStart);
-  if (onStalled != null) v.onStalled.listen(onStalled);
-  if (onSubmit != null) v.onSubmit.listen(onSubmit);
-  if (onSuspend != null) v.onSuspend.listen(onSuspend);
-  if (onTimeUpdate != null) v.onTimeUpdate.listen(onTimeUpdate);
-  if (onTouchCancel != null) v.onTouchCancel.listen(onTouchCancel);
-  if (onTouchEnd != null) v.onTouchEnd.listen(onTouchEnd);
-  if (onTouchEnter != null) v.onTouchEnter.listen(onTouchEnter);
-  if (onTouchLeave != null) v.onTouchLeave.listen(onTouchLeave);
-  if (onTouchMove != null) v.onTouchMove.listen(onTouchMove);
-  if (onTouchStart != null) v.onTouchStart.listen(onTouchStart);
-  if (onTransitionEnd != null) v.onTransitionEnd.listen(onTransitionEnd);
-  if (onVolumeChange != null) v.onVolumeChange.listen(onVolumeChange);
-  if (onWaiting != null) v.onWaiting.listen(onWaiting);
-  if (onFullscreenChange != null)
-    v.onFullscreenChange.listen(onFullscreenChange);
-  if (onFullscreenError != null) v.onFullscreenError.listen(onFullscreenError);
-  if (onWheel != null) v.onWheel.listen(onWheel);
-  return v;
+class InputElementWidget extends HtmlElementWidget {
+  final String? type;
+  final String? value;
+  final String? placeholder;
+  InputElementWidget(
+      {this.type,
+      this.value,
+      this.placeholder,
+      super.nonce,
+      super.attributes,
+      super.children,
+      super.classes,
+      super.dataset,
+      super.innerHtml,
+      super.innerText,
+      super.scrollLeft,
+      super.scrollTop,
+      super.contentEditable,
+      super.dir,
+      super.draggable,
+      super.hidden,
+      super.inert,
+      super.inputMode,
+      super.lang,
+      super.spellcheck,
+      super.tabIndex,
+      super.title,
+      super.translate,
+      super.className,
+      super.id,
+      super.slot,
+      super.nodes,
+      super.text,
+      super.onAbort,
+      super.onBeforeCopy,
+      super.onBeforeCut,
+      super.onBeforePaste,
+      super.onBlur,
+      super.onCanPlay,
+      super.onCanPlayThrough,
+      super.onChange,
+      super.onClick,
+      super.onContextMenu,
+      super.onCopy,
+      super.onCut,
+      super.onDoubleClick,
+      super.onDrag,
+      super.onDragEnd,
+      super.onDragEnter,
+      super.onDragLeave,
+      super.onDragOver,
+      super.onDragStart,
+      super.onDrop,
+      super.onDurationChange,
+      super.onEmptied,
+      super.onEnded,
+      super.onError,
+      super.onFocus,
+      super.onInput,
+      super.onInvalid,
+      super.onKeyDown,
+      super.onKeyPress,
+      super.onKeyUp,
+      super.onLoad,
+      super.onLoadedData,
+      super.onLoadedMetadata,
+      super.onMouseDown,
+      super.onMouseEnter,
+      super.onMouseLeave,
+      super.onMouseMove,
+      super.onMouseOut,
+      super.onMouseOver,
+      super.onMouseUp,
+      super.onMouseWheel,
+      super.onPaste,
+      super.onPause,
+      super.onPlay,
+      super.onPlaying,
+      super.onRateChange,
+      super.onReset,
+      super.onResize,
+      super.onScroll,
+      super.onSearch,
+      super.onSeeked,
+      super.onSeeking,
+      super.onSelect,
+      super.onSelectStart,
+      super.onStalled,
+      super.onSubmit,
+      super.onSuspend,
+      super.onTimeUpdate,
+      super.onTouchCancel,
+      super.onTouchEnd,
+      super.onTouchEnter,
+      super.onTouchLeave,
+      super.onTouchMove,
+      super.onTouchStart,
+      super.onTransitionEnd,
+      super.onVolumeChange,
+      super.onWaiting,
+      super.onFullscreenChange,
+      super.onFullscreenError,
+      super.onWheel});
+
+  @override
+  Element hook(Element el) {
+    final v = el as InputElement;
+    if (type != null) v.type = type;
+    if (value != null) v.value = value;
+    if (placeholder != null) v.placeholder = placeholder!;
+    return super.hook(v);
+  }
+
+  @override
+  Element render() => hook(InputElement());
 }
 
-LabelElement labelElement(
-    {String? htmlFor,
-    String? nonce,
-    Map<String, String>? attributes,
-    List<Element>? children,
-    Iterable<String>? classes,
-    Map<String, String>? dataset,
-    String? innerHtml,
-    String? innerText,
-    int? scrollLeft,
-    int? scrollTop,
-    String? contentEditable,
-    String? dir,
-    bool? draggable,
-    bool? hidden,
-    bool? inert,
-    String? inputMode,
-    String? lang,
-    bool? spellcheck,
-    int? tabIndex,
-    String? title,
-    bool? translate,
-    String? className,
-    String? id,
-    String? slot,
-    Iterable<Node>? nodes,
-    String? text,
-    void Function(Event)? onAbort,
-    void Function(Event)? onBeforeCopy,
-    void Function(Event)? onBeforeCut,
-    void Function(Event)? onBeforePaste,
-    void Function(Event)? onBlur,
-    void Function(Event)? onCanPlay,
-    void Function(Event)? onCanPlayThrough,
-    void Function(Event)? onChange,
-    void Function(MouseEvent)? onClick,
-    void Function(MouseEvent)? onContextMenu,
-    void Function(ClipboardEvent)? onCopy,
-    void Function(ClipboardEvent)? onCut,
-    void Function(Event)? onDoubleClick,
-    void Function(MouseEvent)? onDrag,
-    void Function(MouseEvent)? onDragEnd,
-    void Function(MouseEvent)? onDragEnter,
-    void Function(MouseEvent)? onDragLeave,
-    void Function(MouseEvent)? onDragOver,
-    void Function(MouseEvent)? onDragStart,
-    void Function(MouseEvent)? onDrop,
-    void Function(Event)? onDurationChange,
-    void Function(Event)? onEmptied,
-    void Function(Event)? onEnded,
-    void Function(Event)? onError,
-    void Function(Event)? onFocus,
-    void Function(Event)? onInput,
-    void Function(Event)? onInvalid,
-    void Function(KeyboardEvent)? onKeyDown,
-    void Function(KeyboardEvent)? onKeyPress,
-    void Function(KeyboardEvent)? onKeyUp,
-    void Function(Event)? onLoad,
-    void Function(Event)? onLoadedData,
-    void Function(Event)? onLoadedMetadata,
-    void Function(MouseEvent)? onMouseDown,
-    void Function(MouseEvent)? onMouseEnter,
-    void Function(MouseEvent)? onMouseLeave,
-    void Function(MouseEvent)? onMouseMove,
-    void Function(MouseEvent)? onMouseOut,
-    void Function(MouseEvent)? onMouseOver,
-    void Function(MouseEvent)? onMouseUp,
-    void Function(WheelEvent)? onMouseWheel,
-    void Function(ClipboardEvent)? onPaste,
-    void Function(Event)? onPause,
-    void Function(Event)? onPlay,
-    void Function(Event)? onPlaying,
-    void Function(Event)? onRateChange,
-    void Function(Event)? onReset,
-    void Function(Event)? onResize,
-    void Function(Event)? onScroll,
-    void Function(Event)? onSearch,
-    void Function(Event)? onSeeked,
-    void Function(Event)? onSeeking,
-    void Function(Event)? onSelect,
-    void Function(Event)? onSelectStart,
-    void Function(Event)? onStalled,
-    void Function(Event)? onSubmit,
-    void Function(Event)? onSuspend,
-    void Function(Event)? onTimeUpdate,
-    void Function(TouchEvent)? onTouchCancel,
-    void Function(TouchEvent)? onTouchEnd,
-    void Function(TouchEvent)? onTouchEnter,
-    void Function(TouchEvent)? onTouchLeave,
-    void Function(TouchEvent)? onTouchMove,
-    void Function(TouchEvent)? onTouchStart,
-    void Function(TransitionEvent)? onTransitionEnd,
-    void Function(Event)? onVolumeChange,
-    void Function(Event)? onWaiting,
-    void Function(Event)? onFullscreenChange,
-    void Function(Event)? onFullscreenError,
-    void Function(WheelEvent)? onWheel}) {
-  final v = LabelElement();
-  if (htmlFor != null) v.htmlFor = htmlFor;
-  if (nonce != null) v.nonce = nonce;
-  if (attributes != null) v.attributes = attributes;
-  if (children != null) v.children = children;
-  if (classes != null) v.classes = classes;
-  if (dataset != null) v.dataset = dataset;
-  if (innerHtml != null) v.innerHtml = innerHtml;
-  if (innerText != null) v.innerText = innerText;
-  if (scrollLeft != null) v.scrollLeft = scrollLeft;
-  if (scrollTop != null) v.scrollTop = scrollTop;
-  if (contentEditable != null) v.contentEditable = contentEditable;
-  if (dir != null) v.dir = dir;
-  if (draggable != null) v.draggable = draggable;
-  if (hidden != null) v.hidden = hidden;
-  if (inert != null) v.inert = inert;
-  if (inputMode != null) v.inputMode = inputMode;
-  if (lang != null) v.lang = lang;
-  if (spellcheck != null) v.spellcheck = spellcheck;
-  if (tabIndex != null) v.tabIndex = tabIndex;
-  if (title != null) v.title = title;
-  if (translate != null) v.translate = translate;
-  if (className != null) v.className = className;
-  if (id != null) v.id = id;
-  if (slot != null) v.slot = slot;
-  if (nodes != null) v.nodes = nodes;
-  if (text != null) v.text = text;
-  if (onAbort != null) v.onAbort.listen(onAbort);
-  if (onBeforeCopy != null) v.onBeforeCopy.listen(onBeforeCopy);
-  if (onBeforeCut != null) v.onBeforeCut.listen(onBeforeCut);
-  if (onBeforePaste != null) v.onBeforePaste.listen(onBeforePaste);
-  if (onBlur != null) v.onBlur.listen(onBlur);
-  if (onCanPlay != null) v.onCanPlay.listen(onCanPlay);
-  if (onCanPlayThrough != null) v.onCanPlayThrough.listen(onCanPlayThrough);
-  if (onChange != null) v.onChange.listen(onChange);
-  if (onClick != null) v.onClick.listen(onClick);
-  if (onContextMenu != null) v.onContextMenu.listen(onContextMenu);
-  if (onCopy != null) v.onCopy.listen(onCopy);
-  if (onCut != null) v.onCut.listen(onCut);
-  if (onDoubleClick != null) v.onDoubleClick.listen(onDoubleClick);
-  if (onDrag != null) v.onDrag.listen(onDrag);
-  if (onDragEnd != null) v.onDragEnd.listen(onDragEnd);
-  if (onDragEnter != null) v.onDragEnter.listen(onDragEnter);
-  if (onDragLeave != null) v.onDragLeave.listen(onDragLeave);
-  if (onDragOver != null) v.onDragOver.listen(onDragOver);
-  if (onDragStart != null) v.onDragStart.listen(onDragStart);
-  if (onDrop != null) v.onDrop.listen(onDrop);
-  if (onDurationChange != null) v.onDurationChange.listen(onDurationChange);
-  if (onEmptied != null) v.onEmptied.listen(onEmptied);
-  if (onEnded != null) v.onEnded.listen(onEnded);
-  if (onError != null) v.onError.listen(onError);
-  if (onFocus != null) v.onFocus.listen(onFocus);
-  if (onInput != null) v.onInput.listen(onInput);
-  if (onInvalid != null) v.onInvalid.listen(onInvalid);
-  if (onKeyDown != null) v.onKeyDown.listen(onKeyDown);
-  if (onKeyPress != null) v.onKeyPress.listen(onKeyPress);
-  if (onKeyUp != null) v.onKeyUp.listen(onKeyUp);
-  if (onLoad != null) v.onLoad.listen(onLoad);
-  if (onLoadedData != null) v.onLoadedData.listen(onLoadedData);
-  if (onLoadedMetadata != null) v.onLoadedMetadata.listen(onLoadedMetadata);
-  if (onMouseDown != null) v.onMouseDown.listen(onMouseDown);
-  if (onMouseEnter != null) v.onMouseEnter.listen(onMouseEnter);
-  if (onMouseLeave != null) v.onMouseLeave.listen(onMouseLeave);
-  if (onMouseMove != null) v.onMouseMove.listen(onMouseMove);
-  if (onMouseOut != null) v.onMouseOut.listen(onMouseOut);
-  if (onMouseOver != null) v.onMouseOver.listen(onMouseOver);
-  if (onMouseUp != null) v.onMouseUp.listen(onMouseUp);
-  if (onMouseWheel != null) v.onMouseWheel.listen(onMouseWheel);
-  if (onPaste != null) v.onPaste.listen(onPaste);
-  if (onPause != null) v.onPause.listen(onPause);
-  if (onPlay != null) v.onPlay.listen(onPlay);
-  if (onPlaying != null) v.onPlaying.listen(onPlaying);
-  if (onRateChange != null) v.onRateChange.listen(onRateChange);
-  if (onReset != null) v.onReset.listen(onReset);
-  if (onResize != null) v.onResize.listen(onResize);
-  if (onScroll != null) v.onScroll.listen(onScroll);
-  if (onSearch != null) v.onSearch.listen(onSearch);
-  if (onSeeked != null) v.onSeeked.listen(onSeeked);
-  if (onSeeking != null) v.onSeeking.listen(onSeeking);
-  if (onSelect != null) v.onSelect.listen(onSelect);
-  if (onSelectStart != null) v.onSelectStart.listen(onSelectStart);
-  if (onStalled != null) v.onStalled.listen(onStalled);
-  if (onSubmit != null) v.onSubmit.listen(onSubmit);
-  if (onSuspend != null) v.onSuspend.listen(onSuspend);
-  if (onTimeUpdate != null) v.onTimeUpdate.listen(onTimeUpdate);
-  if (onTouchCancel != null) v.onTouchCancel.listen(onTouchCancel);
-  if (onTouchEnd != null) v.onTouchEnd.listen(onTouchEnd);
-  if (onTouchEnter != null) v.onTouchEnter.listen(onTouchEnter);
-  if (onTouchLeave != null) v.onTouchLeave.listen(onTouchLeave);
-  if (onTouchMove != null) v.onTouchMove.listen(onTouchMove);
-  if (onTouchStart != null) v.onTouchStart.listen(onTouchStart);
-  if (onTransitionEnd != null) v.onTransitionEnd.listen(onTransitionEnd);
-  if (onVolumeChange != null) v.onVolumeChange.listen(onVolumeChange);
-  if (onWaiting != null) v.onWaiting.listen(onWaiting);
-  if (onFullscreenChange != null)
-    v.onFullscreenChange.listen(onFullscreenChange);
-  if (onFullscreenError != null) v.onFullscreenError.listen(onFullscreenError);
-  if (onWheel != null) v.onWheel.listen(onWheel);
-  return v;
+class LIElementWidget extends HtmlElementWidget {
+  LIElementWidget(
+      {super.nonce,
+      super.attributes,
+      super.children,
+      super.classes,
+      super.dataset,
+      super.innerHtml,
+      super.innerText,
+      super.scrollLeft,
+      super.scrollTop,
+      super.contentEditable,
+      super.dir,
+      super.draggable,
+      super.hidden,
+      super.inert,
+      super.inputMode,
+      super.lang,
+      super.spellcheck,
+      super.tabIndex,
+      super.title,
+      super.translate,
+      super.className,
+      super.id,
+      super.slot,
+      super.nodes,
+      super.text,
+      super.onAbort,
+      super.onBeforeCopy,
+      super.onBeforeCut,
+      super.onBeforePaste,
+      super.onBlur,
+      super.onCanPlay,
+      super.onCanPlayThrough,
+      super.onChange,
+      super.onClick,
+      super.onContextMenu,
+      super.onCopy,
+      super.onCut,
+      super.onDoubleClick,
+      super.onDrag,
+      super.onDragEnd,
+      super.onDragEnter,
+      super.onDragLeave,
+      super.onDragOver,
+      super.onDragStart,
+      super.onDrop,
+      super.onDurationChange,
+      super.onEmptied,
+      super.onEnded,
+      super.onError,
+      super.onFocus,
+      super.onInput,
+      super.onInvalid,
+      super.onKeyDown,
+      super.onKeyPress,
+      super.onKeyUp,
+      super.onLoad,
+      super.onLoadedData,
+      super.onLoadedMetadata,
+      super.onMouseDown,
+      super.onMouseEnter,
+      super.onMouseLeave,
+      super.onMouseMove,
+      super.onMouseOut,
+      super.onMouseOver,
+      super.onMouseUp,
+      super.onMouseWheel,
+      super.onPaste,
+      super.onPause,
+      super.onPlay,
+      super.onPlaying,
+      super.onRateChange,
+      super.onReset,
+      super.onResize,
+      super.onScroll,
+      super.onSearch,
+      super.onSeeked,
+      super.onSeeking,
+      super.onSelect,
+      super.onSelectStart,
+      super.onStalled,
+      super.onSubmit,
+      super.onSuspend,
+      super.onTimeUpdate,
+      super.onTouchCancel,
+      super.onTouchEnd,
+      super.onTouchEnter,
+      super.onTouchLeave,
+      super.onTouchMove,
+      super.onTouchStart,
+      super.onTransitionEnd,
+      super.onVolumeChange,
+      super.onWaiting,
+      super.onFullscreenChange,
+      super.onFullscreenError,
+      super.onWheel});
+  @override
+  Element render() => hook(LIElement());
 }
 
-LegendElement legendElement(
-    {String? nonce,
-    Map<String, String>? attributes,
-    List<Element>? children,
-    Iterable<String>? classes,
-    Map<String, String>? dataset,
-    String? innerHtml,
-    String? innerText,
-    int? scrollLeft,
-    int? scrollTop,
-    String? contentEditable,
-    String? dir,
-    bool? draggable,
-    bool? hidden,
-    bool? inert,
-    String? inputMode,
-    String? lang,
-    bool? spellcheck,
-    int? tabIndex,
-    String? title,
-    bool? translate,
-    String? className,
-    String? id,
-    String? slot,
-    Iterable<Node>? nodes,
-    String? text,
-    void Function(Event)? onAbort,
-    void Function(Event)? onBeforeCopy,
-    void Function(Event)? onBeforeCut,
-    void Function(Event)? onBeforePaste,
-    void Function(Event)? onBlur,
-    void Function(Event)? onCanPlay,
-    void Function(Event)? onCanPlayThrough,
-    void Function(Event)? onChange,
-    void Function(MouseEvent)? onClick,
-    void Function(MouseEvent)? onContextMenu,
-    void Function(ClipboardEvent)? onCopy,
-    void Function(ClipboardEvent)? onCut,
-    void Function(Event)? onDoubleClick,
-    void Function(MouseEvent)? onDrag,
-    void Function(MouseEvent)? onDragEnd,
-    void Function(MouseEvent)? onDragEnter,
-    void Function(MouseEvent)? onDragLeave,
-    void Function(MouseEvent)? onDragOver,
-    void Function(MouseEvent)? onDragStart,
-    void Function(MouseEvent)? onDrop,
-    void Function(Event)? onDurationChange,
-    void Function(Event)? onEmptied,
-    void Function(Event)? onEnded,
-    void Function(Event)? onError,
-    void Function(Event)? onFocus,
-    void Function(Event)? onInput,
-    void Function(Event)? onInvalid,
-    void Function(KeyboardEvent)? onKeyDown,
-    void Function(KeyboardEvent)? onKeyPress,
-    void Function(KeyboardEvent)? onKeyUp,
-    void Function(Event)? onLoad,
-    void Function(Event)? onLoadedData,
-    void Function(Event)? onLoadedMetadata,
-    void Function(MouseEvent)? onMouseDown,
-    void Function(MouseEvent)? onMouseEnter,
-    void Function(MouseEvent)? onMouseLeave,
-    void Function(MouseEvent)? onMouseMove,
-    void Function(MouseEvent)? onMouseOut,
-    void Function(MouseEvent)? onMouseOver,
-    void Function(MouseEvent)? onMouseUp,
-    void Function(WheelEvent)? onMouseWheel,
-    void Function(ClipboardEvent)? onPaste,
-    void Function(Event)? onPause,
-    void Function(Event)? onPlay,
-    void Function(Event)? onPlaying,
-    void Function(Event)? onRateChange,
-    void Function(Event)? onReset,
-    void Function(Event)? onResize,
-    void Function(Event)? onScroll,
-    void Function(Event)? onSearch,
-    void Function(Event)? onSeeked,
-    void Function(Event)? onSeeking,
-    void Function(Event)? onSelect,
-    void Function(Event)? onSelectStart,
-    void Function(Event)? onStalled,
-    void Function(Event)? onSubmit,
-    void Function(Event)? onSuspend,
-    void Function(Event)? onTimeUpdate,
-    void Function(TouchEvent)? onTouchCancel,
-    void Function(TouchEvent)? onTouchEnd,
-    void Function(TouchEvent)? onTouchEnter,
-    void Function(TouchEvent)? onTouchLeave,
-    void Function(TouchEvent)? onTouchMove,
-    void Function(TouchEvent)? onTouchStart,
-    void Function(TransitionEvent)? onTransitionEnd,
-    void Function(Event)? onVolumeChange,
-    void Function(Event)? onWaiting,
-    void Function(Event)? onFullscreenChange,
-    void Function(Event)? onFullscreenError,
-    void Function(WheelEvent)? onWheel}) {
-  final v = LegendElement();
-  if (nonce != null) v.nonce = nonce;
-  if (attributes != null) v.attributes = attributes;
-  if (children != null) v.children = children;
-  if (classes != null) v.classes = classes;
-  if (dataset != null) v.dataset = dataset;
-  if (innerHtml != null) v.innerHtml = innerHtml;
-  if (innerText != null) v.innerText = innerText;
-  if (scrollLeft != null) v.scrollLeft = scrollLeft;
-  if (scrollTop != null) v.scrollTop = scrollTop;
-  if (contentEditable != null) v.contentEditable = contentEditable;
-  if (dir != null) v.dir = dir;
-  if (draggable != null) v.draggable = draggable;
-  if (hidden != null) v.hidden = hidden;
-  if (inert != null) v.inert = inert;
-  if (inputMode != null) v.inputMode = inputMode;
-  if (lang != null) v.lang = lang;
-  if (spellcheck != null) v.spellcheck = spellcheck;
-  if (tabIndex != null) v.tabIndex = tabIndex;
-  if (title != null) v.title = title;
-  if (translate != null) v.translate = translate;
-  if (className != null) v.className = className;
-  if (id != null) v.id = id;
-  if (slot != null) v.slot = slot;
-  if (nodes != null) v.nodes = nodes;
-  if (text != null) v.text = text;
-  if (onAbort != null) v.onAbort.listen(onAbort);
-  if (onBeforeCopy != null) v.onBeforeCopy.listen(onBeforeCopy);
-  if (onBeforeCut != null) v.onBeforeCut.listen(onBeforeCut);
-  if (onBeforePaste != null) v.onBeforePaste.listen(onBeforePaste);
-  if (onBlur != null) v.onBlur.listen(onBlur);
-  if (onCanPlay != null) v.onCanPlay.listen(onCanPlay);
-  if (onCanPlayThrough != null) v.onCanPlayThrough.listen(onCanPlayThrough);
-  if (onChange != null) v.onChange.listen(onChange);
-  if (onClick != null) v.onClick.listen(onClick);
-  if (onContextMenu != null) v.onContextMenu.listen(onContextMenu);
-  if (onCopy != null) v.onCopy.listen(onCopy);
-  if (onCut != null) v.onCut.listen(onCut);
-  if (onDoubleClick != null) v.onDoubleClick.listen(onDoubleClick);
-  if (onDrag != null) v.onDrag.listen(onDrag);
-  if (onDragEnd != null) v.onDragEnd.listen(onDragEnd);
-  if (onDragEnter != null) v.onDragEnter.listen(onDragEnter);
-  if (onDragLeave != null) v.onDragLeave.listen(onDragLeave);
-  if (onDragOver != null) v.onDragOver.listen(onDragOver);
-  if (onDragStart != null) v.onDragStart.listen(onDragStart);
-  if (onDrop != null) v.onDrop.listen(onDrop);
-  if (onDurationChange != null) v.onDurationChange.listen(onDurationChange);
-  if (onEmptied != null) v.onEmptied.listen(onEmptied);
-  if (onEnded != null) v.onEnded.listen(onEnded);
-  if (onError != null) v.onError.listen(onError);
-  if (onFocus != null) v.onFocus.listen(onFocus);
-  if (onInput != null) v.onInput.listen(onInput);
-  if (onInvalid != null) v.onInvalid.listen(onInvalid);
-  if (onKeyDown != null) v.onKeyDown.listen(onKeyDown);
-  if (onKeyPress != null) v.onKeyPress.listen(onKeyPress);
-  if (onKeyUp != null) v.onKeyUp.listen(onKeyUp);
-  if (onLoad != null) v.onLoad.listen(onLoad);
-  if (onLoadedData != null) v.onLoadedData.listen(onLoadedData);
-  if (onLoadedMetadata != null) v.onLoadedMetadata.listen(onLoadedMetadata);
-  if (onMouseDown != null) v.onMouseDown.listen(onMouseDown);
-  if (onMouseEnter != null) v.onMouseEnter.listen(onMouseEnter);
-  if (onMouseLeave != null) v.onMouseLeave.listen(onMouseLeave);
-  if (onMouseMove != null) v.onMouseMove.listen(onMouseMove);
-  if (onMouseOut != null) v.onMouseOut.listen(onMouseOut);
-  if (onMouseOver != null) v.onMouseOver.listen(onMouseOver);
-  if (onMouseUp != null) v.onMouseUp.listen(onMouseUp);
-  if (onMouseWheel != null) v.onMouseWheel.listen(onMouseWheel);
-  if (onPaste != null) v.onPaste.listen(onPaste);
-  if (onPause != null) v.onPause.listen(onPause);
-  if (onPlay != null) v.onPlay.listen(onPlay);
-  if (onPlaying != null) v.onPlaying.listen(onPlaying);
-  if (onRateChange != null) v.onRateChange.listen(onRateChange);
-  if (onReset != null) v.onReset.listen(onReset);
-  if (onResize != null) v.onResize.listen(onResize);
-  if (onScroll != null) v.onScroll.listen(onScroll);
-  if (onSearch != null) v.onSearch.listen(onSearch);
-  if (onSeeked != null) v.onSeeked.listen(onSeeked);
-  if (onSeeking != null) v.onSeeking.listen(onSeeking);
-  if (onSelect != null) v.onSelect.listen(onSelect);
-  if (onSelectStart != null) v.onSelectStart.listen(onSelectStart);
-  if (onStalled != null) v.onStalled.listen(onStalled);
-  if (onSubmit != null) v.onSubmit.listen(onSubmit);
-  if (onSuspend != null) v.onSuspend.listen(onSuspend);
-  if (onTimeUpdate != null) v.onTimeUpdate.listen(onTimeUpdate);
-  if (onTouchCancel != null) v.onTouchCancel.listen(onTouchCancel);
-  if (onTouchEnd != null) v.onTouchEnd.listen(onTouchEnd);
-  if (onTouchEnter != null) v.onTouchEnter.listen(onTouchEnter);
-  if (onTouchLeave != null) v.onTouchLeave.listen(onTouchLeave);
-  if (onTouchMove != null) v.onTouchMove.listen(onTouchMove);
-  if (onTouchStart != null) v.onTouchStart.listen(onTouchStart);
-  if (onTransitionEnd != null) v.onTransitionEnd.listen(onTransitionEnd);
-  if (onVolumeChange != null) v.onVolumeChange.listen(onVolumeChange);
-  if (onWaiting != null) v.onWaiting.listen(onWaiting);
-  if (onFullscreenChange != null)
-    v.onFullscreenChange.listen(onFullscreenChange);
-  if (onFullscreenError != null) v.onFullscreenError.listen(onFullscreenError);
-  if (onWheel != null) v.onWheel.listen(onWheel);
-  return v;
+class LabelElementWidget extends HtmlElementWidget {
+  LabelElementWidget(
+      {super.nonce,
+      super.attributes,
+      super.children,
+      super.classes,
+      super.dataset,
+      super.innerHtml,
+      super.innerText,
+      super.scrollLeft,
+      super.scrollTop,
+      super.contentEditable,
+      super.dir,
+      super.draggable,
+      super.hidden,
+      super.inert,
+      super.inputMode,
+      super.lang,
+      super.spellcheck,
+      super.tabIndex,
+      super.title,
+      super.translate,
+      super.className,
+      super.id,
+      super.slot,
+      super.nodes,
+      super.text,
+      super.onAbort,
+      super.onBeforeCopy,
+      super.onBeforeCut,
+      super.onBeforePaste,
+      super.onBlur,
+      super.onCanPlay,
+      super.onCanPlayThrough,
+      super.onChange,
+      super.onClick,
+      super.onContextMenu,
+      super.onCopy,
+      super.onCut,
+      super.onDoubleClick,
+      super.onDrag,
+      super.onDragEnd,
+      super.onDragEnter,
+      super.onDragLeave,
+      super.onDragOver,
+      super.onDragStart,
+      super.onDrop,
+      super.onDurationChange,
+      super.onEmptied,
+      super.onEnded,
+      super.onError,
+      super.onFocus,
+      super.onInput,
+      super.onInvalid,
+      super.onKeyDown,
+      super.onKeyPress,
+      super.onKeyUp,
+      super.onLoad,
+      super.onLoadedData,
+      super.onLoadedMetadata,
+      super.onMouseDown,
+      super.onMouseEnter,
+      super.onMouseLeave,
+      super.onMouseMove,
+      super.onMouseOut,
+      super.onMouseOver,
+      super.onMouseUp,
+      super.onMouseWheel,
+      super.onPaste,
+      super.onPause,
+      super.onPlay,
+      super.onPlaying,
+      super.onRateChange,
+      super.onReset,
+      super.onResize,
+      super.onScroll,
+      super.onSearch,
+      super.onSeeked,
+      super.onSeeking,
+      super.onSelect,
+      super.onSelectStart,
+      super.onStalled,
+      super.onSubmit,
+      super.onSuspend,
+      super.onTimeUpdate,
+      super.onTouchCancel,
+      super.onTouchEnd,
+      super.onTouchEnter,
+      super.onTouchLeave,
+      super.onTouchMove,
+      super.onTouchStart,
+      super.onTransitionEnd,
+      super.onVolumeChange,
+      super.onWaiting,
+      super.onFullscreenChange,
+      super.onFullscreenError,
+      super.onWheel});
+  @override
+  Element render() => hook(LabelElement());
 }
 
-LinkElement linkElement(
-    {String? as,
-    String? crossOrigin,
-    bool? disabled,
-    String? href,
-    String? hreflang,
-    String? integrity,
-    String? media,
-    String? referrerPolicy,
-    String? rel,
-    String? scope,
-    String? type,
-    String? nonce,
-    Map<String, String>? attributes,
-    List<Element>? children,
-    Iterable<String>? classes,
-    Map<String, String>? dataset,
-    String? innerHtml,
-    String? innerText,
-    int? scrollLeft,
-    int? scrollTop,
-    String? contentEditable,
-    String? dir,
-    bool? draggable,
-    bool? hidden,
-    bool? inert,
-    String? inputMode,
-    String? lang,
-    bool? spellcheck,
-    int? tabIndex,
-    String? title,
-    bool? translate,
-    String? className,
-    String? id,
-    String? slot,
-    Iterable<Node>? nodes,
-    String? text,
-    void Function(Event)? onAbort,
-    void Function(Event)? onBeforeCopy,
-    void Function(Event)? onBeforeCut,
-    void Function(Event)? onBeforePaste,
-    void Function(Event)? onBlur,
-    void Function(Event)? onCanPlay,
-    void Function(Event)? onCanPlayThrough,
-    void Function(Event)? onChange,
-    void Function(MouseEvent)? onClick,
-    void Function(MouseEvent)? onContextMenu,
-    void Function(ClipboardEvent)? onCopy,
-    void Function(ClipboardEvent)? onCut,
-    void Function(Event)? onDoubleClick,
-    void Function(MouseEvent)? onDrag,
-    void Function(MouseEvent)? onDragEnd,
-    void Function(MouseEvent)? onDragEnter,
-    void Function(MouseEvent)? onDragLeave,
-    void Function(MouseEvent)? onDragOver,
-    void Function(MouseEvent)? onDragStart,
-    void Function(MouseEvent)? onDrop,
-    void Function(Event)? onDurationChange,
-    void Function(Event)? onEmptied,
-    void Function(Event)? onEnded,
-    void Function(Event)? onError,
-    void Function(Event)? onFocus,
-    void Function(Event)? onInput,
-    void Function(Event)? onInvalid,
-    void Function(KeyboardEvent)? onKeyDown,
-    void Function(KeyboardEvent)? onKeyPress,
-    void Function(KeyboardEvent)? onKeyUp,
-    void Function(Event)? onLoad,
-    void Function(Event)? onLoadedData,
-    void Function(Event)? onLoadedMetadata,
-    void Function(MouseEvent)? onMouseDown,
-    void Function(MouseEvent)? onMouseEnter,
-    void Function(MouseEvent)? onMouseLeave,
-    void Function(MouseEvent)? onMouseMove,
-    void Function(MouseEvent)? onMouseOut,
-    void Function(MouseEvent)? onMouseOver,
-    void Function(MouseEvent)? onMouseUp,
-    void Function(WheelEvent)? onMouseWheel,
-    void Function(ClipboardEvent)? onPaste,
-    void Function(Event)? onPause,
-    void Function(Event)? onPlay,
-    void Function(Event)? onPlaying,
-    void Function(Event)? onRateChange,
-    void Function(Event)? onReset,
-    void Function(Event)? onResize,
-    void Function(Event)? onScroll,
-    void Function(Event)? onSearch,
-    void Function(Event)? onSeeked,
-    void Function(Event)? onSeeking,
-    void Function(Event)? onSelect,
-    void Function(Event)? onSelectStart,
-    void Function(Event)? onStalled,
-    void Function(Event)? onSubmit,
-    void Function(Event)? onSuspend,
-    void Function(Event)? onTimeUpdate,
-    void Function(TouchEvent)? onTouchCancel,
-    void Function(TouchEvent)? onTouchEnd,
-    void Function(TouchEvent)? onTouchEnter,
-    void Function(TouchEvent)? onTouchLeave,
-    void Function(TouchEvent)? onTouchMove,
-    void Function(TouchEvent)? onTouchStart,
-    void Function(TransitionEvent)? onTransitionEnd,
-    void Function(Event)? onVolumeChange,
-    void Function(Event)? onWaiting,
-    void Function(Event)? onFullscreenChange,
-    void Function(Event)? onFullscreenError,
-    void Function(WheelEvent)? onWheel}) {
-  final v = LinkElement();
-  if (as != null) v.as = as;
-  if (crossOrigin != null) v.crossOrigin = crossOrigin;
-  if (disabled != null) v.disabled = disabled;
-  if (href != null) v.href = href;
-  if (hreflang != null) v.hreflang = hreflang;
-  if (integrity != null) v.integrity = integrity;
-  if (media != null) v.media = media;
-  if (referrerPolicy != null) v.referrerPolicy = referrerPolicy;
-  if (rel != null) v.rel = rel;
-  if (scope != null) v.scope = scope;
-  if (type != null) v.type = type;
-  if (nonce != null) v.nonce = nonce;
-  if (attributes != null) v.attributes = attributes;
-  if (children != null) v.children = children;
-  if (classes != null) v.classes = classes;
-  if (dataset != null) v.dataset = dataset;
-  if (innerHtml != null) v.innerHtml = innerHtml;
-  if (innerText != null) v.innerText = innerText;
-  if (scrollLeft != null) v.scrollLeft = scrollLeft;
-  if (scrollTop != null) v.scrollTop = scrollTop;
-  if (contentEditable != null) v.contentEditable = contentEditable;
-  if (dir != null) v.dir = dir;
-  if (draggable != null) v.draggable = draggable;
-  if (hidden != null) v.hidden = hidden;
-  if (inert != null) v.inert = inert;
-  if (inputMode != null) v.inputMode = inputMode;
-  if (lang != null) v.lang = lang;
-  if (spellcheck != null) v.spellcheck = spellcheck;
-  if (tabIndex != null) v.tabIndex = tabIndex;
-  if (title != null) v.title = title;
-  if (translate != null) v.translate = translate;
-  if (className != null) v.className = className;
-  if (id != null) v.id = id;
-  if (slot != null) v.slot = slot;
-  if (nodes != null) v.nodes = nodes;
-  if (text != null) v.text = text;
-  if (onAbort != null) v.onAbort.listen(onAbort);
-  if (onBeforeCopy != null) v.onBeforeCopy.listen(onBeforeCopy);
-  if (onBeforeCut != null) v.onBeforeCut.listen(onBeforeCut);
-  if (onBeforePaste != null) v.onBeforePaste.listen(onBeforePaste);
-  if (onBlur != null) v.onBlur.listen(onBlur);
-  if (onCanPlay != null) v.onCanPlay.listen(onCanPlay);
-  if (onCanPlayThrough != null) v.onCanPlayThrough.listen(onCanPlayThrough);
-  if (onChange != null) v.onChange.listen(onChange);
-  if (onClick != null) v.onClick.listen(onClick);
-  if (onContextMenu != null) v.onContextMenu.listen(onContextMenu);
-  if (onCopy != null) v.onCopy.listen(onCopy);
-  if (onCut != null) v.onCut.listen(onCut);
-  if (onDoubleClick != null) v.onDoubleClick.listen(onDoubleClick);
-  if (onDrag != null) v.onDrag.listen(onDrag);
-  if (onDragEnd != null) v.onDragEnd.listen(onDragEnd);
-  if (onDragEnter != null) v.onDragEnter.listen(onDragEnter);
-  if (onDragLeave != null) v.onDragLeave.listen(onDragLeave);
-  if (onDragOver != null) v.onDragOver.listen(onDragOver);
-  if (onDragStart != null) v.onDragStart.listen(onDragStart);
-  if (onDrop != null) v.onDrop.listen(onDrop);
-  if (onDurationChange != null) v.onDurationChange.listen(onDurationChange);
-  if (onEmptied != null) v.onEmptied.listen(onEmptied);
-  if (onEnded != null) v.onEnded.listen(onEnded);
-  if (onError != null) v.onError.listen(onError);
-  if (onFocus != null) v.onFocus.listen(onFocus);
-  if (onInput != null) v.onInput.listen(onInput);
-  if (onInvalid != null) v.onInvalid.listen(onInvalid);
-  if (onKeyDown != null) v.onKeyDown.listen(onKeyDown);
-  if (onKeyPress != null) v.onKeyPress.listen(onKeyPress);
-  if (onKeyUp != null) v.onKeyUp.listen(onKeyUp);
-  if (onLoad != null) v.onLoad.listen(onLoad);
-  if (onLoadedData != null) v.onLoadedData.listen(onLoadedData);
-  if (onLoadedMetadata != null) v.onLoadedMetadata.listen(onLoadedMetadata);
-  if (onMouseDown != null) v.onMouseDown.listen(onMouseDown);
-  if (onMouseEnter != null) v.onMouseEnter.listen(onMouseEnter);
-  if (onMouseLeave != null) v.onMouseLeave.listen(onMouseLeave);
-  if (onMouseMove != null) v.onMouseMove.listen(onMouseMove);
-  if (onMouseOut != null) v.onMouseOut.listen(onMouseOut);
-  if (onMouseOver != null) v.onMouseOver.listen(onMouseOver);
-  if (onMouseUp != null) v.onMouseUp.listen(onMouseUp);
-  if (onMouseWheel != null) v.onMouseWheel.listen(onMouseWheel);
-  if (onPaste != null) v.onPaste.listen(onPaste);
-  if (onPause != null) v.onPause.listen(onPause);
-  if (onPlay != null) v.onPlay.listen(onPlay);
-  if (onPlaying != null) v.onPlaying.listen(onPlaying);
-  if (onRateChange != null) v.onRateChange.listen(onRateChange);
-  if (onReset != null) v.onReset.listen(onReset);
-  if (onResize != null) v.onResize.listen(onResize);
-  if (onScroll != null) v.onScroll.listen(onScroll);
-  if (onSearch != null) v.onSearch.listen(onSearch);
-  if (onSeeked != null) v.onSeeked.listen(onSeeked);
-  if (onSeeking != null) v.onSeeking.listen(onSeeking);
-  if (onSelect != null) v.onSelect.listen(onSelect);
-  if (onSelectStart != null) v.onSelectStart.listen(onSelectStart);
-  if (onStalled != null) v.onStalled.listen(onStalled);
-  if (onSubmit != null) v.onSubmit.listen(onSubmit);
-  if (onSuspend != null) v.onSuspend.listen(onSuspend);
-  if (onTimeUpdate != null) v.onTimeUpdate.listen(onTimeUpdate);
-  if (onTouchCancel != null) v.onTouchCancel.listen(onTouchCancel);
-  if (onTouchEnd != null) v.onTouchEnd.listen(onTouchEnd);
-  if (onTouchEnter != null) v.onTouchEnter.listen(onTouchEnter);
-  if (onTouchLeave != null) v.onTouchLeave.listen(onTouchLeave);
-  if (onTouchMove != null) v.onTouchMove.listen(onTouchMove);
-  if (onTouchStart != null) v.onTouchStart.listen(onTouchStart);
-  if (onTransitionEnd != null) v.onTransitionEnd.listen(onTransitionEnd);
-  if (onVolumeChange != null) v.onVolumeChange.listen(onVolumeChange);
-  if (onWaiting != null) v.onWaiting.listen(onWaiting);
-  if (onFullscreenChange != null)
-    v.onFullscreenChange.listen(onFullscreenChange);
-  if (onFullscreenError != null) v.onFullscreenError.listen(onFullscreenError);
-  if (onWheel != null) v.onWheel.listen(onWheel);
-  return v;
+class LegendElementWidget extends HtmlElementWidget {
+  LegendElementWidget(
+      {super.nonce,
+      super.attributes,
+      super.children,
+      super.classes,
+      super.dataset,
+      super.innerHtml,
+      super.innerText,
+      super.scrollLeft,
+      super.scrollTop,
+      super.contentEditable,
+      super.dir,
+      super.draggable,
+      super.hidden,
+      super.inert,
+      super.inputMode,
+      super.lang,
+      super.spellcheck,
+      super.tabIndex,
+      super.title,
+      super.translate,
+      super.className,
+      super.id,
+      super.slot,
+      super.nodes,
+      super.text,
+      super.onAbort,
+      super.onBeforeCopy,
+      super.onBeforeCut,
+      super.onBeforePaste,
+      super.onBlur,
+      super.onCanPlay,
+      super.onCanPlayThrough,
+      super.onChange,
+      super.onClick,
+      super.onContextMenu,
+      super.onCopy,
+      super.onCut,
+      super.onDoubleClick,
+      super.onDrag,
+      super.onDragEnd,
+      super.onDragEnter,
+      super.onDragLeave,
+      super.onDragOver,
+      super.onDragStart,
+      super.onDrop,
+      super.onDurationChange,
+      super.onEmptied,
+      super.onEnded,
+      super.onError,
+      super.onFocus,
+      super.onInput,
+      super.onInvalid,
+      super.onKeyDown,
+      super.onKeyPress,
+      super.onKeyUp,
+      super.onLoad,
+      super.onLoadedData,
+      super.onLoadedMetadata,
+      super.onMouseDown,
+      super.onMouseEnter,
+      super.onMouseLeave,
+      super.onMouseMove,
+      super.onMouseOut,
+      super.onMouseOver,
+      super.onMouseUp,
+      super.onMouseWheel,
+      super.onPaste,
+      super.onPause,
+      super.onPlay,
+      super.onPlaying,
+      super.onRateChange,
+      super.onReset,
+      super.onResize,
+      super.onScroll,
+      super.onSearch,
+      super.onSeeked,
+      super.onSeeking,
+      super.onSelect,
+      super.onSelectStart,
+      super.onStalled,
+      super.onSubmit,
+      super.onSuspend,
+      super.onTimeUpdate,
+      super.onTouchCancel,
+      super.onTouchEnd,
+      super.onTouchEnter,
+      super.onTouchLeave,
+      super.onTouchMove,
+      super.onTouchStart,
+      super.onTransitionEnd,
+      super.onVolumeChange,
+      super.onWaiting,
+      super.onFullscreenChange,
+      super.onFullscreenError,
+      super.onWheel});
+  @override
+  Element render() => hook(LegendElement());
 }
 
-MapElement mapElement(
-    {String? name,
-    String? nonce,
-    Map<String, String>? attributes,
-    List<Element>? children,
-    Iterable<String>? classes,
-    Map<String, String>? dataset,
-    String? innerHtml,
-    String? innerText,
-    int? scrollLeft,
-    int? scrollTop,
-    String? contentEditable,
-    String? dir,
-    bool? draggable,
-    bool? hidden,
-    bool? inert,
-    String? inputMode,
-    String? lang,
-    bool? spellcheck,
-    int? tabIndex,
-    String? title,
-    bool? translate,
-    String? className,
-    String? id,
-    String? slot,
-    Iterable<Node>? nodes,
-    String? text,
-    void Function(Event)? onAbort,
-    void Function(Event)? onBeforeCopy,
-    void Function(Event)? onBeforeCut,
-    void Function(Event)? onBeforePaste,
-    void Function(Event)? onBlur,
-    void Function(Event)? onCanPlay,
-    void Function(Event)? onCanPlayThrough,
-    void Function(Event)? onChange,
-    void Function(MouseEvent)? onClick,
-    void Function(MouseEvent)? onContextMenu,
-    void Function(ClipboardEvent)? onCopy,
-    void Function(ClipboardEvent)? onCut,
-    void Function(Event)? onDoubleClick,
-    void Function(MouseEvent)? onDrag,
-    void Function(MouseEvent)? onDragEnd,
-    void Function(MouseEvent)? onDragEnter,
-    void Function(MouseEvent)? onDragLeave,
-    void Function(MouseEvent)? onDragOver,
-    void Function(MouseEvent)? onDragStart,
-    void Function(MouseEvent)? onDrop,
-    void Function(Event)? onDurationChange,
-    void Function(Event)? onEmptied,
-    void Function(Event)? onEnded,
-    void Function(Event)? onError,
-    void Function(Event)? onFocus,
-    void Function(Event)? onInput,
-    void Function(Event)? onInvalid,
-    void Function(KeyboardEvent)? onKeyDown,
-    void Function(KeyboardEvent)? onKeyPress,
-    void Function(KeyboardEvent)? onKeyUp,
-    void Function(Event)? onLoad,
-    void Function(Event)? onLoadedData,
-    void Function(Event)? onLoadedMetadata,
-    void Function(MouseEvent)? onMouseDown,
-    void Function(MouseEvent)? onMouseEnter,
-    void Function(MouseEvent)? onMouseLeave,
-    void Function(MouseEvent)? onMouseMove,
-    void Function(MouseEvent)? onMouseOut,
-    void Function(MouseEvent)? onMouseOver,
-    void Function(MouseEvent)? onMouseUp,
-    void Function(WheelEvent)? onMouseWheel,
-    void Function(ClipboardEvent)? onPaste,
-    void Function(Event)? onPause,
-    void Function(Event)? onPlay,
-    void Function(Event)? onPlaying,
-    void Function(Event)? onRateChange,
-    void Function(Event)? onReset,
-    void Function(Event)? onResize,
-    void Function(Event)? onScroll,
-    void Function(Event)? onSearch,
-    void Function(Event)? onSeeked,
-    void Function(Event)? onSeeking,
-    void Function(Event)? onSelect,
-    void Function(Event)? onSelectStart,
-    void Function(Event)? onStalled,
-    void Function(Event)? onSubmit,
-    void Function(Event)? onSuspend,
-    void Function(Event)? onTimeUpdate,
-    void Function(TouchEvent)? onTouchCancel,
-    void Function(TouchEvent)? onTouchEnd,
-    void Function(TouchEvent)? onTouchEnter,
-    void Function(TouchEvent)? onTouchLeave,
-    void Function(TouchEvent)? onTouchMove,
-    void Function(TouchEvent)? onTouchStart,
-    void Function(TransitionEvent)? onTransitionEnd,
-    void Function(Event)? onVolumeChange,
-    void Function(Event)? onWaiting,
-    void Function(Event)? onFullscreenChange,
-    void Function(Event)? onFullscreenError,
-    void Function(WheelEvent)? onWheel}) {
-  final v = MapElement();
-  if (name != null) v.name = name;
-  if (nonce != null) v.nonce = nonce;
-  if (attributes != null) v.attributes = attributes;
-  if (children != null) v.children = children;
-  if (classes != null) v.classes = classes;
-  if (dataset != null) v.dataset = dataset;
-  if (innerHtml != null) v.innerHtml = innerHtml;
-  if (innerText != null) v.innerText = innerText;
-  if (scrollLeft != null) v.scrollLeft = scrollLeft;
-  if (scrollTop != null) v.scrollTop = scrollTop;
-  if (contentEditable != null) v.contentEditable = contentEditable;
-  if (dir != null) v.dir = dir;
-  if (draggable != null) v.draggable = draggable;
-  if (hidden != null) v.hidden = hidden;
-  if (inert != null) v.inert = inert;
-  if (inputMode != null) v.inputMode = inputMode;
-  if (lang != null) v.lang = lang;
-  if (spellcheck != null) v.spellcheck = spellcheck;
-  if (tabIndex != null) v.tabIndex = tabIndex;
-  if (title != null) v.title = title;
-  if (translate != null) v.translate = translate;
-  if (className != null) v.className = className;
-  if (id != null) v.id = id;
-  if (slot != null) v.slot = slot;
-  if (nodes != null) v.nodes = nodes;
-  if (text != null) v.text = text;
-  if (onAbort != null) v.onAbort.listen(onAbort);
-  if (onBeforeCopy != null) v.onBeforeCopy.listen(onBeforeCopy);
-  if (onBeforeCut != null) v.onBeforeCut.listen(onBeforeCut);
-  if (onBeforePaste != null) v.onBeforePaste.listen(onBeforePaste);
-  if (onBlur != null) v.onBlur.listen(onBlur);
-  if (onCanPlay != null) v.onCanPlay.listen(onCanPlay);
-  if (onCanPlayThrough != null) v.onCanPlayThrough.listen(onCanPlayThrough);
-  if (onChange != null) v.onChange.listen(onChange);
-  if (onClick != null) v.onClick.listen(onClick);
-  if (onContextMenu != null) v.onContextMenu.listen(onContextMenu);
-  if (onCopy != null) v.onCopy.listen(onCopy);
-  if (onCut != null) v.onCut.listen(onCut);
-  if (onDoubleClick != null) v.onDoubleClick.listen(onDoubleClick);
-  if (onDrag != null) v.onDrag.listen(onDrag);
-  if (onDragEnd != null) v.onDragEnd.listen(onDragEnd);
-  if (onDragEnter != null) v.onDragEnter.listen(onDragEnter);
-  if (onDragLeave != null) v.onDragLeave.listen(onDragLeave);
-  if (onDragOver != null) v.onDragOver.listen(onDragOver);
-  if (onDragStart != null) v.onDragStart.listen(onDragStart);
-  if (onDrop != null) v.onDrop.listen(onDrop);
-  if (onDurationChange != null) v.onDurationChange.listen(onDurationChange);
-  if (onEmptied != null) v.onEmptied.listen(onEmptied);
-  if (onEnded != null) v.onEnded.listen(onEnded);
-  if (onError != null) v.onError.listen(onError);
-  if (onFocus != null) v.onFocus.listen(onFocus);
-  if (onInput != null) v.onInput.listen(onInput);
-  if (onInvalid != null) v.onInvalid.listen(onInvalid);
-  if (onKeyDown != null) v.onKeyDown.listen(onKeyDown);
-  if (onKeyPress != null) v.onKeyPress.listen(onKeyPress);
-  if (onKeyUp != null) v.onKeyUp.listen(onKeyUp);
-  if (onLoad != null) v.onLoad.listen(onLoad);
-  if (onLoadedData != null) v.onLoadedData.listen(onLoadedData);
-  if (onLoadedMetadata != null) v.onLoadedMetadata.listen(onLoadedMetadata);
-  if (onMouseDown != null) v.onMouseDown.listen(onMouseDown);
-  if (onMouseEnter != null) v.onMouseEnter.listen(onMouseEnter);
-  if (onMouseLeave != null) v.onMouseLeave.listen(onMouseLeave);
-  if (onMouseMove != null) v.onMouseMove.listen(onMouseMove);
-  if (onMouseOut != null) v.onMouseOut.listen(onMouseOut);
-  if (onMouseOver != null) v.onMouseOver.listen(onMouseOver);
-  if (onMouseUp != null) v.onMouseUp.listen(onMouseUp);
-  if (onMouseWheel != null) v.onMouseWheel.listen(onMouseWheel);
-  if (onPaste != null) v.onPaste.listen(onPaste);
-  if (onPause != null) v.onPause.listen(onPause);
-  if (onPlay != null) v.onPlay.listen(onPlay);
-  if (onPlaying != null) v.onPlaying.listen(onPlaying);
-  if (onRateChange != null) v.onRateChange.listen(onRateChange);
-  if (onReset != null) v.onReset.listen(onReset);
-  if (onResize != null) v.onResize.listen(onResize);
-  if (onScroll != null) v.onScroll.listen(onScroll);
-  if (onSearch != null) v.onSearch.listen(onSearch);
-  if (onSeeked != null) v.onSeeked.listen(onSeeked);
-  if (onSeeking != null) v.onSeeking.listen(onSeeking);
-  if (onSelect != null) v.onSelect.listen(onSelect);
-  if (onSelectStart != null) v.onSelectStart.listen(onSelectStart);
-  if (onStalled != null) v.onStalled.listen(onStalled);
-  if (onSubmit != null) v.onSubmit.listen(onSubmit);
-  if (onSuspend != null) v.onSuspend.listen(onSuspend);
-  if (onTimeUpdate != null) v.onTimeUpdate.listen(onTimeUpdate);
-  if (onTouchCancel != null) v.onTouchCancel.listen(onTouchCancel);
-  if (onTouchEnd != null) v.onTouchEnd.listen(onTouchEnd);
-  if (onTouchEnter != null) v.onTouchEnter.listen(onTouchEnter);
-  if (onTouchLeave != null) v.onTouchLeave.listen(onTouchLeave);
-  if (onTouchMove != null) v.onTouchMove.listen(onTouchMove);
-  if (onTouchStart != null) v.onTouchStart.listen(onTouchStart);
-  if (onTransitionEnd != null) v.onTransitionEnd.listen(onTransitionEnd);
-  if (onVolumeChange != null) v.onVolumeChange.listen(onVolumeChange);
-  if (onWaiting != null) v.onWaiting.listen(onWaiting);
-  if (onFullscreenChange != null)
-    v.onFullscreenChange.listen(onFullscreenChange);
-  if (onFullscreenError != null) v.onFullscreenError.listen(onFullscreenError);
-  if (onWheel != null) v.onWheel.listen(onWheel);
-  return v;
+class LinkElementWidget extends HtmlElementWidget {
+  LinkElementWidget(
+      {super.nonce,
+      super.attributes,
+      super.children,
+      super.classes,
+      super.dataset,
+      super.innerHtml,
+      super.innerText,
+      super.scrollLeft,
+      super.scrollTop,
+      super.contentEditable,
+      super.dir,
+      super.draggable,
+      super.hidden,
+      super.inert,
+      super.inputMode,
+      super.lang,
+      super.spellcheck,
+      super.tabIndex,
+      super.title,
+      super.translate,
+      super.className,
+      super.id,
+      super.slot,
+      super.nodes,
+      super.text,
+      super.onAbort,
+      super.onBeforeCopy,
+      super.onBeforeCut,
+      super.onBeforePaste,
+      super.onBlur,
+      super.onCanPlay,
+      super.onCanPlayThrough,
+      super.onChange,
+      super.onClick,
+      super.onContextMenu,
+      super.onCopy,
+      super.onCut,
+      super.onDoubleClick,
+      super.onDrag,
+      super.onDragEnd,
+      super.onDragEnter,
+      super.onDragLeave,
+      super.onDragOver,
+      super.onDragStart,
+      super.onDrop,
+      super.onDurationChange,
+      super.onEmptied,
+      super.onEnded,
+      super.onError,
+      super.onFocus,
+      super.onInput,
+      super.onInvalid,
+      super.onKeyDown,
+      super.onKeyPress,
+      super.onKeyUp,
+      super.onLoad,
+      super.onLoadedData,
+      super.onLoadedMetadata,
+      super.onMouseDown,
+      super.onMouseEnter,
+      super.onMouseLeave,
+      super.onMouseMove,
+      super.onMouseOut,
+      super.onMouseOver,
+      super.onMouseUp,
+      super.onMouseWheel,
+      super.onPaste,
+      super.onPause,
+      super.onPlay,
+      super.onPlaying,
+      super.onRateChange,
+      super.onReset,
+      super.onResize,
+      super.onScroll,
+      super.onSearch,
+      super.onSeeked,
+      super.onSeeking,
+      super.onSelect,
+      super.onSelectStart,
+      super.onStalled,
+      super.onSubmit,
+      super.onSuspend,
+      super.onTimeUpdate,
+      super.onTouchCancel,
+      super.onTouchEnd,
+      super.onTouchEnter,
+      super.onTouchLeave,
+      super.onTouchMove,
+      super.onTouchStart,
+      super.onTransitionEnd,
+      super.onVolumeChange,
+      super.onWaiting,
+      super.onFullscreenChange,
+      super.onFullscreenError,
+      super.onWheel});
+  @override
+  Element render() => hook(LinkElement());
 }
 
-MenuElement menuElement(
-    {String? nonce,
-    Map<String, String>? attributes,
-    List<Element>? children,
-    Iterable<String>? classes,
-    Map<String, String>? dataset,
-    String? innerHtml,
-    String? innerText,
-    int? scrollLeft,
-    int? scrollTop,
-    String? contentEditable,
-    String? dir,
-    bool? draggable,
-    bool? hidden,
-    bool? inert,
-    String? inputMode,
-    String? lang,
-    bool? spellcheck,
-    int? tabIndex,
-    String? title,
-    bool? translate,
-    String? className,
-    String? id,
-    String? slot,
-    Iterable<Node>? nodes,
-    String? text,
-    void Function(Event)? onAbort,
-    void Function(Event)? onBeforeCopy,
-    void Function(Event)? onBeforeCut,
-    void Function(Event)? onBeforePaste,
-    void Function(Event)? onBlur,
-    void Function(Event)? onCanPlay,
-    void Function(Event)? onCanPlayThrough,
-    void Function(Event)? onChange,
-    void Function(MouseEvent)? onClick,
-    void Function(MouseEvent)? onContextMenu,
-    void Function(ClipboardEvent)? onCopy,
-    void Function(ClipboardEvent)? onCut,
-    void Function(Event)? onDoubleClick,
-    void Function(MouseEvent)? onDrag,
-    void Function(MouseEvent)? onDragEnd,
-    void Function(MouseEvent)? onDragEnter,
-    void Function(MouseEvent)? onDragLeave,
-    void Function(MouseEvent)? onDragOver,
-    void Function(MouseEvent)? onDragStart,
-    void Function(MouseEvent)? onDrop,
-    void Function(Event)? onDurationChange,
-    void Function(Event)? onEmptied,
-    void Function(Event)? onEnded,
-    void Function(Event)? onError,
-    void Function(Event)? onFocus,
-    void Function(Event)? onInput,
-    void Function(Event)? onInvalid,
-    void Function(KeyboardEvent)? onKeyDown,
-    void Function(KeyboardEvent)? onKeyPress,
-    void Function(KeyboardEvent)? onKeyUp,
-    void Function(Event)? onLoad,
-    void Function(Event)? onLoadedData,
-    void Function(Event)? onLoadedMetadata,
-    void Function(MouseEvent)? onMouseDown,
-    void Function(MouseEvent)? onMouseEnter,
-    void Function(MouseEvent)? onMouseLeave,
-    void Function(MouseEvent)? onMouseMove,
-    void Function(MouseEvent)? onMouseOut,
-    void Function(MouseEvent)? onMouseOver,
-    void Function(MouseEvent)? onMouseUp,
-    void Function(WheelEvent)? onMouseWheel,
-    void Function(ClipboardEvent)? onPaste,
-    void Function(Event)? onPause,
-    void Function(Event)? onPlay,
-    void Function(Event)? onPlaying,
-    void Function(Event)? onRateChange,
-    void Function(Event)? onReset,
-    void Function(Event)? onResize,
-    void Function(Event)? onScroll,
-    void Function(Event)? onSearch,
-    void Function(Event)? onSeeked,
-    void Function(Event)? onSeeking,
-    void Function(Event)? onSelect,
-    void Function(Event)? onSelectStart,
-    void Function(Event)? onStalled,
-    void Function(Event)? onSubmit,
-    void Function(Event)? onSuspend,
-    void Function(Event)? onTimeUpdate,
-    void Function(TouchEvent)? onTouchCancel,
-    void Function(TouchEvent)? onTouchEnd,
-    void Function(TouchEvent)? onTouchEnter,
-    void Function(TouchEvent)? onTouchLeave,
-    void Function(TouchEvent)? onTouchMove,
-    void Function(TouchEvent)? onTouchStart,
-    void Function(TransitionEvent)? onTransitionEnd,
-    void Function(Event)? onVolumeChange,
-    void Function(Event)? onWaiting,
-    void Function(Event)? onFullscreenChange,
-    void Function(Event)? onFullscreenError,
-    void Function(WheelEvent)? onWheel}) {
-  final v = MenuElement();
-  if (nonce != null) v.nonce = nonce;
-  if (attributes != null) v.attributes = attributes;
-  if (children != null) v.children = children;
-  if (classes != null) v.classes = classes;
-  if (dataset != null) v.dataset = dataset;
-  if (innerHtml != null) v.innerHtml = innerHtml;
-  if (innerText != null) v.innerText = innerText;
-  if (scrollLeft != null) v.scrollLeft = scrollLeft;
-  if (scrollTop != null) v.scrollTop = scrollTop;
-  if (contentEditable != null) v.contentEditable = contentEditable;
-  if (dir != null) v.dir = dir;
-  if (draggable != null) v.draggable = draggable;
-  if (hidden != null) v.hidden = hidden;
-  if (inert != null) v.inert = inert;
-  if (inputMode != null) v.inputMode = inputMode;
-  if (lang != null) v.lang = lang;
-  if (spellcheck != null) v.spellcheck = spellcheck;
-  if (tabIndex != null) v.tabIndex = tabIndex;
-  if (title != null) v.title = title;
-  if (translate != null) v.translate = translate;
-  if (className != null) v.className = className;
-  if (id != null) v.id = id;
-  if (slot != null) v.slot = slot;
-  if (nodes != null) v.nodes = nodes;
-  if (text != null) v.text = text;
-  if (onAbort != null) v.onAbort.listen(onAbort);
-  if (onBeforeCopy != null) v.onBeforeCopy.listen(onBeforeCopy);
-  if (onBeforeCut != null) v.onBeforeCut.listen(onBeforeCut);
-  if (onBeforePaste != null) v.onBeforePaste.listen(onBeforePaste);
-  if (onBlur != null) v.onBlur.listen(onBlur);
-  if (onCanPlay != null) v.onCanPlay.listen(onCanPlay);
-  if (onCanPlayThrough != null) v.onCanPlayThrough.listen(onCanPlayThrough);
-  if (onChange != null) v.onChange.listen(onChange);
-  if (onClick != null) v.onClick.listen(onClick);
-  if (onContextMenu != null) v.onContextMenu.listen(onContextMenu);
-  if (onCopy != null) v.onCopy.listen(onCopy);
-  if (onCut != null) v.onCut.listen(onCut);
-  if (onDoubleClick != null) v.onDoubleClick.listen(onDoubleClick);
-  if (onDrag != null) v.onDrag.listen(onDrag);
-  if (onDragEnd != null) v.onDragEnd.listen(onDragEnd);
-  if (onDragEnter != null) v.onDragEnter.listen(onDragEnter);
-  if (onDragLeave != null) v.onDragLeave.listen(onDragLeave);
-  if (onDragOver != null) v.onDragOver.listen(onDragOver);
-  if (onDragStart != null) v.onDragStart.listen(onDragStart);
-  if (onDrop != null) v.onDrop.listen(onDrop);
-  if (onDurationChange != null) v.onDurationChange.listen(onDurationChange);
-  if (onEmptied != null) v.onEmptied.listen(onEmptied);
-  if (onEnded != null) v.onEnded.listen(onEnded);
-  if (onError != null) v.onError.listen(onError);
-  if (onFocus != null) v.onFocus.listen(onFocus);
-  if (onInput != null) v.onInput.listen(onInput);
-  if (onInvalid != null) v.onInvalid.listen(onInvalid);
-  if (onKeyDown != null) v.onKeyDown.listen(onKeyDown);
-  if (onKeyPress != null) v.onKeyPress.listen(onKeyPress);
-  if (onKeyUp != null) v.onKeyUp.listen(onKeyUp);
-  if (onLoad != null) v.onLoad.listen(onLoad);
-  if (onLoadedData != null) v.onLoadedData.listen(onLoadedData);
-  if (onLoadedMetadata != null) v.onLoadedMetadata.listen(onLoadedMetadata);
-  if (onMouseDown != null) v.onMouseDown.listen(onMouseDown);
-  if (onMouseEnter != null) v.onMouseEnter.listen(onMouseEnter);
-  if (onMouseLeave != null) v.onMouseLeave.listen(onMouseLeave);
-  if (onMouseMove != null) v.onMouseMove.listen(onMouseMove);
-  if (onMouseOut != null) v.onMouseOut.listen(onMouseOut);
-  if (onMouseOver != null) v.onMouseOver.listen(onMouseOver);
-  if (onMouseUp != null) v.onMouseUp.listen(onMouseUp);
-  if (onMouseWheel != null) v.onMouseWheel.listen(onMouseWheel);
-  if (onPaste != null) v.onPaste.listen(onPaste);
-  if (onPause != null) v.onPause.listen(onPause);
-  if (onPlay != null) v.onPlay.listen(onPlay);
-  if (onPlaying != null) v.onPlaying.listen(onPlaying);
-  if (onRateChange != null) v.onRateChange.listen(onRateChange);
-  if (onReset != null) v.onReset.listen(onReset);
-  if (onResize != null) v.onResize.listen(onResize);
-  if (onScroll != null) v.onScroll.listen(onScroll);
-  if (onSearch != null) v.onSearch.listen(onSearch);
-  if (onSeeked != null) v.onSeeked.listen(onSeeked);
-  if (onSeeking != null) v.onSeeking.listen(onSeeking);
-  if (onSelect != null) v.onSelect.listen(onSelect);
-  if (onSelectStart != null) v.onSelectStart.listen(onSelectStart);
-  if (onStalled != null) v.onStalled.listen(onStalled);
-  if (onSubmit != null) v.onSubmit.listen(onSubmit);
-  if (onSuspend != null) v.onSuspend.listen(onSuspend);
-  if (onTimeUpdate != null) v.onTimeUpdate.listen(onTimeUpdate);
-  if (onTouchCancel != null) v.onTouchCancel.listen(onTouchCancel);
-  if (onTouchEnd != null) v.onTouchEnd.listen(onTouchEnd);
-  if (onTouchEnter != null) v.onTouchEnter.listen(onTouchEnter);
-  if (onTouchLeave != null) v.onTouchLeave.listen(onTouchLeave);
-  if (onTouchMove != null) v.onTouchMove.listen(onTouchMove);
-  if (onTouchStart != null) v.onTouchStart.listen(onTouchStart);
-  if (onTransitionEnd != null) v.onTransitionEnd.listen(onTransitionEnd);
-  if (onVolumeChange != null) v.onVolumeChange.listen(onVolumeChange);
-  if (onWaiting != null) v.onWaiting.listen(onWaiting);
-  if (onFullscreenChange != null)
-    v.onFullscreenChange.listen(onFullscreenChange);
-  if (onFullscreenError != null) v.onFullscreenError.listen(onFullscreenError);
-  if (onWheel != null) v.onWheel.listen(onWheel);
-  return v;
+class MapElementWidget extends HtmlElementWidget {
+  MapElementWidget(
+      {super.nonce,
+      super.attributes,
+      super.children,
+      super.classes,
+      super.dataset,
+      super.innerHtml,
+      super.innerText,
+      super.scrollLeft,
+      super.scrollTop,
+      super.contentEditable,
+      super.dir,
+      super.draggable,
+      super.hidden,
+      super.inert,
+      super.inputMode,
+      super.lang,
+      super.spellcheck,
+      super.tabIndex,
+      super.title,
+      super.translate,
+      super.className,
+      super.id,
+      super.slot,
+      super.nodes,
+      super.text,
+      super.onAbort,
+      super.onBeforeCopy,
+      super.onBeforeCut,
+      super.onBeforePaste,
+      super.onBlur,
+      super.onCanPlay,
+      super.onCanPlayThrough,
+      super.onChange,
+      super.onClick,
+      super.onContextMenu,
+      super.onCopy,
+      super.onCut,
+      super.onDoubleClick,
+      super.onDrag,
+      super.onDragEnd,
+      super.onDragEnter,
+      super.onDragLeave,
+      super.onDragOver,
+      super.onDragStart,
+      super.onDrop,
+      super.onDurationChange,
+      super.onEmptied,
+      super.onEnded,
+      super.onError,
+      super.onFocus,
+      super.onInput,
+      super.onInvalid,
+      super.onKeyDown,
+      super.onKeyPress,
+      super.onKeyUp,
+      super.onLoad,
+      super.onLoadedData,
+      super.onLoadedMetadata,
+      super.onMouseDown,
+      super.onMouseEnter,
+      super.onMouseLeave,
+      super.onMouseMove,
+      super.onMouseOut,
+      super.onMouseOver,
+      super.onMouseUp,
+      super.onMouseWheel,
+      super.onPaste,
+      super.onPause,
+      super.onPlay,
+      super.onPlaying,
+      super.onRateChange,
+      super.onReset,
+      super.onResize,
+      super.onScroll,
+      super.onSearch,
+      super.onSeeked,
+      super.onSeeking,
+      super.onSelect,
+      super.onSelectStart,
+      super.onStalled,
+      super.onSubmit,
+      super.onSuspend,
+      super.onTimeUpdate,
+      super.onTouchCancel,
+      super.onTouchEnd,
+      super.onTouchEnter,
+      super.onTouchLeave,
+      super.onTouchMove,
+      super.onTouchStart,
+      super.onTransitionEnd,
+      super.onVolumeChange,
+      super.onWaiting,
+      super.onFullscreenChange,
+      super.onFullscreenError,
+      super.onWheel});
+  @override
+  Element render() => hook(MapElement());
 }
 
-MetaElement metaElement(
-    {String? content,
-    String? httpEquiv,
-    String? name,
-    String? nonce,
-    Map<String, String>? attributes,
-    List<Element>? children,
-    Iterable<String>? classes,
-    Map<String, String>? dataset,
-    String? innerHtml,
-    String? innerText,
-    int? scrollLeft,
-    int? scrollTop,
-    String? contentEditable,
-    String? dir,
-    bool? draggable,
-    bool? hidden,
-    bool? inert,
-    String? inputMode,
-    String? lang,
-    bool? spellcheck,
-    int? tabIndex,
-    String? title,
-    bool? translate,
-    String? className,
-    String? id,
-    String? slot,
-    Iterable<Node>? nodes,
-    String? text,
-    void Function(Event)? onAbort,
-    void Function(Event)? onBeforeCopy,
-    void Function(Event)? onBeforeCut,
-    void Function(Event)? onBeforePaste,
-    void Function(Event)? onBlur,
-    void Function(Event)? onCanPlay,
-    void Function(Event)? onCanPlayThrough,
-    void Function(Event)? onChange,
-    void Function(MouseEvent)? onClick,
-    void Function(MouseEvent)? onContextMenu,
-    void Function(ClipboardEvent)? onCopy,
-    void Function(ClipboardEvent)? onCut,
-    void Function(Event)? onDoubleClick,
-    void Function(MouseEvent)? onDrag,
-    void Function(MouseEvent)? onDragEnd,
-    void Function(MouseEvent)? onDragEnter,
-    void Function(MouseEvent)? onDragLeave,
-    void Function(MouseEvent)? onDragOver,
-    void Function(MouseEvent)? onDragStart,
-    void Function(MouseEvent)? onDrop,
-    void Function(Event)? onDurationChange,
-    void Function(Event)? onEmptied,
-    void Function(Event)? onEnded,
-    void Function(Event)? onError,
-    void Function(Event)? onFocus,
-    void Function(Event)? onInput,
-    void Function(Event)? onInvalid,
-    void Function(KeyboardEvent)? onKeyDown,
-    void Function(KeyboardEvent)? onKeyPress,
-    void Function(KeyboardEvent)? onKeyUp,
-    void Function(Event)? onLoad,
-    void Function(Event)? onLoadedData,
-    void Function(Event)? onLoadedMetadata,
-    void Function(MouseEvent)? onMouseDown,
-    void Function(MouseEvent)? onMouseEnter,
-    void Function(MouseEvent)? onMouseLeave,
-    void Function(MouseEvent)? onMouseMove,
-    void Function(MouseEvent)? onMouseOut,
-    void Function(MouseEvent)? onMouseOver,
-    void Function(MouseEvent)? onMouseUp,
-    void Function(WheelEvent)? onMouseWheel,
-    void Function(ClipboardEvent)? onPaste,
-    void Function(Event)? onPause,
-    void Function(Event)? onPlay,
-    void Function(Event)? onPlaying,
-    void Function(Event)? onRateChange,
-    void Function(Event)? onReset,
-    void Function(Event)? onResize,
-    void Function(Event)? onScroll,
-    void Function(Event)? onSearch,
-    void Function(Event)? onSeeked,
-    void Function(Event)? onSeeking,
-    void Function(Event)? onSelect,
-    void Function(Event)? onSelectStart,
-    void Function(Event)? onStalled,
-    void Function(Event)? onSubmit,
-    void Function(Event)? onSuspend,
-    void Function(Event)? onTimeUpdate,
-    void Function(TouchEvent)? onTouchCancel,
-    void Function(TouchEvent)? onTouchEnd,
-    void Function(TouchEvent)? onTouchEnter,
-    void Function(TouchEvent)? onTouchLeave,
-    void Function(TouchEvent)? onTouchMove,
-    void Function(TouchEvent)? onTouchStart,
-    void Function(TransitionEvent)? onTransitionEnd,
-    void Function(Event)? onVolumeChange,
-    void Function(Event)? onWaiting,
-    void Function(Event)? onFullscreenChange,
-    void Function(Event)? onFullscreenError,
-    void Function(WheelEvent)? onWheel}) {
-  final v = MetaElement();
-  if (content != null) v.content = content;
-  if (httpEquiv != null) v.httpEquiv = httpEquiv;
-  if (name != null) v.name = name;
-  if (nonce != null) v.nonce = nonce;
-  if (attributes != null) v.attributes = attributes;
-  if (children != null) v.children = children;
-  if (classes != null) v.classes = classes;
-  if (dataset != null) v.dataset = dataset;
-  if (innerHtml != null) v.innerHtml = innerHtml;
-  if (innerText != null) v.innerText = innerText;
-  if (scrollLeft != null) v.scrollLeft = scrollLeft;
-  if (scrollTop != null) v.scrollTop = scrollTop;
-  if (contentEditable != null) v.contentEditable = contentEditable;
-  if (dir != null) v.dir = dir;
-  if (draggable != null) v.draggable = draggable;
-  if (hidden != null) v.hidden = hidden;
-  if (inert != null) v.inert = inert;
-  if (inputMode != null) v.inputMode = inputMode;
-  if (lang != null) v.lang = lang;
-  if (spellcheck != null) v.spellcheck = spellcheck;
-  if (tabIndex != null) v.tabIndex = tabIndex;
-  if (title != null) v.title = title;
-  if (translate != null) v.translate = translate;
-  if (className != null) v.className = className;
-  if (id != null) v.id = id;
-  if (slot != null) v.slot = slot;
-  if (nodes != null) v.nodes = nodes;
-  if (text != null) v.text = text;
-  if (onAbort != null) v.onAbort.listen(onAbort);
-  if (onBeforeCopy != null) v.onBeforeCopy.listen(onBeforeCopy);
-  if (onBeforeCut != null) v.onBeforeCut.listen(onBeforeCut);
-  if (onBeforePaste != null) v.onBeforePaste.listen(onBeforePaste);
-  if (onBlur != null) v.onBlur.listen(onBlur);
-  if (onCanPlay != null) v.onCanPlay.listen(onCanPlay);
-  if (onCanPlayThrough != null) v.onCanPlayThrough.listen(onCanPlayThrough);
-  if (onChange != null) v.onChange.listen(onChange);
-  if (onClick != null) v.onClick.listen(onClick);
-  if (onContextMenu != null) v.onContextMenu.listen(onContextMenu);
-  if (onCopy != null) v.onCopy.listen(onCopy);
-  if (onCut != null) v.onCut.listen(onCut);
-  if (onDoubleClick != null) v.onDoubleClick.listen(onDoubleClick);
-  if (onDrag != null) v.onDrag.listen(onDrag);
-  if (onDragEnd != null) v.onDragEnd.listen(onDragEnd);
-  if (onDragEnter != null) v.onDragEnter.listen(onDragEnter);
-  if (onDragLeave != null) v.onDragLeave.listen(onDragLeave);
-  if (onDragOver != null) v.onDragOver.listen(onDragOver);
-  if (onDragStart != null) v.onDragStart.listen(onDragStart);
-  if (onDrop != null) v.onDrop.listen(onDrop);
-  if (onDurationChange != null) v.onDurationChange.listen(onDurationChange);
-  if (onEmptied != null) v.onEmptied.listen(onEmptied);
-  if (onEnded != null) v.onEnded.listen(onEnded);
-  if (onError != null) v.onError.listen(onError);
-  if (onFocus != null) v.onFocus.listen(onFocus);
-  if (onInput != null) v.onInput.listen(onInput);
-  if (onInvalid != null) v.onInvalid.listen(onInvalid);
-  if (onKeyDown != null) v.onKeyDown.listen(onKeyDown);
-  if (onKeyPress != null) v.onKeyPress.listen(onKeyPress);
-  if (onKeyUp != null) v.onKeyUp.listen(onKeyUp);
-  if (onLoad != null) v.onLoad.listen(onLoad);
-  if (onLoadedData != null) v.onLoadedData.listen(onLoadedData);
-  if (onLoadedMetadata != null) v.onLoadedMetadata.listen(onLoadedMetadata);
-  if (onMouseDown != null) v.onMouseDown.listen(onMouseDown);
-  if (onMouseEnter != null) v.onMouseEnter.listen(onMouseEnter);
-  if (onMouseLeave != null) v.onMouseLeave.listen(onMouseLeave);
-  if (onMouseMove != null) v.onMouseMove.listen(onMouseMove);
-  if (onMouseOut != null) v.onMouseOut.listen(onMouseOut);
-  if (onMouseOver != null) v.onMouseOver.listen(onMouseOver);
-  if (onMouseUp != null) v.onMouseUp.listen(onMouseUp);
-  if (onMouseWheel != null) v.onMouseWheel.listen(onMouseWheel);
-  if (onPaste != null) v.onPaste.listen(onPaste);
-  if (onPause != null) v.onPause.listen(onPause);
-  if (onPlay != null) v.onPlay.listen(onPlay);
-  if (onPlaying != null) v.onPlaying.listen(onPlaying);
-  if (onRateChange != null) v.onRateChange.listen(onRateChange);
-  if (onReset != null) v.onReset.listen(onReset);
-  if (onResize != null) v.onResize.listen(onResize);
-  if (onScroll != null) v.onScroll.listen(onScroll);
-  if (onSearch != null) v.onSearch.listen(onSearch);
-  if (onSeeked != null) v.onSeeked.listen(onSeeked);
-  if (onSeeking != null) v.onSeeking.listen(onSeeking);
-  if (onSelect != null) v.onSelect.listen(onSelect);
-  if (onSelectStart != null) v.onSelectStart.listen(onSelectStart);
-  if (onStalled != null) v.onStalled.listen(onStalled);
-  if (onSubmit != null) v.onSubmit.listen(onSubmit);
-  if (onSuspend != null) v.onSuspend.listen(onSuspend);
-  if (onTimeUpdate != null) v.onTimeUpdate.listen(onTimeUpdate);
-  if (onTouchCancel != null) v.onTouchCancel.listen(onTouchCancel);
-  if (onTouchEnd != null) v.onTouchEnd.listen(onTouchEnd);
-  if (onTouchEnter != null) v.onTouchEnter.listen(onTouchEnter);
-  if (onTouchLeave != null) v.onTouchLeave.listen(onTouchLeave);
-  if (onTouchMove != null) v.onTouchMove.listen(onTouchMove);
-  if (onTouchStart != null) v.onTouchStart.listen(onTouchStart);
-  if (onTransitionEnd != null) v.onTransitionEnd.listen(onTransitionEnd);
-  if (onVolumeChange != null) v.onVolumeChange.listen(onVolumeChange);
-  if (onWaiting != null) v.onWaiting.listen(onWaiting);
-  if (onFullscreenChange != null)
-    v.onFullscreenChange.listen(onFullscreenChange);
-  if (onFullscreenError != null) v.onFullscreenError.listen(onFullscreenError);
-  if (onWheel != null) v.onWheel.listen(onWheel);
-  return v;
+class MenuElementWidget extends HtmlElementWidget {
+  MenuElementWidget(
+      {super.nonce,
+      super.attributes,
+      super.children,
+      super.classes,
+      super.dataset,
+      super.innerHtml,
+      super.innerText,
+      super.scrollLeft,
+      super.scrollTop,
+      super.contentEditable,
+      super.dir,
+      super.draggable,
+      super.hidden,
+      super.inert,
+      super.inputMode,
+      super.lang,
+      super.spellcheck,
+      super.tabIndex,
+      super.title,
+      super.translate,
+      super.className,
+      super.id,
+      super.slot,
+      super.nodes,
+      super.text,
+      super.onAbort,
+      super.onBeforeCopy,
+      super.onBeforeCut,
+      super.onBeforePaste,
+      super.onBlur,
+      super.onCanPlay,
+      super.onCanPlayThrough,
+      super.onChange,
+      super.onClick,
+      super.onContextMenu,
+      super.onCopy,
+      super.onCut,
+      super.onDoubleClick,
+      super.onDrag,
+      super.onDragEnd,
+      super.onDragEnter,
+      super.onDragLeave,
+      super.onDragOver,
+      super.onDragStart,
+      super.onDrop,
+      super.onDurationChange,
+      super.onEmptied,
+      super.onEnded,
+      super.onError,
+      super.onFocus,
+      super.onInput,
+      super.onInvalid,
+      super.onKeyDown,
+      super.onKeyPress,
+      super.onKeyUp,
+      super.onLoad,
+      super.onLoadedData,
+      super.onLoadedMetadata,
+      super.onMouseDown,
+      super.onMouseEnter,
+      super.onMouseLeave,
+      super.onMouseMove,
+      super.onMouseOut,
+      super.onMouseOver,
+      super.onMouseUp,
+      super.onMouseWheel,
+      super.onPaste,
+      super.onPause,
+      super.onPlay,
+      super.onPlaying,
+      super.onRateChange,
+      super.onReset,
+      super.onResize,
+      super.onScroll,
+      super.onSearch,
+      super.onSeeked,
+      super.onSeeking,
+      super.onSelect,
+      super.onSelectStart,
+      super.onStalled,
+      super.onSubmit,
+      super.onSuspend,
+      super.onTimeUpdate,
+      super.onTouchCancel,
+      super.onTouchEnd,
+      super.onTouchEnter,
+      super.onTouchLeave,
+      super.onTouchMove,
+      super.onTouchStart,
+      super.onTransitionEnd,
+      super.onVolumeChange,
+      super.onWaiting,
+      super.onFullscreenChange,
+      super.onFullscreenError,
+      super.onWheel});
+  @override
+  Element render() => hook(MenuElement());
 }
 
-MeterElement meterElement(
-    {num? high,
-    num? low,
-    num? max,
-    num? min,
-    num? optimum,
-    num? value,
-    String? nonce,
-    Map<String, String>? attributes,
-    List<Element>? children,
-    Iterable<String>? classes,
-    Map<String, String>? dataset,
-    String? innerHtml,
-    String? innerText,
-    int? scrollLeft,
-    int? scrollTop,
-    String? contentEditable,
-    String? dir,
-    bool? draggable,
-    bool? hidden,
-    bool? inert,
-    String? inputMode,
-    String? lang,
-    bool? spellcheck,
-    int? tabIndex,
-    String? title,
-    bool? translate,
-    String? className,
-    String? id,
-    String? slot,
-    Iterable<Node>? nodes,
-    String? text,
-    void Function(Event)? onAbort,
-    void Function(Event)? onBeforeCopy,
-    void Function(Event)? onBeforeCut,
-    void Function(Event)? onBeforePaste,
-    void Function(Event)? onBlur,
-    void Function(Event)? onCanPlay,
-    void Function(Event)? onCanPlayThrough,
-    void Function(Event)? onChange,
-    void Function(MouseEvent)? onClick,
-    void Function(MouseEvent)? onContextMenu,
-    void Function(ClipboardEvent)? onCopy,
-    void Function(ClipboardEvent)? onCut,
-    void Function(Event)? onDoubleClick,
-    void Function(MouseEvent)? onDrag,
-    void Function(MouseEvent)? onDragEnd,
-    void Function(MouseEvent)? onDragEnter,
-    void Function(MouseEvent)? onDragLeave,
-    void Function(MouseEvent)? onDragOver,
-    void Function(MouseEvent)? onDragStart,
-    void Function(MouseEvent)? onDrop,
-    void Function(Event)? onDurationChange,
-    void Function(Event)? onEmptied,
-    void Function(Event)? onEnded,
-    void Function(Event)? onError,
-    void Function(Event)? onFocus,
-    void Function(Event)? onInput,
-    void Function(Event)? onInvalid,
-    void Function(KeyboardEvent)? onKeyDown,
-    void Function(KeyboardEvent)? onKeyPress,
-    void Function(KeyboardEvent)? onKeyUp,
-    void Function(Event)? onLoad,
-    void Function(Event)? onLoadedData,
-    void Function(Event)? onLoadedMetadata,
-    void Function(MouseEvent)? onMouseDown,
-    void Function(MouseEvent)? onMouseEnter,
-    void Function(MouseEvent)? onMouseLeave,
-    void Function(MouseEvent)? onMouseMove,
-    void Function(MouseEvent)? onMouseOut,
-    void Function(MouseEvent)? onMouseOver,
-    void Function(MouseEvent)? onMouseUp,
-    void Function(WheelEvent)? onMouseWheel,
-    void Function(ClipboardEvent)? onPaste,
-    void Function(Event)? onPause,
-    void Function(Event)? onPlay,
-    void Function(Event)? onPlaying,
-    void Function(Event)? onRateChange,
-    void Function(Event)? onReset,
-    void Function(Event)? onResize,
-    void Function(Event)? onScroll,
-    void Function(Event)? onSearch,
-    void Function(Event)? onSeeked,
-    void Function(Event)? onSeeking,
-    void Function(Event)? onSelect,
-    void Function(Event)? onSelectStart,
-    void Function(Event)? onStalled,
-    void Function(Event)? onSubmit,
-    void Function(Event)? onSuspend,
-    void Function(Event)? onTimeUpdate,
-    void Function(TouchEvent)? onTouchCancel,
-    void Function(TouchEvent)? onTouchEnd,
-    void Function(TouchEvent)? onTouchEnter,
-    void Function(TouchEvent)? onTouchLeave,
-    void Function(TouchEvent)? onTouchMove,
-    void Function(TouchEvent)? onTouchStart,
-    void Function(TransitionEvent)? onTransitionEnd,
-    void Function(Event)? onVolumeChange,
-    void Function(Event)? onWaiting,
-    void Function(Event)? onFullscreenChange,
-    void Function(Event)? onFullscreenError,
-    void Function(WheelEvent)? onWheel}) {
-  final v = MeterElement();
-  if (high != null) v.high = high;
-  if (low != null) v.low = low;
-  if (max != null) v.max = max;
-  if (min != null) v.min = min;
-  if (optimum != null) v.optimum = optimum;
-  if (value != null) v.value = value;
-  if (nonce != null) v.nonce = nonce;
-  if (attributes != null) v.attributes = attributes;
-  if (children != null) v.children = children;
-  if (classes != null) v.classes = classes;
-  if (dataset != null) v.dataset = dataset;
-  if (innerHtml != null) v.innerHtml = innerHtml;
-  if (innerText != null) v.innerText = innerText;
-  if (scrollLeft != null) v.scrollLeft = scrollLeft;
-  if (scrollTop != null) v.scrollTop = scrollTop;
-  if (contentEditable != null) v.contentEditable = contentEditable;
-  if (dir != null) v.dir = dir;
-  if (draggable != null) v.draggable = draggable;
-  if (hidden != null) v.hidden = hidden;
-  if (inert != null) v.inert = inert;
-  if (inputMode != null) v.inputMode = inputMode;
-  if (lang != null) v.lang = lang;
-  if (spellcheck != null) v.spellcheck = spellcheck;
-  if (tabIndex != null) v.tabIndex = tabIndex;
-  if (title != null) v.title = title;
-  if (translate != null) v.translate = translate;
-  if (className != null) v.className = className;
-  if (id != null) v.id = id;
-  if (slot != null) v.slot = slot;
-  if (nodes != null) v.nodes = nodes;
-  if (text != null) v.text = text;
-  if (onAbort != null) v.onAbort.listen(onAbort);
-  if (onBeforeCopy != null) v.onBeforeCopy.listen(onBeforeCopy);
-  if (onBeforeCut != null) v.onBeforeCut.listen(onBeforeCut);
-  if (onBeforePaste != null) v.onBeforePaste.listen(onBeforePaste);
-  if (onBlur != null) v.onBlur.listen(onBlur);
-  if (onCanPlay != null) v.onCanPlay.listen(onCanPlay);
-  if (onCanPlayThrough != null) v.onCanPlayThrough.listen(onCanPlayThrough);
-  if (onChange != null) v.onChange.listen(onChange);
-  if (onClick != null) v.onClick.listen(onClick);
-  if (onContextMenu != null) v.onContextMenu.listen(onContextMenu);
-  if (onCopy != null) v.onCopy.listen(onCopy);
-  if (onCut != null) v.onCut.listen(onCut);
-  if (onDoubleClick != null) v.onDoubleClick.listen(onDoubleClick);
-  if (onDrag != null) v.onDrag.listen(onDrag);
-  if (onDragEnd != null) v.onDragEnd.listen(onDragEnd);
-  if (onDragEnter != null) v.onDragEnter.listen(onDragEnter);
-  if (onDragLeave != null) v.onDragLeave.listen(onDragLeave);
-  if (onDragOver != null) v.onDragOver.listen(onDragOver);
-  if (onDragStart != null) v.onDragStart.listen(onDragStart);
-  if (onDrop != null) v.onDrop.listen(onDrop);
-  if (onDurationChange != null) v.onDurationChange.listen(onDurationChange);
-  if (onEmptied != null) v.onEmptied.listen(onEmptied);
-  if (onEnded != null) v.onEnded.listen(onEnded);
-  if (onError != null) v.onError.listen(onError);
-  if (onFocus != null) v.onFocus.listen(onFocus);
-  if (onInput != null) v.onInput.listen(onInput);
-  if (onInvalid != null) v.onInvalid.listen(onInvalid);
-  if (onKeyDown != null) v.onKeyDown.listen(onKeyDown);
-  if (onKeyPress != null) v.onKeyPress.listen(onKeyPress);
-  if (onKeyUp != null) v.onKeyUp.listen(onKeyUp);
-  if (onLoad != null) v.onLoad.listen(onLoad);
-  if (onLoadedData != null) v.onLoadedData.listen(onLoadedData);
-  if (onLoadedMetadata != null) v.onLoadedMetadata.listen(onLoadedMetadata);
-  if (onMouseDown != null) v.onMouseDown.listen(onMouseDown);
-  if (onMouseEnter != null) v.onMouseEnter.listen(onMouseEnter);
-  if (onMouseLeave != null) v.onMouseLeave.listen(onMouseLeave);
-  if (onMouseMove != null) v.onMouseMove.listen(onMouseMove);
-  if (onMouseOut != null) v.onMouseOut.listen(onMouseOut);
-  if (onMouseOver != null) v.onMouseOver.listen(onMouseOver);
-  if (onMouseUp != null) v.onMouseUp.listen(onMouseUp);
-  if (onMouseWheel != null) v.onMouseWheel.listen(onMouseWheel);
-  if (onPaste != null) v.onPaste.listen(onPaste);
-  if (onPause != null) v.onPause.listen(onPause);
-  if (onPlay != null) v.onPlay.listen(onPlay);
-  if (onPlaying != null) v.onPlaying.listen(onPlaying);
-  if (onRateChange != null) v.onRateChange.listen(onRateChange);
-  if (onReset != null) v.onReset.listen(onReset);
-  if (onResize != null) v.onResize.listen(onResize);
-  if (onScroll != null) v.onScroll.listen(onScroll);
-  if (onSearch != null) v.onSearch.listen(onSearch);
-  if (onSeeked != null) v.onSeeked.listen(onSeeked);
-  if (onSeeking != null) v.onSeeking.listen(onSeeking);
-  if (onSelect != null) v.onSelect.listen(onSelect);
-  if (onSelectStart != null) v.onSelectStart.listen(onSelectStart);
-  if (onStalled != null) v.onStalled.listen(onStalled);
-  if (onSubmit != null) v.onSubmit.listen(onSubmit);
-  if (onSuspend != null) v.onSuspend.listen(onSuspend);
-  if (onTimeUpdate != null) v.onTimeUpdate.listen(onTimeUpdate);
-  if (onTouchCancel != null) v.onTouchCancel.listen(onTouchCancel);
-  if (onTouchEnd != null) v.onTouchEnd.listen(onTouchEnd);
-  if (onTouchEnter != null) v.onTouchEnter.listen(onTouchEnter);
-  if (onTouchLeave != null) v.onTouchLeave.listen(onTouchLeave);
-  if (onTouchMove != null) v.onTouchMove.listen(onTouchMove);
-  if (onTouchStart != null) v.onTouchStart.listen(onTouchStart);
-  if (onTransitionEnd != null) v.onTransitionEnd.listen(onTransitionEnd);
-  if (onVolumeChange != null) v.onVolumeChange.listen(onVolumeChange);
-  if (onWaiting != null) v.onWaiting.listen(onWaiting);
-  if (onFullscreenChange != null)
-    v.onFullscreenChange.listen(onFullscreenChange);
-  if (onFullscreenError != null) v.onFullscreenError.listen(onFullscreenError);
-  if (onWheel != null) v.onWheel.listen(onWheel);
-  return v;
+class MetaElementWidget extends HtmlElementWidget {
+  MetaElementWidget(
+      {super.nonce,
+      super.attributes,
+      super.children,
+      super.classes,
+      super.dataset,
+      super.innerHtml,
+      super.innerText,
+      super.scrollLeft,
+      super.scrollTop,
+      super.contentEditable,
+      super.dir,
+      super.draggable,
+      super.hidden,
+      super.inert,
+      super.inputMode,
+      super.lang,
+      super.spellcheck,
+      super.tabIndex,
+      super.title,
+      super.translate,
+      super.className,
+      super.id,
+      super.slot,
+      super.nodes,
+      super.text,
+      super.onAbort,
+      super.onBeforeCopy,
+      super.onBeforeCut,
+      super.onBeforePaste,
+      super.onBlur,
+      super.onCanPlay,
+      super.onCanPlayThrough,
+      super.onChange,
+      super.onClick,
+      super.onContextMenu,
+      super.onCopy,
+      super.onCut,
+      super.onDoubleClick,
+      super.onDrag,
+      super.onDragEnd,
+      super.onDragEnter,
+      super.onDragLeave,
+      super.onDragOver,
+      super.onDragStart,
+      super.onDrop,
+      super.onDurationChange,
+      super.onEmptied,
+      super.onEnded,
+      super.onError,
+      super.onFocus,
+      super.onInput,
+      super.onInvalid,
+      super.onKeyDown,
+      super.onKeyPress,
+      super.onKeyUp,
+      super.onLoad,
+      super.onLoadedData,
+      super.onLoadedMetadata,
+      super.onMouseDown,
+      super.onMouseEnter,
+      super.onMouseLeave,
+      super.onMouseMove,
+      super.onMouseOut,
+      super.onMouseOver,
+      super.onMouseUp,
+      super.onMouseWheel,
+      super.onPaste,
+      super.onPause,
+      super.onPlay,
+      super.onPlaying,
+      super.onRateChange,
+      super.onReset,
+      super.onResize,
+      super.onScroll,
+      super.onSearch,
+      super.onSeeked,
+      super.onSeeking,
+      super.onSelect,
+      super.onSelectStart,
+      super.onStalled,
+      super.onSubmit,
+      super.onSuspend,
+      super.onTimeUpdate,
+      super.onTouchCancel,
+      super.onTouchEnd,
+      super.onTouchEnter,
+      super.onTouchLeave,
+      super.onTouchMove,
+      super.onTouchStart,
+      super.onTransitionEnd,
+      super.onVolumeChange,
+      super.onWaiting,
+      super.onFullscreenChange,
+      super.onFullscreenError,
+      super.onWheel});
+  @override
+  Element render() => hook(MetaElement());
 }
 
-OListElement oListElement(
-    {bool? reversed,
-    int? start,
-    String? type,
-    String? nonce,
-    Map<String, String>? attributes,
-    List<Element>? children,
-    Iterable<String>? classes,
-    Map<String, String>? dataset,
-    String? innerHtml,
-    String? innerText,
-    int? scrollLeft,
-    int? scrollTop,
-    String? contentEditable,
-    String? dir,
-    bool? draggable,
-    bool? hidden,
-    bool? inert,
-    String? inputMode,
-    String? lang,
-    bool? spellcheck,
-    int? tabIndex,
-    String? title,
-    bool? translate,
-    String? className,
-    String? id,
-    String? slot,
-    Iterable<Node>? nodes,
-    String? text,
-    void Function(Event)? onAbort,
-    void Function(Event)? onBeforeCopy,
-    void Function(Event)? onBeforeCut,
-    void Function(Event)? onBeforePaste,
-    void Function(Event)? onBlur,
-    void Function(Event)? onCanPlay,
-    void Function(Event)? onCanPlayThrough,
-    void Function(Event)? onChange,
-    void Function(MouseEvent)? onClick,
-    void Function(MouseEvent)? onContextMenu,
-    void Function(ClipboardEvent)? onCopy,
-    void Function(ClipboardEvent)? onCut,
-    void Function(Event)? onDoubleClick,
-    void Function(MouseEvent)? onDrag,
-    void Function(MouseEvent)? onDragEnd,
-    void Function(MouseEvent)? onDragEnter,
-    void Function(MouseEvent)? onDragLeave,
-    void Function(MouseEvent)? onDragOver,
-    void Function(MouseEvent)? onDragStart,
-    void Function(MouseEvent)? onDrop,
-    void Function(Event)? onDurationChange,
-    void Function(Event)? onEmptied,
-    void Function(Event)? onEnded,
-    void Function(Event)? onError,
-    void Function(Event)? onFocus,
-    void Function(Event)? onInput,
-    void Function(Event)? onInvalid,
-    void Function(KeyboardEvent)? onKeyDown,
-    void Function(KeyboardEvent)? onKeyPress,
-    void Function(KeyboardEvent)? onKeyUp,
-    void Function(Event)? onLoad,
-    void Function(Event)? onLoadedData,
-    void Function(Event)? onLoadedMetadata,
-    void Function(MouseEvent)? onMouseDown,
-    void Function(MouseEvent)? onMouseEnter,
-    void Function(MouseEvent)? onMouseLeave,
-    void Function(MouseEvent)? onMouseMove,
-    void Function(MouseEvent)? onMouseOut,
-    void Function(MouseEvent)? onMouseOver,
-    void Function(MouseEvent)? onMouseUp,
-    void Function(WheelEvent)? onMouseWheel,
-    void Function(ClipboardEvent)? onPaste,
-    void Function(Event)? onPause,
-    void Function(Event)? onPlay,
-    void Function(Event)? onPlaying,
-    void Function(Event)? onRateChange,
-    void Function(Event)? onReset,
-    void Function(Event)? onResize,
-    void Function(Event)? onScroll,
-    void Function(Event)? onSearch,
-    void Function(Event)? onSeeked,
-    void Function(Event)? onSeeking,
-    void Function(Event)? onSelect,
-    void Function(Event)? onSelectStart,
-    void Function(Event)? onStalled,
-    void Function(Event)? onSubmit,
-    void Function(Event)? onSuspend,
-    void Function(Event)? onTimeUpdate,
-    void Function(TouchEvent)? onTouchCancel,
-    void Function(TouchEvent)? onTouchEnd,
-    void Function(TouchEvent)? onTouchEnter,
-    void Function(TouchEvent)? onTouchLeave,
-    void Function(TouchEvent)? onTouchMove,
-    void Function(TouchEvent)? onTouchStart,
-    void Function(TransitionEvent)? onTransitionEnd,
-    void Function(Event)? onVolumeChange,
-    void Function(Event)? onWaiting,
-    void Function(Event)? onFullscreenChange,
-    void Function(Event)? onFullscreenError,
-    void Function(WheelEvent)? onWheel}) {
-  final v = OListElement();
-  if (reversed != null) v.reversed = reversed;
-  if (start != null) v.start = start;
-  if (type != null) v.type = type;
-  if (nonce != null) v.nonce = nonce;
-  if (attributes != null) v.attributes = attributes;
-  if (children != null) v.children = children;
-  if (classes != null) v.classes = classes;
-  if (dataset != null) v.dataset = dataset;
-  if (innerHtml != null) v.innerHtml = innerHtml;
-  if (innerText != null) v.innerText = innerText;
-  if (scrollLeft != null) v.scrollLeft = scrollLeft;
-  if (scrollTop != null) v.scrollTop = scrollTop;
-  if (contentEditable != null) v.contentEditable = contentEditable;
-  if (dir != null) v.dir = dir;
-  if (draggable != null) v.draggable = draggable;
-  if (hidden != null) v.hidden = hidden;
-  if (inert != null) v.inert = inert;
-  if (inputMode != null) v.inputMode = inputMode;
-  if (lang != null) v.lang = lang;
-  if (spellcheck != null) v.spellcheck = spellcheck;
-  if (tabIndex != null) v.tabIndex = tabIndex;
-  if (title != null) v.title = title;
-  if (translate != null) v.translate = translate;
-  if (className != null) v.className = className;
-  if (id != null) v.id = id;
-  if (slot != null) v.slot = slot;
-  if (nodes != null) v.nodes = nodes;
-  if (text != null) v.text = text;
-  if (onAbort != null) v.onAbort.listen(onAbort);
-  if (onBeforeCopy != null) v.onBeforeCopy.listen(onBeforeCopy);
-  if (onBeforeCut != null) v.onBeforeCut.listen(onBeforeCut);
-  if (onBeforePaste != null) v.onBeforePaste.listen(onBeforePaste);
-  if (onBlur != null) v.onBlur.listen(onBlur);
-  if (onCanPlay != null) v.onCanPlay.listen(onCanPlay);
-  if (onCanPlayThrough != null) v.onCanPlayThrough.listen(onCanPlayThrough);
-  if (onChange != null) v.onChange.listen(onChange);
-  if (onClick != null) v.onClick.listen(onClick);
-  if (onContextMenu != null) v.onContextMenu.listen(onContextMenu);
-  if (onCopy != null) v.onCopy.listen(onCopy);
-  if (onCut != null) v.onCut.listen(onCut);
-  if (onDoubleClick != null) v.onDoubleClick.listen(onDoubleClick);
-  if (onDrag != null) v.onDrag.listen(onDrag);
-  if (onDragEnd != null) v.onDragEnd.listen(onDragEnd);
-  if (onDragEnter != null) v.onDragEnter.listen(onDragEnter);
-  if (onDragLeave != null) v.onDragLeave.listen(onDragLeave);
-  if (onDragOver != null) v.onDragOver.listen(onDragOver);
-  if (onDragStart != null) v.onDragStart.listen(onDragStart);
-  if (onDrop != null) v.onDrop.listen(onDrop);
-  if (onDurationChange != null) v.onDurationChange.listen(onDurationChange);
-  if (onEmptied != null) v.onEmptied.listen(onEmptied);
-  if (onEnded != null) v.onEnded.listen(onEnded);
-  if (onError != null) v.onError.listen(onError);
-  if (onFocus != null) v.onFocus.listen(onFocus);
-  if (onInput != null) v.onInput.listen(onInput);
-  if (onInvalid != null) v.onInvalid.listen(onInvalid);
-  if (onKeyDown != null) v.onKeyDown.listen(onKeyDown);
-  if (onKeyPress != null) v.onKeyPress.listen(onKeyPress);
-  if (onKeyUp != null) v.onKeyUp.listen(onKeyUp);
-  if (onLoad != null) v.onLoad.listen(onLoad);
-  if (onLoadedData != null) v.onLoadedData.listen(onLoadedData);
-  if (onLoadedMetadata != null) v.onLoadedMetadata.listen(onLoadedMetadata);
-  if (onMouseDown != null) v.onMouseDown.listen(onMouseDown);
-  if (onMouseEnter != null) v.onMouseEnter.listen(onMouseEnter);
-  if (onMouseLeave != null) v.onMouseLeave.listen(onMouseLeave);
-  if (onMouseMove != null) v.onMouseMove.listen(onMouseMove);
-  if (onMouseOut != null) v.onMouseOut.listen(onMouseOut);
-  if (onMouseOver != null) v.onMouseOver.listen(onMouseOver);
-  if (onMouseUp != null) v.onMouseUp.listen(onMouseUp);
-  if (onMouseWheel != null) v.onMouseWheel.listen(onMouseWheel);
-  if (onPaste != null) v.onPaste.listen(onPaste);
-  if (onPause != null) v.onPause.listen(onPause);
-  if (onPlay != null) v.onPlay.listen(onPlay);
-  if (onPlaying != null) v.onPlaying.listen(onPlaying);
-  if (onRateChange != null) v.onRateChange.listen(onRateChange);
-  if (onReset != null) v.onReset.listen(onReset);
-  if (onResize != null) v.onResize.listen(onResize);
-  if (onScroll != null) v.onScroll.listen(onScroll);
-  if (onSearch != null) v.onSearch.listen(onSearch);
-  if (onSeeked != null) v.onSeeked.listen(onSeeked);
-  if (onSeeking != null) v.onSeeking.listen(onSeeking);
-  if (onSelect != null) v.onSelect.listen(onSelect);
-  if (onSelectStart != null) v.onSelectStart.listen(onSelectStart);
-  if (onStalled != null) v.onStalled.listen(onStalled);
-  if (onSubmit != null) v.onSubmit.listen(onSubmit);
-  if (onSuspend != null) v.onSuspend.listen(onSuspend);
-  if (onTimeUpdate != null) v.onTimeUpdate.listen(onTimeUpdate);
-  if (onTouchCancel != null) v.onTouchCancel.listen(onTouchCancel);
-  if (onTouchEnd != null) v.onTouchEnd.listen(onTouchEnd);
-  if (onTouchEnter != null) v.onTouchEnter.listen(onTouchEnter);
-  if (onTouchLeave != null) v.onTouchLeave.listen(onTouchLeave);
-  if (onTouchMove != null) v.onTouchMove.listen(onTouchMove);
-  if (onTouchStart != null) v.onTouchStart.listen(onTouchStart);
-  if (onTransitionEnd != null) v.onTransitionEnd.listen(onTransitionEnd);
-  if (onVolumeChange != null) v.onVolumeChange.listen(onVolumeChange);
-  if (onWaiting != null) v.onWaiting.listen(onWaiting);
-  if (onFullscreenChange != null)
-    v.onFullscreenChange.listen(onFullscreenChange);
-  if (onFullscreenError != null) v.onFullscreenError.listen(onFullscreenError);
-  if (onWheel != null) v.onWheel.listen(onWheel);
-  return v;
+class MeterElementWidget extends HtmlElementWidget {
+  MeterElementWidget(
+      {super.nonce,
+      super.attributes,
+      super.children,
+      super.classes,
+      super.dataset,
+      super.innerHtml,
+      super.innerText,
+      super.scrollLeft,
+      super.scrollTop,
+      super.contentEditable,
+      super.dir,
+      super.draggable,
+      super.hidden,
+      super.inert,
+      super.inputMode,
+      super.lang,
+      super.spellcheck,
+      super.tabIndex,
+      super.title,
+      super.translate,
+      super.className,
+      super.id,
+      super.slot,
+      super.nodes,
+      super.text,
+      super.onAbort,
+      super.onBeforeCopy,
+      super.onBeforeCut,
+      super.onBeforePaste,
+      super.onBlur,
+      super.onCanPlay,
+      super.onCanPlayThrough,
+      super.onChange,
+      super.onClick,
+      super.onContextMenu,
+      super.onCopy,
+      super.onCut,
+      super.onDoubleClick,
+      super.onDrag,
+      super.onDragEnd,
+      super.onDragEnter,
+      super.onDragLeave,
+      super.onDragOver,
+      super.onDragStart,
+      super.onDrop,
+      super.onDurationChange,
+      super.onEmptied,
+      super.onEnded,
+      super.onError,
+      super.onFocus,
+      super.onInput,
+      super.onInvalid,
+      super.onKeyDown,
+      super.onKeyPress,
+      super.onKeyUp,
+      super.onLoad,
+      super.onLoadedData,
+      super.onLoadedMetadata,
+      super.onMouseDown,
+      super.onMouseEnter,
+      super.onMouseLeave,
+      super.onMouseMove,
+      super.onMouseOut,
+      super.onMouseOver,
+      super.onMouseUp,
+      super.onMouseWheel,
+      super.onPaste,
+      super.onPause,
+      super.onPlay,
+      super.onPlaying,
+      super.onRateChange,
+      super.onReset,
+      super.onResize,
+      super.onScroll,
+      super.onSearch,
+      super.onSeeked,
+      super.onSeeking,
+      super.onSelect,
+      super.onSelectStart,
+      super.onStalled,
+      super.onSubmit,
+      super.onSuspend,
+      super.onTimeUpdate,
+      super.onTouchCancel,
+      super.onTouchEnd,
+      super.onTouchEnter,
+      super.onTouchLeave,
+      super.onTouchMove,
+      super.onTouchStart,
+      super.onTransitionEnd,
+      super.onVolumeChange,
+      super.onWaiting,
+      super.onFullscreenChange,
+      super.onFullscreenError,
+      super.onWheel});
+  @override
+  Element render() => hook(MeterElement());
 }
 
-ObjectElement objectElement(
-    {String? data,
-    String? height,
-    String? name,
-    String? type,
-    String? useMap,
-    String? width,
-    String? nonce,
-    Map<String, String>? attributes,
-    List<Element>? children,
-    Iterable<String>? classes,
-    Map<String, String>? dataset,
-    String? innerHtml,
-    String? innerText,
-    int? scrollLeft,
-    int? scrollTop,
-    String? contentEditable,
-    String? dir,
-    bool? draggable,
-    bool? hidden,
-    bool? inert,
-    String? inputMode,
-    String? lang,
-    bool? spellcheck,
-    int? tabIndex,
-    String? title,
-    bool? translate,
-    String? className,
-    String? id,
-    String? slot,
-    Iterable<Node>? nodes,
-    String? text,
-    void Function(Event)? onAbort,
-    void Function(Event)? onBeforeCopy,
-    void Function(Event)? onBeforeCut,
-    void Function(Event)? onBeforePaste,
-    void Function(Event)? onBlur,
-    void Function(Event)? onCanPlay,
-    void Function(Event)? onCanPlayThrough,
-    void Function(Event)? onChange,
-    void Function(MouseEvent)? onClick,
-    void Function(MouseEvent)? onContextMenu,
-    void Function(ClipboardEvent)? onCopy,
-    void Function(ClipboardEvent)? onCut,
-    void Function(Event)? onDoubleClick,
-    void Function(MouseEvent)? onDrag,
-    void Function(MouseEvent)? onDragEnd,
-    void Function(MouseEvent)? onDragEnter,
-    void Function(MouseEvent)? onDragLeave,
-    void Function(MouseEvent)? onDragOver,
-    void Function(MouseEvent)? onDragStart,
-    void Function(MouseEvent)? onDrop,
-    void Function(Event)? onDurationChange,
-    void Function(Event)? onEmptied,
-    void Function(Event)? onEnded,
-    void Function(Event)? onError,
-    void Function(Event)? onFocus,
-    void Function(Event)? onInput,
-    void Function(Event)? onInvalid,
-    void Function(KeyboardEvent)? onKeyDown,
-    void Function(KeyboardEvent)? onKeyPress,
-    void Function(KeyboardEvent)? onKeyUp,
-    void Function(Event)? onLoad,
-    void Function(Event)? onLoadedData,
-    void Function(Event)? onLoadedMetadata,
-    void Function(MouseEvent)? onMouseDown,
-    void Function(MouseEvent)? onMouseEnter,
-    void Function(MouseEvent)? onMouseLeave,
-    void Function(MouseEvent)? onMouseMove,
-    void Function(MouseEvent)? onMouseOut,
-    void Function(MouseEvent)? onMouseOver,
-    void Function(MouseEvent)? onMouseUp,
-    void Function(WheelEvent)? onMouseWheel,
-    void Function(ClipboardEvent)? onPaste,
-    void Function(Event)? onPause,
-    void Function(Event)? onPlay,
-    void Function(Event)? onPlaying,
-    void Function(Event)? onRateChange,
-    void Function(Event)? onReset,
-    void Function(Event)? onResize,
-    void Function(Event)? onScroll,
-    void Function(Event)? onSearch,
-    void Function(Event)? onSeeked,
-    void Function(Event)? onSeeking,
-    void Function(Event)? onSelect,
-    void Function(Event)? onSelectStart,
-    void Function(Event)? onStalled,
-    void Function(Event)? onSubmit,
-    void Function(Event)? onSuspend,
-    void Function(Event)? onTimeUpdate,
-    void Function(TouchEvent)? onTouchCancel,
-    void Function(TouchEvent)? onTouchEnd,
-    void Function(TouchEvent)? onTouchEnter,
-    void Function(TouchEvent)? onTouchLeave,
-    void Function(TouchEvent)? onTouchMove,
-    void Function(TouchEvent)? onTouchStart,
-    void Function(TransitionEvent)? onTransitionEnd,
-    void Function(Event)? onVolumeChange,
-    void Function(Event)? onWaiting,
-    void Function(Event)? onFullscreenChange,
-    void Function(Event)? onFullscreenError,
-    void Function(WheelEvent)? onWheel}) {
-  final v = ObjectElement();
-  if (data != null) v.data = data;
-  if (height != null) v.height = height;
-  if (name != null) v.name = name;
-  if (type != null) v.type = type;
-  if (useMap != null) v.useMap = useMap;
-  if (width != null) v.width = width;
-  if (nonce != null) v.nonce = nonce;
-  if (attributes != null) v.attributes = attributes;
-  if (children != null) v.children = children;
-  if (classes != null) v.classes = classes;
-  if (dataset != null) v.dataset = dataset;
-  if (innerHtml != null) v.innerHtml = innerHtml;
-  if (innerText != null) v.innerText = innerText;
-  if (scrollLeft != null) v.scrollLeft = scrollLeft;
-  if (scrollTop != null) v.scrollTop = scrollTop;
-  if (contentEditable != null) v.contentEditable = contentEditable;
-  if (dir != null) v.dir = dir;
-  if (draggable != null) v.draggable = draggable;
-  if (hidden != null) v.hidden = hidden;
-  if (inert != null) v.inert = inert;
-  if (inputMode != null) v.inputMode = inputMode;
-  if (lang != null) v.lang = lang;
-  if (spellcheck != null) v.spellcheck = spellcheck;
-  if (tabIndex != null) v.tabIndex = tabIndex;
-  if (title != null) v.title = title;
-  if (translate != null) v.translate = translate;
-  if (className != null) v.className = className;
-  if (id != null) v.id = id;
-  if (slot != null) v.slot = slot;
-  if (nodes != null) v.nodes = nodes;
-  if (text != null) v.text = text;
-  if (onAbort != null) v.onAbort.listen(onAbort);
-  if (onBeforeCopy != null) v.onBeforeCopy.listen(onBeforeCopy);
-  if (onBeforeCut != null) v.onBeforeCut.listen(onBeforeCut);
-  if (onBeforePaste != null) v.onBeforePaste.listen(onBeforePaste);
-  if (onBlur != null) v.onBlur.listen(onBlur);
-  if (onCanPlay != null) v.onCanPlay.listen(onCanPlay);
-  if (onCanPlayThrough != null) v.onCanPlayThrough.listen(onCanPlayThrough);
-  if (onChange != null) v.onChange.listen(onChange);
-  if (onClick != null) v.onClick.listen(onClick);
-  if (onContextMenu != null) v.onContextMenu.listen(onContextMenu);
-  if (onCopy != null) v.onCopy.listen(onCopy);
-  if (onCut != null) v.onCut.listen(onCut);
-  if (onDoubleClick != null) v.onDoubleClick.listen(onDoubleClick);
-  if (onDrag != null) v.onDrag.listen(onDrag);
-  if (onDragEnd != null) v.onDragEnd.listen(onDragEnd);
-  if (onDragEnter != null) v.onDragEnter.listen(onDragEnter);
-  if (onDragLeave != null) v.onDragLeave.listen(onDragLeave);
-  if (onDragOver != null) v.onDragOver.listen(onDragOver);
-  if (onDragStart != null) v.onDragStart.listen(onDragStart);
-  if (onDrop != null) v.onDrop.listen(onDrop);
-  if (onDurationChange != null) v.onDurationChange.listen(onDurationChange);
-  if (onEmptied != null) v.onEmptied.listen(onEmptied);
-  if (onEnded != null) v.onEnded.listen(onEnded);
-  if (onError != null) v.onError.listen(onError);
-  if (onFocus != null) v.onFocus.listen(onFocus);
-  if (onInput != null) v.onInput.listen(onInput);
-  if (onInvalid != null) v.onInvalid.listen(onInvalid);
-  if (onKeyDown != null) v.onKeyDown.listen(onKeyDown);
-  if (onKeyPress != null) v.onKeyPress.listen(onKeyPress);
-  if (onKeyUp != null) v.onKeyUp.listen(onKeyUp);
-  if (onLoad != null) v.onLoad.listen(onLoad);
-  if (onLoadedData != null) v.onLoadedData.listen(onLoadedData);
-  if (onLoadedMetadata != null) v.onLoadedMetadata.listen(onLoadedMetadata);
-  if (onMouseDown != null) v.onMouseDown.listen(onMouseDown);
-  if (onMouseEnter != null) v.onMouseEnter.listen(onMouseEnter);
-  if (onMouseLeave != null) v.onMouseLeave.listen(onMouseLeave);
-  if (onMouseMove != null) v.onMouseMove.listen(onMouseMove);
-  if (onMouseOut != null) v.onMouseOut.listen(onMouseOut);
-  if (onMouseOver != null) v.onMouseOver.listen(onMouseOver);
-  if (onMouseUp != null) v.onMouseUp.listen(onMouseUp);
-  if (onMouseWheel != null) v.onMouseWheel.listen(onMouseWheel);
-  if (onPaste != null) v.onPaste.listen(onPaste);
-  if (onPause != null) v.onPause.listen(onPause);
-  if (onPlay != null) v.onPlay.listen(onPlay);
-  if (onPlaying != null) v.onPlaying.listen(onPlaying);
-  if (onRateChange != null) v.onRateChange.listen(onRateChange);
-  if (onReset != null) v.onReset.listen(onReset);
-  if (onResize != null) v.onResize.listen(onResize);
-  if (onScroll != null) v.onScroll.listen(onScroll);
-  if (onSearch != null) v.onSearch.listen(onSearch);
-  if (onSeeked != null) v.onSeeked.listen(onSeeked);
-  if (onSeeking != null) v.onSeeking.listen(onSeeking);
-  if (onSelect != null) v.onSelect.listen(onSelect);
-  if (onSelectStart != null) v.onSelectStart.listen(onSelectStart);
-  if (onStalled != null) v.onStalled.listen(onStalled);
-  if (onSubmit != null) v.onSubmit.listen(onSubmit);
-  if (onSuspend != null) v.onSuspend.listen(onSuspend);
-  if (onTimeUpdate != null) v.onTimeUpdate.listen(onTimeUpdate);
-  if (onTouchCancel != null) v.onTouchCancel.listen(onTouchCancel);
-  if (onTouchEnd != null) v.onTouchEnd.listen(onTouchEnd);
-  if (onTouchEnter != null) v.onTouchEnter.listen(onTouchEnter);
-  if (onTouchLeave != null) v.onTouchLeave.listen(onTouchLeave);
-  if (onTouchMove != null) v.onTouchMove.listen(onTouchMove);
-  if (onTouchStart != null) v.onTouchStart.listen(onTouchStart);
-  if (onTransitionEnd != null) v.onTransitionEnd.listen(onTransitionEnd);
-  if (onVolumeChange != null) v.onVolumeChange.listen(onVolumeChange);
-  if (onWaiting != null) v.onWaiting.listen(onWaiting);
-  if (onFullscreenChange != null)
-    v.onFullscreenChange.listen(onFullscreenChange);
-  if (onFullscreenError != null) v.onFullscreenError.listen(onFullscreenError);
-  if (onWheel != null) v.onWheel.listen(onWheel);
-  return v;
+class OListElementWidget extends HtmlElementWidget {
+  OListElementWidget(
+      {super.nonce,
+      super.attributes,
+      super.children,
+      super.classes,
+      super.dataset,
+      super.innerHtml,
+      super.innerText,
+      super.scrollLeft,
+      super.scrollTop,
+      super.contentEditable,
+      super.dir,
+      super.draggable,
+      super.hidden,
+      super.inert,
+      super.inputMode,
+      super.lang,
+      super.spellcheck,
+      super.tabIndex,
+      super.title,
+      super.translate,
+      super.className,
+      super.id,
+      super.slot,
+      super.nodes,
+      super.text,
+      super.onAbort,
+      super.onBeforeCopy,
+      super.onBeforeCut,
+      super.onBeforePaste,
+      super.onBlur,
+      super.onCanPlay,
+      super.onCanPlayThrough,
+      super.onChange,
+      super.onClick,
+      super.onContextMenu,
+      super.onCopy,
+      super.onCut,
+      super.onDoubleClick,
+      super.onDrag,
+      super.onDragEnd,
+      super.onDragEnter,
+      super.onDragLeave,
+      super.onDragOver,
+      super.onDragStart,
+      super.onDrop,
+      super.onDurationChange,
+      super.onEmptied,
+      super.onEnded,
+      super.onError,
+      super.onFocus,
+      super.onInput,
+      super.onInvalid,
+      super.onKeyDown,
+      super.onKeyPress,
+      super.onKeyUp,
+      super.onLoad,
+      super.onLoadedData,
+      super.onLoadedMetadata,
+      super.onMouseDown,
+      super.onMouseEnter,
+      super.onMouseLeave,
+      super.onMouseMove,
+      super.onMouseOut,
+      super.onMouseOver,
+      super.onMouseUp,
+      super.onMouseWheel,
+      super.onPaste,
+      super.onPause,
+      super.onPlay,
+      super.onPlaying,
+      super.onRateChange,
+      super.onReset,
+      super.onResize,
+      super.onScroll,
+      super.onSearch,
+      super.onSeeked,
+      super.onSeeking,
+      super.onSelect,
+      super.onSelectStart,
+      super.onStalled,
+      super.onSubmit,
+      super.onSuspend,
+      super.onTimeUpdate,
+      super.onTouchCancel,
+      super.onTouchEnd,
+      super.onTouchEnter,
+      super.onTouchLeave,
+      super.onTouchMove,
+      super.onTouchStart,
+      super.onTransitionEnd,
+      super.onVolumeChange,
+      super.onWaiting,
+      super.onFullscreenChange,
+      super.onFullscreenError,
+      super.onWheel});
+  @override
+  Element render() => hook(OListElement());
 }
 
-OptGroupElement optGroupElement(
-    {bool? disabled,
-    String? label,
-    String? nonce,
-    Map<String, String>? attributes,
-    List<Element>? children,
-    Iterable<String>? classes,
-    Map<String, String>? dataset,
-    String? innerHtml,
-    String? innerText,
-    int? scrollLeft,
-    int? scrollTop,
-    String? contentEditable,
-    String? dir,
-    bool? draggable,
-    bool? hidden,
-    bool? inert,
-    String? inputMode,
-    String? lang,
-    bool? spellcheck,
-    int? tabIndex,
-    String? title,
-    bool? translate,
-    String? className,
-    String? id,
-    String? slot,
-    Iterable<Node>? nodes,
-    String? text,
-    void Function(Event)? onAbort,
-    void Function(Event)? onBeforeCopy,
-    void Function(Event)? onBeforeCut,
-    void Function(Event)? onBeforePaste,
-    void Function(Event)? onBlur,
-    void Function(Event)? onCanPlay,
-    void Function(Event)? onCanPlayThrough,
-    void Function(Event)? onChange,
-    void Function(MouseEvent)? onClick,
-    void Function(MouseEvent)? onContextMenu,
-    void Function(ClipboardEvent)? onCopy,
-    void Function(ClipboardEvent)? onCut,
-    void Function(Event)? onDoubleClick,
-    void Function(MouseEvent)? onDrag,
-    void Function(MouseEvent)? onDragEnd,
-    void Function(MouseEvent)? onDragEnter,
-    void Function(MouseEvent)? onDragLeave,
-    void Function(MouseEvent)? onDragOver,
-    void Function(MouseEvent)? onDragStart,
-    void Function(MouseEvent)? onDrop,
-    void Function(Event)? onDurationChange,
-    void Function(Event)? onEmptied,
-    void Function(Event)? onEnded,
-    void Function(Event)? onError,
-    void Function(Event)? onFocus,
-    void Function(Event)? onInput,
-    void Function(Event)? onInvalid,
-    void Function(KeyboardEvent)? onKeyDown,
-    void Function(KeyboardEvent)? onKeyPress,
-    void Function(KeyboardEvent)? onKeyUp,
-    void Function(Event)? onLoad,
-    void Function(Event)? onLoadedData,
-    void Function(Event)? onLoadedMetadata,
-    void Function(MouseEvent)? onMouseDown,
-    void Function(MouseEvent)? onMouseEnter,
-    void Function(MouseEvent)? onMouseLeave,
-    void Function(MouseEvent)? onMouseMove,
-    void Function(MouseEvent)? onMouseOut,
-    void Function(MouseEvent)? onMouseOver,
-    void Function(MouseEvent)? onMouseUp,
-    void Function(WheelEvent)? onMouseWheel,
-    void Function(ClipboardEvent)? onPaste,
-    void Function(Event)? onPause,
-    void Function(Event)? onPlay,
-    void Function(Event)? onPlaying,
-    void Function(Event)? onRateChange,
-    void Function(Event)? onReset,
-    void Function(Event)? onResize,
-    void Function(Event)? onScroll,
-    void Function(Event)? onSearch,
-    void Function(Event)? onSeeked,
-    void Function(Event)? onSeeking,
-    void Function(Event)? onSelect,
-    void Function(Event)? onSelectStart,
-    void Function(Event)? onStalled,
-    void Function(Event)? onSubmit,
-    void Function(Event)? onSuspend,
-    void Function(Event)? onTimeUpdate,
-    void Function(TouchEvent)? onTouchCancel,
-    void Function(TouchEvent)? onTouchEnd,
-    void Function(TouchEvent)? onTouchEnter,
-    void Function(TouchEvent)? onTouchLeave,
-    void Function(TouchEvent)? onTouchMove,
-    void Function(TouchEvent)? onTouchStart,
-    void Function(TransitionEvent)? onTransitionEnd,
-    void Function(Event)? onVolumeChange,
-    void Function(Event)? onWaiting,
-    void Function(Event)? onFullscreenChange,
-    void Function(Event)? onFullscreenError,
-    void Function(WheelEvent)? onWheel}) {
-  final v = OptGroupElement();
-  if (disabled != null) v.disabled = disabled;
-  if (label != null) v.label = label;
-  if (nonce != null) v.nonce = nonce;
-  if (attributes != null) v.attributes = attributes;
-  if (children != null) v.children = children;
-  if (classes != null) v.classes = classes;
-  if (dataset != null) v.dataset = dataset;
-  if (innerHtml != null) v.innerHtml = innerHtml;
-  if (innerText != null) v.innerText = innerText;
-  if (scrollLeft != null) v.scrollLeft = scrollLeft;
-  if (scrollTop != null) v.scrollTop = scrollTop;
-  if (contentEditable != null) v.contentEditable = contentEditable;
-  if (dir != null) v.dir = dir;
-  if (draggable != null) v.draggable = draggable;
-  if (hidden != null) v.hidden = hidden;
-  if (inert != null) v.inert = inert;
-  if (inputMode != null) v.inputMode = inputMode;
-  if (lang != null) v.lang = lang;
-  if (spellcheck != null) v.spellcheck = spellcheck;
-  if (tabIndex != null) v.tabIndex = tabIndex;
-  if (title != null) v.title = title;
-  if (translate != null) v.translate = translate;
-  if (className != null) v.className = className;
-  if (id != null) v.id = id;
-  if (slot != null) v.slot = slot;
-  if (nodes != null) v.nodes = nodes;
-  if (text != null) v.text = text;
-  if (onAbort != null) v.onAbort.listen(onAbort);
-  if (onBeforeCopy != null) v.onBeforeCopy.listen(onBeforeCopy);
-  if (onBeforeCut != null) v.onBeforeCut.listen(onBeforeCut);
-  if (onBeforePaste != null) v.onBeforePaste.listen(onBeforePaste);
-  if (onBlur != null) v.onBlur.listen(onBlur);
-  if (onCanPlay != null) v.onCanPlay.listen(onCanPlay);
-  if (onCanPlayThrough != null) v.onCanPlayThrough.listen(onCanPlayThrough);
-  if (onChange != null) v.onChange.listen(onChange);
-  if (onClick != null) v.onClick.listen(onClick);
-  if (onContextMenu != null) v.onContextMenu.listen(onContextMenu);
-  if (onCopy != null) v.onCopy.listen(onCopy);
-  if (onCut != null) v.onCut.listen(onCut);
-  if (onDoubleClick != null) v.onDoubleClick.listen(onDoubleClick);
-  if (onDrag != null) v.onDrag.listen(onDrag);
-  if (onDragEnd != null) v.onDragEnd.listen(onDragEnd);
-  if (onDragEnter != null) v.onDragEnter.listen(onDragEnter);
-  if (onDragLeave != null) v.onDragLeave.listen(onDragLeave);
-  if (onDragOver != null) v.onDragOver.listen(onDragOver);
-  if (onDragStart != null) v.onDragStart.listen(onDragStart);
-  if (onDrop != null) v.onDrop.listen(onDrop);
-  if (onDurationChange != null) v.onDurationChange.listen(onDurationChange);
-  if (onEmptied != null) v.onEmptied.listen(onEmptied);
-  if (onEnded != null) v.onEnded.listen(onEnded);
-  if (onError != null) v.onError.listen(onError);
-  if (onFocus != null) v.onFocus.listen(onFocus);
-  if (onInput != null) v.onInput.listen(onInput);
-  if (onInvalid != null) v.onInvalid.listen(onInvalid);
-  if (onKeyDown != null) v.onKeyDown.listen(onKeyDown);
-  if (onKeyPress != null) v.onKeyPress.listen(onKeyPress);
-  if (onKeyUp != null) v.onKeyUp.listen(onKeyUp);
-  if (onLoad != null) v.onLoad.listen(onLoad);
-  if (onLoadedData != null) v.onLoadedData.listen(onLoadedData);
-  if (onLoadedMetadata != null) v.onLoadedMetadata.listen(onLoadedMetadata);
-  if (onMouseDown != null) v.onMouseDown.listen(onMouseDown);
-  if (onMouseEnter != null) v.onMouseEnter.listen(onMouseEnter);
-  if (onMouseLeave != null) v.onMouseLeave.listen(onMouseLeave);
-  if (onMouseMove != null) v.onMouseMove.listen(onMouseMove);
-  if (onMouseOut != null) v.onMouseOut.listen(onMouseOut);
-  if (onMouseOver != null) v.onMouseOver.listen(onMouseOver);
-  if (onMouseUp != null) v.onMouseUp.listen(onMouseUp);
-  if (onMouseWheel != null) v.onMouseWheel.listen(onMouseWheel);
-  if (onPaste != null) v.onPaste.listen(onPaste);
-  if (onPause != null) v.onPause.listen(onPause);
-  if (onPlay != null) v.onPlay.listen(onPlay);
-  if (onPlaying != null) v.onPlaying.listen(onPlaying);
-  if (onRateChange != null) v.onRateChange.listen(onRateChange);
-  if (onReset != null) v.onReset.listen(onReset);
-  if (onResize != null) v.onResize.listen(onResize);
-  if (onScroll != null) v.onScroll.listen(onScroll);
-  if (onSearch != null) v.onSearch.listen(onSearch);
-  if (onSeeked != null) v.onSeeked.listen(onSeeked);
-  if (onSeeking != null) v.onSeeking.listen(onSeeking);
-  if (onSelect != null) v.onSelect.listen(onSelect);
-  if (onSelectStart != null) v.onSelectStart.listen(onSelectStart);
-  if (onStalled != null) v.onStalled.listen(onStalled);
-  if (onSubmit != null) v.onSubmit.listen(onSubmit);
-  if (onSuspend != null) v.onSuspend.listen(onSuspend);
-  if (onTimeUpdate != null) v.onTimeUpdate.listen(onTimeUpdate);
-  if (onTouchCancel != null) v.onTouchCancel.listen(onTouchCancel);
-  if (onTouchEnd != null) v.onTouchEnd.listen(onTouchEnd);
-  if (onTouchEnter != null) v.onTouchEnter.listen(onTouchEnter);
-  if (onTouchLeave != null) v.onTouchLeave.listen(onTouchLeave);
-  if (onTouchMove != null) v.onTouchMove.listen(onTouchMove);
-  if (onTouchStart != null) v.onTouchStart.listen(onTouchStart);
-  if (onTransitionEnd != null) v.onTransitionEnd.listen(onTransitionEnd);
-  if (onVolumeChange != null) v.onVolumeChange.listen(onVolumeChange);
-  if (onWaiting != null) v.onWaiting.listen(onWaiting);
-  if (onFullscreenChange != null)
-    v.onFullscreenChange.listen(onFullscreenChange);
-  if (onFullscreenError != null) v.onFullscreenError.listen(onFullscreenError);
-  if (onWheel != null) v.onWheel.listen(onWheel);
-  return v;
+class ObjectElementWidget extends HtmlElementWidget {
+  ObjectElementWidget(
+      {super.nonce,
+      super.attributes,
+      super.children,
+      super.classes,
+      super.dataset,
+      super.innerHtml,
+      super.innerText,
+      super.scrollLeft,
+      super.scrollTop,
+      super.contentEditable,
+      super.dir,
+      super.draggable,
+      super.hidden,
+      super.inert,
+      super.inputMode,
+      super.lang,
+      super.spellcheck,
+      super.tabIndex,
+      super.title,
+      super.translate,
+      super.className,
+      super.id,
+      super.slot,
+      super.nodes,
+      super.text,
+      super.onAbort,
+      super.onBeforeCopy,
+      super.onBeforeCut,
+      super.onBeforePaste,
+      super.onBlur,
+      super.onCanPlay,
+      super.onCanPlayThrough,
+      super.onChange,
+      super.onClick,
+      super.onContextMenu,
+      super.onCopy,
+      super.onCut,
+      super.onDoubleClick,
+      super.onDrag,
+      super.onDragEnd,
+      super.onDragEnter,
+      super.onDragLeave,
+      super.onDragOver,
+      super.onDragStart,
+      super.onDrop,
+      super.onDurationChange,
+      super.onEmptied,
+      super.onEnded,
+      super.onError,
+      super.onFocus,
+      super.onInput,
+      super.onInvalid,
+      super.onKeyDown,
+      super.onKeyPress,
+      super.onKeyUp,
+      super.onLoad,
+      super.onLoadedData,
+      super.onLoadedMetadata,
+      super.onMouseDown,
+      super.onMouseEnter,
+      super.onMouseLeave,
+      super.onMouseMove,
+      super.onMouseOut,
+      super.onMouseOver,
+      super.onMouseUp,
+      super.onMouseWheel,
+      super.onPaste,
+      super.onPause,
+      super.onPlay,
+      super.onPlaying,
+      super.onRateChange,
+      super.onReset,
+      super.onResize,
+      super.onScroll,
+      super.onSearch,
+      super.onSeeked,
+      super.onSeeking,
+      super.onSelect,
+      super.onSelectStart,
+      super.onStalled,
+      super.onSubmit,
+      super.onSuspend,
+      super.onTimeUpdate,
+      super.onTouchCancel,
+      super.onTouchEnd,
+      super.onTouchEnter,
+      super.onTouchLeave,
+      super.onTouchMove,
+      super.onTouchStart,
+      super.onTransitionEnd,
+      super.onVolumeChange,
+      super.onWaiting,
+      super.onFullscreenChange,
+      super.onFullscreenError,
+      super.onWheel});
+  @override
+  Element render() => hook(ObjectElement());
 }
 
-OptionElement optionElement(
-    {bool? defaultSelected,
-    bool? disabled,
-    String? label,
-    bool? selected,
-    String? value,
-    String? nonce,
-    Map<String, String>? attributes,
-    List<Element>? children,
-    Iterable<String>? classes,
-    Map<String, String>? dataset,
-    String? innerHtml,
-    String? innerText,
-    int? scrollLeft,
-    int? scrollTop,
-    String? contentEditable,
-    String? dir,
-    bool? draggable,
-    bool? hidden,
-    bool? inert,
-    String? inputMode,
-    String? lang,
-    bool? spellcheck,
-    int? tabIndex,
-    String? title,
-    bool? translate,
-    String? className,
-    String? id,
-    String? slot,
-    Iterable<Node>? nodes,
-    String? text,
-    void Function(Event)? onAbort,
-    void Function(Event)? onBeforeCopy,
-    void Function(Event)? onBeforeCut,
-    void Function(Event)? onBeforePaste,
-    void Function(Event)? onBlur,
-    void Function(Event)? onCanPlay,
-    void Function(Event)? onCanPlayThrough,
-    void Function(Event)? onChange,
-    void Function(MouseEvent)? onClick,
-    void Function(MouseEvent)? onContextMenu,
-    void Function(ClipboardEvent)? onCopy,
-    void Function(ClipboardEvent)? onCut,
-    void Function(Event)? onDoubleClick,
-    void Function(MouseEvent)? onDrag,
-    void Function(MouseEvent)? onDragEnd,
-    void Function(MouseEvent)? onDragEnter,
-    void Function(MouseEvent)? onDragLeave,
-    void Function(MouseEvent)? onDragOver,
-    void Function(MouseEvent)? onDragStart,
-    void Function(MouseEvent)? onDrop,
-    void Function(Event)? onDurationChange,
-    void Function(Event)? onEmptied,
-    void Function(Event)? onEnded,
-    void Function(Event)? onError,
-    void Function(Event)? onFocus,
-    void Function(Event)? onInput,
-    void Function(Event)? onInvalid,
-    void Function(KeyboardEvent)? onKeyDown,
-    void Function(KeyboardEvent)? onKeyPress,
-    void Function(KeyboardEvent)? onKeyUp,
-    void Function(Event)? onLoad,
-    void Function(Event)? onLoadedData,
-    void Function(Event)? onLoadedMetadata,
-    void Function(MouseEvent)? onMouseDown,
-    void Function(MouseEvent)? onMouseEnter,
-    void Function(MouseEvent)? onMouseLeave,
-    void Function(MouseEvent)? onMouseMove,
-    void Function(MouseEvent)? onMouseOut,
-    void Function(MouseEvent)? onMouseOver,
-    void Function(MouseEvent)? onMouseUp,
-    void Function(WheelEvent)? onMouseWheel,
-    void Function(ClipboardEvent)? onPaste,
-    void Function(Event)? onPause,
-    void Function(Event)? onPlay,
-    void Function(Event)? onPlaying,
-    void Function(Event)? onRateChange,
-    void Function(Event)? onReset,
-    void Function(Event)? onResize,
-    void Function(Event)? onScroll,
-    void Function(Event)? onSearch,
-    void Function(Event)? onSeeked,
-    void Function(Event)? onSeeking,
-    void Function(Event)? onSelect,
-    void Function(Event)? onSelectStart,
-    void Function(Event)? onStalled,
-    void Function(Event)? onSubmit,
-    void Function(Event)? onSuspend,
-    void Function(Event)? onTimeUpdate,
-    void Function(TouchEvent)? onTouchCancel,
-    void Function(TouchEvent)? onTouchEnd,
-    void Function(TouchEvent)? onTouchEnter,
-    void Function(TouchEvent)? onTouchLeave,
-    void Function(TouchEvent)? onTouchMove,
-    void Function(TouchEvent)? onTouchStart,
-    void Function(TransitionEvent)? onTransitionEnd,
-    void Function(Event)? onVolumeChange,
-    void Function(Event)? onWaiting,
-    void Function(Event)? onFullscreenChange,
-    void Function(Event)? onFullscreenError,
-    void Function(WheelEvent)? onWheel}) {
-  final v = OptionElement();
-  if (defaultSelected != null) v.defaultSelected = defaultSelected;
-  if (disabled != null) v.disabled = disabled;
-  if (label != null) v.label = label;
-  if (selected != null) v.selected = selected;
-  if (value != null) v.value = value;
-  if (nonce != null) v.nonce = nonce;
-  if (attributes != null) v.attributes = attributes;
-  if (children != null) v.children = children;
-  if (classes != null) v.classes = classes;
-  if (dataset != null) v.dataset = dataset;
-  if (innerHtml != null) v.innerHtml = innerHtml;
-  if (innerText != null) v.innerText = innerText;
-  if (scrollLeft != null) v.scrollLeft = scrollLeft;
-  if (scrollTop != null) v.scrollTop = scrollTop;
-  if (contentEditable != null) v.contentEditable = contentEditable;
-  if (dir != null) v.dir = dir;
-  if (draggable != null) v.draggable = draggable;
-  if (hidden != null) v.hidden = hidden;
-  if (inert != null) v.inert = inert;
-  if (inputMode != null) v.inputMode = inputMode;
-  if (lang != null) v.lang = lang;
-  if (spellcheck != null) v.spellcheck = spellcheck;
-  if (tabIndex != null) v.tabIndex = tabIndex;
-  if (title != null) v.title = title;
-  if (translate != null) v.translate = translate;
-  if (className != null) v.className = className;
-  if (id != null) v.id = id;
-  if (slot != null) v.slot = slot;
-  if (nodes != null) v.nodes = nodes;
-  if (text != null) v.text = text;
-  if (onAbort != null) v.onAbort.listen(onAbort);
-  if (onBeforeCopy != null) v.onBeforeCopy.listen(onBeforeCopy);
-  if (onBeforeCut != null) v.onBeforeCut.listen(onBeforeCut);
-  if (onBeforePaste != null) v.onBeforePaste.listen(onBeforePaste);
-  if (onBlur != null) v.onBlur.listen(onBlur);
-  if (onCanPlay != null) v.onCanPlay.listen(onCanPlay);
-  if (onCanPlayThrough != null) v.onCanPlayThrough.listen(onCanPlayThrough);
-  if (onChange != null) v.onChange.listen(onChange);
-  if (onClick != null) v.onClick.listen(onClick);
-  if (onContextMenu != null) v.onContextMenu.listen(onContextMenu);
-  if (onCopy != null) v.onCopy.listen(onCopy);
-  if (onCut != null) v.onCut.listen(onCut);
-  if (onDoubleClick != null) v.onDoubleClick.listen(onDoubleClick);
-  if (onDrag != null) v.onDrag.listen(onDrag);
-  if (onDragEnd != null) v.onDragEnd.listen(onDragEnd);
-  if (onDragEnter != null) v.onDragEnter.listen(onDragEnter);
-  if (onDragLeave != null) v.onDragLeave.listen(onDragLeave);
-  if (onDragOver != null) v.onDragOver.listen(onDragOver);
-  if (onDragStart != null) v.onDragStart.listen(onDragStart);
-  if (onDrop != null) v.onDrop.listen(onDrop);
-  if (onDurationChange != null) v.onDurationChange.listen(onDurationChange);
-  if (onEmptied != null) v.onEmptied.listen(onEmptied);
-  if (onEnded != null) v.onEnded.listen(onEnded);
-  if (onError != null) v.onError.listen(onError);
-  if (onFocus != null) v.onFocus.listen(onFocus);
-  if (onInput != null) v.onInput.listen(onInput);
-  if (onInvalid != null) v.onInvalid.listen(onInvalid);
-  if (onKeyDown != null) v.onKeyDown.listen(onKeyDown);
-  if (onKeyPress != null) v.onKeyPress.listen(onKeyPress);
-  if (onKeyUp != null) v.onKeyUp.listen(onKeyUp);
-  if (onLoad != null) v.onLoad.listen(onLoad);
-  if (onLoadedData != null) v.onLoadedData.listen(onLoadedData);
-  if (onLoadedMetadata != null) v.onLoadedMetadata.listen(onLoadedMetadata);
-  if (onMouseDown != null) v.onMouseDown.listen(onMouseDown);
-  if (onMouseEnter != null) v.onMouseEnter.listen(onMouseEnter);
-  if (onMouseLeave != null) v.onMouseLeave.listen(onMouseLeave);
-  if (onMouseMove != null) v.onMouseMove.listen(onMouseMove);
-  if (onMouseOut != null) v.onMouseOut.listen(onMouseOut);
-  if (onMouseOver != null) v.onMouseOver.listen(onMouseOver);
-  if (onMouseUp != null) v.onMouseUp.listen(onMouseUp);
-  if (onMouseWheel != null) v.onMouseWheel.listen(onMouseWheel);
-  if (onPaste != null) v.onPaste.listen(onPaste);
-  if (onPause != null) v.onPause.listen(onPause);
-  if (onPlay != null) v.onPlay.listen(onPlay);
-  if (onPlaying != null) v.onPlaying.listen(onPlaying);
-  if (onRateChange != null) v.onRateChange.listen(onRateChange);
-  if (onReset != null) v.onReset.listen(onReset);
-  if (onResize != null) v.onResize.listen(onResize);
-  if (onScroll != null) v.onScroll.listen(onScroll);
-  if (onSearch != null) v.onSearch.listen(onSearch);
-  if (onSeeked != null) v.onSeeked.listen(onSeeked);
-  if (onSeeking != null) v.onSeeking.listen(onSeeking);
-  if (onSelect != null) v.onSelect.listen(onSelect);
-  if (onSelectStart != null) v.onSelectStart.listen(onSelectStart);
-  if (onStalled != null) v.onStalled.listen(onStalled);
-  if (onSubmit != null) v.onSubmit.listen(onSubmit);
-  if (onSuspend != null) v.onSuspend.listen(onSuspend);
-  if (onTimeUpdate != null) v.onTimeUpdate.listen(onTimeUpdate);
-  if (onTouchCancel != null) v.onTouchCancel.listen(onTouchCancel);
-  if (onTouchEnd != null) v.onTouchEnd.listen(onTouchEnd);
-  if (onTouchEnter != null) v.onTouchEnter.listen(onTouchEnter);
-  if (onTouchLeave != null) v.onTouchLeave.listen(onTouchLeave);
-  if (onTouchMove != null) v.onTouchMove.listen(onTouchMove);
-  if (onTouchStart != null) v.onTouchStart.listen(onTouchStart);
-  if (onTransitionEnd != null) v.onTransitionEnd.listen(onTransitionEnd);
-  if (onVolumeChange != null) v.onVolumeChange.listen(onVolumeChange);
-  if (onWaiting != null) v.onWaiting.listen(onWaiting);
-  if (onFullscreenChange != null)
-    v.onFullscreenChange.listen(onFullscreenChange);
-  if (onFullscreenError != null) v.onFullscreenError.listen(onFullscreenError);
-  if (onWheel != null) v.onWheel.listen(onWheel);
-  return v;
+class OptGroupElementWidget extends HtmlElementWidget {
+  OptGroupElementWidget(
+      {super.nonce,
+      super.attributes,
+      super.children,
+      super.classes,
+      super.dataset,
+      super.innerHtml,
+      super.innerText,
+      super.scrollLeft,
+      super.scrollTop,
+      super.contentEditable,
+      super.dir,
+      super.draggable,
+      super.hidden,
+      super.inert,
+      super.inputMode,
+      super.lang,
+      super.spellcheck,
+      super.tabIndex,
+      super.title,
+      super.translate,
+      super.className,
+      super.id,
+      super.slot,
+      super.nodes,
+      super.text,
+      super.onAbort,
+      super.onBeforeCopy,
+      super.onBeforeCut,
+      super.onBeforePaste,
+      super.onBlur,
+      super.onCanPlay,
+      super.onCanPlayThrough,
+      super.onChange,
+      super.onClick,
+      super.onContextMenu,
+      super.onCopy,
+      super.onCut,
+      super.onDoubleClick,
+      super.onDrag,
+      super.onDragEnd,
+      super.onDragEnter,
+      super.onDragLeave,
+      super.onDragOver,
+      super.onDragStart,
+      super.onDrop,
+      super.onDurationChange,
+      super.onEmptied,
+      super.onEnded,
+      super.onError,
+      super.onFocus,
+      super.onInput,
+      super.onInvalid,
+      super.onKeyDown,
+      super.onKeyPress,
+      super.onKeyUp,
+      super.onLoad,
+      super.onLoadedData,
+      super.onLoadedMetadata,
+      super.onMouseDown,
+      super.onMouseEnter,
+      super.onMouseLeave,
+      super.onMouseMove,
+      super.onMouseOut,
+      super.onMouseOver,
+      super.onMouseUp,
+      super.onMouseWheel,
+      super.onPaste,
+      super.onPause,
+      super.onPlay,
+      super.onPlaying,
+      super.onRateChange,
+      super.onReset,
+      super.onResize,
+      super.onScroll,
+      super.onSearch,
+      super.onSeeked,
+      super.onSeeking,
+      super.onSelect,
+      super.onSelectStart,
+      super.onStalled,
+      super.onSubmit,
+      super.onSuspend,
+      super.onTimeUpdate,
+      super.onTouchCancel,
+      super.onTouchEnd,
+      super.onTouchEnter,
+      super.onTouchLeave,
+      super.onTouchMove,
+      super.onTouchStart,
+      super.onTransitionEnd,
+      super.onVolumeChange,
+      super.onWaiting,
+      super.onFullscreenChange,
+      super.onFullscreenError,
+      super.onWheel});
+  @override
+  Element render() => hook(OptGroupElement());
 }
 
-OutputElement outputElement(
-    {String? defaultValue,
-    String? name,
-    String? value,
-    String? nonce,
-    Map<String, String>? attributes,
-    List<Element>? children,
-    Iterable<String>? classes,
-    Map<String, String>? dataset,
-    String? innerHtml,
-    String? innerText,
-    int? scrollLeft,
-    int? scrollTop,
-    String? contentEditable,
-    String? dir,
-    bool? draggable,
-    bool? hidden,
-    bool? inert,
-    String? inputMode,
-    String? lang,
-    bool? spellcheck,
-    int? tabIndex,
-    String? title,
-    bool? translate,
-    String? className,
-    String? id,
-    String? slot,
-    Iterable<Node>? nodes,
-    String? text,
-    void Function(Event)? onAbort,
-    void Function(Event)? onBeforeCopy,
-    void Function(Event)? onBeforeCut,
-    void Function(Event)? onBeforePaste,
-    void Function(Event)? onBlur,
-    void Function(Event)? onCanPlay,
-    void Function(Event)? onCanPlayThrough,
-    void Function(Event)? onChange,
-    void Function(MouseEvent)? onClick,
-    void Function(MouseEvent)? onContextMenu,
-    void Function(ClipboardEvent)? onCopy,
-    void Function(ClipboardEvent)? onCut,
-    void Function(Event)? onDoubleClick,
-    void Function(MouseEvent)? onDrag,
-    void Function(MouseEvent)? onDragEnd,
-    void Function(MouseEvent)? onDragEnter,
-    void Function(MouseEvent)? onDragLeave,
-    void Function(MouseEvent)? onDragOver,
-    void Function(MouseEvent)? onDragStart,
-    void Function(MouseEvent)? onDrop,
-    void Function(Event)? onDurationChange,
-    void Function(Event)? onEmptied,
-    void Function(Event)? onEnded,
-    void Function(Event)? onError,
-    void Function(Event)? onFocus,
-    void Function(Event)? onInput,
-    void Function(Event)? onInvalid,
-    void Function(KeyboardEvent)? onKeyDown,
-    void Function(KeyboardEvent)? onKeyPress,
-    void Function(KeyboardEvent)? onKeyUp,
-    void Function(Event)? onLoad,
-    void Function(Event)? onLoadedData,
-    void Function(Event)? onLoadedMetadata,
-    void Function(MouseEvent)? onMouseDown,
-    void Function(MouseEvent)? onMouseEnter,
-    void Function(MouseEvent)? onMouseLeave,
-    void Function(MouseEvent)? onMouseMove,
-    void Function(MouseEvent)? onMouseOut,
-    void Function(MouseEvent)? onMouseOver,
-    void Function(MouseEvent)? onMouseUp,
-    void Function(WheelEvent)? onMouseWheel,
-    void Function(ClipboardEvent)? onPaste,
-    void Function(Event)? onPause,
-    void Function(Event)? onPlay,
-    void Function(Event)? onPlaying,
-    void Function(Event)? onRateChange,
-    void Function(Event)? onReset,
-    void Function(Event)? onResize,
-    void Function(Event)? onScroll,
-    void Function(Event)? onSearch,
-    void Function(Event)? onSeeked,
-    void Function(Event)? onSeeking,
-    void Function(Event)? onSelect,
-    void Function(Event)? onSelectStart,
-    void Function(Event)? onStalled,
-    void Function(Event)? onSubmit,
-    void Function(Event)? onSuspend,
-    void Function(Event)? onTimeUpdate,
-    void Function(TouchEvent)? onTouchCancel,
-    void Function(TouchEvent)? onTouchEnd,
-    void Function(TouchEvent)? onTouchEnter,
-    void Function(TouchEvent)? onTouchLeave,
-    void Function(TouchEvent)? onTouchMove,
-    void Function(TouchEvent)? onTouchStart,
-    void Function(TransitionEvent)? onTransitionEnd,
-    void Function(Event)? onVolumeChange,
-    void Function(Event)? onWaiting,
-    void Function(Event)? onFullscreenChange,
-    void Function(Event)? onFullscreenError,
-    void Function(WheelEvent)? onWheel}) {
-  final v = OutputElement();
-  if (defaultValue != null) v.defaultValue = defaultValue;
-  if (name != null) v.name = name;
-  if (value != null) v.value = value;
-  if (nonce != null) v.nonce = nonce;
-  if (attributes != null) v.attributes = attributes;
-  if (children != null) v.children = children;
-  if (classes != null) v.classes = classes;
-  if (dataset != null) v.dataset = dataset;
-  if (innerHtml != null) v.innerHtml = innerHtml;
-  if (innerText != null) v.innerText = innerText;
-  if (scrollLeft != null) v.scrollLeft = scrollLeft;
-  if (scrollTop != null) v.scrollTop = scrollTop;
-  if (contentEditable != null) v.contentEditable = contentEditable;
-  if (dir != null) v.dir = dir;
-  if (draggable != null) v.draggable = draggable;
-  if (hidden != null) v.hidden = hidden;
-  if (inert != null) v.inert = inert;
-  if (inputMode != null) v.inputMode = inputMode;
-  if (lang != null) v.lang = lang;
-  if (spellcheck != null) v.spellcheck = spellcheck;
-  if (tabIndex != null) v.tabIndex = tabIndex;
-  if (title != null) v.title = title;
-  if (translate != null) v.translate = translate;
-  if (className != null) v.className = className;
-  if (id != null) v.id = id;
-  if (slot != null) v.slot = slot;
-  if (nodes != null) v.nodes = nodes;
-  if (text != null) v.text = text;
-  if (onAbort != null) v.onAbort.listen(onAbort);
-  if (onBeforeCopy != null) v.onBeforeCopy.listen(onBeforeCopy);
-  if (onBeforeCut != null) v.onBeforeCut.listen(onBeforeCut);
-  if (onBeforePaste != null) v.onBeforePaste.listen(onBeforePaste);
-  if (onBlur != null) v.onBlur.listen(onBlur);
-  if (onCanPlay != null) v.onCanPlay.listen(onCanPlay);
-  if (onCanPlayThrough != null) v.onCanPlayThrough.listen(onCanPlayThrough);
-  if (onChange != null) v.onChange.listen(onChange);
-  if (onClick != null) v.onClick.listen(onClick);
-  if (onContextMenu != null) v.onContextMenu.listen(onContextMenu);
-  if (onCopy != null) v.onCopy.listen(onCopy);
-  if (onCut != null) v.onCut.listen(onCut);
-  if (onDoubleClick != null) v.onDoubleClick.listen(onDoubleClick);
-  if (onDrag != null) v.onDrag.listen(onDrag);
-  if (onDragEnd != null) v.onDragEnd.listen(onDragEnd);
-  if (onDragEnter != null) v.onDragEnter.listen(onDragEnter);
-  if (onDragLeave != null) v.onDragLeave.listen(onDragLeave);
-  if (onDragOver != null) v.onDragOver.listen(onDragOver);
-  if (onDragStart != null) v.onDragStart.listen(onDragStart);
-  if (onDrop != null) v.onDrop.listen(onDrop);
-  if (onDurationChange != null) v.onDurationChange.listen(onDurationChange);
-  if (onEmptied != null) v.onEmptied.listen(onEmptied);
-  if (onEnded != null) v.onEnded.listen(onEnded);
-  if (onError != null) v.onError.listen(onError);
-  if (onFocus != null) v.onFocus.listen(onFocus);
-  if (onInput != null) v.onInput.listen(onInput);
-  if (onInvalid != null) v.onInvalid.listen(onInvalid);
-  if (onKeyDown != null) v.onKeyDown.listen(onKeyDown);
-  if (onKeyPress != null) v.onKeyPress.listen(onKeyPress);
-  if (onKeyUp != null) v.onKeyUp.listen(onKeyUp);
-  if (onLoad != null) v.onLoad.listen(onLoad);
-  if (onLoadedData != null) v.onLoadedData.listen(onLoadedData);
-  if (onLoadedMetadata != null) v.onLoadedMetadata.listen(onLoadedMetadata);
-  if (onMouseDown != null) v.onMouseDown.listen(onMouseDown);
-  if (onMouseEnter != null) v.onMouseEnter.listen(onMouseEnter);
-  if (onMouseLeave != null) v.onMouseLeave.listen(onMouseLeave);
-  if (onMouseMove != null) v.onMouseMove.listen(onMouseMove);
-  if (onMouseOut != null) v.onMouseOut.listen(onMouseOut);
-  if (onMouseOver != null) v.onMouseOver.listen(onMouseOver);
-  if (onMouseUp != null) v.onMouseUp.listen(onMouseUp);
-  if (onMouseWheel != null) v.onMouseWheel.listen(onMouseWheel);
-  if (onPaste != null) v.onPaste.listen(onPaste);
-  if (onPause != null) v.onPause.listen(onPause);
-  if (onPlay != null) v.onPlay.listen(onPlay);
-  if (onPlaying != null) v.onPlaying.listen(onPlaying);
-  if (onRateChange != null) v.onRateChange.listen(onRateChange);
-  if (onReset != null) v.onReset.listen(onReset);
-  if (onResize != null) v.onResize.listen(onResize);
-  if (onScroll != null) v.onScroll.listen(onScroll);
-  if (onSearch != null) v.onSearch.listen(onSearch);
-  if (onSeeked != null) v.onSeeked.listen(onSeeked);
-  if (onSeeking != null) v.onSeeking.listen(onSeeking);
-  if (onSelect != null) v.onSelect.listen(onSelect);
-  if (onSelectStart != null) v.onSelectStart.listen(onSelectStart);
-  if (onStalled != null) v.onStalled.listen(onStalled);
-  if (onSubmit != null) v.onSubmit.listen(onSubmit);
-  if (onSuspend != null) v.onSuspend.listen(onSuspend);
-  if (onTimeUpdate != null) v.onTimeUpdate.listen(onTimeUpdate);
-  if (onTouchCancel != null) v.onTouchCancel.listen(onTouchCancel);
-  if (onTouchEnd != null) v.onTouchEnd.listen(onTouchEnd);
-  if (onTouchEnter != null) v.onTouchEnter.listen(onTouchEnter);
-  if (onTouchLeave != null) v.onTouchLeave.listen(onTouchLeave);
-  if (onTouchMove != null) v.onTouchMove.listen(onTouchMove);
-  if (onTouchStart != null) v.onTouchStart.listen(onTouchStart);
-  if (onTransitionEnd != null) v.onTransitionEnd.listen(onTransitionEnd);
-  if (onVolumeChange != null) v.onVolumeChange.listen(onVolumeChange);
-  if (onWaiting != null) v.onWaiting.listen(onWaiting);
-  if (onFullscreenChange != null)
-    v.onFullscreenChange.listen(onFullscreenChange);
-  if (onFullscreenError != null) v.onFullscreenError.listen(onFullscreenError);
-  if (onWheel != null) v.onWheel.listen(onWheel);
-  return v;
+class OptionElementWidget extends HtmlElementWidget {
+  OptionElementWidget(
+      {super.nonce,
+      super.attributes,
+      super.children,
+      super.classes,
+      super.dataset,
+      super.innerHtml,
+      super.innerText,
+      super.scrollLeft,
+      super.scrollTop,
+      super.contentEditable,
+      super.dir,
+      super.draggable,
+      super.hidden,
+      super.inert,
+      super.inputMode,
+      super.lang,
+      super.spellcheck,
+      super.tabIndex,
+      super.title,
+      super.translate,
+      super.className,
+      super.id,
+      super.slot,
+      super.nodes,
+      super.text,
+      super.onAbort,
+      super.onBeforeCopy,
+      super.onBeforeCut,
+      super.onBeforePaste,
+      super.onBlur,
+      super.onCanPlay,
+      super.onCanPlayThrough,
+      super.onChange,
+      super.onClick,
+      super.onContextMenu,
+      super.onCopy,
+      super.onCut,
+      super.onDoubleClick,
+      super.onDrag,
+      super.onDragEnd,
+      super.onDragEnter,
+      super.onDragLeave,
+      super.onDragOver,
+      super.onDragStart,
+      super.onDrop,
+      super.onDurationChange,
+      super.onEmptied,
+      super.onEnded,
+      super.onError,
+      super.onFocus,
+      super.onInput,
+      super.onInvalid,
+      super.onKeyDown,
+      super.onKeyPress,
+      super.onKeyUp,
+      super.onLoad,
+      super.onLoadedData,
+      super.onLoadedMetadata,
+      super.onMouseDown,
+      super.onMouseEnter,
+      super.onMouseLeave,
+      super.onMouseMove,
+      super.onMouseOut,
+      super.onMouseOver,
+      super.onMouseUp,
+      super.onMouseWheel,
+      super.onPaste,
+      super.onPause,
+      super.onPlay,
+      super.onPlaying,
+      super.onRateChange,
+      super.onReset,
+      super.onResize,
+      super.onScroll,
+      super.onSearch,
+      super.onSeeked,
+      super.onSeeking,
+      super.onSelect,
+      super.onSelectStart,
+      super.onStalled,
+      super.onSubmit,
+      super.onSuspend,
+      super.onTimeUpdate,
+      super.onTouchCancel,
+      super.onTouchEnd,
+      super.onTouchEnter,
+      super.onTouchLeave,
+      super.onTouchMove,
+      super.onTouchStart,
+      super.onTransitionEnd,
+      super.onVolumeChange,
+      super.onWaiting,
+      super.onFullscreenChange,
+      super.onFullscreenError,
+      super.onWheel});
+  @override
+  Element render() => hook(OptionElement());
 }
 
-ParagraphElement paragraphElement(
-    {String? nonce,
-    Map<String, String>? attributes,
-    List<Element>? children,
-    Iterable<String>? classes,
-    Map<String, String>? dataset,
-    String? innerHtml,
-    String? innerText,
-    int? scrollLeft,
-    int? scrollTop,
-    String? contentEditable,
-    String? dir,
-    bool? draggable,
-    bool? hidden,
-    bool? inert,
-    String? inputMode,
-    String? lang,
-    bool? spellcheck,
-    int? tabIndex,
-    String? title,
-    bool? translate,
-    String? className,
-    String? id,
-    String? slot,
-    Iterable<Node>? nodes,
-    String? text,
-    void Function(Event)? onAbort,
-    void Function(Event)? onBeforeCopy,
-    void Function(Event)? onBeforeCut,
-    void Function(Event)? onBeforePaste,
-    void Function(Event)? onBlur,
-    void Function(Event)? onCanPlay,
-    void Function(Event)? onCanPlayThrough,
-    void Function(Event)? onChange,
-    void Function(MouseEvent)? onClick,
-    void Function(MouseEvent)? onContextMenu,
-    void Function(ClipboardEvent)? onCopy,
-    void Function(ClipboardEvent)? onCut,
-    void Function(Event)? onDoubleClick,
-    void Function(MouseEvent)? onDrag,
-    void Function(MouseEvent)? onDragEnd,
-    void Function(MouseEvent)? onDragEnter,
-    void Function(MouseEvent)? onDragLeave,
-    void Function(MouseEvent)? onDragOver,
-    void Function(MouseEvent)? onDragStart,
-    void Function(MouseEvent)? onDrop,
-    void Function(Event)? onDurationChange,
-    void Function(Event)? onEmptied,
-    void Function(Event)? onEnded,
-    void Function(Event)? onError,
-    void Function(Event)? onFocus,
-    void Function(Event)? onInput,
-    void Function(Event)? onInvalid,
-    void Function(KeyboardEvent)? onKeyDown,
-    void Function(KeyboardEvent)? onKeyPress,
-    void Function(KeyboardEvent)? onKeyUp,
-    void Function(Event)? onLoad,
-    void Function(Event)? onLoadedData,
-    void Function(Event)? onLoadedMetadata,
-    void Function(MouseEvent)? onMouseDown,
-    void Function(MouseEvent)? onMouseEnter,
-    void Function(MouseEvent)? onMouseLeave,
-    void Function(MouseEvent)? onMouseMove,
-    void Function(MouseEvent)? onMouseOut,
-    void Function(MouseEvent)? onMouseOver,
-    void Function(MouseEvent)? onMouseUp,
-    void Function(WheelEvent)? onMouseWheel,
-    void Function(ClipboardEvent)? onPaste,
-    void Function(Event)? onPause,
-    void Function(Event)? onPlay,
-    void Function(Event)? onPlaying,
-    void Function(Event)? onRateChange,
-    void Function(Event)? onReset,
-    void Function(Event)? onResize,
-    void Function(Event)? onScroll,
-    void Function(Event)? onSearch,
-    void Function(Event)? onSeeked,
-    void Function(Event)? onSeeking,
-    void Function(Event)? onSelect,
-    void Function(Event)? onSelectStart,
-    void Function(Event)? onStalled,
-    void Function(Event)? onSubmit,
-    void Function(Event)? onSuspend,
-    void Function(Event)? onTimeUpdate,
-    void Function(TouchEvent)? onTouchCancel,
-    void Function(TouchEvent)? onTouchEnd,
-    void Function(TouchEvent)? onTouchEnter,
-    void Function(TouchEvent)? onTouchLeave,
-    void Function(TouchEvent)? onTouchMove,
-    void Function(TouchEvent)? onTouchStart,
-    void Function(TransitionEvent)? onTransitionEnd,
-    void Function(Event)? onVolumeChange,
-    void Function(Event)? onWaiting,
-    void Function(Event)? onFullscreenChange,
-    void Function(Event)? onFullscreenError,
-    void Function(WheelEvent)? onWheel}) {
-  final v = ParagraphElement();
-  if (nonce != null) v.nonce = nonce;
-  if (attributes != null) v.attributes = attributes;
-  if (children != null) v.children = children;
-  if (classes != null) v.classes = classes;
-  if (dataset != null) v.dataset = dataset;
-  if (innerHtml != null) v.innerHtml = innerHtml;
-  if (innerText != null) v.innerText = innerText;
-  if (scrollLeft != null) v.scrollLeft = scrollLeft;
-  if (scrollTop != null) v.scrollTop = scrollTop;
-  if (contentEditable != null) v.contentEditable = contentEditable;
-  if (dir != null) v.dir = dir;
-  if (draggable != null) v.draggable = draggable;
-  if (hidden != null) v.hidden = hidden;
-  if (inert != null) v.inert = inert;
-  if (inputMode != null) v.inputMode = inputMode;
-  if (lang != null) v.lang = lang;
-  if (spellcheck != null) v.spellcheck = spellcheck;
-  if (tabIndex != null) v.tabIndex = tabIndex;
-  if (title != null) v.title = title;
-  if (translate != null) v.translate = translate;
-  if (className != null) v.className = className;
-  if (id != null) v.id = id;
-  if (slot != null) v.slot = slot;
-  if (nodes != null) v.nodes = nodes;
-  if (text != null) v.text = text;
-  if (onAbort != null) v.onAbort.listen(onAbort);
-  if (onBeforeCopy != null) v.onBeforeCopy.listen(onBeforeCopy);
-  if (onBeforeCut != null) v.onBeforeCut.listen(onBeforeCut);
-  if (onBeforePaste != null) v.onBeforePaste.listen(onBeforePaste);
-  if (onBlur != null) v.onBlur.listen(onBlur);
-  if (onCanPlay != null) v.onCanPlay.listen(onCanPlay);
-  if (onCanPlayThrough != null) v.onCanPlayThrough.listen(onCanPlayThrough);
-  if (onChange != null) v.onChange.listen(onChange);
-  if (onClick != null) v.onClick.listen(onClick);
-  if (onContextMenu != null) v.onContextMenu.listen(onContextMenu);
-  if (onCopy != null) v.onCopy.listen(onCopy);
-  if (onCut != null) v.onCut.listen(onCut);
-  if (onDoubleClick != null) v.onDoubleClick.listen(onDoubleClick);
-  if (onDrag != null) v.onDrag.listen(onDrag);
-  if (onDragEnd != null) v.onDragEnd.listen(onDragEnd);
-  if (onDragEnter != null) v.onDragEnter.listen(onDragEnter);
-  if (onDragLeave != null) v.onDragLeave.listen(onDragLeave);
-  if (onDragOver != null) v.onDragOver.listen(onDragOver);
-  if (onDragStart != null) v.onDragStart.listen(onDragStart);
-  if (onDrop != null) v.onDrop.listen(onDrop);
-  if (onDurationChange != null) v.onDurationChange.listen(onDurationChange);
-  if (onEmptied != null) v.onEmptied.listen(onEmptied);
-  if (onEnded != null) v.onEnded.listen(onEnded);
-  if (onError != null) v.onError.listen(onError);
-  if (onFocus != null) v.onFocus.listen(onFocus);
-  if (onInput != null) v.onInput.listen(onInput);
-  if (onInvalid != null) v.onInvalid.listen(onInvalid);
-  if (onKeyDown != null) v.onKeyDown.listen(onKeyDown);
-  if (onKeyPress != null) v.onKeyPress.listen(onKeyPress);
-  if (onKeyUp != null) v.onKeyUp.listen(onKeyUp);
-  if (onLoad != null) v.onLoad.listen(onLoad);
-  if (onLoadedData != null) v.onLoadedData.listen(onLoadedData);
-  if (onLoadedMetadata != null) v.onLoadedMetadata.listen(onLoadedMetadata);
-  if (onMouseDown != null) v.onMouseDown.listen(onMouseDown);
-  if (onMouseEnter != null) v.onMouseEnter.listen(onMouseEnter);
-  if (onMouseLeave != null) v.onMouseLeave.listen(onMouseLeave);
-  if (onMouseMove != null) v.onMouseMove.listen(onMouseMove);
-  if (onMouseOut != null) v.onMouseOut.listen(onMouseOut);
-  if (onMouseOver != null) v.onMouseOver.listen(onMouseOver);
-  if (onMouseUp != null) v.onMouseUp.listen(onMouseUp);
-  if (onMouseWheel != null) v.onMouseWheel.listen(onMouseWheel);
-  if (onPaste != null) v.onPaste.listen(onPaste);
-  if (onPause != null) v.onPause.listen(onPause);
-  if (onPlay != null) v.onPlay.listen(onPlay);
-  if (onPlaying != null) v.onPlaying.listen(onPlaying);
-  if (onRateChange != null) v.onRateChange.listen(onRateChange);
-  if (onReset != null) v.onReset.listen(onReset);
-  if (onResize != null) v.onResize.listen(onResize);
-  if (onScroll != null) v.onScroll.listen(onScroll);
-  if (onSearch != null) v.onSearch.listen(onSearch);
-  if (onSeeked != null) v.onSeeked.listen(onSeeked);
-  if (onSeeking != null) v.onSeeking.listen(onSeeking);
-  if (onSelect != null) v.onSelect.listen(onSelect);
-  if (onSelectStart != null) v.onSelectStart.listen(onSelectStart);
-  if (onStalled != null) v.onStalled.listen(onStalled);
-  if (onSubmit != null) v.onSubmit.listen(onSubmit);
-  if (onSuspend != null) v.onSuspend.listen(onSuspend);
-  if (onTimeUpdate != null) v.onTimeUpdate.listen(onTimeUpdate);
-  if (onTouchCancel != null) v.onTouchCancel.listen(onTouchCancel);
-  if (onTouchEnd != null) v.onTouchEnd.listen(onTouchEnd);
-  if (onTouchEnter != null) v.onTouchEnter.listen(onTouchEnter);
-  if (onTouchLeave != null) v.onTouchLeave.listen(onTouchLeave);
-  if (onTouchMove != null) v.onTouchMove.listen(onTouchMove);
-  if (onTouchStart != null) v.onTouchStart.listen(onTouchStart);
-  if (onTransitionEnd != null) v.onTransitionEnd.listen(onTransitionEnd);
-  if (onVolumeChange != null) v.onVolumeChange.listen(onVolumeChange);
-  if (onWaiting != null) v.onWaiting.listen(onWaiting);
-  if (onFullscreenChange != null)
-    v.onFullscreenChange.listen(onFullscreenChange);
-  if (onFullscreenError != null) v.onFullscreenError.listen(onFullscreenError);
-  if (onWheel != null) v.onWheel.listen(onWheel);
-  return v;
+class OutputElementWidget extends HtmlElementWidget {
+  OutputElementWidget(
+      {super.nonce,
+      super.attributes,
+      super.children,
+      super.classes,
+      super.dataset,
+      super.innerHtml,
+      super.innerText,
+      super.scrollLeft,
+      super.scrollTop,
+      super.contentEditable,
+      super.dir,
+      super.draggable,
+      super.hidden,
+      super.inert,
+      super.inputMode,
+      super.lang,
+      super.spellcheck,
+      super.tabIndex,
+      super.title,
+      super.translate,
+      super.className,
+      super.id,
+      super.slot,
+      super.nodes,
+      super.text,
+      super.onAbort,
+      super.onBeforeCopy,
+      super.onBeforeCut,
+      super.onBeforePaste,
+      super.onBlur,
+      super.onCanPlay,
+      super.onCanPlayThrough,
+      super.onChange,
+      super.onClick,
+      super.onContextMenu,
+      super.onCopy,
+      super.onCut,
+      super.onDoubleClick,
+      super.onDrag,
+      super.onDragEnd,
+      super.onDragEnter,
+      super.onDragLeave,
+      super.onDragOver,
+      super.onDragStart,
+      super.onDrop,
+      super.onDurationChange,
+      super.onEmptied,
+      super.onEnded,
+      super.onError,
+      super.onFocus,
+      super.onInput,
+      super.onInvalid,
+      super.onKeyDown,
+      super.onKeyPress,
+      super.onKeyUp,
+      super.onLoad,
+      super.onLoadedData,
+      super.onLoadedMetadata,
+      super.onMouseDown,
+      super.onMouseEnter,
+      super.onMouseLeave,
+      super.onMouseMove,
+      super.onMouseOut,
+      super.onMouseOver,
+      super.onMouseUp,
+      super.onMouseWheel,
+      super.onPaste,
+      super.onPause,
+      super.onPlay,
+      super.onPlaying,
+      super.onRateChange,
+      super.onReset,
+      super.onResize,
+      super.onScroll,
+      super.onSearch,
+      super.onSeeked,
+      super.onSeeking,
+      super.onSelect,
+      super.onSelectStart,
+      super.onStalled,
+      super.onSubmit,
+      super.onSuspend,
+      super.onTimeUpdate,
+      super.onTouchCancel,
+      super.onTouchEnd,
+      super.onTouchEnter,
+      super.onTouchLeave,
+      super.onTouchMove,
+      super.onTouchStart,
+      super.onTransitionEnd,
+      super.onVolumeChange,
+      super.onWaiting,
+      super.onFullscreenChange,
+      super.onFullscreenError,
+      super.onWheel});
+  @override
+  Element render() => hook(OutputElement());
 }
 
-ParamElement paramElement(
-    {String? name,
-    String? value,
-    String? nonce,
-    Map<String, String>? attributes,
-    List<Element>? children,
-    Iterable<String>? classes,
-    Map<String, String>? dataset,
-    String? innerHtml,
-    String? innerText,
-    int? scrollLeft,
-    int? scrollTop,
-    String? contentEditable,
-    String? dir,
-    bool? draggable,
-    bool? hidden,
-    bool? inert,
-    String? inputMode,
-    String? lang,
-    bool? spellcheck,
-    int? tabIndex,
-    String? title,
-    bool? translate,
-    String? className,
-    String? id,
-    String? slot,
-    Iterable<Node>? nodes,
-    String? text,
-    void Function(Event)? onAbort,
-    void Function(Event)? onBeforeCopy,
-    void Function(Event)? onBeforeCut,
-    void Function(Event)? onBeforePaste,
-    void Function(Event)? onBlur,
-    void Function(Event)? onCanPlay,
-    void Function(Event)? onCanPlayThrough,
-    void Function(Event)? onChange,
-    void Function(MouseEvent)? onClick,
-    void Function(MouseEvent)? onContextMenu,
-    void Function(ClipboardEvent)? onCopy,
-    void Function(ClipboardEvent)? onCut,
-    void Function(Event)? onDoubleClick,
-    void Function(MouseEvent)? onDrag,
-    void Function(MouseEvent)? onDragEnd,
-    void Function(MouseEvent)? onDragEnter,
-    void Function(MouseEvent)? onDragLeave,
-    void Function(MouseEvent)? onDragOver,
-    void Function(MouseEvent)? onDragStart,
-    void Function(MouseEvent)? onDrop,
-    void Function(Event)? onDurationChange,
-    void Function(Event)? onEmptied,
-    void Function(Event)? onEnded,
-    void Function(Event)? onError,
-    void Function(Event)? onFocus,
-    void Function(Event)? onInput,
-    void Function(Event)? onInvalid,
-    void Function(KeyboardEvent)? onKeyDown,
-    void Function(KeyboardEvent)? onKeyPress,
-    void Function(KeyboardEvent)? onKeyUp,
-    void Function(Event)? onLoad,
-    void Function(Event)? onLoadedData,
-    void Function(Event)? onLoadedMetadata,
-    void Function(MouseEvent)? onMouseDown,
-    void Function(MouseEvent)? onMouseEnter,
-    void Function(MouseEvent)? onMouseLeave,
-    void Function(MouseEvent)? onMouseMove,
-    void Function(MouseEvent)? onMouseOut,
-    void Function(MouseEvent)? onMouseOver,
-    void Function(MouseEvent)? onMouseUp,
-    void Function(WheelEvent)? onMouseWheel,
-    void Function(ClipboardEvent)? onPaste,
-    void Function(Event)? onPause,
-    void Function(Event)? onPlay,
-    void Function(Event)? onPlaying,
-    void Function(Event)? onRateChange,
-    void Function(Event)? onReset,
-    void Function(Event)? onResize,
-    void Function(Event)? onScroll,
-    void Function(Event)? onSearch,
-    void Function(Event)? onSeeked,
-    void Function(Event)? onSeeking,
-    void Function(Event)? onSelect,
-    void Function(Event)? onSelectStart,
-    void Function(Event)? onStalled,
-    void Function(Event)? onSubmit,
-    void Function(Event)? onSuspend,
-    void Function(Event)? onTimeUpdate,
-    void Function(TouchEvent)? onTouchCancel,
-    void Function(TouchEvent)? onTouchEnd,
-    void Function(TouchEvent)? onTouchEnter,
-    void Function(TouchEvent)? onTouchLeave,
-    void Function(TouchEvent)? onTouchMove,
-    void Function(TouchEvent)? onTouchStart,
-    void Function(TransitionEvent)? onTransitionEnd,
-    void Function(Event)? onVolumeChange,
-    void Function(Event)? onWaiting,
-    void Function(Event)? onFullscreenChange,
-    void Function(Event)? onFullscreenError,
-    void Function(WheelEvent)? onWheel}) {
-  final v = ParamElement();
-  if (name != null) v.name = name;
-  if (value != null) v.value = value;
-  if (nonce != null) v.nonce = nonce;
-  if (attributes != null) v.attributes = attributes;
-  if (children != null) v.children = children;
-  if (classes != null) v.classes = classes;
-  if (dataset != null) v.dataset = dataset;
-  if (innerHtml != null) v.innerHtml = innerHtml;
-  if (innerText != null) v.innerText = innerText;
-  if (scrollLeft != null) v.scrollLeft = scrollLeft;
-  if (scrollTop != null) v.scrollTop = scrollTop;
-  if (contentEditable != null) v.contentEditable = contentEditable;
-  if (dir != null) v.dir = dir;
-  if (draggable != null) v.draggable = draggable;
-  if (hidden != null) v.hidden = hidden;
-  if (inert != null) v.inert = inert;
-  if (inputMode != null) v.inputMode = inputMode;
-  if (lang != null) v.lang = lang;
-  if (spellcheck != null) v.spellcheck = spellcheck;
-  if (tabIndex != null) v.tabIndex = tabIndex;
-  if (title != null) v.title = title;
-  if (translate != null) v.translate = translate;
-  if (className != null) v.className = className;
-  if (id != null) v.id = id;
-  if (slot != null) v.slot = slot;
-  if (nodes != null) v.nodes = nodes;
-  if (text != null) v.text = text;
-  if (onAbort != null) v.onAbort.listen(onAbort);
-  if (onBeforeCopy != null) v.onBeforeCopy.listen(onBeforeCopy);
-  if (onBeforeCut != null) v.onBeforeCut.listen(onBeforeCut);
-  if (onBeforePaste != null) v.onBeforePaste.listen(onBeforePaste);
-  if (onBlur != null) v.onBlur.listen(onBlur);
-  if (onCanPlay != null) v.onCanPlay.listen(onCanPlay);
-  if (onCanPlayThrough != null) v.onCanPlayThrough.listen(onCanPlayThrough);
-  if (onChange != null) v.onChange.listen(onChange);
-  if (onClick != null) v.onClick.listen(onClick);
-  if (onContextMenu != null) v.onContextMenu.listen(onContextMenu);
-  if (onCopy != null) v.onCopy.listen(onCopy);
-  if (onCut != null) v.onCut.listen(onCut);
-  if (onDoubleClick != null) v.onDoubleClick.listen(onDoubleClick);
-  if (onDrag != null) v.onDrag.listen(onDrag);
-  if (onDragEnd != null) v.onDragEnd.listen(onDragEnd);
-  if (onDragEnter != null) v.onDragEnter.listen(onDragEnter);
-  if (onDragLeave != null) v.onDragLeave.listen(onDragLeave);
-  if (onDragOver != null) v.onDragOver.listen(onDragOver);
-  if (onDragStart != null) v.onDragStart.listen(onDragStart);
-  if (onDrop != null) v.onDrop.listen(onDrop);
-  if (onDurationChange != null) v.onDurationChange.listen(onDurationChange);
-  if (onEmptied != null) v.onEmptied.listen(onEmptied);
-  if (onEnded != null) v.onEnded.listen(onEnded);
-  if (onError != null) v.onError.listen(onError);
-  if (onFocus != null) v.onFocus.listen(onFocus);
-  if (onInput != null) v.onInput.listen(onInput);
-  if (onInvalid != null) v.onInvalid.listen(onInvalid);
-  if (onKeyDown != null) v.onKeyDown.listen(onKeyDown);
-  if (onKeyPress != null) v.onKeyPress.listen(onKeyPress);
-  if (onKeyUp != null) v.onKeyUp.listen(onKeyUp);
-  if (onLoad != null) v.onLoad.listen(onLoad);
-  if (onLoadedData != null) v.onLoadedData.listen(onLoadedData);
-  if (onLoadedMetadata != null) v.onLoadedMetadata.listen(onLoadedMetadata);
-  if (onMouseDown != null) v.onMouseDown.listen(onMouseDown);
-  if (onMouseEnter != null) v.onMouseEnter.listen(onMouseEnter);
-  if (onMouseLeave != null) v.onMouseLeave.listen(onMouseLeave);
-  if (onMouseMove != null) v.onMouseMove.listen(onMouseMove);
-  if (onMouseOut != null) v.onMouseOut.listen(onMouseOut);
-  if (onMouseOver != null) v.onMouseOver.listen(onMouseOver);
-  if (onMouseUp != null) v.onMouseUp.listen(onMouseUp);
-  if (onMouseWheel != null) v.onMouseWheel.listen(onMouseWheel);
-  if (onPaste != null) v.onPaste.listen(onPaste);
-  if (onPause != null) v.onPause.listen(onPause);
-  if (onPlay != null) v.onPlay.listen(onPlay);
-  if (onPlaying != null) v.onPlaying.listen(onPlaying);
-  if (onRateChange != null) v.onRateChange.listen(onRateChange);
-  if (onReset != null) v.onReset.listen(onReset);
-  if (onResize != null) v.onResize.listen(onResize);
-  if (onScroll != null) v.onScroll.listen(onScroll);
-  if (onSearch != null) v.onSearch.listen(onSearch);
-  if (onSeeked != null) v.onSeeked.listen(onSeeked);
-  if (onSeeking != null) v.onSeeking.listen(onSeeking);
-  if (onSelect != null) v.onSelect.listen(onSelect);
-  if (onSelectStart != null) v.onSelectStart.listen(onSelectStart);
-  if (onStalled != null) v.onStalled.listen(onStalled);
-  if (onSubmit != null) v.onSubmit.listen(onSubmit);
-  if (onSuspend != null) v.onSuspend.listen(onSuspend);
-  if (onTimeUpdate != null) v.onTimeUpdate.listen(onTimeUpdate);
-  if (onTouchCancel != null) v.onTouchCancel.listen(onTouchCancel);
-  if (onTouchEnd != null) v.onTouchEnd.listen(onTouchEnd);
-  if (onTouchEnter != null) v.onTouchEnter.listen(onTouchEnter);
-  if (onTouchLeave != null) v.onTouchLeave.listen(onTouchLeave);
-  if (onTouchMove != null) v.onTouchMove.listen(onTouchMove);
-  if (onTouchStart != null) v.onTouchStart.listen(onTouchStart);
-  if (onTransitionEnd != null) v.onTransitionEnd.listen(onTransitionEnd);
-  if (onVolumeChange != null) v.onVolumeChange.listen(onVolumeChange);
-  if (onWaiting != null) v.onWaiting.listen(onWaiting);
-  if (onFullscreenChange != null)
-    v.onFullscreenChange.listen(onFullscreenChange);
-  if (onFullscreenError != null) v.onFullscreenError.listen(onFullscreenError);
-  if (onWheel != null) v.onWheel.listen(onWheel);
-  return v;
+class ParagraphElementWidget extends HtmlElementWidget {
+  ParagraphElementWidget(
+      {super.nonce,
+      super.attributes,
+      super.children,
+      super.classes,
+      super.dataset,
+      super.innerHtml,
+      super.innerText,
+      super.scrollLeft,
+      super.scrollTop,
+      super.contentEditable,
+      super.dir,
+      super.draggable,
+      super.hidden,
+      super.inert,
+      super.inputMode,
+      super.lang,
+      super.spellcheck,
+      super.tabIndex,
+      super.title,
+      super.translate,
+      super.className,
+      super.id,
+      super.slot,
+      super.nodes,
+      super.text,
+      super.onAbort,
+      super.onBeforeCopy,
+      super.onBeforeCut,
+      super.onBeforePaste,
+      super.onBlur,
+      super.onCanPlay,
+      super.onCanPlayThrough,
+      super.onChange,
+      super.onClick,
+      super.onContextMenu,
+      super.onCopy,
+      super.onCut,
+      super.onDoubleClick,
+      super.onDrag,
+      super.onDragEnd,
+      super.onDragEnter,
+      super.onDragLeave,
+      super.onDragOver,
+      super.onDragStart,
+      super.onDrop,
+      super.onDurationChange,
+      super.onEmptied,
+      super.onEnded,
+      super.onError,
+      super.onFocus,
+      super.onInput,
+      super.onInvalid,
+      super.onKeyDown,
+      super.onKeyPress,
+      super.onKeyUp,
+      super.onLoad,
+      super.onLoadedData,
+      super.onLoadedMetadata,
+      super.onMouseDown,
+      super.onMouseEnter,
+      super.onMouseLeave,
+      super.onMouseMove,
+      super.onMouseOut,
+      super.onMouseOver,
+      super.onMouseUp,
+      super.onMouseWheel,
+      super.onPaste,
+      super.onPause,
+      super.onPlay,
+      super.onPlaying,
+      super.onRateChange,
+      super.onReset,
+      super.onResize,
+      super.onScroll,
+      super.onSearch,
+      super.onSeeked,
+      super.onSeeking,
+      super.onSelect,
+      super.onSelectStart,
+      super.onStalled,
+      super.onSubmit,
+      super.onSuspend,
+      super.onTimeUpdate,
+      super.onTouchCancel,
+      super.onTouchEnd,
+      super.onTouchEnter,
+      super.onTouchLeave,
+      super.onTouchMove,
+      super.onTouchStart,
+      super.onTransitionEnd,
+      super.onVolumeChange,
+      super.onWaiting,
+      super.onFullscreenChange,
+      super.onFullscreenError,
+      super.onWheel});
+  @override
+  Element render() => hook(ParagraphElement());
 }
 
-PreElement preElement(
-    {String? nonce,
-    Map<String, String>? attributes,
-    List<Element>? children,
-    Iterable<String>? classes,
-    Map<String, String>? dataset,
-    String? innerHtml,
-    String? innerText,
-    int? scrollLeft,
-    int? scrollTop,
-    String? contentEditable,
-    String? dir,
-    bool? draggable,
-    bool? hidden,
-    bool? inert,
-    String? inputMode,
-    String? lang,
-    bool? spellcheck,
-    int? tabIndex,
-    String? title,
-    bool? translate,
-    String? className,
-    String? id,
-    String? slot,
-    Iterable<Node>? nodes,
-    String? text,
-    void Function(Event)? onAbort,
-    void Function(Event)? onBeforeCopy,
-    void Function(Event)? onBeforeCut,
-    void Function(Event)? onBeforePaste,
-    void Function(Event)? onBlur,
-    void Function(Event)? onCanPlay,
-    void Function(Event)? onCanPlayThrough,
-    void Function(Event)? onChange,
-    void Function(MouseEvent)? onClick,
-    void Function(MouseEvent)? onContextMenu,
-    void Function(ClipboardEvent)? onCopy,
-    void Function(ClipboardEvent)? onCut,
-    void Function(Event)? onDoubleClick,
-    void Function(MouseEvent)? onDrag,
-    void Function(MouseEvent)? onDragEnd,
-    void Function(MouseEvent)? onDragEnter,
-    void Function(MouseEvent)? onDragLeave,
-    void Function(MouseEvent)? onDragOver,
-    void Function(MouseEvent)? onDragStart,
-    void Function(MouseEvent)? onDrop,
-    void Function(Event)? onDurationChange,
-    void Function(Event)? onEmptied,
-    void Function(Event)? onEnded,
-    void Function(Event)? onError,
-    void Function(Event)? onFocus,
-    void Function(Event)? onInput,
-    void Function(Event)? onInvalid,
-    void Function(KeyboardEvent)? onKeyDown,
-    void Function(KeyboardEvent)? onKeyPress,
-    void Function(KeyboardEvent)? onKeyUp,
-    void Function(Event)? onLoad,
-    void Function(Event)? onLoadedData,
-    void Function(Event)? onLoadedMetadata,
-    void Function(MouseEvent)? onMouseDown,
-    void Function(MouseEvent)? onMouseEnter,
-    void Function(MouseEvent)? onMouseLeave,
-    void Function(MouseEvent)? onMouseMove,
-    void Function(MouseEvent)? onMouseOut,
-    void Function(MouseEvent)? onMouseOver,
-    void Function(MouseEvent)? onMouseUp,
-    void Function(WheelEvent)? onMouseWheel,
-    void Function(ClipboardEvent)? onPaste,
-    void Function(Event)? onPause,
-    void Function(Event)? onPlay,
-    void Function(Event)? onPlaying,
-    void Function(Event)? onRateChange,
-    void Function(Event)? onReset,
-    void Function(Event)? onResize,
-    void Function(Event)? onScroll,
-    void Function(Event)? onSearch,
-    void Function(Event)? onSeeked,
-    void Function(Event)? onSeeking,
-    void Function(Event)? onSelect,
-    void Function(Event)? onSelectStart,
-    void Function(Event)? onStalled,
-    void Function(Event)? onSubmit,
-    void Function(Event)? onSuspend,
-    void Function(Event)? onTimeUpdate,
-    void Function(TouchEvent)? onTouchCancel,
-    void Function(TouchEvent)? onTouchEnd,
-    void Function(TouchEvent)? onTouchEnter,
-    void Function(TouchEvent)? onTouchLeave,
-    void Function(TouchEvent)? onTouchMove,
-    void Function(TouchEvent)? onTouchStart,
-    void Function(TransitionEvent)? onTransitionEnd,
-    void Function(Event)? onVolumeChange,
-    void Function(Event)? onWaiting,
-    void Function(Event)? onFullscreenChange,
-    void Function(Event)? onFullscreenError,
-    void Function(WheelEvent)? onWheel}) {
-  final v = PreElement();
-  if (nonce != null) v.nonce = nonce;
-  if (attributes != null) v.attributes = attributes;
-  if (children != null) v.children = children;
-  if (classes != null) v.classes = classes;
-  if (dataset != null) v.dataset = dataset;
-  if (innerHtml != null) v.innerHtml = innerHtml;
-  if (innerText != null) v.innerText = innerText;
-  if (scrollLeft != null) v.scrollLeft = scrollLeft;
-  if (scrollTop != null) v.scrollTop = scrollTop;
-  if (contentEditable != null) v.contentEditable = contentEditable;
-  if (dir != null) v.dir = dir;
-  if (draggable != null) v.draggable = draggable;
-  if (hidden != null) v.hidden = hidden;
-  if (inert != null) v.inert = inert;
-  if (inputMode != null) v.inputMode = inputMode;
-  if (lang != null) v.lang = lang;
-  if (spellcheck != null) v.spellcheck = spellcheck;
-  if (tabIndex != null) v.tabIndex = tabIndex;
-  if (title != null) v.title = title;
-  if (translate != null) v.translate = translate;
-  if (className != null) v.className = className;
-  if (id != null) v.id = id;
-  if (slot != null) v.slot = slot;
-  if (nodes != null) v.nodes = nodes;
-  if (text != null) v.text = text;
-  if (onAbort != null) v.onAbort.listen(onAbort);
-  if (onBeforeCopy != null) v.onBeforeCopy.listen(onBeforeCopy);
-  if (onBeforeCut != null) v.onBeforeCut.listen(onBeforeCut);
-  if (onBeforePaste != null) v.onBeforePaste.listen(onBeforePaste);
-  if (onBlur != null) v.onBlur.listen(onBlur);
-  if (onCanPlay != null) v.onCanPlay.listen(onCanPlay);
-  if (onCanPlayThrough != null) v.onCanPlayThrough.listen(onCanPlayThrough);
-  if (onChange != null) v.onChange.listen(onChange);
-  if (onClick != null) v.onClick.listen(onClick);
-  if (onContextMenu != null) v.onContextMenu.listen(onContextMenu);
-  if (onCopy != null) v.onCopy.listen(onCopy);
-  if (onCut != null) v.onCut.listen(onCut);
-  if (onDoubleClick != null) v.onDoubleClick.listen(onDoubleClick);
-  if (onDrag != null) v.onDrag.listen(onDrag);
-  if (onDragEnd != null) v.onDragEnd.listen(onDragEnd);
-  if (onDragEnter != null) v.onDragEnter.listen(onDragEnter);
-  if (onDragLeave != null) v.onDragLeave.listen(onDragLeave);
-  if (onDragOver != null) v.onDragOver.listen(onDragOver);
-  if (onDragStart != null) v.onDragStart.listen(onDragStart);
-  if (onDrop != null) v.onDrop.listen(onDrop);
-  if (onDurationChange != null) v.onDurationChange.listen(onDurationChange);
-  if (onEmptied != null) v.onEmptied.listen(onEmptied);
-  if (onEnded != null) v.onEnded.listen(onEnded);
-  if (onError != null) v.onError.listen(onError);
-  if (onFocus != null) v.onFocus.listen(onFocus);
-  if (onInput != null) v.onInput.listen(onInput);
-  if (onInvalid != null) v.onInvalid.listen(onInvalid);
-  if (onKeyDown != null) v.onKeyDown.listen(onKeyDown);
-  if (onKeyPress != null) v.onKeyPress.listen(onKeyPress);
-  if (onKeyUp != null) v.onKeyUp.listen(onKeyUp);
-  if (onLoad != null) v.onLoad.listen(onLoad);
-  if (onLoadedData != null) v.onLoadedData.listen(onLoadedData);
-  if (onLoadedMetadata != null) v.onLoadedMetadata.listen(onLoadedMetadata);
-  if (onMouseDown != null) v.onMouseDown.listen(onMouseDown);
-  if (onMouseEnter != null) v.onMouseEnter.listen(onMouseEnter);
-  if (onMouseLeave != null) v.onMouseLeave.listen(onMouseLeave);
-  if (onMouseMove != null) v.onMouseMove.listen(onMouseMove);
-  if (onMouseOut != null) v.onMouseOut.listen(onMouseOut);
-  if (onMouseOver != null) v.onMouseOver.listen(onMouseOver);
-  if (onMouseUp != null) v.onMouseUp.listen(onMouseUp);
-  if (onMouseWheel != null) v.onMouseWheel.listen(onMouseWheel);
-  if (onPaste != null) v.onPaste.listen(onPaste);
-  if (onPause != null) v.onPause.listen(onPause);
-  if (onPlay != null) v.onPlay.listen(onPlay);
-  if (onPlaying != null) v.onPlaying.listen(onPlaying);
-  if (onRateChange != null) v.onRateChange.listen(onRateChange);
-  if (onReset != null) v.onReset.listen(onReset);
-  if (onResize != null) v.onResize.listen(onResize);
-  if (onScroll != null) v.onScroll.listen(onScroll);
-  if (onSearch != null) v.onSearch.listen(onSearch);
-  if (onSeeked != null) v.onSeeked.listen(onSeeked);
-  if (onSeeking != null) v.onSeeking.listen(onSeeking);
-  if (onSelect != null) v.onSelect.listen(onSelect);
-  if (onSelectStart != null) v.onSelectStart.listen(onSelectStart);
-  if (onStalled != null) v.onStalled.listen(onStalled);
-  if (onSubmit != null) v.onSubmit.listen(onSubmit);
-  if (onSuspend != null) v.onSuspend.listen(onSuspend);
-  if (onTimeUpdate != null) v.onTimeUpdate.listen(onTimeUpdate);
-  if (onTouchCancel != null) v.onTouchCancel.listen(onTouchCancel);
-  if (onTouchEnd != null) v.onTouchEnd.listen(onTouchEnd);
-  if (onTouchEnter != null) v.onTouchEnter.listen(onTouchEnter);
-  if (onTouchLeave != null) v.onTouchLeave.listen(onTouchLeave);
-  if (onTouchMove != null) v.onTouchMove.listen(onTouchMove);
-  if (onTouchStart != null) v.onTouchStart.listen(onTouchStart);
-  if (onTransitionEnd != null) v.onTransitionEnd.listen(onTransitionEnd);
-  if (onVolumeChange != null) v.onVolumeChange.listen(onVolumeChange);
-  if (onWaiting != null) v.onWaiting.listen(onWaiting);
-  if (onFullscreenChange != null)
-    v.onFullscreenChange.listen(onFullscreenChange);
-  if (onFullscreenError != null) v.onFullscreenError.listen(onFullscreenError);
-  if (onWheel != null) v.onWheel.listen(onWheel);
-  return v;
+class PreElementWidget extends HtmlElementWidget {
+  PreElementWidget(
+      {super.nonce,
+      super.attributes,
+      super.children,
+      super.classes,
+      super.dataset,
+      super.innerHtml,
+      super.innerText,
+      super.scrollLeft,
+      super.scrollTop,
+      super.contentEditable,
+      super.dir,
+      super.draggable,
+      super.hidden,
+      super.inert,
+      super.inputMode,
+      super.lang,
+      super.spellcheck,
+      super.tabIndex,
+      super.title,
+      super.translate,
+      super.className,
+      super.id,
+      super.slot,
+      super.nodes,
+      super.text,
+      super.onAbort,
+      super.onBeforeCopy,
+      super.onBeforeCut,
+      super.onBeforePaste,
+      super.onBlur,
+      super.onCanPlay,
+      super.onCanPlayThrough,
+      super.onChange,
+      super.onClick,
+      super.onContextMenu,
+      super.onCopy,
+      super.onCut,
+      super.onDoubleClick,
+      super.onDrag,
+      super.onDragEnd,
+      super.onDragEnter,
+      super.onDragLeave,
+      super.onDragOver,
+      super.onDragStart,
+      super.onDrop,
+      super.onDurationChange,
+      super.onEmptied,
+      super.onEnded,
+      super.onError,
+      super.onFocus,
+      super.onInput,
+      super.onInvalid,
+      super.onKeyDown,
+      super.onKeyPress,
+      super.onKeyUp,
+      super.onLoad,
+      super.onLoadedData,
+      super.onLoadedMetadata,
+      super.onMouseDown,
+      super.onMouseEnter,
+      super.onMouseLeave,
+      super.onMouseMove,
+      super.onMouseOut,
+      super.onMouseOver,
+      super.onMouseUp,
+      super.onMouseWheel,
+      super.onPaste,
+      super.onPause,
+      super.onPlay,
+      super.onPlaying,
+      super.onRateChange,
+      super.onReset,
+      super.onResize,
+      super.onScroll,
+      super.onSearch,
+      super.onSeeked,
+      super.onSeeking,
+      super.onSelect,
+      super.onSelectStart,
+      super.onStalled,
+      super.onSubmit,
+      super.onSuspend,
+      super.onTimeUpdate,
+      super.onTouchCancel,
+      super.onTouchEnd,
+      super.onTouchEnter,
+      super.onTouchLeave,
+      super.onTouchMove,
+      super.onTouchStart,
+      super.onTransitionEnd,
+      super.onVolumeChange,
+      super.onWaiting,
+      super.onFullscreenChange,
+      super.onFullscreenError,
+      super.onWheel});
+  @override
+  Element render() => hook(PreElement());
 }
 
-ProgressElement progressElement(
-    {num? max,
-    num? value,
-    String? nonce,
-    Map<String, String>? attributes,
-    List<Element>? children,
-    Iterable<String>? classes,
-    Map<String, String>? dataset,
-    String? innerHtml,
-    String? innerText,
-    int? scrollLeft,
-    int? scrollTop,
-    String? contentEditable,
-    String? dir,
-    bool? draggable,
-    bool? hidden,
-    bool? inert,
-    String? inputMode,
-    String? lang,
-    bool? spellcheck,
-    int? tabIndex,
-    String? title,
-    bool? translate,
-    String? className,
-    String? id,
-    String? slot,
-    Iterable<Node>? nodes,
-    String? text,
-    void Function(Event)? onAbort,
-    void Function(Event)? onBeforeCopy,
-    void Function(Event)? onBeforeCut,
-    void Function(Event)? onBeforePaste,
-    void Function(Event)? onBlur,
-    void Function(Event)? onCanPlay,
-    void Function(Event)? onCanPlayThrough,
-    void Function(Event)? onChange,
-    void Function(MouseEvent)? onClick,
-    void Function(MouseEvent)? onContextMenu,
-    void Function(ClipboardEvent)? onCopy,
-    void Function(ClipboardEvent)? onCut,
-    void Function(Event)? onDoubleClick,
-    void Function(MouseEvent)? onDrag,
-    void Function(MouseEvent)? onDragEnd,
-    void Function(MouseEvent)? onDragEnter,
-    void Function(MouseEvent)? onDragLeave,
-    void Function(MouseEvent)? onDragOver,
-    void Function(MouseEvent)? onDragStart,
-    void Function(MouseEvent)? onDrop,
-    void Function(Event)? onDurationChange,
-    void Function(Event)? onEmptied,
-    void Function(Event)? onEnded,
-    void Function(Event)? onError,
-    void Function(Event)? onFocus,
-    void Function(Event)? onInput,
-    void Function(Event)? onInvalid,
-    void Function(KeyboardEvent)? onKeyDown,
-    void Function(KeyboardEvent)? onKeyPress,
-    void Function(KeyboardEvent)? onKeyUp,
-    void Function(Event)? onLoad,
-    void Function(Event)? onLoadedData,
-    void Function(Event)? onLoadedMetadata,
-    void Function(MouseEvent)? onMouseDown,
-    void Function(MouseEvent)? onMouseEnter,
-    void Function(MouseEvent)? onMouseLeave,
-    void Function(MouseEvent)? onMouseMove,
-    void Function(MouseEvent)? onMouseOut,
-    void Function(MouseEvent)? onMouseOver,
-    void Function(MouseEvent)? onMouseUp,
-    void Function(WheelEvent)? onMouseWheel,
-    void Function(ClipboardEvent)? onPaste,
-    void Function(Event)? onPause,
-    void Function(Event)? onPlay,
-    void Function(Event)? onPlaying,
-    void Function(Event)? onRateChange,
-    void Function(Event)? onReset,
-    void Function(Event)? onResize,
-    void Function(Event)? onScroll,
-    void Function(Event)? onSearch,
-    void Function(Event)? onSeeked,
-    void Function(Event)? onSeeking,
-    void Function(Event)? onSelect,
-    void Function(Event)? onSelectStart,
-    void Function(Event)? onStalled,
-    void Function(Event)? onSubmit,
-    void Function(Event)? onSuspend,
-    void Function(Event)? onTimeUpdate,
-    void Function(TouchEvent)? onTouchCancel,
-    void Function(TouchEvent)? onTouchEnd,
-    void Function(TouchEvent)? onTouchEnter,
-    void Function(TouchEvent)? onTouchLeave,
-    void Function(TouchEvent)? onTouchMove,
-    void Function(TouchEvent)? onTouchStart,
-    void Function(TransitionEvent)? onTransitionEnd,
-    void Function(Event)? onVolumeChange,
-    void Function(Event)? onWaiting,
-    void Function(Event)? onFullscreenChange,
-    void Function(Event)? onFullscreenError,
-    void Function(WheelEvent)? onWheel}) {
-  final v = ProgressElement();
-  if (max != null) v.max = max;
-  if (value != null) v.value = value;
-  if (nonce != null) v.nonce = nonce;
-  if (attributes != null) v.attributes = attributes;
-  if (children != null) v.children = children;
-  if (classes != null) v.classes = classes;
-  if (dataset != null) v.dataset = dataset;
-  if (innerHtml != null) v.innerHtml = innerHtml;
-  if (innerText != null) v.innerText = innerText;
-  if (scrollLeft != null) v.scrollLeft = scrollLeft;
-  if (scrollTop != null) v.scrollTop = scrollTop;
-  if (contentEditable != null) v.contentEditable = contentEditable;
-  if (dir != null) v.dir = dir;
-  if (draggable != null) v.draggable = draggable;
-  if (hidden != null) v.hidden = hidden;
-  if (inert != null) v.inert = inert;
-  if (inputMode != null) v.inputMode = inputMode;
-  if (lang != null) v.lang = lang;
-  if (spellcheck != null) v.spellcheck = spellcheck;
-  if (tabIndex != null) v.tabIndex = tabIndex;
-  if (title != null) v.title = title;
-  if (translate != null) v.translate = translate;
-  if (className != null) v.className = className;
-  if (id != null) v.id = id;
-  if (slot != null) v.slot = slot;
-  if (nodes != null) v.nodes = nodes;
-  if (text != null) v.text = text;
-  if (onAbort != null) v.onAbort.listen(onAbort);
-  if (onBeforeCopy != null) v.onBeforeCopy.listen(onBeforeCopy);
-  if (onBeforeCut != null) v.onBeforeCut.listen(onBeforeCut);
-  if (onBeforePaste != null) v.onBeforePaste.listen(onBeforePaste);
-  if (onBlur != null) v.onBlur.listen(onBlur);
-  if (onCanPlay != null) v.onCanPlay.listen(onCanPlay);
-  if (onCanPlayThrough != null) v.onCanPlayThrough.listen(onCanPlayThrough);
-  if (onChange != null) v.onChange.listen(onChange);
-  if (onClick != null) v.onClick.listen(onClick);
-  if (onContextMenu != null) v.onContextMenu.listen(onContextMenu);
-  if (onCopy != null) v.onCopy.listen(onCopy);
-  if (onCut != null) v.onCut.listen(onCut);
-  if (onDoubleClick != null) v.onDoubleClick.listen(onDoubleClick);
-  if (onDrag != null) v.onDrag.listen(onDrag);
-  if (onDragEnd != null) v.onDragEnd.listen(onDragEnd);
-  if (onDragEnter != null) v.onDragEnter.listen(onDragEnter);
-  if (onDragLeave != null) v.onDragLeave.listen(onDragLeave);
-  if (onDragOver != null) v.onDragOver.listen(onDragOver);
-  if (onDragStart != null) v.onDragStart.listen(onDragStart);
-  if (onDrop != null) v.onDrop.listen(onDrop);
-  if (onDurationChange != null) v.onDurationChange.listen(onDurationChange);
-  if (onEmptied != null) v.onEmptied.listen(onEmptied);
-  if (onEnded != null) v.onEnded.listen(onEnded);
-  if (onError != null) v.onError.listen(onError);
-  if (onFocus != null) v.onFocus.listen(onFocus);
-  if (onInput != null) v.onInput.listen(onInput);
-  if (onInvalid != null) v.onInvalid.listen(onInvalid);
-  if (onKeyDown != null) v.onKeyDown.listen(onKeyDown);
-  if (onKeyPress != null) v.onKeyPress.listen(onKeyPress);
-  if (onKeyUp != null) v.onKeyUp.listen(onKeyUp);
-  if (onLoad != null) v.onLoad.listen(onLoad);
-  if (onLoadedData != null) v.onLoadedData.listen(onLoadedData);
-  if (onLoadedMetadata != null) v.onLoadedMetadata.listen(onLoadedMetadata);
-  if (onMouseDown != null) v.onMouseDown.listen(onMouseDown);
-  if (onMouseEnter != null) v.onMouseEnter.listen(onMouseEnter);
-  if (onMouseLeave != null) v.onMouseLeave.listen(onMouseLeave);
-  if (onMouseMove != null) v.onMouseMove.listen(onMouseMove);
-  if (onMouseOut != null) v.onMouseOut.listen(onMouseOut);
-  if (onMouseOver != null) v.onMouseOver.listen(onMouseOver);
-  if (onMouseUp != null) v.onMouseUp.listen(onMouseUp);
-  if (onMouseWheel != null) v.onMouseWheel.listen(onMouseWheel);
-  if (onPaste != null) v.onPaste.listen(onPaste);
-  if (onPause != null) v.onPause.listen(onPause);
-  if (onPlay != null) v.onPlay.listen(onPlay);
-  if (onPlaying != null) v.onPlaying.listen(onPlaying);
-  if (onRateChange != null) v.onRateChange.listen(onRateChange);
-  if (onReset != null) v.onReset.listen(onReset);
-  if (onResize != null) v.onResize.listen(onResize);
-  if (onScroll != null) v.onScroll.listen(onScroll);
-  if (onSearch != null) v.onSearch.listen(onSearch);
-  if (onSeeked != null) v.onSeeked.listen(onSeeked);
-  if (onSeeking != null) v.onSeeking.listen(onSeeking);
-  if (onSelect != null) v.onSelect.listen(onSelect);
-  if (onSelectStart != null) v.onSelectStart.listen(onSelectStart);
-  if (onStalled != null) v.onStalled.listen(onStalled);
-  if (onSubmit != null) v.onSubmit.listen(onSubmit);
-  if (onSuspend != null) v.onSuspend.listen(onSuspend);
-  if (onTimeUpdate != null) v.onTimeUpdate.listen(onTimeUpdate);
-  if (onTouchCancel != null) v.onTouchCancel.listen(onTouchCancel);
-  if (onTouchEnd != null) v.onTouchEnd.listen(onTouchEnd);
-  if (onTouchEnter != null) v.onTouchEnter.listen(onTouchEnter);
-  if (onTouchLeave != null) v.onTouchLeave.listen(onTouchLeave);
-  if (onTouchMove != null) v.onTouchMove.listen(onTouchMove);
-  if (onTouchStart != null) v.onTouchStart.listen(onTouchStart);
-  if (onTransitionEnd != null) v.onTransitionEnd.listen(onTransitionEnd);
-  if (onVolumeChange != null) v.onVolumeChange.listen(onVolumeChange);
-  if (onWaiting != null) v.onWaiting.listen(onWaiting);
-  if (onFullscreenChange != null)
-    v.onFullscreenChange.listen(onFullscreenChange);
-  if (onFullscreenError != null) v.onFullscreenError.listen(onFullscreenError);
-  if (onWheel != null) v.onWheel.listen(onWheel);
-  return v;
+class ProgressElementWidget extends HtmlElementWidget {
+  ProgressElementWidget(
+      {super.nonce,
+      super.attributes,
+      super.children,
+      super.classes,
+      super.dataset,
+      super.innerHtml,
+      super.innerText,
+      super.scrollLeft,
+      super.scrollTop,
+      super.contentEditable,
+      super.dir,
+      super.draggable,
+      super.hidden,
+      super.inert,
+      super.inputMode,
+      super.lang,
+      super.spellcheck,
+      super.tabIndex,
+      super.title,
+      super.translate,
+      super.className,
+      super.id,
+      super.slot,
+      super.nodes,
+      super.text,
+      super.onAbort,
+      super.onBeforeCopy,
+      super.onBeforeCut,
+      super.onBeforePaste,
+      super.onBlur,
+      super.onCanPlay,
+      super.onCanPlayThrough,
+      super.onChange,
+      super.onClick,
+      super.onContextMenu,
+      super.onCopy,
+      super.onCut,
+      super.onDoubleClick,
+      super.onDrag,
+      super.onDragEnd,
+      super.onDragEnter,
+      super.onDragLeave,
+      super.onDragOver,
+      super.onDragStart,
+      super.onDrop,
+      super.onDurationChange,
+      super.onEmptied,
+      super.onEnded,
+      super.onError,
+      super.onFocus,
+      super.onInput,
+      super.onInvalid,
+      super.onKeyDown,
+      super.onKeyPress,
+      super.onKeyUp,
+      super.onLoad,
+      super.onLoadedData,
+      super.onLoadedMetadata,
+      super.onMouseDown,
+      super.onMouseEnter,
+      super.onMouseLeave,
+      super.onMouseMove,
+      super.onMouseOut,
+      super.onMouseOver,
+      super.onMouseUp,
+      super.onMouseWheel,
+      super.onPaste,
+      super.onPause,
+      super.onPlay,
+      super.onPlaying,
+      super.onRateChange,
+      super.onReset,
+      super.onResize,
+      super.onScroll,
+      super.onSearch,
+      super.onSeeked,
+      super.onSeeking,
+      super.onSelect,
+      super.onSelectStart,
+      super.onStalled,
+      super.onSubmit,
+      super.onSuspend,
+      super.onTimeUpdate,
+      super.onTouchCancel,
+      super.onTouchEnd,
+      super.onTouchEnter,
+      super.onTouchLeave,
+      super.onTouchMove,
+      super.onTouchStart,
+      super.onTransitionEnd,
+      super.onVolumeChange,
+      super.onWaiting,
+      super.onFullscreenChange,
+      super.onFullscreenError,
+      super.onWheel});
+  @override
+  Element render() => hook(ProgressElement());
 }
 
-QuoteElement quoteElement(
-    {String? cite,
-    String? nonce,
-    Map<String, String>? attributes,
-    List<Element>? children,
-    Iterable<String>? classes,
-    Map<String, String>? dataset,
-    String? innerHtml,
-    String? innerText,
-    int? scrollLeft,
-    int? scrollTop,
-    String? contentEditable,
-    String? dir,
-    bool? draggable,
-    bool? hidden,
-    bool? inert,
-    String? inputMode,
-    String? lang,
-    bool? spellcheck,
-    int? tabIndex,
-    String? title,
-    bool? translate,
-    String? className,
-    String? id,
-    String? slot,
-    Iterable<Node>? nodes,
-    String? text,
-    void Function(Event)? onAbort,
-    void Function(Event)? onBeforeCopy,
-    void Function(Event)? onBeforeCut,
-    void Function(Event)? onBeforePaste,
-    void Function(Event)? onBlur,
-    void Function(Event)? onCanPlay,
-    void Function(Event)? onCanPlayThrough,
-    void Function(Event)? onChange,
-    void Function(MouseEvent)? onClick,
-    void Function(MouseEvent)? onContextMenu,
-    void Function(ClipboardEvent)? onCopy,
-    void Function(ClipboardEvent)? onCut,
-    void Function(Event)? onDoubleClick,
-    void Function(MouseEvent)? onDrag,
-    void Function(MouseEvent)? onDragEnd,
-    void Function(MouseEvent)? onDragEnter,
-    void Function(MouseEvent)? onDragLeave,
-    void Function(MouseEvent)? onDragOver,
-    void Function(MouseEvent)? onDragStart,
-    void Function(MouseEvent)? onDrop,
-    void Function(Event)? onDurationChange,
-    void Function(Event)? onEmptied,
-    void Function(Event)? onEnded,
-    void Function(Event)? onError,
-    void Function(Event)? onFocus,
-    void Function(Event)? onInput,
-    void Function(Event)? onInvalid,
-    void Function(KeyboardEvent)? onKeyDown,
-    void Function(KeyboardEvent)? onKeyPress,
-    void Function(KeyboardEvent)? onKeyUp,
-    void Function(Event)? onLoad,
-    void Function(Event)? onLoadedData,
-    void Function(Event)? onLoadedMetadata,
-    void Function(MouseEvent)? onMouseDown,
-    void Function(MouseEvent)? onMouseEnter,
-    void Function(MouseEvent)? onMouseLeave,
-    void Function(MouseEvent)? onMouseMove,
-    void Function(MouseEvent)? onMouseOut,
-    void Function(MouseEvent)? onMouseOver,
-    void Function(MouseEvent)? onMouseUp,
-    void Function(WheelEvent)? onMouseWheel,
-    void Function(ClipboardEvent)? onPaste,
-    void Function(Event)? onPause,
-    void Function(Event)? onPlay,
-    void Function(Event)? onPlaying,
-    void Function(Event)? onRateChange,
-    void Function(Event)? onReset,
-    void Function(Event)? onResize,
-    void Function(Event)? onScroll,
-    void Function(Event)? onSearch,
-    void Function(Event)? onSeeked,
-    void Function(Event)? onSeeking,
-    void Function(Event)? onSelect,
-    void Function(Event)? onSelectStart,
-    void Function(Event)? onStalled,
-    void Function(Event)? onSubmit,
-    void Function(Event)? onSuspend,
-    void Function(Event)? onTimeUpdate,
-    void Function(TouchEvent)? onTouchCancel,
-    void Function(TouchEvent)? onTouchEnd,
-    void Function(TouchEvent)? onTouchEnter,
-    void Function(TouchEvent)? onTouchLeave,
-    void Function(TouchEvent)? onTouchMove,
-    void Function(TouchEvent)? onTouchStart,
-    void Function(TransitionEvent)? onTransitionEnd,
-    void Function(Event)? onVolumeChange,
-    void Function(Event)? onWaiting,
-    void Function(Event)? onFullscreenChange,
-    void Function(Event)? onFullscreenError,
-    void Function(WheelEvent)? onWheel}) {
-  final v = QuoteElement();
-  if (cite != null) v.cite = cite;
-  if (nonce != null) v.nonce = nonce;
-  if (attributes != null) v.attributes = attributes;
-  if (children != null) v.children = children;
-  if (classes != null) v.classes = classes;
-  if (dataset != null) v.dataset = dataset;
-  if (innerHtml != null) v.innerHtml = innerHtml;
-  if (innerText != null) v.innerText = innerText;
-  if (scrollLeft != null) v.scrollLeft = scrollLeft;
-  if (scrollTop != null) v.scrollTop = scrollTop;
-  if (contentEditable != null) v.contentEditable = contentEditable;
-  if (dir != null) v.dir = dir;
-  if (draggable != null) v.draggable = draggable;
-  if (hidden != null) v.hidden = hidden;
-  if (inert != null) v.inert = inert;
-  if (inputMode != null) v.inputMode = inputMode;
-  if (lang != null) v.lang = lang;
-  if (spellcheck != null) v.spellcheck = spellcheck;
-  if (tabIndex != null) v.tabIndex = tabIndex;
-  if (title != null) v.title = title;
-  if (translate != null) v.translate = translate;
-  if (className != null) v.className = className;
-  if (id != null) v.id = id;
-  if (slot != null) v.slot = slot;
-  if (nodes != null) v.nodes = nodes;
-  if (text != null) v.text = text;
-  if (onAbort != null) v.onAbort.listen(onAbort);
-  if (onBeforeCopy != null) v.onBeforeCopy.listen(onBeforeCopy);
-  if (onBeforeCut != null) v.onBeforeCut.listen(onBeforeCut);
-  if (onBeforePaste != null) v.onBeforePaste.listen(onBeforePaste);
-  if (onBlur != null) v.onBlur.listen(onBlur);
-  if (onCanPlay != null) v.onCanPlay.listen(onCanPlay);
-  if (onCanPlayThrough != null) v.onCanPlayThrough.listen(onCanPlayThrough);
-  if (onChange != null) v.onChange.listen(onChange);
-  if (onClick != null) v.onClick.listen(onClick);
-  if (onContextMenu != null) v.onContextMenu.listen(onContextMenu);
-  if (onCopy != null) v.onCopy.listen(onCopy);
-  if (onCut != null) v.onCut.listen(onCut);
-  if (onDoubleClick != null) v.onDoubleClick.listen(onDoubleClick);
-  if (onDrag != null) v.onDrag.listen(onDrag);
-  if (onDragEnd != null) v.onDragEnd.listen(onDragEnd);
-  if (onDragEnter != null) v.onDragEnter.listen(onDragEnter);
-  if (onDragLeave != null) v.onDragLeave.listen(onDragLeave);
-  if (onDragOver != null) v.onDragOver.listen(onDragOver);
-  if (onDragStart != null) v.onDragStart.listen(onDragStart);
-  if (onDrop != null) v.onDrop.listen(onDrop);
-  if (onDurationChange != null) v.onDurationChange.listen(onDurationChange);
-  if (onEmptied != null) v.onEmptied.listen(onEmptied);
-  if (onEnded != null) v.onEnded.listen(onEnded);
-  if (onError != null) v.onError.listen(onError);
-  if (onFocus != null) v.onFocus.listen(onFocus);
-  if (onInput != null) v.onInput.listen(onInput);
-  if (onInvalid != null) v.onInvalid.listen(onInvalid);
-  if (onKeyDown != null) v.onKeyDown.listen(onKeyDown);
-  if (onKeyPress != null) v.onKeyPress.listen(onKeyPress);
-  if (onKeyUp != null) v.onKeyUp.listen(onKeyUp);
-  if (onLoad != null) v.onLoad.listen(onLoad);
-  if (onLoadedData != null) v.onLoadedData.listen(onLoadedData);
-  if (onLoadedMetadata != null) v.onLoadedMetadata.listen(onLoadedMetadata);
-  if (onMouseDown != null) v.onMouseDown.listen(onMouseDown);
-  if (onMouseEnter != null) v.onMouseEnter.listen(onMouseEnter);
-  if (onMouseLeave != null) v.onMouseLeave.listen(onMouseLeave);
-  if (onMouseMove != null) v.onMouseMove.listen(onMouseMove);
-  if (onMouseOut != null) v.onMouseOut.listen(onMouseOut);
-  if (onMouseOver != null) v.onMouseOver.listen(onMouseOver);
-  if (onMouseUp != null) v.onMouseUp.listen(onMouseUp);
-  if (onMouseWheel != null) v.onMouseWheel.listen(onMouseWheel);
-  if (onPaste != null) v.onPaste.listen(onPaste);
-  if (onPause != null) v.onPause.listen(onPause);
-  if (onPlay != null) v.onPlay.listen(onPlay);
-  if (onPlaying != null) v.onPlaying.listen(onPlaying);
-  if (onRateChange != null) v.onRateChange.listen(onRateChange);
-  if (onReset != null) v.onReset.listen(onReset);
-  if (onResize != null) v.onResize.listen(onResize);
-  if (onScroll != null) v.onScroll.listen(onScroll);
-  if (onSearch != null) v.onSearch.listen(onSearch);
-  if (onSeeked != null) v.onSeeked.listen(onSeeked);
-  if (onSeeking != null) v.onSeeking.listen(onSeeking);
-  if (onSelect != null) v.onSelect.listen(onSelect);
-  if (onSelectStart != null) v.onSelectStart.listen(onSelectStart);
-  if (onStalled != null) v.onStalled.listen(onStalled);
-  if (onSubmit != null) v.onSubmit.listen(onSubmit);
-  if (onSuspend != null) v.onSuspend.listen(onSuspend);
-  if (onTimeUpdate != null) v.onTimeUpdate.listen(onTimeUpdate);
-  if (onTouchCancel != null) v.onTouchCancel.listen(onTouchCancel);
-  if (onTouchEnd != null) v.onTouchEnd.listen(onTouchEnd);
-  if (onTouchEnter != null) v.onTouchEnter.listen(onTouchEnter);
-  if (onTouchLeave != null) v.onTouchLeave.listen(onTouchLeave);
-  if (onTouchMove != null) v.onTouchMove.listen(onTouchMove);
-  if (onTouchStart != null) v.onTouchStart.listen(onTouchStart);
-  if (onTransitionEnd != null) v.onTransitionEnd.listen(onTransitionEnd);
-  if (onVolumeChange != null) v.onVolumeChange.listen(onVolumeChange);
-  if (onWaiting != null) v.onWaiting.listen(onWaiting);
-  if (onFullscreenChange != null)
-    v.onFullscreenChange.listen(onFullscreenChange);
-  if (onFullscreenError != null) v.onFullscreenError.listen(onFullscreenError);
-  if (onWheel != null) v.onWheel.listen(onWheel);
-  return v;
+class QuoteElementWidget extends HtmlElementWidget {
+  QuoteElementWidget(
+      {super.nonce,
+      super.attributes,
+      super.children,
+      super.classes,
+      super.dataset,
+      super.innerHtml,
+      super.innerText,
+      super.scrollLeft,
+      super.scrollTop,
+      super.contentEditable,
+      super.dir,
+      super.draggable,
+      super.hidden,
+      super.inert,
+      super.inputMode,
+      super.lang,
+      super.spellcheck,
+      super.tabIndex,
+      super.title,
+      super.translate,
+      super.className,
+      super.id,
+      super.slot,
+      super.nodes,
+      super.text,
+      super.onAbort,
+      super.onBeforeCopy,
+      super.onBeforeCut,
+      super.onBeforePaste,
+      super.onBlur,
+      super.onCanPlay,
+      super.onCanPlayThrough,
+      super.onChange,
+      super.onClick,
+      super.onContextMenu,
+      super.onCopy,
+      super.onCut,
+      super.onDoubleClick,
+      super.onDrag,
+      super.onDragEnd,
+      super.onDragEnter,
+      super.onDragLeave,
+      super.onDragOver,
+      super.onDragStart,
+      super.onDrop,
+      super.onDurationChange,
+      super.onEmptied,
+      super.onEnded,
+      super.onError,
+      super.onFocus,
+      super.onInput,
+      super.onInvalid,
+      super.onKeyDown,
+      super.onKeyPress,
+      super.onKeyUp,
+      super.onLoad,
+      super.onLoadedData,
+      super.onLoadedMetadata,
+      super.onMouseDown,
+      super.onMouseEnter,
+      super.onMouseLeave,
+      super.onMouseMove,
+      super.onMouseOut,
+      super.onMouseOver,
+      super.onMouseUp,
+      super.onMouseWheel,
+      super.onPaste,
+      super.onPause,
+      super.onPlay,
+      super.onPlaying,
+      super.onRateChange,
+      super.onReset,
+      super.onResize,
+      super.onScroll,
+      super.onSearch,
+      super.onSeeked,
+      super.onSeeking,
+      super.onSelect,
+      super.onSelectStart,
+      super.onStalled,
+      super.onSubmit,
+      super.onSuspend,
+      super.onTimeUpdate,
+      super.onTouchCancel,
+      super.onTouchEnd,
+      super.onTouchEnter,
+      super.onTouchLeave,
+      super.onTouchMove,
+      super.onTouchStart,
+      super.onTransitionEnd,
+      super.onVolumeChange,
+      super.onWaiting,
+      super.onFullscreenChange,
+      super.onFullscreenError,
+      super.onWheel});
+  @override
+  Element render() => hook(QuoteElement());
 }
 
-ScriptElement scriptElement(
-    {bool? async,
-    String? charset,
-    String? crossOrigin,
-    bool? defer,
-    String? integrity,
-    bool? noModule,
-    String? src,
-    String? type,
-    String? nonce,
-    Map<String, String>? attributes,
-    List<Element>? children,
-    Iterable<String>? classes,
-    Map<String, String>? dataset,
-    String? innerHtml,
-    String? innerText,
-    int? scrollLeft,
-    int? scrollTop,
-    String? contentEditable,
-    String? dir,
-    bool? draggable,
-    bool? hidden,
-    bool? inert,
-    String? inputMode,
-    String? lang,
-    bool? spellcheck,
-    int? tabIndex,
-    String? title,
-    bool? translate,
-    String? className,
-    String? id,
-    String? slot,
-    Iterable<Node>? nodes,
-    String? text,
-    void Function(Event)? onAbort,
-    void Function(Event)? onBeforeCopy,
-    void Function(Event)? onBeforeCut,
-    void Function(Event)? onBeforePaste,
-    void Function(Event)? onBlur,
-    void Function(Event)? onCanPlay,
-    void Function(Event)? onCanPlayThrough,
-    void Function(Event)? onChange,
-    void Function(MouseEvent)? onClick,
-    void Function(MouseEvent)? onContextMenu,
-    void Function(ClipboardEvent)? onCopy,
-    void Function(ClipboardEvent)? onCut,
-    void Function(Event)? onDoubleClick,
-    void Function(MouseEvent)? onDrag,
-    void Function(MouseEvent)? onDragEnd,
-    void Function(MouseEvent)? onDragEnter,
-    void Function(MouseEvent)? onDragLeave,
-    void Function(MouseEvent)? onDragOver,
-    void Function(MouseEvent)? onDragStart,
-    void Function(MouseEvent)? onDrop,
-    void Function(Event)? onDurationChange,
-    void Function(Event)? onEmptied,
-    void Function(Event)? onEnded,
-    void Function(Event)? onError,
-    void Function(Event)? onFocus,
-    void Function(Event)? onInput,
-    void Function(Event)? onInvalid,
-    void Function(KeyboardEvent)? onKeyDown,
-    void Function(KeyboardEvent)? onKeyPress,
-    void Function(KeyboardEvent)? onKeyUp,
-    void Function(Event)? onLoad,
-    void Function(Event)? onLoadedData,
-    void Function(Event)? onLoadedMetadata,
-    void Function(MouseEvent)? onMouseDown,
-    void Function(MouseEvent)? onMouseEnter,
-    void Function(MouseEvent)? onMouseLeave,
-    void Function(MouseEvent)? onMouseMove,
-    void Function(MouseEvent)? onMouseOut,
-    void Function(MouseEvent)? onMouseOver,
-    void Function(MouseEvent)? onMouseUp,
-    void Function(WheelEvent)? onMouseWheel,
-    void Function(ClipboardEvent)? onPaste,
-    void Function(Event)? onPause,
-    void Function(Event)? onPlay,
-    void Function(Event)? onPlaying,
-    void Function(Event)? onRateChange,
-    void Function(Event)? onReset,
-    void Function(Event)? onResize,
-    void Function(Event)? onScroll,
-    void Function(Event)? onSearch,
-    void Function(Event)? onSeeked,
-    void Function(Event)? onSeeking,
-    void Function(Event)? onSelect,
-    void Function(Event)? onSelectStart,
-    void Function(Event)? onStalled,
-    void Function(Event)? onSubmit,
-    void Function(Event)? onSuspend,
-    void Function(Event)? onTimeUpdate,
-    void Function(TouchEvent)? onTouchCancel,
-    void Function(TouchEvent)? onTouchEnd,
-    void Function(TouchEvent)? onTouchEnter,
-    void Function(TouchEvent)? onTouchLeave,
-    void Function(TouchEvent)? onTouchMove,
-    void Function(TouchEvent)? onTouchStart,
-    void Function(TransitionEvent)? onTransitionEnd,
-    void Function(Event)? onVolumeChange,
-    void Function(Event)? onWaiting,
-    void Function(Event)? onFullscreenChange,
-    void Function(Event)? onFullscreenError,
-    void Function(WheelEvent)? onWheel}) {
-  final v = ScriptElement();
-  if (async != null) v.async = async;
-  if (charset != null) v.charset = charset;
-  if (crossOrigin != null) v.crossOrigin = crossOrigin;
-  if (defer != null) v.defer = defer;
-  if (integrity != null) v.integrity = integrity;
-  if (noModule != null) v.noModule = noModule;
-  if (src != null) v.src = src;
-  if (type != null) v.type = type;
-  if (nonce != null) v.nonce = nonce;
-  if (attributes != null) v.attributes = attributes;
-  if (children != null) v.children = children;
-  if (classes != null) v.classes = classes;
-  if (dataset != null) v.dataset = dataset;
-  if (innerHtml != null) v.innerHtml = innerHtml;
-  if (innerText != null) v.innerText = innerText;
-  if (scrollLeft != null) v.scrollLeft = scrollLeft;
-  if (scrollTop != null) v.scrollTop = scrollTop;
-  if (contentEditable != null) v.contentEditable = contentEditable;
-  if (dir != null) v.dir = dir;
-  if (draggable != null) v.draggable = draggable;
-  if (hidden != null) v.hidden = hidden;
-  if (inert != null) v.inert = inert;
-  if (inputMode != null) v.inputMode = inputMode;
-  if (lang != null) v.lang = lang;
-  if (spellcheck != null) v.spellcheck = spellcheck;
-  if (tabIndex != null) v.tabIndex = tabIndex;
-  if (title != null) v.title = title;
-  if (translate != null) v.translate = translate;
-  if (className != null) v.className = className;
-  if (id != null) v.id = id;
-  if (slot != null) v.slot = slot;
-  if (nodes != null) v.nodes = nodes;
-  if (text != null) v.text = text;
-  if (onAbort != null) v.onAbort.listen(onAbort);
-  if (onBeforeCopy != null) v.onBeforeCopy.listen(onBeforeCopy);
-  if (onBeforeCut != null) v.onBeforeCut.listen(onBeforeCut);
-  if (onBeforePaste != null) v.onBeforePaste.listen(onBeforePaste);
-  if (onBlur != null) v.onBlur.listen(onBlur);
-  if (onCanPlay != null) v.onCanPlay.listen(onCanPlay);
-  if (onCanPlayThrough != null) v.onCanPlayThrough.listen(onCanPlayThrough);
-  if (onChange != null) v.onChange.listen(onChange);
-  if (onClick != null) v.onClick.listen(onClick);
-  if (onContextMenu != null) v.onContextMenu.listen(onContextMenu);
-  if (onCopy != null) v.onCopy.listen(onCopy);
-  if (onCut != null) v.onCut.listen(onCut);
-  if (onDoubleClick != null) v.onDoubleClick.listen(onDoubleClick);
-  if (onDrag != null) v.onDrag.listen(onDrag);
-  if (onDragEnd != null) v.onDragEnd.listen(onDragEnd);
-  if (onDragEnter != null) v.onDragEnter.listen(onDragEnter);
-  if (onDragLeave != null) v.onDragLeave.listen(onDragLeave);
-  if (onDragOver != null) v.onDragOver.listen(onDragOver);
-  if (onDragStart != null) v.onDragStart.listen(onDragStart);
-  if (onDrop != null) v.onDrop.listen(onDrop);
-  if (onDurationChange != null) v.onDurationChange.listen(onDurationChange);
-  if (onEmptied != null) v.onEmptied.listen(onEmptied);
-  if (onEnded != null) v.onEnded.listen(onEnded);
-  if (onError != null) v.onError.listen(onError);
-  if (onFocus != null) v.onFocus.listen(onFocus);
-  if (onInput != null) v.onInput.listen(onInput);
-  if (onInvalid != null) v.onInvalid.listen(onInvalid);
-  if (onKeyDown != null) v.onKeyDown.listen(onKeyDown);
-  if (onKeyPress != null) v.onKeyPress.listen(onKeyPress);
-  if (onKeyUp != null) v.onKeyUp.listen(onKeyUp);
-  if (onLoad != null) v.onLoad.listen(onLoad);
-  if (onLoadedData != null) v.onLoadedData.listen(onLoadedData);
-  if (onLoadedMetadata != null) v.onLoadedMetadata.listen(onLoadedMetadata);
-  if (onMouseDown != null) v.onMouseDown.listen(onMouseDown);
-  if (onMouseEnter != null) v.onMouseEnter.listen(onMouseEnter);
-  if (onMouseLeave != null) v.onMouseLeave.listen(onMouseLeave);
-  if (onMouseMove != null) v.onMouseMove.listen(onMouseMove);
-  if (onMouseOut != null) v.onMouseOut.listen(onMouseOut);
-  if (onMouseOver != null) v.onMouseOver.listen(onMouseOver);
-  if (onMouseUp != null) v.onMouseUp.listen(onMouseUp);
-  if (onMouseWheel != null) v.onMouseWheel.listen(onMouseWheel);
-  if (onPaste != null) v.onPaste.listen(onPaste);
-  if (onPause != null) v.onPause.listen(onPause);
-  if (onPlay != null) v.onPlay.listen(onPlay);
-  if (onPlaying != null) v.onPlaying.listen(onPlaying);
-  if (onRateChange != null) v.onRateChange.listen(onRateChange);
-  if (onReset != null) v.onReset.listen(onReset);
-  if (onResize != null) v.onResize.listen(onResize);
-  if (onScroll != null) v.onScroll.listen(onScroll);
-  if (onSearch != null) v.onSearch.listen(onSearch);
-  if (onSeeked != null) v.onSeeked.listen(onSeeked);
-  if (onSeeking != null) v.onSeeking.listen(onSeeking);
-  if (onSelect != null) v.onSelect.listen(onSelect);
-  if (onSelectStart != null) v.onSelectStart.listen(onSelectStart);
-  if (onStalled != null) v.onStalled.listen(onStalled);
-  if (onSubmit != null) v.onSubmit.listen(onSubmit);
-  if (onSuspend != null) v.onSuspend.listen(onSuspend);
-  if (onTimeUpdate != null) v.onTimeUpdate.listen(onTimeUpdate);
-  if (onTouchCancel != null) v.onTouchCancel.listen(onTouchCancel);
-  if (onTouchEnd != null) v.onTouchEnd.listen(onTouchEnd);
-  if (onTouchEnter != null) v.onTouchEnter.listen(onTouchEnter);
-  if (onTouchLeave != null) v.onTouchLeave.listen(onTouchLeave);
-  if (onTouchMove != null) v.onTouchMove.listen(onTouchMove);
-  if (onTouchStart != null) v.onTouchStart.listen(onTouchStart);
-  if (onTransitionEnd != null) v.onTransitionEnd.listen(onTransitionEnd);
-  if (onVolumeChange != null) v.onVolumeChange.listen(onVolumeChange);
-  if (onWaiting != null) v.onWaiting.listen(onWaiting);
-  if (onFullscreenChange != null)
-    v.onFullscreenChange.listen(onFullscreenChange);
-  if (onFullscreenError != null) v.onFullscreenError.listen(onFullscreenError);
-  if (onWheel != null) v.onWheel.listen(onWheel);
-  return v;
+class ScriptElementWidget extends HtmlElementWidget {
+  ScriptElementWidget(
+      {super.nonce,
+      super.attributes,
+      super.children,
+      super.classes,
+      super.dataset,
+      super.innerHtml,
+      super.innerText,
+      super.scrollLeft,
+      super.scrollTop,
+      super.contentEditable,
+      super.dir,
+      super.draggable,
+      super.hidden,
+      super.inert,
+      super.inputMode,
+      super.lang,
+      super.spellcheck,
+      super.tabIndex,
+      super.title,
+      super.translate,
+      super.className,
+      super.id,
+      super.slot,
+      super.nodes,
+      super.text,
+      super.onAbort,
+      super.onBeforeCopy,
+      super.onBeforeCut,
+      super.onBeforePaste,
+      super.onBlur,
+      super.onCanPlay,
+      super.onCanPlayThrough,
+      super.onChange,
+      super.onClick,
+      super.onContextMenu,
+      super.onCopy,
+      super.onCut,
+      super.onDoubleClick,
+      super.onDrag,
+      super.onDragEnd,
+      super.onDragEnter,
+      super.onDragLeave,
+      super.onDragOver,
+      super.onDragStart,
+      super.onDrop,
+      super.onDurationChange,
+      super.onEmptied,
+      super.onEnded,
+      super.onError,
+      super.onFocus,
+      super.onInput,
+      super.onInvalid,
+      super.onKeyDown,
+      super.onKeyPress,
+      super.onKeyUp,
+      super.onLoad,
+      super.onLoadedData,
+      super.onLoadedMetadata,
+      super.onMouseDown,
+      super.onMouseEnter,
+      super.onMouseLeave,
+      super.onMouseMove,
+      super.onMouseOut,
+      super.onMouseOver,
+      super.onMouseUp,
+      super.onMouseWheel,
+      super.onPaste,
+      super.onPause,
+      super.onPlay,
+      super.onPlaying,
+      super.onRateChange,
+      super.onReset,
+      super.onResize,
+      super.onScroll,
+      super.onSearch,
+      super.onSeeked,
+      super.onSeeking,
+      super.onSelect,
+      super.onSelectStart,
+      super.onStalled,
+      super.onSubmit,
+      super.onSuspend,
+      super.onTimeUpdate,
+      super.onTouchCancel,
+      super.onTouchEnd,
+      super.onTouchEnter,
+      super.onTouchLeave,
+      super.onTouchMove,
+      super.onTouchStart,
+      super.onTransitionEnd,
+      super.onVolumeChange,
+      super.onWaiting,
+      super.onFullscreenChange,
+      super.onFullscreenError,
+      super.onWheel});
+  @override
+  Element render() => hook(ScriptElement());
 }
 
-SelectElement selectElement(
-    {bool? autofocus,
-    bool? disabled,
-    int? length,
-    bool? multiple,
-    String? name,
-    bool? required,
-    int? selectedIndex,
-    int? size,
-    String? value,
-    String? nonce,
-    Map<String, String>? attributes,
-    List<Element>? children,
-    Iterable<String>? classes,
-    Map<String, String>? dataset,
-    String? innerHtml,
-    String? innerText,
-    int? scrollLeft,
-    int? scrollTop,
-    String? contentEditable,
-    String? dir,
-    bool? draggable,
-    bool? hidden,
-    bool? inert,
-    String? inputMode,
-    String? lang,
-    bool? spellcheck,
-    int? tabIndex,
-    String? title,
-    bool? translate,
-    String? className,
-    String? id,
-    String? slot,
-    Iterable<Node>? nodes,
-    String? text,
-    void Function(Event)? onAbort,
-    void Function(Event)? onBeforeCopy,
-    void Function(Event)? onBeforeCut,
-    void Function(Event)? onBeforePaste,
-    void Function(Event)? onBlur,
-    void Function(Event)? onCanPlay,
-    void Function(Event)? onCanPlayThrough,
-    void Function(Event)? onChange,
-    void Function(MouseEvent)? onClick,
-    void Function(MouseEvent)? onContextMenu,
-    void Function(ClipboardEvent)? onCopy,
-    void Function(ClipboardEvent)? onCut,
-    void Function(Event)? onDoubleClick,
-    void Function(MouseEvent)? onDrag,
-    void Function(MouseEvent)? onDragEnd,
-    void Function(MouseEvent)? onDragEnter,
-    void Function(MouseEvent)? onDragLeave,
-    void Function(MouseEvent)? onDragOver,
-    void Function(MouseEvent)? onDragStart,
-    void Function(MouseEvent)? onDrop,
-    void Function(Event)? onDurationChange,
-    void Function(Event)? onEmptied,
-    void Function(Event)? onEnded,
-    void Function(Event)? onError,
-    void Function(Event)? onFocus,
-    void Function(Event)? onInput,
-    void Function(Event)? onInvalid,
-    void Function(KeyboardEvent)? onKeyDown,
-    void Function(KeyboardEvent)? onKeyPress,
-    void Function(KeyboardEvent)? onKeyUp,
-    void Function(Event)? onLoad,
-    void Function(Event)? onLoadedData,
-    void Function(Event)? onLoadedMetadata,
-    void Function(MouseEvent)? onMouseDown,
-    void Function(MouseEvent)? onMouseEnter,
-    void Function(MouseEvent)? onMouseLeave,
-    void Function(MouseEvent)? onMouseMove,
-    void Function(MouseEvent)? onMouseOut,
-    void Function(MouseEvent)? onMouseOver,
-    void Function(MouseEvent)? onMouseUp,
-    void Function(WheelEvent)? onMouseWheel,
-    void Function(ClipboardEvent)? onPaste,
-    void Function(Event)? onPause,
-    void Function(Event)? onPlay,
-    void Function(Event)? onPlaying,
-    void Function(Event)? onRateChange,
-    void Function(Event)? onReset,
-    void Function(Event)? onResize,
-    void Function(Event)? onScroll,
-    void Function(Event)? onSearch,
-    void Function(Event)? onSeeked,
-    void Function(Event)? onSeeking,
-    void Function(Event)? onSelect,
-    void Function(Event)? onSelectStart,
-    void Function(Event)? onStalled,
-    void Function(Event)? onSubmit,
-    void Function(Event)? onSuspend,
-    void Function(Event)? onTimeUpdate,
-    void Function(TouchEvent)? onTouchCancel,
-    void Function(TouchEvent)? onTouchEnd,
-    void Function(TouchEvent)? onTouchEnter,
-    void Function(TouchEvent)? onTouchLeave,
-    void Function(TouchEvent)? onTouchMove,
-    void Function(TouchEvent)? onTouchStart,
-    void Function(TransitionEvent)? onTransitionEnd,
-    void Function(Event)? onVolumeChange,
-    void Function(Event)? onWaiting,
-    void Function(Event)? onFullscreenChange,
-    void Function(Event)? onFullscreenError,
-    void Function(WheelEvent)? onWheel}) {
-  final v = SelectElement();
-  if (autofocus != null) v.autofocus = autofocus;
-  if (disabled != null) v.disabled = disabled;
-  if (length != null) v.length = length;
-  if (multiple != null) v.multiple = multiple;
-  if (name != null) v.name = name;
-  if (required != null) v.required = required;
-  if (selectedIndex != null) v.selectedIndex = selectedIndex;
-  if (size != null) v.size = size;
-  if (value != null) v.value = value;
-  if (nonce != null) v.nonce = nonce;
-  if (attributes != null) v.attributes = attributes;
-  if (children != null) v.children = children;
-  if (classes != null) v.classes = classes;
-  if (dataset != null) v.dataset = dataset;
-  if (innerHtml != null) v.innerHtml = innerHtml;
-  if (innerText != null) v.innerText = innerText;
-  if (scrollLeft != null) v.scrollLeft = scrollLeft;
-  if (scrollTop != null) v.scrollTop = scrollTop;
-  if (contentEditable != null) v.contentEditable = contentEditable;
-  if (dir != null) v.dir = dir;
-  if (draggable != null) v.draggable = draggable;
-  if (hidden != null) v.hidden = hidden;
-  if (inert != null) v.inert = inert;
-  if (inputMode != null) v.inputMode = inputMode;
-  if (lang != null) v.lang = lang;
-  if (spellcheck != null) v.spellcheck = spellcheck;
-  if (tabIndex != null) v.tabIndex = tabIndex;
-  if (title != null) v.title = title;
-  if (translate != null) v.translate = translate;
-  if (className != null) v.className = className;
-  if (id != null) v.id = id;
-  if (slot != null) v.slot = slot;
-  if (nodes != null) v.nodes = nodes;
-  if (text != null) v.text = text;
-  if (onAbort != null) v.onAbort.listen(onAbort);
-  if (onBeforeCopy != null) v.onBeforeCopy.listen(onBeforeCopy);
-  if (onBeforeCut != null) v.onBeforeCut.listen(onBeforeCut);
-  if (onBeforePaste != null) v.onBeforePaste.listen(onBeforePaste);
-  if (onBlur != null) v.onBlur.listen(onBlur);
-  if (onCanPlay != null) v.onCanPlay.listen(onCanPlay);
-  if (onCanPlayThrough != null) v.onCanPlayThrough.listen(onCanPlayThrough);
-  if (onChange != null) v.onChange.listen(onChange);
-  if (onClick != null) v.onClick.listen(onClick);
-  if (onContextMenu != null) v.onContextMenu.listen(onContextMenu);
-  if (onCopy != null) v.onCopy.listen(onCopy);
-  if (onCut != null) v.onCut.listen(onCut);
-  if (onDoubleClick != null) v.onDoubleClick.listen(onDoubleClick);
-  if (onDrag != null) v.onDrag.listen(onDrag);
-  if (onDragEnd != null) v.onDragEnd.listen(onDragEnd);
-  if (onDragEnter != null) v.onDragEnter.listen(onDragEnter);
-  if (onDragLeave != null) v.onDragLeave.listen(onDragLeave);
-  if (onDragOver != null) v.onDragOver.listen(onDragOver);
-  if (onDragStart != null) v.onDragStart.listen(onDragStart);
-  if (onDrop != null) v.onDrop.listen(onDrop);
-  if (onDurationChange != null) v.onDurationChange.listen(onDurationChange);
-  if (onEmptied != null) v.onEmptied.listen(onEmptied);
-  if (onEnded != null) v.onEnded.listen(onEnded);
-  if (onError != null) v.onError.listen(onError);
-  if (onFocus != null) v.onFocus.listen(onFocus);
-  if (onInput != null) v.onInput.listen(onInput);
-  if (onInvalid != null) v.onInvalid.listen(onInvalid);
-  if (onKeyDown != null) v.onKeyDown.listen(onKeyDown);
-  if (onKeyPress != null) v.onKeyPress.listen(onKeyPress);
-  if (onKeyUp != null) v.onKeyUp.listen(onKeyUp);
-  if (onLoad != null) v.onLoad.listen(onLoad);
-  if (onLoadedData != null) v.onLoadedData.listen(onLoadedData);
-  if (onLoadedMetadata != null) v.onLoadedMetadata.listen(onLoadedMetadata);
-  if (onMouseDown != null) v.onMouseDown.listen(onMouseDown);
-  if (onMouseEnter != null) v.onMouseEnter.listen(onMouseEnter);
-  if (onMouseLeave != null) v.onMouseLeave.listen(onMouseLeave);
-  if (onMouseMove != null) v.onMouseMove.listen(onMouseMove);
-  if (onMouseOut != null) v.onMouseOut.listen(onMouseOut);
-  if (onMouseOver != null) v.onMouseOver.listen(onMouseOver);
-  if (onMouseUp != null) v.onMouseUp.listen(onMouseUp);
-  if (onMouseWheel != null) v.onMouseWheel.listen(onMouseWheel);
-  if (onPaste != null) v.onPaste.listen(onPaste);
-  if (onPause != null) v.onPause.listen(onPause);
-  if (onPlay != null) v.onPlay.listen(onPlay);
-  if (onPlaying != null) v.onPlaying.listen(onPlaying);
-  if (onRateChange != null) v.onRateChange.listen(onRateChange);
-  if (onReset != null) v.onReset.listen(onReset);
-  if (onResize != null) v.onResize.listen(onResize);
-  if (onScroll != null) v.onScroll.listen(onScroll);
-  if (onSearch != null) v.onSearch.listen(onSearch);
-  if (onSeeked != null) v.onSeeked.listen(onSeeked);
-  if (onSeeking != null) v.onSeeking.listen(onSeeking);
-  if (onSelect != null) v.onSelect.listen(onSelect);
-  if (onSelectStart != null) v.onSelectStart.listen(onSelectStart);
-  if (onStalled != null) v.onStalled.listen(onStalled);
-  if (onSubmit != null) v.onSubmit.listen(onSubmit);
-  if (onSuspend != null) v.onSuspend.listen(onSuspend);
-  if (onTimeUpdate != null) v.onTimeUpdate.listen(onTimeUpdate);
-  if (onTouchCancel != null) v.onTouchCancel.listen(onTouchCancel);
-  if (onTouchEnd != null) v.onTouchEnd.listen(onTouchEnd);
-  if (onTouchEnter != null) v.onTouchEnter.listen(onTouchEnter);
-  if (onTouchLeave != null) v.onTouchLeave.listen(onTouchLeave);
-  if (onTouchMove != null) v.onTouchMove.listen(onTouchMove);
-  if (onTouchStart != null) v.onTouchStart.listen(onTouchStart);
-  if (onTransitionEnd != null) v.onTransitionEnd.listen(onTransitionEnd);
-  if (onVolumeChange != null) v.onVolumeChange.listen(onVolumeChange);
-  if (onWaiting != null) v.onWaiting.listen(onWaiting);
-  if (onFullscreenChange != null)
-    v.onFullscreenChange.listen(onFullscreenChange);
-  if (onFullscreenError != null) v.onFullscreenError.listen(onFullscreenError);
-  if (onWheel != null) v.onWheel.listen(onWheel);
-  return v;
+class SelectElementWidget extends HtmlElementWidget {
+  SelectElementWidget(
+      {super.nonce,
+      super.attributes,
+      super.children,
+      super.classes,
+      super.dataset,
+      super.innerHtml,
+      super.innerText,
+      super.scrollLeft,
+      super.scrollTop,
+      super.contentEditable,
+      super.dir,
+      super.draggable,
+      super.hidden,
+      super.inert,
+      super.inputMode,
+      super.lang,
+      super.spellcheck,
+      super.tabIndex,
+      super.title,
+      super.translate,
+      super.className,
+      super.id,
+      super.slot,
+      super.nodes,
+      super.text,
+      super.onAbort,
+      super.onBeforeCopy,
+      super.onBeforeCut,
+      super.onBeforePaste,
+      super.onBlur,
+      super.onCanPlay,
+      super.onCanPlayThrough,
+      super.onChange,
+      super.onClick,
+      super.onContextMenu,
+      super.onCopy,
+      super.onCut,
+      super.onDoubleClick,
+      super.onDrag,
+      super.onDragEnd,
+      super.onDragEnter,
+      super.onDragLeave,
+      super.onDragOver,
+      super.onDragStart,
+      super.onDrop,
+      super.onDurationChange,
+      super.onEmptied,
+      super.onEnded,
+      super.onError,
+      super.onFocus,
+      super.onInput,
+      super.onInvalid,
+      super.onKeyDown,
+      super.onKeyPress,
+      super.onKeyUp,
+      super.onLoad,
+      super.onLoadedData,
+      super.onLoadedMetadata,
+      super.onMouseDown,
+      super.onMouseEnter,
+      super.onMouseLeave,
+      super.onMouseMove,
+      super.onMouseOut,
+      super.onMouseOver,
+      super.onMouseUp,
+      super.onMouseWheel,
+      super.onPaste,
+      super.onPause,
+      super.onPlay,
+      super.onPlaying,
+      super.onRateChange,
+      super.onReset,
+      super.onResize,
+      super.onScroll,
+      super.onSearch,
+      super.onSeeked,
+      super.onSeeking,
+      super.onSelect,
+      super.onSelectStart,
+      super.onStalled,
+      super.onSubmit,
+      super.onSuspend,
+      super.onTimeUpdate,
+      super.onTouchCancel,
+      super.onTouchEnd,
+      super.onTouchEnter,
+      super.onTouchLeave,
+      super.onTouchMove,
+      super.onTouchStart,
+      super.onTransitionEnd,
+      super.onVolumeChange,
+      super.onWaiting,
+      super.onFullscreenChange,
+      super.onFullscreenError,
+      super.onWheel});
+  @override
+  Element render() => hook(SelectElement());
 }
 
-ShadowElement shadowElement(
-    {String? nonce,
-    Map<String, String>? attributes,
-    List<Element>? children,
-    Iterable<String>? classes,
-    Map<String, String>? dataset,
-    String? innerHtml,
-    String? innerText,
-    int? scrollLeft,
-    int? scrollTop,
-    String? contentEditable,
-    String? dir,
-    bool? draggable,
-    bool? hidden,
-    bool? inert,
-    String? inputMode,
-    String? lang,
-    bool? spellcheck,
-    int? tabIndex,
-    String? title,
-    bool? translate,
-    String? className,
-    String? id,
-    String? slot,
-    Iterable<Node>? nodes,
-    String? text,
-    void Function(Event)? onAbort,
-    void Function(Event)? onBeforeCopy,
-    void Function(Event)? onBeforeCut,
-    void Function(Event)? onBeforePaste,
-    void Function(Event)? onBlur,
-    void Function(Event)? onCanPlay,
-    void Function(Event)? onCanPlayThrough,
-    void Function(Event)? onChange,
-    void Function(MouseEvent)? onClick,
-    void Function(MouseEvent)? onContextMenu,
-    void Function(ClipboardEvent)? onCopy,
-    void Function(ClipboardEvent)? onCut,
-    void Function(Event)? onDoubleClick,
-    void Function(MouseEvent)? onDrag,
-    void Function(MouseEvent)? onDragEnd,
-    void Function(MouseEvent)? onDragEnter,
-    void Function(MouseEvent)? onDragLeave,
-    void Function(MouseEvent)? onDragOver,
-    void Function(MouseEvent)? onDragStart,
-    void Function(MouseEvent)? onDrop,
-    void Function(Event)? onDurationChange,
-    void Function(Event)? onEmptied,
-    void Function(Event)? onEnded,
-    void Function(Event)? onError,
-    void Function(Event)? onFocus,
-    void Function(Event)? onInput,
-    void Function(Event)? onInvalid,
-    void Function(KeyboardEvent)? onKeyDown,
-    void Function(KeyboardEvent)? onKeyPress,
-    void Function(KeyboardEvent)? onKeyUp,
-    void Function(Event)? onLoad,
-    void Function(Event)? onLoadedData,
-    void Function(Event)? onLoadedMetadata,
-    void Function(MouseEvent)? onMouseDown,
-    void Function(MouseEvent)? onMouseEnter,
-    void Function(MouseEvent)? onMouseLeave,
-    void Function(MouseEvent)? onMouseMove,
-    void Function(MouseEvent)? onMouseOut,
-    void Function(MouseEvent)? onMouseOver,
-    void Function(MouseEvent)? onMouseUp,
-    void Function(WheelEvent)? onMouseWheel,
-    void Function(ClipboardEvent)? onPaste,
-    void Function(Event)? onPause,
-    void Function(Event)? onPlay,
-    void Function(Event)? onPlaying,
-    void Function(Event)? onRateChange,
-    void Function(Event)? onReset,
-    void Function(Event)? onResize,
-    void Function(Event)? onScroll,
-    void Function(Event)? onSearch,
-    void Function(Event)? onSeeked,
-    void Function(Event)? onSeeking,
-    void Function(Event)? onSelect,
-    void Function(Event)? onSelectStart,
-    void Function(Event)? onStalled,
-    void Function(Event)? onSubmit,
-    void Function(Event)? onSuspend,
-    void Function(Event)? onTimeUpdate,
-    void Function(TouchEvent)? onTouchCancel,
-    void Function(TouchEvent)? onTouchEnd,
-    void Function(TouchEvent)? onTouchEnter,
-    void Function(TouchEvent)? onTouchLeave,
-    void Function(TouchEvent)? onTouchMove,
-    void Function(TouchEvent)? onTouchStart,
-    void Function(TransitionEvent)? onTransitionEnd,
-    void Function(Event)? onVolumeChange,
-    void Function(Event)? onWaiting,
-    void Function(Event)? onFullscreenChange,
-    void Function(Event)? onFullscreenError,
-    void Function(WheelEvent)? onWheel}) {
-  final v = ShadowElement();
-  if (nonce != null) v.nonce = nonce;
-  if (attributes != null) v.attributes = attributes;
-  if (children != null) v.children = children;
-  if (classes != null) v.classes = classes;
-  if (dataset != null) v.dataset = dataset;
-  if (innerHtml != null) v.innerHtml = innerHtml;
-  if (innerText != null) v.innerText = innerText;
-  if (scrollLeft != null) v.scrollLeft = scrollLeft;
-  if (scrollTop != null) v.scrollTop = scrollTop;
-  if (contentEditable != null) v.contentEditable = contentEditable;
-  if (dir != null) v.dir = dir;
-  if (draggable != null) v.draggable = draggable;
-  if (hidden != null) v.hidden = hidden;
-  if (inert != null) v.inert = inert;
-  if (inputMode != null) v.inputMode = inputMode;
-  if (lang != null) v.lang = lang;
-  if (spellcheck != null) v.spellcheck = spellcheck;
-  if (tabIndex != null) v.tabIndex = tabIndex;
-  if (title != null) v.title = title;
-  if (translate != null) v.translate = translate;
-  if (className != null) v.className = className;
-  if (id != null) v.id = id;
-  if (slot != null) v.slot = slot;
-  if (nodes != null) v.nodes = nodes;
-  if (text != null) v.text = text;
-  if (onAbort != null) v.onAbort.listen(onAbort);
-  if (onBeforeCopy != null) v.onBeforeCopy.listen(onBeforeCopy);
-  if (onBeforeCut != null) v.onBeforeCut.listen(onBeforeCut);
-  if (onBeforePaste != null) v.onBeforePaste.listen(onBeforePaste);
-  if (onBlur != null) v.onBlur.listen(onBlur);
-  if (onCanPlay != null) v.onCanPlay.listen(onCanPlay);
-  if (onCanPlayThrough != null) v.onCanPlayThrough.listen(onCanPlayThrough);
-  if (onChange != null) v.onChange.listen(onChange);
-  if (onClick != null) v.onClick.listen(onClick);
-  if (onContextMenu != null) v.onContextMenu.listen(onContextMenu);
-  if (onCopy != null) v.onCopy.listen(onCopy);
-  if (onCut != null) v.onCut.listen(onCut);
-  if (onDoubleClick != null) v.onDoubleClick.listen(onDoubleClick);
-  if (onDrag != null) v.onDrag.listen(onDrag);
-  if (onDragEnd != null) v.onDragEnd.listen(onDragEnd);
-  if (onDragEnter != null) v.onDragEnter.listen(onDragEnter);
-  if (onDragLeave != null) v.onDragLeave.listen(onDragLeave);
-  if (onDragOver != null) v.onDragOver.listen(onDragOver);
-  if (onDragStart != null) v.onDragStart.listen(onDragStart);
-  if (onDrop != null) v.onDrop.listen(onDrop);
-  if (onDurationChange != null) v.onDurationChange.listen(onDurationChange);
-  if (onEmptied != null) v.onEmptied.listen(onEmptied);
-  if (onEnded != null) v.onEnded.listen(onEnded);
-  if (onError != null) v.onError.listen(onError);
-  if (onFocus != null) v.onFocus.listen(onFocus);
-  if (onInput != null) v.onInput.listen(onInput);
-  if (onInvalid != null) v.onInvalid.listen(onInvalid);
-  if (onKeyDown != null) v.onKeyDown.listen(onKeyDown);
-  if (onKeyPress != null) v.onKeyPress.listen(onKeyPress);
-  if (onKeyUp != null) v.onKeyUp.listen(onKeyUp);
-  if (onLoad != null) v.onLoad.listen(onLoad);
-  if (onLoadedData != null) v.onLoadedData.listen(onLoadedData);
-  if (onLoadedMetadata != null) v.onLoadedMetadata.listen(onLoadedMetadata);
-  if (onMouseDown != null) v.onMouseDown.listen(onMouseDown);
-  if (onMouseEnter != null) v.onMouseEnter.listen(onMouseEnter);
-  if (onMouseLeave != null) v.onMouseLeave.listen(onMouseLeave);
-  if (onMouseMove != null) v.onMouseMove.listen(onMouseMove);
-  if (onMouseOut != null) v.onMouseOut.listen(onMouseOut);
-  if (onMouseOver != null) v.onMouseOver.listen(onMouseOver);
-  if (onMouseUp != null) v.onMouseUp.listen(onMouseUp);
-  if (onMouseWheel != null) v.onMouseWheel.listen(onMouseWheel);
-  if (onPaste != null) v.onPaste.listen(onPaste);
-  if (onPause != null) v.onPause.listen(onPause);
-  if (onPlay != null) v.onPlay.listen(onPlay);
-  if (onPlaying != null) v.onPlaying.listen(onPlaying);
-  if (onRateChange != null) v.onRateChange.listen(onRateChange);
-  if (onReset != null) v.onReset.listen(onReset);
-  if (onResize != null) v.onResize.listen(onResize);
-  if (onScroll != null) v.onScroll.listen(onScroll);
-  if (onSearch != null) v.onSearch.listen(onSearch);
-  if (onSeeked != null) v.onSeeked.listen(onSeeked);
-  if (onSeeking != null) v.onSeeking.listen(onSeeking);
-  if (onSelect != null) v.onSelect.listen(onSelect);
-  if (onSelectStart != null) v.onSelectStart.listen(onSelectStart);
-  if (onStalled != null) v.onStalled.listen(onStalled);
-  if (onSubmit != null) v.onSubmit.listen(onSubmit);
-  if (onSuspend != null) v.onSuspend.listen(onSuspend);
-  if (onTimeUpdate != null) v.onTimeUpdate.listen(onTimeUpdate);
-  if (onTouchCancel != null) v.onTouchCancel.listen(onTouchCancel);
-  if (onTouchEnd != null) v.onTouchEnd.listen(onTouchEnd);
-  if (onTouchEnter != null) v.onTouchEnter.listen(onTouchEnter);
-  if (onTouchLeave != null) v.onTouchLeave.listen(onTouchLeave);
-  if (onTouchMove != null) v.onTouchMove.listen(onTouchMove);
-  if (onTouchStart != null) v.onTouchStart.listen(onTouchStart);
-  if (onTransitionEnd != null) v.onTransitionEnd.listen(onTransitionEnd);
-  if (onVolumeChange != null) v.onVolumeChange.listen(onVolumeChange);
-  if (onWaiting != null) v.onWaiting.listen(onWaiting);
-  if (onFullscreenChange != null)
-    v.onFullscreenChange.listen(onFullscreenChange);
-  if (onFullscreenError != null) v.onFullscreenError.listen(onFullscreenError);
-  if (onWheel != null) v.onWheel.listen(onWheel);
-  return v;
+class ShadowElementWidget extends HtmlElementWidget {
+  ShadowElementWidget(
+      {super.nonce,
+      super.attributes,
+      super.children,
+      super.classes,
+      super.dataset,
+      super.innerHtml,
+      super.innerText,
+      super.scrollLeft,
+      super.scrollTop,
+      super.contentEditable,
+      super.dir,
+      super.draggable,
+      super.hidden,
+      super.inert,
+      super.inputMode,
+      super.lang,
+      super.spellcheck,
+      super.tabIndex,
+      super.title,
+      super.translate,
+      super.className,
+      super.id,
+      super.slot,
+      super.nodes,
+      super.text,
+      super.onAbort,
+      super.onBeforeCopy,
+      super.onBeforeCut,
+      super.onBeforePaste,
+      super.onBlur,
+      super.onCanPlay,
+      super.onCanPlayThrough,
+      super.onChange,
+      super.onClick,
+      super.onContextMenu,
+      super.onCopy,
+      super.onCut,
+      super.onDoubleClick,
+      super.onDrag,
+      super.onDragEnd,
+      super.onDragEnter,
+      super.onDragLeave,
+      super.onDragOver,
+      super.onDragStart,
+      super.onDrop,
+      super.onDurationChange,
+      super.onEmptied,
+      super.onEnded,
+      super.onError,
+      super.onFocus,
+      super.onInput,
+      super.onInvalid,
+      super.onKeyDown,
+      super.onKeyPress,
+      super.onKeyUp,
+      super.onLoad,
+      super.onLoadedData,
+      super.onLoadedMetadata,
+      super.onMouseDown,
+      super.onMouseEnter,
+      super.onMouseLeave,
+      super.onMouseMove,
+      super.onMouseOut,
+      super.onMouseOver,
+      super.onMouseUp,
+      super.onMouseWheel,
+      super.onPaste,
+      super.onPause,
+      super.onPlay,
+      super.onPlaying,
+      super.onRateChange,
+      super.onReset,
+      super.onResize,
+      super.onScroll,
+      super.onSearch,
+      super.onSeeked,
+      super.onSeeking,
+      super.onSelect,
+      super.onSelectStart,
+      super.onStalled,
+      super.onSubmit,
+      super.onSuspend,
+      super.onTimeUpdate,
+      super.onTouchCancel,
+      super.onTouchEnd,
+      super.onTouchEnter,
+      super.onTouchLeave,
+      super.onTouchMove,
+      super.onTouchStart,
+      super.onTransitionEnd,
+      super.onVolumeChange,
+      super.onWaiting,
+      super.onFullscreenChange,
+      super.onFullscreenError,
+      super.onWheel});
+  @override
+  Element render() => hook(ShadowElement());
 }
 
-SourceElement sourceElement(
-    {String? media,
-    String? sizes,
-    String? src,
-    String? srcset,
-    String? type,
-    String? nonce,
-    Map<String, String>? attributes,
-    List<Element>? children,
-    Iterable<String>? classes,
-    Map<String, String>? dataset,
-    String? innerHtml,
-    String? innerText,
-    int? scrollLeft,
-    int? scrollTop,
-    String? contentEditable,
-    String? dir,
-    bool? draggable,
-    bool? hidden,
-    bool? inert,
-    String? inputMode,
-    String? lang,
-    bool? spellcheck,
-    int? tabIndex,
-    String? title,
-    bool? translate,
-    String? className,
-    String? id,
-    String? slot,
-    Iterable<Node>? nodes,
-    String? text,
-    void Function(Event)? onAbort,
-    void Function(Event)? onBeforeCopy,
-    void Function(Event)? onBeforeCut,
-    void Function(Event)? onBeforePaste,
-    void Function(Event)? onBlur,
-    void Function(Event)? onCanPlay,
-    void Function(Event)? onCanPlayThrough,
-    void Function(Event)? onChange,
-    void Function(MouseEvent)? onClick,
-    void Function(MouseEvent)? onContextMenu,
-    void Function(ClipboardEvent)? onCopy,
-    void Function(ClipboardEvent)? onCut,
-    void Function(Event)? onDoubleClick,
-    void Function(MouseEvent)? onDrag,
-    void Function(MouseEvent)? onDragEnd,
-    void Function(MouseEvent)? onDragEnter,
-    void Function(MouseEvent)? onDragLeave,
-    void Function(MouseEvent)? onDragOver,
-    void Function(MouseEvent)? onDragStart,
-    void Function(MouseEvent)? onDrop,
-    void Function(Event)? onDurationChange,
-    void Function(Event)? onEmptied,
-    void Function(Event)? onEnded,
-    void Function(Event)? onError,
-    void Function(Event)? onFocus,
-    void Function(Event)? onInput,
-    void Function(Event)? onInvalid,
-    void Function(KeyboardEvent)? onKeyDown,
-    void Function(KeyboardEvent)? onKeyPress,
-    void Function(KeyboardEvent)? onKeyUp,
-    void Function(Event)? onLoad,
-    void Function(Event)? onLoadedData,
-    void Function(Event)? onLoadedMetadata,
-    void Function(MouseEvent)? onMouseDown,
-    void Function(MouseEvent)? onMouseEnter,
-    void Function(MouseEvent)? onMouseLeave,
-    void Function(MouseEvent)? onMouseMove,
-    void Function(MouseEvent)? onMouseOut,
-    void Function(MouseEvent)? onMouseOver,
-    void Function(MouseEvent)? onMouseUp,
-    void Function(WheelEvent)? onMouseWheel,
-    void Function(ClipboardEvent)? onPaste,
-    void Function(Event)? onPause,
-    void Function(Event)? onPlay,
-    void Function(Event)? onPlaying,
-    void Function(Event)? onRateChange,
-    void Function(Event)? onReset,
-    void Function(Event)? onResize,
-    void Function(Event)? onScroll,
-    void Function(Event)? onSearch,
-    void Function(Event)? onSeeked,
-    void Function(Event)? onSeeking,
-    void Function(Event)? onSelect,
-    void Function(Event)? onSelectStart,
-    void Function(Event)? onStalled,
-    void Function(Event)? onSubmit,
-    void Function(Event)? onSuspend,
-    void Function(Event)? onTimeUpdate,
-    void Function(TouchEvent)? onTouchCancel,
-    void Function(TouchEvent)? onTouchEnd,
-    void Function(TouchEvent)? onTouchEnter,
-    void Function(TouchEvent)? onTouchLeave,
-    void Function(TouchEvent)? onTouchMove,
-    void Function(TouchEvent)? onTouchStart,
-    void Function(TransitionEvent)? onTransitionEnd,
-    void Function(Event)? onVolumeChange,
-    void Function(Event)? onWaiting,
-    void Function(Event)? onFullscreenChange,
-    void Function(Event)? onFullscreenError,
-    void Function(WheelEvent)? onWheel}) {
-  final v = SourceElement();
-  if (media != null) v.media = media;
-  if (sizes != null) v.sizes = sizes;
-  if (src != null) v.src = src;
-  if (srcset != null) v.srcset = srcset;
-  if (type != null) v.type = type;
-  if (nonce != null) v.nonce = nonce;
-  if (attributes != null) v.attributes = attributes;
-  if (children != null) v.children = children;
-  if (classes != null) v.classes = classes;
-  if (dataset != null) v.dataset = dataset;
-  if (innerHtml != null) v.innerHtml = innerHtml;
-  if (innerText != null) v.innerText = innerText;
-  if (scrollLeft != null) v.scrollLeft = scrollLeft;
-  if (scrollTop != null) v.scrollTop = scrollTop;
-  if (contentEditable != null) v.contentEditable = contentEditable;
-  if (dir != null) v.dir = dir;
-  if (draggable != null) v.draggable = draggable;
-  if (hidden != null) v.hidden = hidden;
-  if (inert != null) v.inert = inert;
-  if (inputMode != null) v.inputMode = inputMode;
-  if (lang != null) v.lang = lang;
-  if (spellcheck != null) v.spellcheck = spellcheck;
-  if (tabIndex != null) v.tabIndex = tabIndex;
-  if (title != null) v.title = title;
-  if (translate != null) v.translate = translate;
-  if (className != null) v.className = className;
-  if (id != null) v.id = id;
-  if (slot != null) v.slot = slot;
-  if (nodes != null) v.nodes = nodes;
-  if (text != null) v.text = text;
-  if (onAbort != null) v.onAbort.listen(onAbort);
-  if (onBeforeCopy != null) v.onBeforeCopy.listen(onBeforeCopy);
-  if (onBeforeCut != null) v.onBeforeCut.listen(onBeforeCut);
-  if (onBeforePaste != null) v.onBeforePaste.listen(onBeforePaste);
-  if (onBlur != null) v.onBlur.listen(onBlur);
-  if (onCanPlay != null) v.onCanPlay.listen(onCanPlay);
-  if (onCanPlayThrough != null) v.onCanPlayThrough.listen(onCanPlayThrough);
-  if (onChange != null) v.onChange.listen(onChange);
-  if (onClick != null) v.onClick.listen(onClick);
-  if (onContextMenu != null) v.onContextMenu.listen(onContextMenu);
-  if (onCopy != null) v.onCopy.listen(onCopy);
-  if (onCut != null) v.onCut.listen(onCut);
-  if (onDoubleClick != null) v.onDoubleClick.listen(onDoubleClick);
-  if (onDrag != null) v.onDrag.listen(onDrag);
-  if (onDragEnd != null) v.onDragEnd.listen(onDragEnd);
-  if (onDragEnter != null) v.onDragEnter.listen(onDragEnter);
-  if (onDragLeave != null) v.onDragLeave.listen(onDragLeave);
-  if (onDragOver != null) v.onDragOver.listen(onDragOver);
-  if (onDragStart != null) v.onDragStart.listen(onDragStart);
-  if (onDrop != null) v.onDrop.listen(onDrop);
-  if (onDurationChange != null) v.onDurationChange.listen(onDurationChange);
-  if (onEmptied != null) v.onEmptied.listen(onEmptied);
-  if (onEnded != null) v.onEnded.listen(onEnded);
-  if (onError != null) v.onError.listen(onError);
-  if (onFocus != null) v.onFocus.listen(onFocus);
-  if (onInput != null) v.onInput.listen(onInput);
-  if (onInvalid != null) v.onInvalid.listen(onInvalid);
-  if (onKeyDown != null) v.onKeyDown.listen(onKeyDown);
-  if (onKeyPress != null) v.onKeyPress.listen(onKeyPress);
-  if (onKeyUp != null) v.onKeyUp.listen(onKeyUp);
-  if (onLoad != null) v.onLoad.listen(onLoad);
-  if (onLoadedData != null) v.onLoadedData.listen(onLoadedData);
-  if (onLoadedMetadata != null) v.onLoadedMetadata.listen(onLoadedMetadata);
-  if (onMouseDown != null) v.onMouseDown.listen(onMouseDown);
-  if (onMouseEnter != null) v.onMouseEnter.listen(onMouseEnter);
-  if (onMouseLeave != null) v.onMouseLeave.listen(onMouseLeave);
-  if (onMouseMove != null) v.onMouseMove.listen(onMouseMove);
-  if (onMouseOut != null) v.onMouseOut.listen(onMouseOut);
-  if (onMouseOver != null) v.onMouseOver.listen(onMouseOver);
-  if (onMouseUp != null) v.onMouseUp.listen(onMouseUp);
-  if (onMouseWheel != null) v.onMouseWheel.listen(onMouseWheel);
-  if (onPaste != null) v.onPaste.listen(onPaste);
-  if (onPause != null) v.onPause.listen(onPause);
-  if (onPlay != null) v.onPlay.listen(onPlay);
-  if (onPlaying != null) v.onPlaying.listen(onPlaying);
-  if (onRateChange != null) v.onRateChange.listen(onRateChange);
-  if (onReset != null) v.onReset.listen(onReset);
-  if (onResize != null) v.onResize.listen(onResize);
-  if (onScroll != null) v.onScroll.listen(onScroll);
-  if (onSearch != null) v.onSearch.listen(onSearch);
-  if (onSeeked != null) v.onSeeked.listen(onSeeked);
-  if (onSeeking != null) v.onSeeking.listen(onSeeking);
-  if (onSelect != null) v.onSelect.listen(onSelect);
-  if (onSelectStart != null) v.onSelectStart.listen(onSelectStart);
-  if (onStalled != null) v.onStalled.listen(onStalled);
-  if (onSubmit != null) v.onSubmit.listen(onSubmit);
-  if (onSuspend != null) v.onSuspend.listen(onSuspend);
-  if (onTimeUpdate != null) v.onTimeUpdate.listen(onTimeUpdate);
-  if (onTouchCancel != null) v.onTouchCancel.listen(onTouchCancel);
-  if (onTouchEnd != null) v.onTouchEnd.listen(onTouchEnd);
-  if (onTouchEnter != null) v.onTouchEnter.listen(onTouchEnter);
-  if (onTouchLeave != null) v.onTouchLeave.listen(onTouchLeave);
-  if (onTouchMove != null) v.onTouchMove.listen(onTouchMove);
-  if (onTouchStart != null) v.onTouchStart.listen(onTouchStart);
-  if (onTransitionEnd != null) v.onTransitionEnd.listen(onTransitionEnd);
-  if (onVolumeChange != null) v.onVolumeChange.listen(onVolumeChange);
-  if (onWaiting != null) v.onWaiting.listen(onWaiting);
-  if (onFullscreenChange != null)
-    v.onFullscreenChange.listen(onFullscreenChange);
-  if (onFullscreenError != null) v.onFullscreenError.listen(onFullscreenError);
-  if (onWheel != null) v.onWheel.listen(onWheel);
-  return v;
+class SourceElementWidget extends HtmlElementWidget {
+  SourceElementWidget(
+      {super.nonce,
+      super.attributes,
+      super.children,
+      super.classes,
+      super.dataset,
+      super.innerHtml,
+      super.innerText,
+      super.scrollLeft,
+      super.scrollTop,
+      super.contentEditable,
+      super.dir,
+      super.draggable,
+      super.hidden,
+      super.inert,
+      super.inputMode,
+      super.lang,
+      super.spellcheck,
+      super.tabIndex,
+      super.title,
+      super.translate,
+      super.className,
+      super.id,
+      super.slot,
+      super.nodes,
+      super.text,
+      super.onAbort,
+      super.onBeforeCopy,
+      super.onBeforeCut,
+      super.onBeforePaste,
+      super.onBlur,
+      super.onCanPlay,
+      super.onCanPlayThrough,
+      super.onChange,
+      super.onClick,
+      super.onContextMenu,
+      super.onCopy,
+      super.onCut,
+      super.onDoubleClick,
+      super.onDrag,
+      super.onDragEnd,
+      super.onDragEnter,
+      super.onDragLeave,
+      super.onDragOver,
+      super.onDragStart,
+      super.onDrop,
+      super.onDurationChange,
+      super.onEmptied,
+      super.onEnded,
+      super.onError,
+      super.onFocus,
+      super.onInput,
+      super.onInvalid,
+      super.onKeyDown,
+      super.onKeyPress,
+      super.onKeyUp,
+      super.onLoad,
+      super.onLoadedData,
+      super.onLoadedMetadata,
+      super.onMouseDown,
+      super.onMouseEnter,
+      super.onMouseLeave,
+      super.onMouseMove,
+      super.onMouseOut,
+      super.onMouseOver,
+      super.onMouseUp,
+      super.onMouseWheel,
+      super.onPaste,
+      super.onPause,
+      super.onPlay,
+      super.onPlaying,
+      super.onRateChange,
+      super.onReset,
+      super.onResize,
+      super.onScroll,
+      super.onSearch,
+      super.onSeeked,
+      super.onSeeking,
+      super.onSelect,
+      super.onSelectStart,
+      super.onStalled,
+      super.onSubmit,
+      super.onSuspend,
+      super.onTimeUpdate,
+      super.onTouchCancel,
+      super.onTouchEnd,
+      super.onTouchEnter,
+      super.onTouchLeave,
+      super.onTouchMove,
+      super.onTouchStart,
+      super.onTransitionEnd,
+      super.onVolumeChange,
+      super.onWaiting,
+      super.onFullscreenChange,
+      super.onFullscreenError,
+      super.onWheel});
+  @override
+  Element render() => hook(SourceElement());
 }
 
-SpanElement spanElement(
-    {String? nonce,
-    Map<String, String>? attributes,
-    List<Element>? children,
-    Iterable<String>? classes,
-    Map<String, String>? dataset,
-    String? innerHtml,
-    String? innerText,
-    int? scrollLeft,
-    int? scrollTop,
-    String? contentEditable,
-    String? dir,
-    bool? draggable,
-    bool? hidden,
-    bool? inert,
-    String? inputMode,
-    String? lang,
-    bool? spellcheck,
-    int? tabIndex,
-    String? title,
-    bool? translate,
-    String? className,
-    String? id,
-    String? slot,
-    Iterable<Node>? nodes,
-    String? text,
-    void Function(Event)? onAbort,
-    void Function(Event)? onBeforeCopy,
-    void Function(Event)? onBeforeCut,
-    void Function(Event)? onBeforePaste,
-    void Function(Event)? onBlur,
-    void Function(Event)? onCanPlay,
-    void Function(Event)? onCanPlayThrough,
-    void Function(Event)? onChange,
-    void Function(MouseEvent)? onClick,
-    void Function(MouseEvent)? onContextMenu,
-    void Function(ClipboardEvent)? onCopy,
-    void Function(ClipboardEvent)? onCut,
-    void Function(Event)? onDoubleClick,
-    void Function(MouseEvent)? onDrag,
-    void Function(MouseEvent)? onDragEnd,
-    void Function(MouseEvent)? onDragEnter,
-    void Function(MouseEvent)? onDragLeave,
-    void Function(MouseEvent)? onDragOver,
-    void Function(MouseEvent)? onDragStart,
-    void Function(MouseEvent)? onDrop,
-    void Function(Event)? onDurationChange,
-    void Function(Event)? onEmptied,
-    void Function(Event)? onEnded,
-    void Function(Event)? onError,
-    void Function(Event)? onFocus,
-    void Function(Event)? onInput,
-    void Function(Event)? onInvalid,
-    void Function(KeyboardEvent)? onKeyDown,
-    void Function(KeyboardEvent)? onKeyPress,
-    void Function(KeyboardEvent)? onKeyUp,
-    void Function(Event)? onLoad,
-    void Function(Event)? onLoadedData,
-    void Function(Event)? onLoadedMetadata,
-    void Function(MouseEvent)? onMouseDown,
-    void Function(MouseEvent)? onMouseEnter,
-    void Function(MouseEvent)? onMouseLeave,
-    void Function(MouseEvent)? onMouseMove,
-    void Function(MouseEvent)? onMouseOut,
-    void Function(MouseEvent)? onMouseOver,
-    void Function(MouseEvent)? onMouseUp,
-    void Function(WheelEvent)? onMouseWheel,
-    void Function(ClipboardEvent)? onPaste,
-    void Function(Event)? onPause,
-    void Function(Event)? onPlay,
-    void Function(Event)? onPlaying,
-    void Function(Event)? onRateChange,
-    void Function(Event)? onReset,
-    void Function(Event)? onResize,
-    void Function(Event)? onScroll,
-    void Function(Event)? onSearch,
-    void Function(Event)? onSeeked,
-    void Function(Event)? onSeeking,
-    void Function(Event)? onSelect,
-    void Function(Event)? onSelectStart,
-    void Function(Event)? onStalled,
-    void Function(Event)? onSubmit,
-    void Function(Event)? onSuspend,
-    void Function(Event)? onTimeUpdate,
-    void Function(TouchEvent)? onTouchCancel,
-    void Function(TouchEvent)? onTouchEnd,
-    void Function(TouchEvent)? onTouchEnter,
-    void Function(TouchEvent)? onTouchLeave,
-    void Function(TouchEvent)? onTouchMove,
-    void Function(TouchEvent)? onTouchStart,
-    void Function(TransitionEvent)? onTransitionEnd,
-    void Function(Event)? onVolumeChange,
-    void Function(Event)? onWaiting,
-    void Function(Event)? onFullscreenChange,
-    void Function(Event)? onFullscreenError,
-    void Function(WheelEvent)? onWheel}) {
-  final v = SpanElement();
-  if (nonce != null) v.nonce = nonce;
-  if (attributes != null) v.attributes = attributes;
-  if (children != null) v.children = children;
-  if (classes != null) v.classes = classes;
-  if (dataset != null) v.dataset = dataset;
-  if (innerHtml != null) v.innerHtml = innerHtml;
-  if (innerText != null) v.innerText = innerText;
-  if (scrollLeft != null) v.scrollLeft = scrollLeft;
-  if (scrollTop != null) v.scrollTop = scrollTop;
-  if (contentEditable != null) v.contentEditable = contentEditable;
-  if (dir != null) v.dir = dir;
-  if (draggable != null) v.draggable = draggable;
-  if (hidden != null) v.hidden = hidden;
-  if (inert != null) v.inert = inert;
-  if (inputMode != null) v.inputMode = inputMode;
-  if (lang != null) v.lang = lang;
-  if (spellcheck != null) v.spellcheck = spellcheck;
-  if (tabIndex != null) v.tabIndex = tabIndex;
-  if (title != null) v.title = title;
-  if (translate != null) v.translate = translate;
-  if (className != null) v.className = className;
-  if (id != null) v.id = id;
-  if (slot != null) v.slot = slot;
-  if (nodes != null) v.nodes = nodes;
-  if (text != null) v.text = text;
-  if (onAbort != null) v.onAbort.listen(onAbort);
-  if (onBeforeCopy != null) v.onBeforeCopy.listen(onBeforeCopy);
-  if (onBeforeCut != null) v.onBeforeCut.listen(onBeforeCut);
-  if (onBeforePaste != null) v.onBeforePaste.listen(onBeforePaste);
-  if (onBlur != null) v.onBlur.listen(onBlur);
-  if (onCanPlay != null) v.onCanPlay.listen(onCanPlay);
-  if (onCanPlayThrough != null) v.onCanPlayThrough.listen(onCanPlayThrough);
-  if (onChange != null) v.onChange.listen(onChange);
-  if (onClick != null) v.onClick.listen(onClick);
-  if (onContextMenu != null) v.onContextMenu.listen(onContextMenu);
-  if (onCopy != null) v.onCopy.listen(onCopy);
-  if (onCut != null) v.onCut.listen(onCut);
-  if (onDoubleClick != null) v.onDoubleClick.listen(onDoubleClick);
-  if (onDrag != null) v.onDrag.listen(onDrag);
-  if (onDragEnd != null) v.onDragEnd.listen(onDragEnd);
-  if (onDragEnter != null) v.onDragEnter.listen(onDragEnter);
-  if (onDragLeave != null) v.onDragLeave.listen(onDragLeave);
-  if (onDragOver != null) v.onDragOver.listen(onDragOver);
-  if (onDragStart != null) v.onDragStart.listen(onDragStart);
-  if (onDrop != null) v.onDrop.listen(onDrop);
-  if (onDurationChange != null) v.onDurationChange.listen(onDurationChange);
-  if (onEmptied != null) v.onEmptied.listen(onEmptied);
-  if (onEnded != null) v.onEnded.listen(onEnded);
-  if (onError != null) v.onError.listen(onError);
-  if (onFocus != null) v.onFocus.listen(onFocus);
-  if (onInput != null) v.onInput.listen(onInput);
-  if (onInvalid != null) v.onInvalid.listen(onInvalid);
-  if (onKeyDown != null) v.onKeyDown.listen(onKeyDown);
-  if (onKeyPress != null) v.onKeyPress.listen(onKeyPress);
-  if (onKeyUp != null) v.onKeyUp.listen(onKeyUp);
-  if (onLoad != null) v.onLoad.listen(onLoad);
-  if (onLoadedData != null) v.onLoadedData.listen(onLoadedData);
-  if (onLoadedMetadata != null) v.onLoadedMetadata.listen(onLoadedMetadata);
-  if (onMouseDown != null) v.onMouseDown.listen(onMouseDown);
-  if (onMouseEnter != null) v.onMouseEnter.listen(onMouseEnter);
-  if (onMouseLeave != null) v.onMouseLeave.listen(onMouseLeave);
-  if (onMouseMove != null) v.onMouseMove.listen(onMouseMove);
-  if (onMouseOut != null) v.onMouseOut.listen(onMouseOut);
-  if (onMouseOver != null) v.onMouseOver.listen(onMouseOver);
-  if (onMouseUp != null) v.onMouseUp.listen(onMouseUp);
-  if (onMouseWheel != null) v.onMouseWheel.listen(onMouseWheel);
-  if (onPaste != null) v.onPaste.listen(onPaste);
-  if (onPause != null) v.onPause.listen(onPause);
-  if (onPlay != null) v.onPlay.listen(onPlay);
-  if (onPlaying != null) v.onPlaying.listen(onPlaying);
-  if (onRateChange != null) v.onRateChange.listen(onRateChange);
-  if (onReset != null) v.onReset.listen(onReset);
-  if (onResize != null) v.onResize.listen(onResize);
-  if (onScroll != null) v.onScroll.listen(onScroll);
-  if (onSearch != null) v.onSearch.listen(onSearch);
-  if (onSeeked != null) v.onSeeked.listen(onSeeked);
-  if (onSeeking != null) v.onSeeking.listen(onSeeking);
-  if (onSelect != null) v.onSelect.listen(onSelect);
-  if (onSelectStart != null) v.onSelectStart.listen(onSelectStart);
-  if (onStalled != null) v.onStalled.listen(onStalled);
-  if (onSubmit != null) v.onSubmit.listen(onSubmit);
-  if (onSuspend != null) v.onSuspend.listen(onSuspend);
-  if (onTimeUpdate != null) v.onTimeUpdate.listen(onTimeUpdate);
-  if (onTouchCancel != null) v.onTouchCancel.listen(onTouchCancel);
-  if (onTouchEnd != null) v.onTouchEnd.listen(onTouchEnd);
-  if (onTouchEnter != null) v.onTouchEnter.listen(onTouchEnter);
-  if (onTouchLeave != null) v.onTouchLeave.listen(onTouchLeave);
-  if (onTouchMove != null) v.onTouchMove.listen(onTouchMove);
-  if (onTouchStart != null) v.onTouchStart.listen(onTouchStart);
-  if (onTransitionEnd != null) v.onTransitionEnd.listen(onTransitionEnd);
-  if (onVolumeChange != null) v.onVolumeChange.listen(onVolumeChange);
-  if (onWaiting != null) v.onWaiting.listen(onWaiting);
-  if (onFullscreenChange != null)
-    v.onFullscreenChange.listen(onFullscreenChange);
-  if (onFullscreenError != null) v.onFullscreenError.listen(onFullscreenError);
-  if (onWheel != null) v.onWheel.listen(onWheel);
-  return v;
+class SpanElementWidget extends HtmlElementWidget {
+  SpanElementWidget(
+      {super.nonce,
+      super.attributes,
+      super.children,
+      super.classes,
+      super.dataset,
+      super.innerHtml,
+      super.innerText,
+      super.scrollLeft,
+      super.scrollTop,
+      super.contentEditable,
+      super.dir,
+      super.draggable,
+      super.hidden,
+      super.inert,
+      super.inputMode,
+      super.lang,
+      super.spellcheck,
+      super.tabIndex,
+      super.title,
+      super.translate,
+      super.className,
+      super.id,
+      super.slot,
+      super.nodes,
+      super.text,
+      super.onAbort,
+      super.onBeforeCopy,
+      super.onBeforeCut,
+      super.onBeforePaste,
+      super.onBlur,
+      super.onCanPlay,
+      super.onCanPlayThrough,
+      super.onChange,
+      super.onClick,
+      super.onContextMenu,
+      super.onCopy,
+      super.onCut,
+      super.onDoubleClick,
+      super.onDrag,
+      super.onDragEnd,
+      super.onDragEnter,
+      super.onDragLeave,
+      super.onDragOver,
+      super.onDragStart,
+      super.onDrop,
+      super.onDurationChange,
+      super.onEmptied,
+      super.onEnded,
+      super.onError,
+      super.onFocus,
+      super.onInput,
+      super.onInvalid,
+      super.onKeyDown,
+      super.onKeyPress,
+      super.onKeyUp,
+      super.onLoad,
+      super.onLoadedData,
+      super.onLoadedMetadata,
+      super.onMouseDown,
+      super.onMouseEnter,
+      super.onMouseLeave,
+      super.onMouseMove,
+      super.onMouseOut,
+      super.onMouseOver,
+      super.onMouseUp,
+      super.onMouseWheel,
+      super.onPaste,
+      super.onPause,
+      super.onPlay,
+      super.onPlaying,
+      super.onRateChange,
+      super.onReset,
+      super.onResize,
+      super.onScroll,
+      super.onSearch,
+      super.onSeeked,
+      super.onSeeking,
+      super.onSelect,
+      super.onSelectStart,
+      super.onStalled,
+      super.onSubmit,
+      super.onSuspend,
+      super.onTimeUpdate,
+      super.onTouchCancel,
+      super.onTouchEnd,
+      super.onTouchEnter,
+      super.onTouchLeave,
+      super.onTouchMove,
+      super.onTouchStart,
+      super.onTransitionEnd,
+      super.onVolumeChange,
+      super.onWaiting,
+      super.onFullscreenChange,
+      super.onFullscreenError,
+      super.onWheel});
+  @override
+  Element render() => hook(SpanElement());
 }
 
-StyleElement styleElement(
-    {bool? disabled,
-    String? media,
-    String? type,
-    String? nonce,
-    Map<String, String>? attributes,
-    List<Element>? children,
-    Iterable<String>? classes,
-    Map<String, String>? dataset,
-    String? innerHtml,
-    String? innerText,
-    int? scrollLeft,
-    int? scrollTop,
-    String? contentEditable,
-    String? dir,
-    bool? draggable,
-    bool? hidden,
-    bool? inert,
-    String? inputMode,
-    String? lang,
-    bool? spellcheck,
-    int? tabIndex,
-    String? title,
-    bool? translate,
-    String? className,
-    String? id,
-    String? slot,
-    Iterable<Node>? nodes,
-    String? text,
-    void Function(Event)? onAbort,
-    void Function(Event)? onBeforeCopy,
-    void Function(Event)? onBeforeCut,
-    void Function(Event)? onBeforePaste,
-    void Function(Event)? onBlur,
-    void Function(Event)? onCanPlay,
-    void Function(Event)? onCanPlayThrough,
-    void Function(Event)? onChange,
-    void Function(MouseEvent)? onClick,
-    void Function(MouseEvent)? onContextMenu,
-    void Function(ClipboardEvent)? onCopy,
-    void Function(ClipboardEvent)? onCut,
-    void Function(Event)? onDoubleClick,
-    void Function(MouseEvent)? onDrag,
-    void Function(MouseEvent)? onDragEnd,
-    void Function(MouseEvent)? onDragEnter,
-    void Function(MouseEvent)? onDragLeave,
-    void Function(MouseEvent)? onDragOver,
-    void Function(MouseEvent)? onDragStart,
-    void Function(MouseEvent)? onDrop,
-    void Function(Event)? onDurationChange,
-    void Function(Event)? onEmptied,
-    void Function(Event)? onEnded,
-    void Function(Event)? onError,
-    void Function(Event)? onFocus,
-    void Function(Event)? onInput,
-    void Function(Event)? onInvalid,
-    void Function(KeyboardEvent)? onKeyDown,
-    void Function(KeyboardEvent)? onKeyPress,
-    void Function(KeyboardEvent)? onKeyUp,
-    void Function(Event)? onLoad,
-    void Function(Event)? onLoadedData,
-    void Function(Event)? onLoadedMetadata,
-    void Function(MouseEvent)? onMouseDown,
-    void Function(MouseEvent)? onMouseEnter,
-    void Function(MouseEvent)? onMouseLeave,
-    void Function(MouseEvent)? onMouseMove,
-    void Function(MouseEvent)? onMouseOut,
-    void Function(MouseEvent)? onMouseOver,
-    void Function(MouseEvent)? onMouseUp,
-    void Function(WheelEvent)? onMouseWheel,
-    void Function(ClipboardEvent)? onPaste,
-    void Function(Event)? onPause,
-    void Function(Event)? onPlay,
-    void Function(Event)? onPlaying,
-    void Function(Event)? onRateChange,
-    void Function(Event)? onReset,
-    void Function(Event)? onResize,
-    void Function(Event)? onScroll,
-    void Function(Event)? onSearch,
-    void Function(Event)? onSeeked,
-    void Function(Event)? onSeeking,
-    void Function(Event)? onSelect,
-    void Function(Event)? onSelectStart,
-    void Function(Event)? onStalled,
-    void Function(Event)? onSubmit,
-    void Function(Event)? onSuspend,
-    void Function(Event)? onTimeUpdate,
-    void Function(TouchEvent)? onTouchCancel,
-    void Function(TouchEvent)? onTouchEnd,
-    void Function(TouchEvent)? onTouchEnter,
-    void Function(TouchEvent)? onTouchLeave,
-    void Function(TouchEvent)? onTouchMove,
-    void Function(TouchEvent)? onTouchStart,
-    void Function(TransitionEvent)? onTransitionEnd,
-    void Function(Event)? onVolumeChange,
-    void Function(Event)? onWaiting,
-    void Function(Event)? onFullscreenChange,
-    void Function(Event)? onFullscreenError,
-    void Function(WheelEvent)? onWheel}) {
-  final v = StyleElement();
-  if (disabled != null) v.disabled = disabled;
-  if (media != null) v.media = media;
-  if (type != null) v.type = type;
-  if (nonce != null) v.nonce = nonce;
-  if (attributes != null) v.attributes = attributes;
-  if (children != null) v.children = children;
-  if (classes != null) v.classes = classes;
-  if (dataset != null) v.dataset = dataset;
-  if (innerHtml != null) v.innerHtml = innerHtml;
-  if (innerText != null) v.innerText = innerText;
-  if (scrollLeft != null) v.scrollLeft = scrollLeft;
-  if (scrollTop != null) v.scrollTop = scrollTop;
-  if (contentEditable != null) v.contentEditable = contentEditable;
-  if (dir != null) v.dir = dir;
-  if (draggable != null) v.draggable = draggable;
-  if (hidden != null) v.hidden = hidden;
-  if (inert != null) v.inert = inert;
-  if (inputMode != null) v.inputMode = inputMode;
-  if (lang != null) v.lang = lang;
-  if (spellcheck != null) v.spellcheck = spellcheck;
-  if (tabIndex != null) v.tabIndex = tabIndex;
-  if (title != null) v.title = title;
-  if (translate != null) v.translate = translate;
-  if (className != null) v.className = className;
-  if (id != null) v.id = id;
-  if (slot != null) v.slot = slot;
-  if (nodes != null) v.nodes = nodes;
-  if (text != null) v.text = text;
-  if (onAbort != null) v.onAbort.listen(onAbort);
-  if (onBeforeCopy != null) v.onBeforeCopy.listen(onBeforeCopy);
-  if (onBeforeCut != null) v.onBeforeCut.listen(onBeforeCut);
-  if (onBeforePaste != null) v.onBeforePaste.listen(onBeforePaste);
-  if (onBlur != null) v.onBlur.listen(onBlur);
-  if (onCanPlay != null) v.onCanPlay.listen(onCanPlay);
-  if (onCanPlayThrough != null) v.onCanPlayThrough.listen(onCanPlayThrough);
-  if (onChange != null) v.onChange.listen(onChange);
-  if (onClick != null) v.onClick.listen(onClick);
-  if (onContextMenu != null) v.onContextMenu.listen(onContextMenu);
-  if (onCopy != null) v.onCopy.listen(onCopy);
-  if (onCut != null) v.onCut.listen(onCut);
-  if (onDoubleClick != null) v.onDoubleClick.listen(onDoubleClick);
-  if (onDrag != null) v.onDrag.listen(onDrag);
-  if (onDragEnd != null) v.onDragEnd.listen(onDragEnd);
-  if (onDragEnter != null) v.onDragEnter.listen(onDragEnter);
-  if (onDragLeave != null) v.onDragLeave.listen(onDragLeave);
-  if (onDragOver != null) v.onDragOver.listen(onDragOver);
-  if (onDragStart != null) v.onDragStart.listen(onDragStart);
-  if (onDrop != null) v.onDrop.listen(onDrop);
-  if (onDurationChange != null) v.onDurationChange.listen(onDurationChange);
-  if (onEmptied != null) v.onEmptied.listen(onEmptied);
-  if (onEnded != null) v.onEnded.listen(onEnded);
-  if (onError != null) v.onError.listen(onError);
-  if (onFocus != null) v.onFocus.listen(onFocus);
-  if (onInput != null) v.onInput.listen(onInput);
-  if (onInvalid != null) v.onInvalid.listen(onInvalid);
-  if (onKeyDown != null) v.onKeyDown.listen(onKeyDown);
-  if (onKeyPress != null) v.onKeyPress.listen(onKeyPress);
-  if (onKeyUp != null) v.onKeyUp.listen(onKeyUp);
-  if (onLoad != null) v.onLoad.listen(onLoad);
-  if (onLoadedData != null) v.onLoadedData.listen(onLoadedData);
-  if (onLoadedMetadata != null) v.onLoadedMetadata.listen(onLoadedMetadata);
-  if (onMouseDown != null) v.onMouseDown.listen(onMouseDown);
-  if (onMouseEnter != null) v.onMouseEnter.listen(onMouseEnter);
-  if (onMouseLeave != null) v.onMouseLeave.listen(onMouseLeave);
-  if (onMouseMove != null) v.onMouseMove.listen(onMouseMove);
-  if (onMouseOut != null) v.onMouseOut.listen(onMouseOut);
-  if (onMouseOver != null) v.onMouseOver.listen(onMouseOver);
-  if (onMouseUp != null) v.onMouseUp.listen(onMouseUp);
-  if (onMouseWheel != null) v.onMouseWheel.listen(onMouseWheel);
-  if (onPaste != null) v.onPaste.listen(onPaste);
-  if (onPause != null) v.onPause.listen(onPause);
-  if (onPlay != null) v.onPlay.listen(onPlay);
-  if (onPlaying != null) v.onPlaying.listen(onPlaying);
-  if (onRateChange != null) v.onRateChange.listen(onRateChange);
-  if (onReset != null) v.onReset.listen(onReset);
-  if (onResize != null) v.onResize.listen(onResize);
-  if (onScroll != null) v.onScroll.listen(onScroll);
-  if (onSearch != null) v.onSearch.listen(onSearch);
-  if (onSeeked != null) v.onSeeked.listen(onSeeked);
-  if (onSeeking != null) v.onSeeking.listen(onSeeking);
-  if (onSelect != null) v.onSelect.listen(onSelect);
-  if (onSelectStart != null) v.onSelectStart.listen(onSelectStart);
-  if (onStalled != null) v.onStalled.listen(onStalled);
-  if (onSubmit != null) v.onSubmit.listen(onSubmit);
-  if (onSuspend != null) v.onSuspend.listen(onSuspend);
-  if (onTimeUpdate != null) v.onTimeUpdate.listen(onTimeUpdate);
-  if (onTouchCancel != null) v.onTouchCancel.listen(onTouchCancel);
-  if (onTouchEnd != null) v.onTouchEnd.listen(onTouchEnd);
-  if (onTouchEnter != null) v.onTouchEnter.listen(onTouchEnter);
-  if (onTouchLeave != null) v.onTouchLeave.listen(onTouchLeave);
-  if (onTouchMove != null) v.onTouchMove.listen(onTouchMove);
-  if (onTouchStart != null) v.onTouchStart.listen(onTouchStart);
-  if (onTransitionEnd != null) v.onTransitionEnd.listen(onTransitionEnd);
-  if (onVolumeChange != null) v.onVolumeChange.listen(onVolumeChange);
-  if (onWaiting != null) v.onWaiting.listen(onWaiting);
-  if (onFullscreenChange != null)
-    v.onFullscreenChange.listen(onFullscreenChange);
-  if (onFullscreenError != null) v.onFullscreenError.listen(onFullscreenError);
-  if (onWheel != null) v.onWheel.listen(onWheel);
-  return v;
+class StyleElementWidget extends HtmlElementWidget {
+  StyleElementWidget(
+      {super.nonce,
+      super.attributes,
+      super.children,
+      super.classes,
+      super.dataset,
+      super.innerHtml,
+      super.innerText,
+      super.scrollLeft,
+      super.scrollTop,
+      super.contentEditable,
+      super.dir,
+      super.draggable,
+      super.hidden,
+      super.inert,
+      super.inputMode,
+      super.lang,
+      super.spellcheck,
+      super.tabIndex,
+      super.title,
+      super.translate,
+      super.className,
+      super.id,
+      super.slot,
+      super.nodes,
+      super.text,
+      super.onAbort,
+      super.onBeforeCopy,
+      super.onBeforeCut,
+      super.onBeforePaste,
+      super.onBlur,
+      super.onCanPlay,
+      super.onCanPlayThrough,
+      super.onChange,
+      super.onClick,
+      super.onContextMenu,
+      super.onCopy,
+      super.onCut,
+      super.onDoubleClick,
+      super.onDrag,
+      super.onDragEnd,
+      super.onDragEnter,
+      super.onDragLeave,
+      super.onDragOver,
+      super.onDragStart,
+      super.onDrop,
+      super.onDurationChange,
+      super.onEmptied,
+      super.onEnded,
+      super.onError,
+      super.onFocus,
+      super.onInput,
+      super.onInvalid,
+      super.onKeyDown,
+      super.onKeyPress,
+      super.onKeyUp,
+      super.onLoad,
+      super.onLoadedData,
+      super.onLoadedMetadata,
+      super.onMouseDown,
+      super.onMouseEnter,
+      super.onMouseLeave,
+      super.onMouseMove,
+      super.onMouseOut,
+      super.onMouseOver,
+      super.onMouseUp,
+      super.onMouseWheel,
+      super.onPaste,
+      super.onPause,
+      super.onPlay,
+      super.onPlaying,
+      super.onRateChange,
+      super.onReset,
+      super.onResize,
+      super.onScroll,
+      super.onSearch,
+      super.onSeeked,
+      super.onSeeking,
+      super.onSelect,
+      super.onSelectStart,
+      super.onStalled,
+      super.onSubmit,
+      super.onSuspend,
+      super.onTimeUpdate,
+      super.onTouchCancel,
+      super.onTouchEnd,
+      super.onTouchEnter,
+      super.onTouchLeave,
+      super.onTouchMove,
+      super.onTouchStart,
+      super.onTransitionEnd,
+      super.onVolumeChange,
+      super.onWaiting,
+      super.onFullscreenChange,
+      super.onFullscreenError,
+      super.onWheel});
+  @override
+  Element render() => hook(StyleElement());
 }
 
-TableCaptionElement tableCaptionElement(
-    {String? nonce,
-    Map<String, String>? attributes,
-    List<Element>? children,
-    Iterable<String>? classes,
-    Map<String, String>? dataset,
-    String? innerHtml,
-    String? innerText,
-    int? scrollLeft,
-    int? scrollTop,
-    String? contentEditable,
-    String? dir,
-    bool? draggable,
-    bool? hidden,
-    bool? inert,
-    String? inputMode,
-    String? lang,
-    bool? spellcheck,
-    int? tabIndex,
-    String? title,
-    bool? translate,
-    String? className,
-    String? id,
-    String? slot,
-    Iterable<Node>? nodes,
-    String? text,
-    void Function(Event)? onAbort,
-    void Function(Event)? onBeforeCopy,
-    void Function(Event)? onBeforeCut,
-    void Function(Event)? onBeforePaste,
-    void Function(Event)? onBlur,
-    void Function(Event)? onCanPlay,
-    void Function(Event)? onCanPlayThrough,
-    void Function(Event)? onChange,
-    void Function(MouseEvent)? onClick,
-    void Function(MouseEvent)? onContextMenu,
-    void Function(ClipboardEvent)? onCopy,
-    void Function(ClipboardEvent)? onCut,
-    void Function(Event)? onDoubleClick,
-    void Function(MouseEvent)? onDrag,
-    void Function(MouseEvent)? onDragEnd,
-    void Function(MouseEvent)? onDragEnter,
-    void Function(MouseEvent)? onDragLeave,
-    void Function(MouseEvent)? onDragOver,
-    void Function(MouseEvent)? onDragStart,
-    void Function(MouseEvent)? onDrop,
-    void Function(Event)? onDurationChange,
-    void Function(Event)? onEmptied,
-    void Function(Event)? onEnded,
-    void Function(Event)? onError,
-    void Function(Event)? onFocus,
-    void Function(Event)? onInput,
-    void Function(Event)? onInvalid,
-    void Function(KeyboardEvent)? onKeyDown,
-    void Function(KeyboardEvent)? onKeyPress,
-    void Function(KeyboardEvent)? onKeyUp,
-    void Function(Event)? onLoad,
-    void Function(Event)? onLoadedData,
-    void Function(Event)? onLoadedMetadata,
-    void Function(MouseEvent)? onMouseDown,
-    void Function(MouseEvent)? onMouseEnter,
-    void Function(MouseEvent)? onMouseLeave,
-    void Function(MouseEvent)? onMouseMove,
-    void Function(MouseEvent)? onMouseOut,
-    void Function(MouseEvent)? onMouseOver,
-    void Function(MouseEvent)? onMouseUp,
-    void Function(WheelEvent)? onMouseWheel,
-    void Function(ClipboardEvent)? onPaste,
-    void Function(Event)? onPause,
-    void Function(Event)? onPlay,
-    void Function(Event)? onPlaying,
-    void Function(Event)? onRateChange,
-    void Function(Event)? onReset,
-    void Function(Event)? onResize,
-    void Function(Event)? onScroll,
-    void Function(Event)? onSearch,
-    void Function(Event)? onSeeked,
-    void Function(Event)? onSeeking,
-    void Function(Event)? onSelect,
-    void Function(Event)? onSelectStart,
-    void Function(Event)? onStalled,
-    void Function(Event)? onSubmit,
-    void Function(Event)? onSuspend,
-    void Function(Event)? onTimeUpdate,
-    void Function(TouchEvent)? onTouchCancel,
-    void Function(TouchEvent)? onTouchEnd,
-    void Function(TouchEvent)? onTouchEnter,
-    void Function(TouchEvent)? onTouchLeave,
-    void Function(TouchEvent)? onTouchMove,
-    void Function(TouchEvent)? onTouchStart,
-    void Function(TransitionEvent)? onTransitionEnd,
-    void Function(Event)? onVolumeChange,
-    void Function(Event)? onWaiting,
-    void Function(Event)? onFullscreenChange,
-    void Function(Event)? onFullscreenError,
-    void Function(WheelEvent)? onWheel}) {
-  final v = TableCaptionElement();
-  if (nonce != null) v.nonce = nonce;
-  if (attributes != null) v.attributes = attributes;
-  if (children != null) v.children = children;
-  if (classes != null) v.classes = classes;
-  if (dataset != null) v.dataset = dataset;
-  if (innerHtml != null) v.innerHtml = innerHtml;
-  if (innerText != null) v.innerText = innerText;
-  if (scrollLeft != null) v.scrollLeft = scrollLeft;
-  if (scrollTop != null) v.scrollTop = scrollTop;
-  if (contentEditable != null) v.contentEditable = contentEditable;
-  if (dir != null) v.dir = dir;
-  if (draggable != null) v.draggable = draggable;
-  if (hidden != null) v.hidden = hidden;
-  if (inert != null) v.inert = inert;
-  if (inputMode != null) v.inputMode = inputMode;
-  if (lang != null) v.lang = lang;
-  if (spellcheck != null) v.spellcheck = spellcheck;
-  if (tabIndex != null) v.tabIndex = tabIndex;
-  if (title != null) v.title = title;
-  if (translate != null) v.translate = translate;
-  if (className != null) v.className = className;
-  if (id != null) v.id = id;
-  if (slot != null) v.slot = slot;
-  if (nodes != null) v.nodes = nodes;
-  if (text != null) v.text = text;
-  if (onAbort != null) v.onAbort.listen(onAbort);
-  if (onBeforeCopy != null) v.onBeforeCopy.listen(onBeforeCopy);
-  if (onBeforeCut != null) v.onBeforeCut.listen(onBeforeCut);
-  if (onBeforePaste != null) v.onBeforePaste.listen(onBeforePaste);
-  if (onBlur != null) v.onBlur.listen(onBlur);
-  if (onCanPlay != null) v.onCanPlay.listen(onCanPlay);
-  if (onCanPlayThrough != null) v.onCanPlayThrough.listen(onCanPlayThrough);
-  if (onChange != null) v.onChange.listen(onChange);
-  if (onClick != null) v.onClick.listen(onClick);
-  if (onContextMenu != null) v.onContextMenu.listen(onContextMenu);
-  if (onCopy != null) v.onCopy.listen(onCopy);
-  if (onCut != null) v.onCut.listen(onCut);
-  if (onDoubleClick != null) v.onDoubleClick.listen(onDoubleClick);
-  if (onDrag != null) v.onDrag.listen(onDrag);
-  if (onDragEnd != null) v.onDragEnd.listen(onDragEnd);
-  if (onDragEnter != null) v.onDragEnter.listen(onDragEnter);
-  if (onDragLeave != null) v.onDragLeave.listen(onDragLeave);
-  if (onDragOver != null) v.onDragOver.listen(onDragOver);
-  if (onDragStart != null) v.onDragStart.listen(onDragStart);
-  if (onDrop != null) v.onDrop.listen(onDrop);
-  if (onDurationChange != null) v.onDurationChange.listen(onDurationChange);
-  if (onEmptied != null) v.onEmptied.listen(onEmptied);
-  if (onEnded != null) v.onEnded.listen(onEnded);
-  if (onError != null) v.onError.listen(onError);
-  if (onFocus != null) v.onFocus.listen(onFocus);
-  if (onInput != null) v.onInput.listen(onInput);
-  if (onInvalid != null) v.onInvalid.listen(onInvalid);
-  if (onKeyDown != null) v.onKeyDown.listen(onKeyDown);
-  if (onKeyPress != null) v.onKeyPress.listen(onKeyPress);
-  if (onKeyUp != null) v.onKeyUp.listen(onKeyUp);
-  if (onLoad != null) v.onLoad.listen(onLoad);
-  if (onLoadedData != null) v.onLoadedData.listen(onLoadedData);
-  if (onLoadedMetadata != null) v.onLoadedMetadata.listen(onLoadedMetadata);
-  if (onMouseDown != null) v.onMouseDown.listen(onMouseDown);
-  if (onMouseEnter != null) v.onMouseEnter.listen(onMouseEnter);
-  if (onMouseLeave != null) v.onMouseLeave.listen(onMouseLeave);
-  if (onMouseMove != null) v.onMouseMove.listen(onMouseMove);
-  if (onMouseOut != null) v.onMouseOut.listen(onMouseOut);
-  if (onMouseOver != null) v.onMouseOver.listen(onMouseOver);
-  if (onMouseUp != null) v.onMouseUp.listen(onMouseUp);
-  if (onMouseWheel != null) v.onMouseWheel.listen(onMouseWheel);
-  if (onPaste != null) v.onPaste.listen(onPaste);
-  if (onPause != null) v.onPause.listen(onPause);
-  if (onPlay != null) v.onPlay.listen(onPlay);
-  if (onPlaying != null) v.onPlaying.listen(onPlaying);
-  if (onRateChange != null) v.onRateChange.listen(onRateChange);
-  if (onReset != null) v.onReset.listen(onReset);
-  if (onResize != null) v.onResize.listen(onResize);
-  if (onScroll != null) v.onScroll.listen(onScroll);
-  if (onSearch != null) v.onSearch.listen(onSearch);
-  if (onSeeked != null) v.onSeeked.listen(onSeeked);
-  if (onSeeking != null) v.onSeeking.listen(onSeeking);
-  if (onSelect != null) v.onSelect.listen(onSelect);
-  if (onSelectStart != null) v.onSelectStart.listen(onSelectStart);
-  if (onStalled != null) v.onStalled.listen(onStalled);
-  if (onSubmit != null) v.onSubmit.listen(onSubmit);
-  if (onSuspend != null) v.onSuspend.listen(onSuspend);
-  if (onTimeUpdate != null) v.onTimeUpdate.listen(onTimeUpdate);
-  if (onTouchCancel != null) v.onTouchCancel.listen(onTouchCancel);
-  if (onTouchEnd != null) v.onTouchEnd.listen(onTouchEnd);
-  if (onTouchEnter != null) v.onTouchEnter.listen(onTouchEnter);
-  if (onTouchLeave != null) v.onTouchLeave.listen(onTouchLeave);
-  if (onTouchMove != null) v.onTouchMove.listen(onTouchMove);
-  if (onTouchStart != null) v.onTouchStart.listen(onTouchStart);
-  if (onTransitionEnd != null) v.onTransitionEnd.listen(onTransitionEnd);
-  if (onVolumeChange != null) v.onVolumeChange.listen(onVolumeChange);
-  if (onWaiting != null) v.onWaiting.listen(onWaiting);
-  if (onFullscreenChange != null)
-    v.onFullscreenChange.listen(onFullscreenChange);
-  if (onFullscreenError != null) v.onFullscreenError.listen(onFullscreenError);
-  if (onWheel != null) v.onWheel.listen(onWheel);
-  return v;
+class TableElementWidget extends HtmlElementWidget {
+  TableElementWidget(
+      {super.nonce,
+      super.attributes,
+      super.children,
+      super.classes,
+      super.dataset,
+      super.innerHtml,
+      super.innerText,
+      super.scrollLeft,
+      super.scrollTop,
+      super.contentEditable,
+      super.dir,
+      super.draggable,
+      super.hidden,
+      super.inert,
+      super.inputMode,
+      super.lang,
+      super.spellcheck,
+      super.tabIndex,
+      super.title,
+      super.translate,
+      super.className,
+      super.id,
+      super.slot,
+      super.nodes,
+      super.text,
+      super.onAbort,
+      super.onBeforeCopy,
+      super.onBeforeCut,
+      super.onBeforePaste,
+      super.onBlur,
+      super.onCanPlay,
+      super.onCanPlayThrough,
+      super.onChange,
+      super.onClick,
+      super.onContextMenu,
+      super.onCopy,
+      super.onCut,
+      super.onDoubleClick,
+      super.onDrag,
+      super.onDragEnd,
+      super.onDragEnter,
+      super.onDragLeave,
+      super.onDragOver,
+      super.onDragStart,
+      super.onDrop,
+      super.onDurationChange,
+      super.onEmptied,
+      super.onEnded,
+      super.onError,
+      super.onFocus,
+      super.onInput,
+      super.onInvalid,
+      super.onKeyDown,
+      super.onKeyPress,
+      super.onKeyUp,
+      super.onLoad,
+      super.onLoadedData,
+      super.onLoadedMetadata,
+      super.onMouseDown,
+      super.onMouseEnter,
+      super.onMouseLeave,
+      super.onMouseMove,
+      super.onMouseOut,
+      super.onMouseOver,
+      super.onMouseUp,
+      super.onMouseWheel,
+      super.onPaste,
+      super.onPause,
+      super.onPlay,
+      super.onPlaying,
+      super.onRateChange,
+      super.onReset,
+      super.onResize,
+      super.onScroll,
+      super.onSearch,
+      super.onSeeked,
+      super.onSeeking,
+      super.onSelect,
+      super.onSelectStart,
+      super.onStalled,
+      super.onSubmit,
+      super.onSuspend,
+      super.onTimeUpdate,
+      super.onTouchCancel,
+      super.onTouchEnd,
+      super.onTouchEnter,
+      super.onTouchLeave,
+      super.onTouchMove,
+      super.onTouchStart,
+      super.onTransitionEnd,
+      super.onVolumeChange,
+      super.onWaiting,
+      super.onFullscreenChange,
+      super.onFullscreenError,
+      super.onWheel});
+  @override
+  Element render() => hook(TableElement());
 }
 
-TableCellElement tableCellElement(
-    {int? colSpan,
-    String? headers,
-    int? rowSpan,
-    String? nonce,
-    Map<String, String>? attributes,
-    List<Element>? children,
-    Iterable<String>? classes,
-    Map<String, String>? dataset,
-    String? innerHtml,
-    String? innerText,
-    int? scrollLeft,
-    int? scrollTop,
-    String? contentEditable,
-    String? dir,
-    bool? draggable,
-    bool? hidden,
-    bool? inert,
-    String? inputMode,
-    String? lang,
-    bool? spellcheck,
-    int? tabIndex,
-    String? title,
-    bool? translate,
-    String? className,
-    String? id,
-    String? slot,
-    Iterable<Node>? nodes,
-    String? text,
-    void Function(Event)? onAbort,
-    void Function(Event)? onBeforeCopy,
-    void Function(Event)? onBeforeCut,
-    void Function(Event)? onBeforePaste,
-    void Function(Event)? onBlur,
-    void Function(Event)? onCanPlay,
-    void Function(Event)? onCanPlayThrough,
-    void Function(Event)? onChange,
-    void Function(MouseEvent)? onClick,
-    void Function(MouseEvent)? onContextMenu,
-    void Function(ClipboardEvent)? onCopy,
-    void Function(ClipboardEvent)? onCut,
-    void Function(Event)? onDoubleClick,
-    void Function(MouseEvent)? onDrag,
-    void Function(MouseEvent)? onDragEnd,
-    void Function(MouseEvent)? onDragEnter,
-    void Function(MouseEvent)? onDragLeave,
-    void Function(MouseEvent)? onDragOver,
-    void Function(MouseEvent)? onDragStart,
-    void Function(MouseEvent)? onDrop,
-    void Function(Event)? onDurationChange,
-    void Function(Event)? onEmptied,
-    void Function(Event)? onEnded,
-    void Function(Event)? onError,
-    void Function(Event)? onFocus,
-    void Function(Event)? onInput,
-    void Function(Event)? onInvalid,
-    void Function(KeyboardEvent)? onKeyDown,
-    void Function(KeyboardEvent)? onKeyPress,
-    void Function(KeyboardEvent)? onKeyUp,
-    void Function(Event)? onLoad,
-    void Function(Event)? onLoadedData,
-    void Function(Event)? onLoadedMetadata,
-    void Function(MouseEvent)? onMouseDown,
-    void Function(MouseEvent)? onMouseEnter,
-    void Function(MouseEvent)? onMouseLeave,
-    void Function(MouseEvent)? onMouseMove,
-    void Function(MouseEvent)? onMouseOut,
-    void Function(MouseEvent)? onMouseOver,
-    void Function(MouseEvent)? onMouseUp,
-    void Function(WheelEvent)? onMouseWheel,
-    void Function(ClipboardEvent)? onPaste,
-    void Function(Event)? onPause,
-    void Function(Event)? onPlay,
-    void Function(Event)? onPlaying,
-    void Function(Event)? onRateChange,
-    void Function(Event)? onReset,
-    void Function(Event)? onResize,
-    void Function(Event)? onScroll,
-    void Function(Event)? onSearch,
-    void Function(Event)? onSeeked,
-    void Function(Event)? onSeeking,
-    void Function(Event)? onSelect,
-    void Function(Event)? onSelectStart,
-    void Function(Event)? onStalled,
-    void Function(Event)? onSubmit,
-    void Function(Event)? onSuspend,
-    void Function(Event)? onTimeUpdate,
-    void Function(TouchEvent)? onTouchCancel,
-    void Function(TouchEvent)? onTouchEnd,
-    void Function(TouchEvent)? onTouchEnter,
-    void Function(TouchEvent)? onTouchLeave,
-    void Function(TouchEvent)? onTouchMove,
-    void Function(TouchEvent)? onTouchStart,
-    void Function(TransitionEvent)? onTransitionEnd,
-    void Function(Event)? onVolumeChange,
-    void Function(Event)? onWaiting,
-    void Function(Event)? onFullscreenChange,
-    void Function(Event)? onFullscreenError,
-    void Function(WheelEvent)? onWheel}) {
-  final v = TableCellElement();
-  if (colSpan != null) v.colSpan = colSpan;
-  if (headers != null) v.headers = headers;
-  if (rowSpan != null) v.rowSpan = rowSpan;
-  if (nonce != null) v.nonce = nonce;
-  if (attributes != null) v.attributes = attributes;
-  if (children != null) v.children = children;
-  if (classes != null) v.classes = classes;
-  if (dataset != null) v.dataset = dataset;
-  if (innerHtml != null) v.innerHtml = innerHtml;
-  if (innerText != null) v.innerText = innerText;
-  if (scrollLeft != null) v.scrollLeft = scrollLeft;
-  if (scrollTop != null) v.scrollTop = scrollTop;
-  if (contentEditable != null) v.contentEditable = contentEditable;
-  if (dir != null) v.dir = dir;
-  if (draggable != null) v.draggable = draggable;
-  if (hidden != null) v.hidden = hidden;
-  if (inert != null) v.inert = inert;
-  if (inputMode != null) v.inputMode = inputMode;
-  if (lang != null) v.lang = lang;
-  if (spellcheck != null) v.spellcheck = spellcheck;
-  if (tabIndex != null) v.tabIndex = tabIndex;
-  if (title != null) v.title = title;
-  if (translate != null) v.translate = translate;
-  if (className != null) v.className = className;
-  if (id != null) v.id = id;
-  if (slot != null) v.slot = slot;
-  if (nodes != null) v.nodes = nodes;
-  if (text != null) v.text = text;
-  if (onAbort != null) v.onAbort.listen(onAbort);
-  if (onBeforeCopy != null) v.onBeforeCopy.listen(onBeforeCopy);
-  if (onBeforeCut != null) v.onBeforeCut.listen(onBeforeCut);
-  if (onBeforePaste != null) v.onBeforePaste.listen(onBeforePaste);
-  if (onBlur != null) v.onBlur.listen(onBlur);
-  if (onCanPlay != null) v.onCanPlay.listen(onCanPlay);
-  if (onCanPlayThrough != null) v.onCanPlayThrough.listen(onCanPlayThrough);
-  if (onChange != null) v.onChange.listen(onChange);
-  if (onClick != null) v.onClick.listen(onClick);
-  if (onContextMenu != null) v.onContextMenu.listen(onContextMenu);
-  if (onCopy != null) v.onCopy.listen(onCopy);
-  if (onCut != null) v.onCut.listen(onCut);
-  if (onDoubleClick != null) v.onDoubleClick.listen(onDoubleClick);
-  if (onDrag != null) v.onDrag.listen(onDrag);
-  if (onDragEnd != null) v.onDragEnd.listen(onDragEnd);
-  if (onDragEnter != null) v.onDragEnter.listen(onDragEnter);
-  if (onDragLeave != null) v.onDragLeave.listen(onDragLeave);
-  if (onDragOver != null) v.onDragOver.listen(onDragOver);
-  if (onDragStart != null) v.onDragStart.listen(onDragStart);
-  if (onDrop != null) v.onDrop.listen(onDrop);
-  if (onDurationChange != null) v.onDurationChange.listen(onDurationChange);
-  if (onEmptied != null) v.onEmptied.listen(onEmptied);
-  if (onEnded != null) v.onEnded.listen(onEnded);
-  if (onError != null) v.onError.listen(onError);
-  if (onFocus != null) v.onFocus.listen(onFocus);
-  if (onInput != null) v.onInput.listen(onInput);
-  if (onInvalid != null) v.onInvalid.listen(onInvalid);
-  if (onKeyDown != null) v.onKeyDown.listen(onKeyDown);
-  if (onKeyPress != null) v.onKeyPress.listen(onKeyPress);
-  if (onKeyUp != null) v.onKeyUp.listen(onKeyUp);
-  if (onLoad != null) v.onLoad.listen(onLoad);
-  if (onLoadedData != null) v.onLoadedData.listen(onLoadedData);
-  if (onLoadedMetadata != null) v.onLoadedMetadata.listen(onLoadedMetadata);
-  if (onMouseDown != null) v.onMouseDown.listen(onMouseDown);
-  if (onMouseEnter != null) v.onMouseEnter.listen(onMouseEnter);
-  if (onMouseLeave != null) v.onMouseLeave.listen(onMouseLeave);
-  if (onMouseMove != null) v.onMouseMove.listen(onMouseMove);
-  if (onMouseOut != null) v.onMouseOut.listen(onMouseOut);
-  if (onMouseOver != null) v.onMouseOver.listen(onMouseOver);
-  if (onMouseUp != null) v.onMouseUp.listen(onMouseUp);
-  if (onMouseWheel != null) v.onMouseWheel.listen(onMouseWheel);
-  if (onPaste != null) v.onPaste.listen(onPaste);
-  if (onPause != null) v.onPause.listen(onPause);
-  if (onPlay != null) v.onPlay.listen(onPlay);
-  if (onPlaying != null) v.onPlaying.listen(onPlaying);
-  if (onRateChange != null) v.onRateChange.listen(onRateChange);
-  if (onReset != null) v.onReset.listen(onReset);
-  if (onResize != null) v.onResize.listen(onResize);
-  if (onScroll != null) v.onScroll.listen(onScroll);
-  if (onSearch != null) v.onSearch.listen(onSearch);
-  if (onSeeked != null) v.onSeeked.listen(onSeeked);
-  if (onSeeking != null) v.onSeeking.listen(onSeeking);
-  if (onSelect != null) v.onSelect.listen(onSelect);
-  if (onSelectStart != null) v.onSelectStart.listen(onSelectStart);
-  if (onStalled != null) v.onStalled.listen(onStalled);
-  if (onSubmit != null) v.onSubmit.listen(onSubmit);
-  if (onSuspend != null) v.onSuspend.listen(onSuspend);
-  if (onTimeUpdate != null) v.onTimeUpdate.listen(onTimeUpdate);
-  if (onTouchCancel != null) v.onTouchCancel.listen(onTouchCancel);
-  if (onTouchEnd != null) v.onTouchEnd.listen(onTouchEnd);
-  if (onTouchEnter != null) v.onTouchEnter.listen(onTouchEnter);
-  if (onTouchLeave != null) v.onTouchLeave.listen(onTouchLeave);
-  if (onTouchMove != null) v.onTouchMove.listen(onTouchMove);
-  if (onTouchStart != null) v.onTouchStart.listen(onTouchStart);
-  if (onTransitionEnd != null) v.onTransitionEnd.listen(onTransitionEnd);
-  if (onVolumeChange != null) v.onVolumeChange.listen(onVolumeChange);
-  if (onWaiting != null) v.onWaiting.listen(onWaiting);
-  if (onFullscreenChange != null)
-    v.onFullscreenChange.listen(onFullscreenChange);
-  if (onFullscreenError != null) v.onFullscreenError.listen(onFullscreenError);
-  if (onWheel != null) v.onWheel.listen(onWheel);
-  return v;
+class TableRowElementWidget extends HtmlElementWidget {
+  TableRowElementWidget(
+      {super.nonce,
+      super.attributes,
+      super.children,
+      super.classes,
+      super.dataset,
+      super.innerHtml,
+      super.innerText,
+      super.scrollLeft,
+      super.scrollTop,
+      super.contentEditable,
+      super.dir,
+      super.draggable,
+      super.hidden,
+      super.inert,
+      super.inputMode,
+      super.lang,
+      super.spellcheck,
+      super.tabIndex,
+      super.title,
+      super.translate,
+      super.className,
+      super.id,
+      super.slot,
+      super.nodes,
+      super.text,
+      super.onAbort,
+      super.onBeforeCopy,
+      super.onBeforeCut,
+      super.onBeforePaste,
+      super.onBlur,
+      super.onCanPlay,
+      super.onCanPlayThrough,
+      super.onChange,
+      super.onClick,
+      super.onContextMenu,
+      super.onCopy,
+      super.onCut,
+      super.onDoubleClick,
+      super.onDrag,
+      super.onDragEnd,
+      super.onDragEnter,
+      super.onDragLeave,
+      super.onDragOver,
+      super.onDragStart,
+      super.onDrop,
+      super.onDurationChange,
+      super.onEmptied,
+      super.onEnded,
+      super.onError,
+      super.onFocus,
+      super.onInput,
+      super.onInvalid,
+      super.onKeyDown,
+      super.onKeyPress,
+      super.onKeyUp,
+      super.onLoad,
+      super.onLoadedData,
+      super.onLoadedMetadata,
+      super.onMouseDown,
+      super.onMouseEnter,
+      super.onMouseLeave,
+      super.onMouseMove,
+      super.onMouseOut,
+      super.onMouseOver,
+      super.onMouseUp,
+      super.onMouseWheel,
+      super.onPaste,
+      super.onPause,
+      super.onPlay,
+      super.onPlaying,
+      super.onRateChange,
+      super.onReset,
+      super.onResize,
+      super.onScroll,
+      super.onSearch,
+      super.onSeeked,
+      super.onSeeking,
+      super.onSelect,
+      super.onSelectStart,
+      super.onStalled,
+      super.onSubmit,
+      super.onSuspend,
+      super.onTimeUpdate,
+      super.onTouchCancel,
+      super.onTouchEnd,
+      super.onTouchEnter,
+      super.onTouchLeave,
+      super.onTouchMove,
+      super.onTouchStart,
+      super.onTransitionEnd,
+      super.onVolumeChange,
+      super.onWaiting,
+      super.onFullscreenChange,
+      super.onFullscreenError,
+      super.onWheel});
+  @override
+  Element render() => hook(TableRowElement());
 }
 
-TableColElement tableColElement(
-    {int? span,
-    String? nonce,
-    Map<String, String>? attributes,
-    List<Element>? children,
-    Iterable<String>? classes,
-    Map<String, String>? dataset,
-    String? innerHtml,
-    String? innerText,
-    int? scrollLeft,
-    int? scrollTop,
-    String? contentEditable,
-    String? dir,
-    bool? draggable,
-    bool? hidden,
-    bool? inert,
-    String? inputMode,
-    String? lang,
-    bool? spellcheck,
-    int? tabIndex,
-    String? title,
-    bool? translate,
-    String? className,
-    String? id,
-    String? slot,
-    Iterable<Node>? nodes,
-    String? text,
-    void Function(Event)? onAbort,
-    void Function(Event)? onBeforeCopy,
-    void Function(Event)? onBeforeCut,
-    void Function(Event)? onBeforePaste,
-    void Function(Event)? onBlur,
-    void Function(Event)? onCanPlay,
-    void Function(Event)? onCanPlayThrough,
-    void Function(Event)? onChange,
-    void Function(MouseEvent)? onClick,
-    void Function(MouseEvent)? onContextMenu,
-    void Function(ClipboardEvent)? onCopy,
-    void Function(ClipboardEvent)? onCut,
-    void Function(Event)? onDoubleClick,
-    void Function(MouseEvent)? onDrag,
-    void Function(MouseEvent)? onDragEnd,
-    void Function(MouseEvent)? onDragEnter,
-    void Function(MouseEvent)? onDragLeave,
-    void Function(MouseEvent)? onDragOver,
-    void Function(MouseEvent)? onDragStart,
-    void Function(MouseEvent)? onDrop,
-    void Function(Event)? onDurationChange,
-    void Function(Event)? onEmptied,
-    void Function(Event)? onEnded,
-    void Function(Event)? onError,
-    void Function(Event)? onFocus,
-    void Function(Event)? onInput,
-    void Function(Event)? onInvalid,
-    void Function(KeyboardEvent)? onKeyDown,
-    void Function(KeyboardEvent)? onKeyPress,
-    void Function(KeyboardEvent)? onKeyUp,
-    void Function(Event)? onLoad,
-    void Function(Event)? onLoadedData,
-    void Function(Event)? onLoadedMetadata,
-    void Function(MouseEvent)? onMouseDown,
-    void Function(MouseEvent)? onMouseEnter,
-    void Function(MouseEvent)? onMouseLeave,
-    void Function(MouseEvent)? onMouseMove,
-    void Function(MouseEvent)? onMouseOut,
-    void Function(MouseEvent)? onMouseOver,
-    void Function(MouseEvent)? onMouseUp,
-    void Function(WheelEvent)? onMouseWheel,
-    void Function(ClipboardEvent)? onPaste,
-    void Function(Event)? onPause,
-    void Function(Event)? onPlay,
-    void Function(Event)? onPlaying,
-    void Function(Event)? onRateChange,
-    void Function(Event)? onReset,
-    void Function(Event)? onResize,
-    void Function(Event)? onScroll,
-    void Function(Event)? onSearch,
-    void Function(Event)? onSeeked,
-    void Function(Event)? onSeeking,
-    void Function(Event)? onSelect,
-    void Function(Event)? onSelectStart,
-    void Function(Event)? onStalled,
-    void Function(Event)? onSubmit,
-    void Function(Event)? onSuspend,
-    void Function(Event)? onTimeUpdate,
-    void Function(TouchEvent)? onTouchCancel,
-    void Function(TouchEvent)? onTouchEnd,
-    void Function(TouchEvent)? onTouchEnter,
-    void Function(TouchEvent)? onTouchLeave,
-    void Function(TouchEvent)? onTouchMove,
-    void Function(TouchEvent)? onTouchStart,
-    void Function(TransitionEvent)? onTransitionEnd,
-    void Function(Event)? onVolumeChange,
-    void Function(Event)? onWaiting,
-    void Function(Event)? onFullscreenChange,
-    void Function(Event)? onFullscreenError,
-    void Function(WheelEvent)? onWheel}) {
-  final v = TableColElement();
-  if (span != null) v.span = span;
-  if (nonce != null) v.nonce = nonce;
-  if (attributes != null) v.attributes = attributes;
-  if (children != null) v.children = children;
-  if (classes != null) v.classes = classes;
-  if (dataset != null) v.dataset = dataset;
-  if (innerHtml != null) v.innerHtml = innerHtml;
-  if (innerText != null) v.innerText = innerText;
-  if (scrollLeft != null) v.scrollLeft = scrollLeft;
-  if (scrollTop != null) v.scrollTop = scrollTop;
-  if (contentEditable != null) v.contentEditable = contentEditable;
-  if (dir != null) v.dir = dir;
-  if (draggable != null) v.draggable = draggable;
-  if (hidden != null) v.hidden = hidden;
-  if (inert != null) v.inert = inert;
-  if (inputMode != null) v.inputMode = inputMode;
-  if (lang != null) v.lang = lang;
-  if (spellcheck != null) v.spellcheck = spellcheck;
-  if (tabIndex != null) v.tabIndex = tabIndex;
-  if (title != null) v.title = title;
-  if (translate != null) v.translate = translate;
-  if (className != null) v.className = className;
-  if (id != null) v.id = id;
-  if (slot != null) v.slot = slot;
-  if (nodes != null) v.nodes = nodes;
-  if (text != null) v.text = text;
-  if (onAbort != null) v.onAbort.listen(onAbort);
-  if (onBeforeCopy != null) v.onBeforeCopy.listen(onBeforeCopy);
-  if (onBeforeCut != null) v.onBeforeCut.listen(onBeforeCut);
-  if (onBeforePaste != null) v.onBeforePaste.listen(onBeforePaste);
-  if (onBlur != null) v.onBlur.listen(onBlur);
-  if (onCanPlay != null) v.onCanPlay.listen(onCanPlay);
-  if (onCanPlayThrough != null) v.onCanPlayThrough.listen(onCanPlayThrough);
-  if (onChange != null) v.onChange.listen(onChange);
-  if (onClick != null) v.onClick.listen(onClick);
-  if (onContextMenu != null) v.onContextMenu.listen(onContextMenu);
-  if (onCopy != null) v.onCopy.listen(onCopy);
-  if (onCut != null) v.onCut.listen(onCut);
-  if (onDoubleClick != null) v.onDoubleClick.listen(onDoubleClick);
-  if (onDrag != null) v.onDrag.listen(onDrag);
-  if (onDragEnd != null) v.onDragEnd.listen(onDragEnd);
-  if (onDragEnter != null) v.onDragEnter.listen(onDragEnter);
-  if (onDragLeave != null) v.onDragLeave.listen(onDragLeave);
-  if (onDragOver != null) v.onDragOver.listen(onDragOver);
-  if (onDragStart != null) v.onDragStart.listen(onDragStart);
-  if (onDrop != null) v.onDrop.listen(onDrop);
-  if (onDurationChange != null) v.onDurationChange.listen(onDurationChange);
-  if (onEmptied != null) v.onEmptied.listen(onEmptied);
-  if (onEnded != null) v.onEnded.listen(onEnded);
-  if (onError != null) v.onError.listen(onError);
-  if (onFocus != null) v.onFocus.listen(onFocus);
-  if (onInput != null) v.onInput.listen(onInput);
-  if (onInvalid != null) v.onInvalid.listen(onInvalid);
-  if (onKeyDown != null) v.onKeyDown.listen(onKeyDown);
-  if (onKeyPress != null) v.onKeyPress.listen(onKeyPress);
-  if (onKeyUp != null) v.onKeyUp.listen(onKeyUp);
-  if (onLoad != null) v.onLoad.listen(onLoad);
-  if (onLoadedData != null) v.onLoadedData.listen(onLoadedData);
-  if (onLoadedMetadata != null) v.onLoadedMetadata.listen(onLoadedMetadata);
-  if (onMouseDown != null) v.onMouseDown.listen(onMouseDown);
-  if (onMouseEnter != null) v.onMouseEnter.listen(onMouseEnter);
-  if (onMouseLeave != null) v.onMouseLeave.listen(onMouseLeave);
-  if (onMouseMove != null) v.onMouseMove.listen(onMouseMove);
-  if (onMouseOut != null) v.onMouseOut.listen(onMouseOut);
-  if (onMouseOver != null) v.onMouseOver.listen(onMouseOver);
-  if (onMouseUp != null) v.onMouseUp.listen(onMouseUp);
-  if (onMouseWheel != null) v.onMouseWheel.listen(onMouseWheel);
-  if (onPaste != null) v.onPaste.listen(onPaste);
-  if (onPause != null) v.onPause.listen(onPause);
-  if (onPlay != null) v.onPlay.listen(onPlay);
-  if (onPlaying != null) v.onPlaying.listen(onPlaying);
-  if (onRateChange != null) v.onRateChange.listen(onRateChange);
-  if (onReset != null) v.onReset.listen(onReset);
-  if (onResize != null) v.onResize.listen(onResize);
-  if (onScroll != null) v.onScroll.listen(onScroll);
-  if (onSearch != null) v.onSearch.listen(onSearch);
-  if (onSeeked != null) v.onSeeked.listen(onSeeked);
-  if (onSeeking != null) v.onSeeking.listen(onSeeking);
-  if (onSelect != null) v.onSelect.listen(onSelect);
-  if (onSelectStart != null) v.onSelectStart.listen(onSelectStart);
-  if (onStalled != null) v.onStalled.listen(onStalled);
-  if (onSubmit != null) v.onSubmit.listen(onSubmit);
-  if (onSuspend != null) v.onSuspend.listen(onSuspend);
-  if (onTimeUpdate != null) v.onTimeUpdate.listen(onTimeUpdate);
-  if (onTouchCancel != null) v.onTouchCancel.listen(onTouchCancel);
-  if (onTouchEnd != null) v.onTouchEnd.listen(onTouchEnd);
-  if (onTouchEnter != null) v.onTouchEnter.listen(onTouchEnter);
-  if (onTouchLeave != null) v.onTouchLeave.listen(onTouchLeave);
-  if (onTouchMove != null) v.onTouchMove.listen(onTouchMove);
-  if (onTouchStart != null) v.onTouchStart.listen(onTouchStart);
-  if (onTransitionEnd != null) v.onTransitionEnd.listen(onTransitionEnd);
-  if (onVolumeChange != null) v.onVolumeChange.listen(onVolumeChange);
-  if (onWaiting != null) v.onWaiting.listen(onWaiting);
-  if (onFullscreenChange != null)
-    v.onFullscreenChange.listen(onFullscreenChange);
-  if (onFullscreenError != null) v.onFullscreenError.listen(onFullscreenError);
-  if (onWheel != null) v.onWheel.listen(onWheel);
-  return v;
+class TemplateElementWidget extends HtmlElementWidget {
+  TemplateElementWidget(
+      {super.nonce,
+      super.attributes,
+      super.children,
+      super.classes,
+      super.dataset,
+      super.innerHtml,
+      super.innerText,
+      super.scrollLeft,
+      super.scrollTop,
+      super.contentEditable,
+      super.dir,
+      super.draggable,
+      super.hidden,
+      super.inert,
+      super.inputMode,
+      super.lang,
+      super.spellcheck,
+      super.tabIndex,
+      super.title,
+      super.translate,
+      super.className,
+      super.id,
+      super.slot,
+      super.nodes,
+      super.text,
+      super.onAbort,
+      super.onBeforeCopy,
+      super.onBeforeCut,
+      super.onBeforePaste,
+      super.onBlur,
+      super.onCanPlay,
+      super.onCanPlayThrough,
+      super.onChange,
+      super.onClick,
+      super.onContextMenu,
+      super.onCopy,
+      super.onCut,
+      super.onDoubleClick,
+      super.onDrag,
+      super.onDragEnd,
+      super.onDragEnter,
+      super.onDragLeave,
+      super.onDragOver,
+      super.onDragStart,
+      super.onDrop,
+      super.onDurationChange,
+      super.onEmptied,
+      super.onEnded,
+      super.onError,
+      super.onFocus,
+      super.onInput,
+      super.onInvalid,
+      super.onKeyDown,
+      super.onKeyPress,
+      super.onKeyUp,
+      super.onLoad,
+      super.onLoadedData,
+      super.onLoadedMetadata,
+      super.onMouseDown,
+      super.onMouseEnter,
+      super.onMouseLeave,
+      super.onMouseMove,
+      super.onMouseOut,
+      super.onMouseOver,
+      super.onMouseUp,
+      super.onMouseWheel,
+      super.onPaste,
+      super.onPause,
+      super.onPlay,
+      super.onPlaying,
+      super.onRateChange,
+      super.onReset,
+      super.onResize,
+      super.onScroll,
+      super.onSearch,
+      super.onSeeked,
+      super.onSeeking,
+      super.onSelect,
+      super.onSelectStart,
+      super.onStalled,
+      super.onSubmit,
+      super.onSuspend,
+      super.onTimeUpdate,
+      super.onTouchCancel,
+      super.onTouchEnd,
+      super.onTouchEnter,
+      super.onTouchLeave,
+      super.onTouchMove,
+      super.onTouchStart,
+      super.onTransitionEnd,
+      super.onVolumeChange,
+      super.onWaiting,
+      super.onFullscreenChange,
+      super.onFullscreenError,
+      super.onWheel});
+  @override
+  Element render() => hook(TemplateElement());
 }
 
-TableElement tableElement(
-    {TableCaptionElement? caption,
-    TableSectionElement? tFoot,
-    TableSectionElement? tHead,
-    String? nonce,
-    Map<String, String>? attributes,
-    List<Element>? children,
-    Iterable<String>? classes,
-    Map<String, String>? dataset,
-    String? innerHtml,
-    String? innerText,
-    int? scrollLeft,
-    int? scrollTop,
-    String? contentEditable,
-    String? dir,
-    bool? draggable,
-    bool? hidden,
-    bool? inert,
-    String? inputMode,
-    String? lang,
-    bool? spellcheck,
-    int? tabIndex,
-    String? title,
-    bool? translate,
-    String? className,
-    String? id,
-    String? slot,
-    Iterable<Node>? nodes,
-    String? text,
-    void Function(Event)? onAbort,
-    void Function(Event)? onBeforeCopy,
-    void Function(Event)? onBeforeCut,
-    void Function(Event)? onBeforePaste,
-    void Function(Event)? onBlur,
-    void Function(Event)? onCanPlay,
-    void Function(Event)? onCanPlayThrough,
-    void Function(Event)? onChange,
-    void Function(MouseEvent)? onClick,
-    void Function(MouseEvent)? onContextMenu,
-    void Function(ClipboardEvent)? onCopy,
-    void Function(ClipboardEvent)? onCut,
-    void Function(Event)? onDoubleClick,
-    void Function(MouseEvent)? onDrag,
-    void Function(MouseEvent)? onDragEnd,
-    void Function(MouseEvent)? onDragEnter,
-    void Function(MouseEvent)? onDragLeave,
-    void Function(MouseEvent)? onDragOver,
-    void Function(MouseEvent)? onDragStart,
-    void Function(MouseEvent)? onDrop,
-    void Function(Event)? onDurationChange,
-    void Function(Event)? onEmptied,
-    void Function(Event)? onEnded,
-    void Function(Event)? onError,
-    void Function(Event)? onFocus,
-    void Function(Event)? onInput,
-    void Function(Event)? onInvalid,
-    void Function(KeyboardEvent)? onKeyDown,
-    void Function(KeyboardEvent)? onKeyPress,
-    void Function(KeyboardEvent)? onKeyUp,
-    void Function(Event)? onLoad,
-    void Function(Event)? onLoadedData,
-    void Function(Event)? onLoadedMetadata,
-    void Function(MouseEvent)? onMouseDown,
-    void Function(MouseEvent)? onMouseEnter,
-    void Function(MouseEvent)? onMouseLeave,
-    void Function(MouseEvent)? onMouseMove,
-    void Function(MouseEvent)? onMouseOut,
-    void Function(MouseEvent)? onMouseOver,
-    void Function(MouseEvent)? onMouseUp,
-    void Function(WheelEvent)? onMouseWheel,
-    void Function(ClipboardEvent)? onPaste,
-    void Function(Event)? onPause,
-    void Function(Event)? onPlay,
-    void Function(Event)? onPlaying,
-    void Function(Event)? onRateChange,
-    void Function(Event)? onReset,
-    void Function(Event)? onResize,
-    void Function(Event)? onScroll,
-    void Function(Event)? onSearch,
-    void Function(Event)? onSeeked,
-    void Function(Event)? onSeeking,
-    void Function(Event)? onSelect,
-    void Function(Event)? onSelectStart,
-    void Function(Event)? onStalled,
-    void Function(Event)? onSubmit,
-    void Function(Event)? onSuspend,
-    void Function(Event)? onTimeUpdate,
-    void Function(TouchEvent)? onTouchCancel,
-    void Function(TouchEvent)? onTouchEnd,
-    void Function(TouchEvent)? onTouchEnter,
-    void Function(TouchEvent)? onTouchLeave,
-    void Function(TouchEvent)? onTouchMove,
-    void Function(TouchEvent)? onTouchStart,
-    void Function(TransitionEvent)? onTransitionEnd,
-    void Function(Event)? onVolumeChange,
-    void Function(Event)? onWaiting,
-    void Function(Event)? onFullscreenChange,
-    void Function(Event)? onFullscreenError,
-    void Function(WheelEvent)? onWheel}) {
-  final v = TableElement();
-  if (caption != null) v.caption = caption;
-  if (tFoot != null) v.tFoot = tFoot;
-  if (tHead != null) v.tHead = tHead;
-  if (nonce != null) v.nonce = nonce;
-  if (attributes != null) v.attributes = attributes;
-  if (children != null) v.children = children;
-  if (classes != null) v.classes = classes;
-  if (dataset != null) v.dataset = dataset;
-  if (innerHtml != null) v.innerHtml = innerHtml;
-  if (innerText != null) v.innerText = innerText;
-  if (scrollLeft != null) v.scrollLeft = scrollLeft;
-  if (scrollTop != null) v.scrollTop = scrollTop;
-  if (contentEditable != null) v.contentEditable = contentEditable;
-  if (dir != null) v.dir = dir;
-  if (draggable != null) v.draggable = draggable;
-  if (hidden != null) v.hidden = hidden;
-  if (inert != null) v.inert = inert;
-  if (inputMode != null) v.inputMode = inputMode;
-  if (lang != null) v.lang = lang;
-  if (spellcheck != null) v.spellcheck = spellcheck;
-  if (tabIndex != null) v.tabIndex = tabIndex;
-  if (title != null) v.title = title;
-  if (translate != null) v.translate = translate;
-  if (className != null) v.className = className;
-  if (id != null) v.id = id;
-  if (slot != null) v.slot = slot;
-  if (nodes != null) v.nodes = nodes;
-  if (text != null) v.text = text;
-  if (onAbort != null) v.onAbort.listen(onAbort);
-  if (onBeforeCopy != null) v.onBeforeCopy.listen(onBeforeCopy);
-  if (onBeforeCut != null) v.onBeforeCut.listen(onBeforeCut);
-  if (onBeforePaste != null) v.onBeforePaste.listen(onBeforePaste);
-  if (onBlur != null) v.onBlur.listen(onBlur);
-  if (onCanPlay != null) v.onCanPlay.listen(onCanPlay);
-  if (onCanPlayThrough != null) v.onCanPlayThrough.listen(onCanPlayThrough);
-  if (onChange != null) v.onChange.listen(onChange);
-  if (onClick != null) v.onClick.listen(onClick);
-  if (onContextMenu != null) v.onContextMenu.listen(onContextMenu);
-  if (onCopy != null) v.onCopy.listen(onCopy);
-  if (onCut != null) v.onCut.listen(onCut);
-  if (onDoubleClick != null) v.onDoubleClick.listen(onDoubleClick);
-  if (onDrag != null) v.onDrag.listen(onDrag);
-  if (onDragEnd != null) v.onDragEnd.listen(onDragEnd);
-  if (onDragEnter != null) v.onDragEnter.listen(onDragEnter);
-  if (onDragLeave != null) v.onDragLeave.listen(onDragLeave);
-  if (onDragOver != null) v.onDragOver.listen(onDragOver);
-  if (onDragStart != null) v.onDragStart.listen(onDragStart);
-  if (onDrop != null) v.onDrop.listen(onDrop);
-  if (onDurationChange != null) v.onDurationChange.listen(onDurationChange);
-  if (onEmptied != null) v.onEmptied.listen(onEmptied);
-  if (onEnded != null) v.onEnded.listen(onEnded);
-  if (onError != null) v.onError.listen(onError);
-  if (onFocus != null) v.onFocus.listen(onFocus);
-  if (onInput != null) v.onInput.listen(onInput);
-  if (onInvalid != null) v.onInvalid.listen(onInvalid);
-  if (onKeyDown != null) v.onKeyDown.listen(onKeyDown);
-  if (onKeyPress != null) v.onKeyPress.listen(onKeyPress);
-  if (onKeyUp != null) v.onKeyUp.listen(onKeyUp);
-  if (onLoad != null) v.onLoad.listen(onLoad);
-  if (onLoadedData != null) v.onLoadedData.listen(onLoadedData);
-  if (onLoadedMetadata != null) v.onLoadedMetadata.listen(onLoadedMetadata);
-  if (onMouseDown != null) v.onMouseDown.listen(onMouseDown);
-  if (onMouseEnter != null) v.onMouseEnter.listen(onMouseEnter);
-  if (onMouseLeave != null) v.onMouseLeave.listen(onMouseLeave);
-  if (onMouseMove != null) v.onMouseMove.listen(onMouseMove);
-  if (onMouseOut != null) v.onMouseOut.listen(onMouseOut);
-  if (onMouseOver != null) v.onMouseOver.listen(onMouseOver);
-  if (onMouseUp != null) v.onMouseUp.listen(onMouseUp);
-  if (onMouseWheel != null) v.onMouseWheel.listen(onMouseWheel);
-  if (onPaste != null) v.onPaste.listen(onPaste);
-  if (onPause != null) v.onPause.listen(onPause);
-  if (onPlay != null) v.onPlay.listen(onPlay);
-  if (onPlaying != null) v.onPlaying.listen(onPlaying);
-  if (onRateChange != null) v.onRateChange.listen(onRateChange);
-  if (onReset != null) v.onReset.listen(onReset);
-  if (onResize != null) v.onResize.listen(onResize);
-  if (onScroll != null) v.onScroll.listen(onScroll);
-  if (onSearch != null) v.onSearch.listen(onSearch);
-  if (onSeeked != null) v.onSeeked.listen(onSeeked);
-  if (onSeeking != null) v.onSeeking.listen(onSeeking);
-  if (onSelect != null) v.onSelect.listen(onSelect);
-  if (onSelectStart != null) v.onSelectStart.listen(onSelectStart);
-  if (onStalled != null) v.onStalled.listen(onStalled);
-  if (onSubmit != null) v.onSubmit.listen(onSubmit);
-  if (onSuspend != null) v.onSuspend.listen(onSuspend);
-  if (onTimeUpdate != null) v.onTimeUpdate.listen(onTimeUpdate);
-  if (onTouchCancel != null) v.onTouchCancel.listen(onTouchCancel);
-  if (onTouchEnd != null) v.onTouchEnd.listen(onTouchEnd);
-  if (onTouchEnter != null) v.onTouchEnter.listen(onTouchEnter);
-  if (onTouchLeave != null) v.onTouchLeave.listen(onTouchLeave);
-  if (onTouchMove != null) v.onTouchMove.listen(onTouchMove);
-  if (onTouchStart != null) v.onTouchStart.listen(onTouchStart);
-  if (onTransitionEnd != null) v.onTransitionEnd.listen(onTransitionEnd);
-  if (onVolumeChange != null) v.onVolumeChange.listen(onVolumeChange);
-  if (onWaiting != null) v.onWaiting.listen(onWaiting);
-  if (onFullscreenChange != null)
-    v.onFullscreenChange.listen(onFullscreenChange);
-  if (onFullscreenError != null) v.onFullscreenError.listen(onFullscreenError);
-  if (onWheel != null) v.onWheel.listen(onWheel);
-  return v;
+class TextAreaElementWidget extends HtmlElementWidget {
+  TextAreaElementWidget(
+      {super.nonce,
+      super.attributes,
+      super.children,
+      super.classes,
+      super.dataset,
+      super.innerHtml,
+      super.innerText,
+      super.scrollLeft,
+      super.scrollTop,
+      super.contentEditable,
+      super.dir,
+      super.draggable,
+      super.hidden,
+      super.inert,
+      super.inputMode,
+      super.lang,
+      super.spellcheck,
+      super.tabIndex,
+      super.title,
+      super.translate,
+      super.className,
+      super.id,
+      super.slot,
+      super.nodes,
+      super.text,
+      super.onAbort,
+      super.onBeforeCopy,
+      super.onBeforeCut,
+      super.onBeforePaste,
+      super.onBlur,
+      super.onCanPlay,
+      super.onCanPlayThrough,
+      super.onChange,
+      super.onClick,
+      super.onContextMenu,
+      super.onCopy,
+      super.onCut,
+      super.onDoubleClick,
+      super.onDrag,
+      super.onDragEnd,
+      super.onDragEnter,
+      super.onDragLeave,
+      super.onDragOver,
+      super.onDragStart,
+      super.onDrop,
+      super.onDurationChange,
+      super.onEmptied,
+      super.onEnded,
+      super.onError,
+      super.onFocus,
+      super.onInput,
+      super.onInvalid,
+      super.onKeyDown,
+      super.onKeyPress,
+      super.onKeyUp,
+      super.onLoad,
+      super.onLoadedData,
+      super.onLoadedMetadata,
+      super.onMouseDown,
+      super.onMouseEnter,
+      super.onMouseLeave,
+      super.onMouseMove,
+      super.onMouseOut,
+      super.onMouseOver,
+      super.onMouseUp,
+      super.onMouseWheel,
+      super.onPaste,
+      super.onPause,
+      super.onPlay,
+      super.onPlaying,
+      super.onRateChange,
+      super.onReset,
+      super.onResize,
+      super.onScroll,
+      super.onSearch,
+      super.onSeeked,
+      super.onSeeking,
+      super.onSelect,
+      super.onSelectStart,
+      super.onStalled,
+      super.onSubmit,
+      super.onSuspend,
+      super.onTimeUpdate,
+      super.onTouchCancel,
+      super.onTouchEnd,
+      super.onTouchEnter,
+      super.onTouchLeave,
+      super.onTouchMove,
+      super.onTouchStart,
+      super.onTransitionEnd,
+      super.onVolumeChange,
+      super.onWaiting,
+      super.onFullscreenChange,
+      super.onFullscreenError,
+      super.onWheel});
+  @override
+  Element render() => hook(TextAreaElement());
 }
 
-TableRowElement tableRowElement(
-    {String? nonce,
-    Map<String, String>? attributes,
-    List<Element>? children,
-    Iterable<String>? classes,
-    Map<String, String>? dataset,
-    String? innerHtml,
-    String? innerText,
-    int? scrollLeft,
-    int? scrollTop,
-    String? contentEditable,
-    String? dir,
-    bool? draggable,
-    bool? hidden,
-    bool? inert,
-    String? inputMode,
-    String? lang,
-    bool? spellcheck,
-    int? tabIndex,
-    String? title,
-    bool? translate,
-    String? className,
-    String? id,
-    String? slot,
-    Iterable<Node>? nodes,
-    String? text,
-    void Function(Event)? onAbort,
-    void Function(Event)? onBeforeCopy,
-    void Function(Event)? onBeforeCut,
-    void Function(Event)? onBeforePaste,
-    void Function(Event)? onBlur,
-    void Function(Event)? onCanPlay,
-    void Function(Event)? onCanPlayThrough,
-    void Function(Event)? onChange,
-    void Function(MouseEvent)? onClick,
-    void Function(MouseEvent)? onContextMenu,
-    void Function(ClipboardEvent)? onCopy,
-    void Function(ClipboardEvent)? onCut,
-    void Function(Event)? onDoubleClick,
-    void Function(MouseEvent)? onDrag,
-    void Function(MouseEvent)? onDragEnd,
-    void Function(MouseEvent)? onDragEnter,
-    void Function(MouseEvent)? onDragLeave,
-    void Function(MouseEvent)? onDragOver,
-    void Function(MouseEvent)? onDragStart,
-    void Function(MouseEvent)? onDrop,
-    void Function(Event)? onDurationChange,
-    void Function(Event)? onEmptied,
-    void Function(Event)? onEnded,
-    void Function(Event)? onError,
-    void Function(Event)? onFocus,
-    void Function(Event)? onInput,
-    void Function(Event)? onInvalid,
-    void Function(KeyboardEvent)? onKeyDown,
-    void Function(KeyboardEvent)? onKeyPress,
-    void Function(KeyboardEvent)? onKeyUp,
-    void Function(Event)? onLoad,
-    void Function(Event)? onLoadedData,
-    void Function(Event)? onLoadedMetadata,
-    void Function(MouseEvent)? onMouseDown,
-    void Function(MouseEvent)? onMouseEnter,
-    void Function(MouseEvent)? onMouseLeave,
-    void Function(MouseEvent)? onMouseMove,
-    void Function(MouseEvent)? onMouseOut,
-    void Function(MouseEvent)? onMouseOver,
-    void Function(MouseEvent)? onMouseUp,
-    void Function(WheelEvent)? onMouseWheel,
-    void Function(ClipboardEvent)? onPaste,
-    void Function(Event)? onPause,
-    void Function(Event)? onPlay,
-    void Function(Event)? onPlaying,
-    void Function(Event)? onRateChange,
-    void Function(Event)? onReset,
-    void Function(Event)? onResize,
-    void Function(Event)? onScroll,
-    void Function(Event)? onSearch,
-    void Function(Event)? onSeeked,
-    void Function(Event)? onSeeking,
-    void Function(Event)? onSelect,
-    void Function(Event)? onSelectStart,
-    void Function(Event)? onStalled,
-    void Function(Event)? onSubmit,
-    void Function(Event)? onSuspend,
-    void Function(Event)? onTimeUpdate,
-    void Function(TouchEvent)? onTouchCancel,
-    void Function(TouchEvent)? onTouchEnd,
-    void Function(TouchEvent)? onTouchEnter,
-    void Function(TouchEvent)? onTouchLeave,
-    void Function(TouchEvent)? onTouchMove,
-    void Function(TouchEvent)? onTouchStart,
-    void Function(TransitionEvent)? onTransitionEnd,
-    void Function(Event)? onVolumeChange,
-    void Function(Event)? onWaiting,
-    void Function(Event)? onFullscreenChange,
-    void Function(Event)? onFullscreenError,
-    void Function(WheelEvent)? onWheel}) {
-  final v = TableRowElement();
-  if (nonce != null) v.nonce = nonce;
-  if (attributes != null) v.attributes = attributes;
-  if (children != null) v.children = children;
-  if (classes != null) v.classes = classes;
-  if (dataset != null) v.dataset = dataset;
-  if (innerHtml != null) v.innerHtml = innerHtml;
-  if (innerText != null) v.innerText = innerText;
-  if (scrollLeft != null) v.scrollLeft = scrollLeft;
-  if (scrollTop != null) v.scrollTop = scrollTop;
-  if (contentEditable != null) v.contentEditable = contentEditable;
-  if (dir != null) v.dir = dir;
-  if (draggable != null) v.draggable = draggable;
-  if (hidden != null) v.hidden = hidden;
-  if (inert != null) v.inert = inert;
-  if (inputMode != null) v.inputMode = inputMode;
-  if (lang != null) v.lang = lang;
-  if (spellcheck != null) v.spellcheck = spellcheck;
-  if (tabIndex != null) v.tabIndex = tabIndex;
-  if (title != null) v.title = title;
-  if (translate != null) v.translate = translate;
-  if (className != null) v.className = className;
-  if (id != null) v.id = id;
-  if (slot != null) v.slot = slot;
-  if (nodes != null) v.nodes = nodes;
-  if (text != null) v.text = text;
-  if (onAbort != null) v.onAbort.listen(onAbort);
-  if (onBeforeCopy != null) v.onBeforeCopy.listen(onBeforeCopy);
-  if (onBeforeCut != null) v.onBeforeCut.listen(onBeforeCut);
-  if (onBeforePaste != null) v.onBeforePaste.listen(onBeforePaste);
-  if (onBlur != null) v.onBlur.listen(onBlur);
-  if (onCanPlay != null) v.onCanPlay.listen(onCanPlay);
-  if (onCanPlayThrough != null) v.onCanPlayThrough.listen(onCanPlayThrough);
-  if (onChange != null) v.onChange.listen(onChange);
-  if (onClick != null) v.onClick.listen(onClick);
-  if (onContextMenu != null) v.onContextMenu.listen(onContextMenu);
-  if (onCopy != null) v.onCopy.listen(onCopy);
-  if (onCut != null) v.onCut.listen(onCut);
-  if (onDoubleClick != null) v.onDoubleClick.listen(onDoubleClick);
-  if (onDrag != null) v.onDrag.listen(onDrag);
-  if (onDragEnd != null) v.onDragEnd.listen(onDragEnd);
-  if (onDragEnter != null) v.onDragEnter.listen(onDragEnter);
-  if (onDragLeave != null) v.onDragLeave.listen(onDragLeave);
-  if (onDragOver != null) v.onDragOver.listen(onDragOver);
-  if (onDragStart != null) v.onDragStart.listen(onDragStart);
-  if (onDrop != null) v.onDrop.listen(onDrop);
-  if (onDurationChange != null) v.onDurationChange.listen(onDurationChange);
-  if (onEmptied != null) v.onEmptied.listen(onEmptied);
-  if (onEnded != null) v.onEnded.listen(onEnded);
-  if (onError != null) v.onError.listen(onError);
-  if (onFocus != null) v.onFocus.listen(onFocus);
-  if (onInput != null) v.onInput.listen(onInput);
-  if (onInvalid != null) v.onInvalid.listen(onInvalid);
-  if (onKeyDown != null) v.onKeyDown.listen(onKeyDown);
-  if (onKeyPress != null) v.onKeyPress.listen(onKeyPress);
-  if (onKeyUp != null) v.onKeyUp.listen(onKeyUp);
-  if (onLoad != null) v.onLoad.listen(onLoad);
-  if (onLoadedData != null) v.onLoadedData.listen(onLoadedData);
-  if (onLoadedMetadata != null) v.onLoadedMetadata.listen(onLoadedMetadata);
-  if (onMouseDown != null) v.onMouseDown.listen(onMouseDown);
-  if (onMouseEnter != null) v.onMouseEnter.listen(onMouseEnter);
-  if (onMouseLeave != null) v.onMouseLeave.listen(onMouseLeave);
-  if (onMouseMove != null) v.onMouseMove.listen(onMouseMove);
-  if (onMouseOut != null) v.onMouseOut.listen(onMouseOut);
-  if (onMouseOver != null) v.onMouseOver.listen(onMouseOver);
-  if (onMouseUp != null) v.onMouseUp.listen(onMouseUp);
-  if (onMouseWheel != null) v.onMouseWheel.listen(onMouseWheel);
-  if (onPaste != null) v.onPaste.listen(onPaste);
-  if (onPause != null) v.onPause.listen(onPause);
-  if (onPlay != null) v.onPlay.listen(onPlay);
-  if (onPlaying != null) v.onPlaying.listen(onPlaying);
-  if (onRateChange != null) v.onRateChange.listen(onRateChange);
-  if (onReset != null) v.onReset.listen(onReset);
-  if (onResize != null) v.onResize.listen(onResize);
-  if (onScroll != null) v.onScroll.listen(onScroll);
-  if (onSearch != null) v.onSearch.listen(onSearch);
-  if (onSeeked != null) v.onSeeked.listen(onSeeked);
-  if (onSeeking != null) v.onSeeking.listen(onSeeking);
-  if (onSelect != null) v.onSelect.listen(onSelect);
-  if (onSelectStart != null) v.onSelectStart.listen(onSelectStart);
-  if (onStalled != null) v.onStalled.listen(onStalled);
-  if (onSubmit != null) v.onSubmit.listen(onSubmit);
-  if (onSuspend != null) v.onSuspend.listen(onSuspend);
-  if (onTimeUpdate != null) v.onTimeUpdate.listen(onTimeUpdate);
-  if (onTouchCancel != null) v.onTouchCancel.listen(onTouchCancel);
-  if (onTouchEnd != null) v.onTouchEnd.listen(onTouchEnd);
-  if (onTouchEnter != null) v.onTouchEnter.listen(onTouchEnter);
-  if (onTouchLeave != null) v.onTouchLeave.listen(onTouchLeave);
-  if (onTouchMove != null) v.onTouchMove.listen(onTouchMove);
-  if (onTouchStart != null) v.onTouchStart.listen(onTouchStart);
-  if (onTransitionEnd != null) v.onTransitionEnd.listen(onTransitionEnd);
-  if (onVolumeChange != null) v.onVolumeChange.listen(onVolumeChange);
-  if (onWaiting != null) v.onWaiting.listen(onWaiting);
-  if (onFullscreenChange != null)
-    v.onFullscreenChange.listen(onFullscreenChange);
-  if (onFullscreenError != null) v.onFullscreenError.listen(onFullscreenError);
-  if (onWheel != null) v.onWheel.listen(onWheel);
-  return v;
+class TitleElementWidget extends HtmlElementWidget {
+  TitleElementWidget(
+      {super.nonce,
+      super.attributes,
+      super.children,
+      super.classes,
+      super.dataset,
+      super.innerHtml,
+      super.innerText,
+      super.scrollLeft,
+      super.scrollTop,
+      super.contentEditable,
+      super.dir,
+      super.draggable,
+      super.hidden,
+      super.inert,
+      super.inputMode,
+      super.lang,
+      super.spellcheck,
+      super.tabIndex,
+      super.title,
+      super.translate,
+      super.className,
+      super.id,
+      super.slot,
+      super.nodes,
+      super.text,
+      super.onAbort,
+      super.onBeforeCopy,
+      super.onBeforeCut,
+      super.onBeforePaste,
+      super.onBlur,
+      super.onCanPlay,
+      super.onCanPlayThrough,
+      super.onChange,
+      super.onClick,
+      super.onContextMenu,
+      super.onCopy,
+      super.onCut,
+      super.onDoubleClick,
+      super.onDrag,
+      super.onDragEnd,
+      super.onDragEnter,
+      super.onDragLeave,
+      super.onDragOver,
+      super.onDragStart,
+      super.onDrop,
+      super.onDurationChange,
+      super.onEmptied,
+      super.onEnded,
+      super.onError,
+      super.onFocus,
+      super.onInput,
+      super.onInvalid,
+      super.onKeyDown,
+      super.onKeyPress,
+      super.onKeyUp,
+      super.onLoad,
+      super.onLoadedData,
+      super.onLoadedMetadata,
+      super.onMouseDown,
+      super.onMouseEnter,
+      super.onMouseLeave,
+      super.onMouseMove,
+      super.onMouseOut,
+      super.onMouseOver,
+      super.onMouseUp,
+      super.onMouseWheel,
+      super.onPaste,
+      super.onPause,
+      super.onPlay,
+      super.onPlaying,
+      super.onRateChange,
+      super.onReset,
+      super.onResize,
+      super.onScroll,
+      super.onSearch,
+      super.onSeeked,
+      super.onSeeking,
+      super.onSelect,
+      super.onSelectStart,
+      super.onStalled,
+      super.onSubmit,
+      super.onSuspend,
+      super.onTimeUpdate,
+      super.onTouchCancel,
+      super.onTouchEnd,
+      super.onTouchEnter,
+      super.onTouchLeave,
+      super.onTouchMove,
+      super.onTouchStart,
+      super.onTransitionEnd,
+      super.onVolumeChange,
+      super.onWaiting,
+      super.onFullscreenChange,
+      super.onFullscreenError,
+      super.onWheel});
+  @override
+  Element render() => hook(TitleElement());
 }
 
-TemplateElement templateElement(
-    {String? nonce,
-    Map<String, String>? attributes,
-    List<Element>? children,
-    Iterable<String>? classes,
-    Map<String, String>? dataset,
-    String? innerHtml,
-    String? innerText,
-    int? scrollLeft,
-    int? scrollTop,
-    String? contentEditable,
-    String? dir,
-    bool? draggable,
-    bool? hidden,
-    bool? inert,
-    String? inputMode,
-    String? lang,
-    bool? spellcheck,
-    int? tabIndex,
-    String? title,
-    bool? translate,
-    String? className,
-    String? id,
-    String? slot,
-    Iterable<Node>? nodes,
-    String? text,
-    void Function(Event)? onAbort,
-    void Function(Event)? onBeforeCopy,
-    void Function(Event)? onBeforeCut,
-    void Function(Event)? onBeforePaste,
-    void Function(Event)? onBlur,
-    void Function(Event)? onCanPlay,
-    void Function(Event)? onCanPlayThrough,
-    void Function(Event)? onChange,
-    void Function(MouseEvent)? onClick,
-    void Function(MouseEvent)? onContextMenu,
-    void Function(ClipboardEvent)? onCopy,
-    void Function(ClipboardEvent)? onCut,
-    void Function(Event)? onDoubleClick,
-    void Function(MouseEvent)? onDrag,
-    void Function(MouseEvent)? onDragEnd,
-    void Function(MouseEvent)? onDragEnter,
-    void Function(MouseEvent)? onDragLeave,
-    void Function(MouseEvent)? onDragOver,
-    void Function(MouseEvent)? onDragStart,
-    void Function(MouseEvent)? onDrop,
-    void Function(Event)? onDurationChange,
-    void Function(Event)? onEmptied,
-    void Function(Event)? onEnded,
-    void Function(Event)? onError,
-    void Function(Event)? onFocus,
-    void Function(Event)? onInput,
-    void Function(Event)? onInvalid,
-    void Function(KeyboardEvent)? onKeyDown,
-    void Function(KeyboardEvent)? onKeyPress,
-    void Function(KeyboardEvent)? onKeyUp,
-    void Function(Event)? onLoad,
-    void Function(Event)? onLoadedData,
-    void Function(Event)? onLoadedMetadata,
-    void Function(MouseEvent)? onMouseDown,
-    void Function(MouseEvent)? onMouseEnter,
-    void Function(MouseEvent)? onMouseLeave,
-    void Function(MouseEvent)? onMouseMove,
-    void Function(MouseEvent)? onMouseOut,
-    void Function(MouseEvent)? onMouseOver,
-    void Function(MouseEvent)? onMouseUp,
-    void Function(WheelEvent)? onMouseWheel,
-    void Function(ClipboardEvent)? onPaste,
-    void Function(Event)? onPause,
-    void Function(Event)? onPlay,
-    void Function(Event)? onPlaying,
-    void Function(Event)? onRateChange,
-    void Function(Event)? onReset,
-    void Function(Event)? onResize,
-    void Function(Event)? onScroll,
-    void Function(Event)? onSearch,
-    void Function(Event)? onSeeked,
-    void Function(Event)? onSeeking,
-    void Function(Event)? onSelect,
-    void Function(Event)? onSelectStart,
-    void Function(Event)? onStalled,
-    void Function(Event)? onSubmit,
-    void Function(Event)? onSuspend,
-    void Function(Event)? onTimeUpdate,
-    void Function(TouchEvent)? onTouchCancel,
-    void Function(TouchEvent)? onTouchEnd,
-    void Function(TouchEvent)? onTouchEnter,
-    void Function(TouchEvent)? onTouchLeave,
-    void Function(TouchEvent)? onTouchMove,
-    void Function(TouchEvent)? onTouchStart,
-    void Function(TransitionEvent)? onTransitionEnd,
-    void Function(Event)? onVolumeChange,
-    void Function(Event)? onWaiting,
-    void Function(Event)? onFullscreenChange,
-    void Function(Event)? onFullscreenError,
-    void Function(WheelEvent)? onWheel}) {
-  final v = TemplateElement();
-  if (nonce != null) v.nonce = nonce;
-  if (attributes != null) v.attributes = attributes;
-  if (children != null) v.children = children;
-  if (classes != null) v.classes = classes;
-  if (dataset != null) v.dataset = dataset;
-  if (innerHtml != null) v.innerHtml = innerHtml;
-  if (innerText != null) v.innerText = innerText;
-  if (scrollLeft != null) v.scrollLeft = scrollLeft;
-  if (scrollTop != null) v.scrollTop = scrollTop;
-  if (contentEditable != null) v.contentEditable = contentEditable;
-  if (dir != null) v.dir = dir;
-  if (draggable != null) v.draggable = draggable;
-  if (hidden != null) v.hidden = hidden;
-  if (inert != null) v.inert = inert;
-  if (inputMode != null) v.inputMode = inputMode;
-  if (lang != null) v.lang = lang;
-  if (spellcheck != null) v.spellcheck = spellcheck;
-  if (tabIndex != null) v.tabIndex = tabIndex;
-  if (title != null) v.title = title;
-  if (translate != null) v.translate = translate;
-  if (className != null) v.className = className;
-  if (id != null) v.id = id;
-  if (slot != null) v.slot = slot;
-  if (nodes != null) v.nodes = nodes;
-  if (text != null) v.text = text;
-  if (onAbort != null) v.onAbort.listen(onAbort);
-  if (onBeforeCopy != null) v.onBeforeCopy.listen(onBeforeCopy);
-  if (onBeforeCut != null) v.onBeforeCut.listen(onBeforeCut);
-  if (onBeforePaste != null) v.onBeforePaste.listen(onBeforePaste);
-  if (onBlur != null) v.onBlur.listen(onBlur);
-  if (onCanPlay != null) v.onCanPlay.listen(onCanPlay);
-  if (onCanPlayThrough != null) v.onCanPlayThrough.listen(onCanPlayThrough);
-  if (onChange != null) v.onChange.listen(onChange);
-  if (onClick != null) v.onClick.listen(onClick);
-  if (onContextMenu != null) v.onContextMenu.listen(onContextMenu);
-  if (onCopy != null) v.onCopy.listen(onCopy);
-  if (onCut != null) v.onCut.listen(onCut);
-  if (onDoubleClick != null) v.onDoubleClick.listen(onDoubleClick);
-  if (onDrag != null) v.onDrag.listen(onDrag);
-  if (onDragEnd != null) v.onDragEnd.listen(onDragEnd);
-  if (onDragEnter != null) v.onDragEnter.listen(onDragEnter);
-  if (onDragLeave != null) v.onDragLeave.listen(onDragLeave);
-  if (onDragOver != null) v.onDragOver.listen(onDragOver);
-  if (onDragStart != null) v.onDragStart.listen(onDragStart);
-  if (onDrop != null) v.onDrop.listen(onDrop);
-  if (onDurationChange != null) v.onDurationChange.listen(onDurationChange);
-  if (onEmptied != null) v.onEmptied.listen(onEmptied);
-  if (onEnded != null) v.onEnded.listen(onEnded);
-  if (onError != null) v.onError.listen(onError);
-  if (onFocus != null) v.onFocus.listen(onFocus);
-  if (onInput != null) v.onInput.listen(onInput);
-  if (onInvalid != null) v.onInvalid.listen(onInvalid);
-  if (onKeyDown != null) v.onKeyDown.listen(onKeyDown);
-  if (onKeyPress != null) v.onKeyPress.listen(onKeyPress);
-  if (onKeyUp != null) v.onKeyUp.listen(onKeyUp);
-  if (onLoad != null) v.onLoad.listen(onLoad);
-  if (onLoadedData != null) v.onLoadedData.listen(onLoadedData);
-  if (onLoadedMetadata != null) v.onLoadedMetadata.listen(onLoadedMetadata);
-  if (onMouseDown != null) v.onMouseDown.listen(onMouseDown);
-  if (onMouseEnter != null) v.onMouseEnter.listen(onMouseEnter);
-  if (onMouseLeave != null) v.onMouseLeave.listen(onMouseLeave);
-  if (onMouseMove != null) v.onMouseMove.listen(onMouseMove);
-  if (onMouseOut != null) v.onMouseOut.listen(onMouseOut);
-  if (onMouseOver != null) v.onMouseOver.listen(onMouseOver);
-  if (onMouseUp != null) v.onMouseUp.listen(onMouseUp);
-  if (onMouseWheel != null) v.onMouseWheel.listen(onMouseWheel);
-  if (onPaste != null) v.onPaste.listen(onPaste);
-  if (onPause != null) v.onPause.listen(onPause);
-  if (onPlay != null) v.onPlay.listen(onPlay);
-  if (onPlaying != null) v.onPlaying.listen(onPlaying);
-  if (onRateChange != null) v.onRateChange.listen(onRateChange);
-  if (onReset != null) v.onReset.listen(onReset);
-  if (onResize != null) v.onResize.listen(onResize);
-  if (onScroll != null) v.onScroll.listen(onScroll);
-  if (onSearch != null) v.onSearch.listen(onSearch);
-  if (onSeeked != null) v.onSeeked.listen(onSeeked);
-  if (onSeeking != null) v.onSeeking.listen(onSeeking);
-  if (onSelect != null) v.onSelect.listen(onSelect);
-  if (onSelectStart != null) v.onSelectStart.listen(onSelectStart);
-  if (onStalled != null) v.onStalled.listen(onStalled);
-  if (onSubmit != null) v.onSubmit.listen(onSubmit);
-  if (onSuspend != null) v.onSuspend.listen(onSuspend);
-  if (onTimeUpdate != null) v.onTimeUpdate.listen(onTimeUpdate);
-  if (onTouchCancel != null) v.onTouchCancel.listen(onTouchCancel);
-  if (onTouchEnd != null) v.onTouchEnd.listen(onTouchEnd);
-  if (onTouchEnter != null) v.onTouchEnter.listen(onTouchEnter);
-  if (onTouchLeave != null) v.onTouchLeave.listen(onTouchLeave);
-  if (onTouchMove != null) v.onTouchMove.listen(onTouchMove);
-  if (onTouchStart != null) v.onTouchStart.listen(onTouchStart);
-  if (onTransitionEnd != null) v.onTransitionEnd.listen(onTransitionEnd);
-  if (onVolumeChange != null) v.onVolumeChange.listen(onVolumeChange);
-  if (onWaiting != null) v.onWaiting.listen(onWaiting);
-  if (onFullscreenChange != null)
-    v.onFullscreenChange.listen(onFullscreenChange);
-  if (onFullscreenError != null) v.onFullscreenError.listen(onFullscreenError);
-  if (onWheel != null) v.onWheel.listen(onWheel);
-  return v;
+class TrackElementWidget extends HtmlElementWidget {
+  TrackElementWidget(
+      {super.nonce,
+      super.attributes,
+      super.children,
+      super.classes,
+      super.dataset,
+      super.innerHtml,
+      super.innerText,
+      super.scrollLeft,
+      super.scrollTop,
+      super.contentEditable,
+      super.dir,
+      super.draggable,
+      super.hidden,
+      super.inert,
+      super.inputMode,
+      super.lang,
+      super.spellcheck,
+      super.tabIndex,
+      super.title,
+      super.translate,
+      super.className,
+      super.id,
+      super.slot,
+      super.nodes,
+      super.text,
+      super.onAbort,
+      super.onBeforeCopy,
+      super.onBeforeCut,
+      super.onBeforePaste,
+      super.onBlur,
+      super.onCanPlay,
+      super.onCanPlayThrough,
+      super.onChange,
+      super.onClick,
+      super.onContextMenu,
+      super.onCopy,
+      super.onCut,
+      super.onDoubleClick,
+      super.onDrag,
+      super.onDragEnd,
+      super.onDragEnter,
+      super.onDragLeave,
+      super.onDragOver,
+      super.onDragStart,
+      super.onDrop,
+      super.onDurationChange,
+      super.onEmptied,
+      super.onEnded,
+      super.onError,
+      super.onFocus,
+      super.onInput,
+      super.onInvalid,
+      super.onKeyDown,
+      super.onKeyPress,
+      super.onKeyUp,
+      super.onLoad,
+      super.onLoadedData,
+      super.onLoadedMetadata,
+      super.onMouseDown,
+      super.onMouseEnter,
+      super.onMouseLeave,
+      super.onMouseMove,
+      super.onMouseOut,
+      super.onMouseOver,
+      super.onMouseUp,
+      super.onMouseWheel,
+      super.onPaste,
+      super.onPause,
+      super.onPlay,
+      super.onPlaying,
+      super.onRateChange,
+      super.onReset,
+      super.onResize,
+      super.onScroll,
+      super.onSearch,
+      super.onSeeked,
+      super.onSeeking,
+      super.onSelect,
+      super.onSelectStart,
+      super.onStalled,
+      super.onSubmit,
+      super.onSuspend,
+      super.onTimeUpdate,
+      super.onTouchCancel,
+      super.onTouchEnd,
+      super.onTouchEnter,
+      super.onTouchLeave,
+      super.onTouchMove,
+      super.onTouchStart,
+      super.onTransitionEnd,
+      super.onVolumeChange,
+      super.onWaiting,
+      super.onFullscreenChange,
+      super.onFullscreenError,
+      super.onWheel});
+  @override
+  Element render() => hook(TrackElement());
 }
 
-TextAreaElement textAreaElement(
-    {String? autocapitalize,
-    bool? autofocus,
-    int? cols,
-    String? defaultValue,
-    String? dirName,
-    bool? disabled,
-    int? maxLength,
-    int? minLength,
-    String? name,
-    String? placeholder,
-    bool? readOnly,
-    bool? required,
-    int? rows,
-    String? selectionDirection,
-    int? selectionEnd,
-    int? selectionStart,
-    String? value,
-    String? wrap,
-    String? nonce,
-    Map<String, String>? attributes,
-    List<Element>? children,
-    Iterable<String>? classes,
-    Map<String, String>? dataset,
-    String? innerHtml,
-    String? innerText,
-    int? scrollLeft,
-    int? scrollTop,
-    String? contentEditable,
-    String? dir,
-    bool? draggable,
-    bool? hidden,
-    bool? inert,
-    String? inputMode,
-    String? lang,
-    bool? spellcheck,
-    int? tabIndex,
-    String? title,
-    bool? translate,
-    String? className,
-    String? id,
-    String? slot,
-    Iterable<Node>? nodes,
-    String? text,
-    void Function(Event)? onAbort,
-    void Function(Event)? onBeforeCopy,
-    void Function(Event)? onBeforeCut,
-    void Function(Event)? onBeforePaste,
-    void Function(Event)? onBlur,
-    void Function(Event)? onCanPlay,
-    void Function(Event)? onCanPlayThrough,
-    void Function(Event)? onChange,
-    void Function(MouseEvent)? onClick,
-    void Function(MouseEvent)? onContextMenu,
-    void Function(ClipboardEvent)? onCopy,
-    void Function(ClipboardEvent)? onCut,
-    void Function(Event)? onDoubleClick,
-    void Function(MouseEvent)? onDrag,
-    void Function(MouseEvent)? onDragEnd,
-    void Function(MouseEvent)? onDragEnter,
-    void Function(MouseEvent)? onDragLeave,
-    void Function(MouseEvent)? onDragOver,
-    void Function(MouseEvent)? onDragStart,
-    void Function(MouseEvent)? onDrop,
-    void Function(Event)? onDurationChange,
-    void Function(Event)? onEmptied,
-    void Function(Event)? onEnded,
-    void Function(Event)? onError,
-    void Function(Event)? onFocus,
-    void Function(Event)? onInput,
-    void Function(Event)? onInvalid,
-    void Function(KeyboardEvent)? onKeyDown,
-    void Function(KeyboardEvent)? onKeyPress,
-    void Function(KeyboardEvent)? onKeyUp,
-    void Function(Event)? onLoad,
-    void Function(Event)? onLoadedData,
-    void Function(Event)? onLoadedMetadata,
-    void Function(MouseEvent)? onMouseDown,
-    void Function(MouseEvent)? onMouseEnter,
-    void Function(MouseEvent)? onMouseLeave,
-    void Function(MouseEvent)? onMouseMove,
-    void Function(MouseEvent)? onMouseOut,
-    void Function(MouseEvent)? onMouseOver,
-    void Function(MouseEvent)? onMouseUp,
-    void Function(WheelEvent)? onMouseWheel,
-    void Function(ClipboardEvent)? onPaste,
-    void Function(Event)? onPause,
-    void Function(Event)? onPlay,
-    void Function(Event)? onPlaying,
-    void Function(Event)? onRateChange,
-    void Function(Event)? onReset,
-    void Function(Event)? onResize,
-    void Function(Event)? onScroll,
-    void Function(Event)? onSearch,
-    void Function(Event)? onSeeked,
-    void Function(Event)? onSeeking,
-    void Function(Event)? onSelect,
-    void Function(Event)? onSelectStart,
-    void Function(Event)? onStalled,
-    void Function(Event)? onSubmit,
-    void Function(Event)? onSuspend,
-    void Function(Event)? onTimeUpdate,
-    void Function(TouchEvent)? onTouchCancel,
-    void Function(TouchEvent)? onTouchEnd,
-    void Function(TouchEvent)? onTouchEnter,
-    void Function(TouchEvent)? onTouchLeave,
-    void Function(TouchEvent)? onTouchMove,
-    void Function(TouchEvent)? onTouchStart,
-    void Function(TransitionEvent)? onTransitionEnd,
-    void Function(Event)? onVolumeChange,
-    void Function(Event)? onWaiting,
-    void Function(Event)? onFullscreenChange,
-    void Function(Event)? onFullscreenError,
-    void Function(WheelEvent)? onWheel}) {
-  final v = TextAreaElement();
-  if (autocapitalize != null) v.autocapitalize = autocapitalize;
-  if (autofocus != null) v.autofocus = autofocus;
-  if (cols != null) v.cols = cols;
-  if (defaultValue != null) v.defaultValue = defaultValue;
-  if (dirName != null) v.dirName = dirName;
-  if (disabled != null) v.disabled = disabled;
-  if (maxLength != null) v.maxLength = maxLength;
-  if (minLength != null) v.minLength = minLength;
-  if (name != null) v.name = name;
-  if (placeholder != null) v.placeholder = placeholder;
-  if (readOnly != null) v.readOnly = readOnly;
-  if (required != null) v.required = required;
-  if (rows != null) v.rows = rows;
-  if (selectionDirection != null) v.selectionDirection = selectionDirection;
-  if (selectionEnd != null) v.selectionEnd = selectionEnd;
-  if (selectionStart != null) v.selectionStart = selectionStart;
-  if (value != null) v.value = value;
-  if (wrap != null) v.wrap = wrap;
-  if (nonce != null) v.nonce = nonce;
-  if (attributes != null) v.attributes = attributes;
-  if (children != null) v.children = children;
-  if (classes != null) v.classes = classes;
-  if (dataset != null) v.dataset = dataset;
-  if (innerHtml != null) v.innerHtml = innerHtml;
-  if (innerText != null) v.innerText = innerText;
-  if (scrollLeft != null) v.scrollLeft = scrollLeft;
-  if (scrollTop != null) v.scrollTop = scrollTop;
-  if (contentEditable != null) v.contentEditable = contentEditable;
-  if (dir != null) v.dir = dir;
-  if (draggable != null) v.draggable = draggable;
-  if (hidden != null) v.hidden = hidden;
-  if (inert != null) v.inert = inert;
-  if (inputMode != null) v.inputMode = inputMode;
-  if (lang != null) v.lang = lang;
-  if (spellcheck != null) v.spellcheck = spellcheck;
-  if (tabIndex != null) v.tabIndex = tabIndex;
-  if (title != null) v.title = title;
-  if (translate != null) v.translate = translate;
-  if (className != null) v.className = className;
-  if (id != null) v.id = id;
-  if (slot != null) v.slot = slot;
-  if (nodes != null) v.nodes = nodes;
-  if (text != null) v.text = text;
-  if (onAbort != null) v.onAbort.listen(onAbort);
-  if (onBeforeCopy != null) v.onBeforeCopy.listen(onBeforeCopy);
-  if (onBeforeCut != null) v.onBeforeCut.listen(onBeforeCut);
-  if (onBeforePaste != null) v.onBeforePaste.listen(onBeforePaste);
-  if (onBlur != null) v.onBlur.listen(onBlur);
-  if (onCanPlay != null) v.onCanPlay.listen(onCanPlay);
-  if (onCanPlayThrough != null) v.onCanPlayThrough.listen(onCanPlayThrough);
-  if (onChange != null) v.onChange.listen(onChange);
-  if (onClick != null) v.onClick.listen(onClick);
-  if (onContextMenu != null) v.onContextMenu.listen(onContextMenu);
-  if (onCopy != null) v.onCopy.listen(onCopy);
-  if (onCut != null) v.onCut.listen(onCut);
-  if (onDoubleClick != null) v.onDoubleClick.listen(onDoubleClick);
-  if (onDrag != null) v.onDrag.listen(onDrag);
-  if (onDragEnd != null) v.onDragEnd.listen(onDragEnd);
-  if (onDragEnter != null) v.onDragEnter.listen(onDragEnter);
-  if (onDragLeave != null) v.onDragLeave.listen(onDragLeave);
-  if (onDragOver != null) v.onDragOver.listen(onDragOver);
-  if (onDragStart != null) v.onDragStart.listen(onDragStart);
-  if (onDrop != null) v.onDrop.listen(onDrop);
-  if (onDurationChange != null) v.onDurationChange.listen(onDurationChange);
-  if (onEmptied != null) v.onEmptied.listen(onEmptied);
-  if (onEnded != null) v.onEnded.listen(onEnded);
-  if (onError != null) v.onError.listen(onError);
-  if (onFocus != null) v.onFocus.listen(onFocus);
-  if (onInput != null) v.onInput.listen(onInput);
-  if (onInvalid != null) v.onInvalid.listen(onInvalid);
-  if (onKeyDown != null) v.onKeyDown.listen(onKeyDown);
-  if (onKeyPress != null) v.onKeyPress.listen(onKeyPress);
-  if (onKeyUp != null) v.onKeyUp.listen(onKeyUp);
-  if (onLoad != null) v.onLoad.listen(onLoad);
-  if (onLoadedData != null) v.onLoadedData.listen(onLoadedData);
-  if (onLoadedMetadata != null) v.onLoadedMetadata.listen(onLoadedMetadata);
-  if (onMouseDown != null) v.onMouseDown.listen(onMouseDown);
-  if (onMouseEnter != null) v.onMouseEnter.listen(onMouseEnter);
-  if (onMouseLeave != null) v.onMouseLeave.listen(onMouseLeave);
-  if (onMouseMove != null) v.onMouseMove.listen(onMouseMove);
-  if (onMouseOut != null) v.onMouseOut.listen(onMouseOut);
-  if (onMouseOver != null) v.onMouseOver.listen(onMouseOver);
-  if (onMouseUp != null) v.onMouseUp.listen(onMouseUp);
-  if (onMouseWheel != null) v.onMouseWheel.listen(onMouseWheel);
-  if (onPaste != null) v.onPaste.listen(onPaste);
-  if (onPause != null) v.onPause.listen(onPause);
-  if (onPlay != null) v.onPlay.listen(onPlay);
-  if (onPlaying != null) v.onPlaying.listen(onPlaying);
-  if (onRateChange != null) v.onRateChange.listen(onRateChange);
-  if (onReset != null) v.onReset.listen(onReset);
-  if (onResize != null) v.onResize.listen(onResize);
-  if (onScroll != null) v.onScroll.listen(onScroll);
-  if (onSearch != null) v.onSearch.listen(onSearch);
-  if (onSeeked != null) v.onSeeked.listen(onSeeked);
-  if (onSeeking != null) v.onSeeking.listen(onSeeking);
-  if (onSelect != null) v.onSelect.listen(onSelect);
-  if (onSelectStart != null) v.onSelectStart.listen(onSelectStart);
-  if (onStalled != null) v.onStalled.listen(onStalled);
-  if (onSubmit != null) v.onSubmit.listen(onSubmit);
-  if (onSuspend != null) v.onSuspend.listen(onSuspend);
-  if (onTimeUpdate != null) v.onTimeUpdate.listen(onTimeUpdate);
-  if (onTouchCancel != null) v.onTouchCancel.listen(onTouchCancel);
-  if (onTouchEnd != null) v.onTouchEnd.listen(onTouchEnd);
-  if (onTouchEnter != null) v.onTouchEnter.listen(onTouchEnter);
-  if (onTouchLeave != null) v.onTouchLeave.listen(onTouchLeave);
-  if (onTouchMove != null) v.onTouchMove.listen(onTouchMove);
-  if (onTouchStart != null) v.onTouchStart.listen(onTouchStart);
-  if (onTransitionEnd != null) v.onTransitionEnd.listen(onTransitionEnd);
-  if (onVolumeChange != null) v.onVolumeChange.listen(onVolumeChange);
-  if (onWaiting != null) v.onWaiting.listen(onWaiting);
-  if (onFullscreenChange != null)
-    v.onFullscreenChange.listen(onFullscreenChange);
-  if (onFullscreenError != null) v.onFullscreenError.listen(onFullscreenError);
-  if (onWheel != null) v.onWheel.listen(onWheel);
-  return v;
+class UListElementWidget extends HtmlElementWidget {
+  UListElementWidget(
+      {super.nonce,
+      super.attributes,
+      super.children,
+      super.classes,
+      super.dataset,
+      super.innerHtml,
+      super.innerText,
+      super.scrollLeft,
+      super.scrollTop,
+      super.contentEditable,
+      super.dir,
+      super.draggable,
+      super.hidden,
+      super.inert,
+      super.inputMode,
+      super.lang,
+      super.spellcheck,
+      super.tabIndex,
+      super.title,
+      super.translate,
+      super.className,
+      super.id,
+      super.slot,
+      super.nodes,
+      super.text,
+      super.onAbort,
+      super.onBeforeCopy,
+      super.onBeforeCut,
+      super.onBeforePaste,
+      super.onBlur,
+      super.onCanPlay,
+      super.onCanPlayThrough,
+      super.onChange,
+      super.onClick,
+      super.onContextMenu,
+      super.onCopy,
+      super.onCut,
+      super.onDoubleClick,
+      super.onDrag,
+      super.onDragEnd,
+      super.onDragEnter,
+      super.onDragLeave,
+      super.onDragOver,
+      super.onDragStart,
+      super.onDrop,
+      super.onDurationChange,
+      super.onEmptied,
+      super.onEnded,
+      super.onError,
+      super.onFocus,
+      super.onInput,
+      super.onInvalid,
+      super.onKeyDown,
+      super.onKeyPress,
+      super.onKeyUp,
+      super.onLoad,
+      super.onLoadedData,
+      super.onLoadedMetadata,
+      super.onMouseDown,
+      super.onMouseEnter,
+      super.onMouseLeave,
+      super.onMouseMove,
+      super.onMouseOut,
+      super.onMouseOver,
+      super.onMouseUp,
+      super.onMouseWheel,
+      super.onPaste,
+      super.onPause,
+      super.onPlay,
+      super.onPlaying,
+      super.onRateChange,
+      super.onReset,
+      super.onResize,
+      super.onScroll,
+      super.onSearch,
+      super.onSeeked,
+      super.onSeeking,
+      super.onSelect,
+      super.onSelectStart,
+      super.onStalled,
+      super.onSubmit,
+      super.onSuspend,
+      super.onTimeUpdate,
+      super.onTouchCancel,
+      super.onTouchEnd,
+      super.onTouchEnter,
+      super.onTouchLeave,
+      super.onTouchMove,
+      super.onTouchStart,
+      super.onTransitionEnd,
+      super.onVolumeChange,
+      super.onWaiting,
+      super.onFullscreenChange,
+      super.onFullscreenError,
+      super.onWheel});
+  @override
+  Element render() => hook(UListElement());
 }
 
-TitleElement titleElement(
-    {String? nonce,
-    Map<String, String>? attributes,
-    List<Element>? children,
-    Iterable<String>? classes,
-    Map<String, String>? dataset,
-    String? innerHtml,
-    String? innerText,
-    int? scrollLeft,
-    int? scrollTop,
-    String? contentEditable,
-    String? dir,
-    bool? draggable,
-    bool? hidden,
-    bool? inert,
-    String? inputMode,
-    String? lang,
-    bool? spellcheck,
-    int? tabIndex,
-    String? title,
-    bool? translate,
-    String? className,
-    String? id,
-    String? slot,
-    Iterable<Node>? nodes,
-    String? text,
-    void Function(Event)? onAbort,
-    void Function(Event)? onBeforeCopy,
-    void Function(Event)? onBeforeCut,
-    void Function(Event)? onBeforePaste,
-    void Function(Event)? onBlur,
-    void Function(Event)? onCanPlay,
-    void Function(Event)? onCanPlayThrough,
-    void Function(Event)? onChange,
-    void Function(MouseEvent)? onClick,
-    void Function(MouseEvent)? onContextMenu,
-    void Function(ClipboardEvent)? onCopy,
-    void Function(ClipboardEvent)? onCut,
-    void Function(Event)? onDoubleClick,
-    void Function(MouseEvent)? onDrag,
-    void Function(MouseEvent)? onDragEnd,
-    void Function(MouseEvent)? onDragEnter,
-    void Function(MouseEvent)? onDragLeave,
-    void Function(MouseEvent)? onDragOver,
-    void Function(MouseEvent)? onDragStart,
-    void Function(MouseEvent)? onDrop,
-    void Function(Event)? onDurationChange,
-    void Function(Event)? onEmptied,
-    void Function(Event)? onEnded,
-    void Function(Event)? onError,
-    void Function(Event)? onFocus,
-    void Function(Event)? onInput,
-    void Function(Event)? onInvalid,
-    void Function(KeyboardEvent)? onKeyDown,
-    void Function(KeyboardEvent)? onKeyPress,
-    void Function(KeyboardEvent)? onKeyUp,
-    void Function(Event)? onLoad,
-    void Function(Event)? onLoadedData,
-    void Function(Event)? onLoadedMetadata,
-    void Function(MouseEvent)? onMouseDown,
-    void Function(MouseEvent)? onMouseEnter,
-    void Function(MouseEvent)? onMouseLeave,
-    void Function(MouseEvent)? onMouseMove,
-    void Function(MouseEvent)? onMouseOut,
-    void Function(MouseEvent)? onMouseOver,
-    void Function(MouseEvent)? onMouseUp,
-    void Function(WheelEvent)? onMouseWheel,
-    void Function(ClipboardEvent)? onPaste,
-    void Function(Event)? onPause,
-    void Function(Event)? onPlay,
-    void Function(Event)? onPlaying,
-    void Function(Event)? onRateChange,
-    void Function(Event)? onReset,
-    void Function(Event)? onResize,
-    void Function(Event)? onScroll,
-    void Function(Event)? onSearch,
-    void Function(Event)? onSeeked,
-    void Function(Event)? onSeeking,
-    void Function(Event)? onSelect,
-    void Function(Event)? onSelectStart,
-    void Function(Event)? onStalled,
-    void Function(Event)? onSubmit,
-    void Function(Event)? onSuspend,
-    void Function(Event)? onTimeUpdate,
-    void Function(TouchEvent)? onTouchCancel,
-    void Function(TouchEvent)? onTouchEnd,
-    void Function(TouchEvent)? onTouchEnter,
-    void Function(TouchEvent)? onTouchLeave,
-    void Function(TouchEvent)? onTouchMove,
-    void Function(TouchEvent)? onTouchStart,
-    void Function(TransitionEvent)? onTransitionEnd,
-    void Function(Event)? onVolumeChange,
-    void Function(Event)? onWaiting,
-    void Function(Event)? onFullscreenChange,
-    void Function(Event)? onFullscreenError,
-    void Function(WheelEvent)? onWheel}) {
-  final v = TitleElement();
-  if (nonce != null) v.nonce = nonce;
-  if (attributes != null) v.attributes = attributes;
-  if (children != null) v.children = children;
-  if (classes != null) v.classes = classes;
-  if (dataset != null) v.dataset = dataset;
-  if (innerHtml != null) v.innerHtml = innerHtml;
-  if (innerText != null) v.innerText = innerText;
-  if (scrollLeft != null) v.scrollLeft = scrollLeft;
-  if (scrollTop != null) v.scrollTop = scrollTop;
-  if (contentEditable != null) v.contentEditable = contentEditable;
-  if (dir != null) v.dir = dir;
-  if (draggable != null) v.draggable = draggable;
-  if (hidden != null) v.hidden = hidden;
-  if (inert != null) v.inert = inert;
-  if (inputMode != null) v.inputMode = inputMode;
-  if (lang != null) v.lang = lang;
-  if (spellcheck != null) v.spellcheck = spellcheck;
-  if (tabIndex != null) v.tabIndex = tabIndex;
-  if (title != null) v.title = title;
-  if (translate != null) v.translate = translate;
-  if (className != null) v.className = className;
-  if (id != null) v.id = id;
-  if (slot != null) v.slot = slot;
-  if (nodes != null) v.nodes = nodes;
-  if (text != null) v.text = text;
-  if (onAbort != null) v.onAbort.listen(onAbort);
-  if (onBeforeCopy != null) v.onBeforeCopy.listen(onBeforeCopy);
-  if (onBeforeCut != null) v.onBeforeCut.listen(onBeforeCut);
-  if (onBeforePaste != null) v.onBeforePaste.listen(onBeforePaste);
-  if (onBlur != null) v.onBlur.listen(onBlur);
-  if (onCanPlay != null) v.onCanPlay.listen(onCanPlay);
-  if (onCanPlayThrough != null) v.onCanPlayThrough.listen(onCanPlayThrough);
-  if (onChange != null) v.onChange.listen(onChange);
-  if (onClick != null) v.onClick.listen(onClick);
-  if (onContextMenu != null) v.onContextMenu.listen(onContextMenu);
-  if (onCopy != null) v.onCopy.listen(onCopy);
-  if (onCut != null) v.onCut.listen(onCut);
-  if (onDoubleClick != null) v.onDoubleClick.listen(onDoubleClick);
-  if (onDrag != null) v.onDrag.listen(onDrag);
-  if (onDragEnd != null) v.onDragEnd.listen(onDragEnd);
-  if (onDragEnter != null) v.onDragEnter.listen(onDragEnter);
-  if (onDragLeave != null) v.onDragLeave.listen(onDragLeave);
-  if (onDragOver != null) v.onDragOver.listen(onDragOver);
-  if (onDragStart != null) v.onDragStart.listen(onDragStart);
-  if (onDrop != null) v.onDrop.listen(onDrop);
-  if (onDurationChange != null) v.onDurationChange.listen(onDurationChange);
-  if (onEmptied != null) v.onEmptied.listen(onEmptied);
-  if (onEnded != null) v.onEnded.listen(onEnded);
-  if (onError != null) v.onError.listen(onError);
-  if (onFocus != null) v.onFocus.listen(onFocus);
-  if (onInput != null) v.onInput.listen(onInput);
-  if (onInvalid != null) v.onInvalid.listen(onInvalid);
-  if (onKeyDown != null) v.onKeyDown.listen(onKeyDown);
-  if (onKeyPress != null) v.onKeyPress.listen(onKeyPress);
-  if (onKeyUp != null) v.onKeyUp.listen(onKeyUp);
-  if (onLoad != null) v.onLoad.listen(onLoad);
-  if (onLoadedData != null) v.onLoadedData.listen(onLoadedData);
-  if (onLoadedMetadata != null) v.onLoadedMetadata.listen(onLoadedMetadata);
-  if (onMouseDown != null) v.onMouseDown.listen(onMouseDown);
-  if (onMouseEnter != null) v.onMouseEnter.listen(onMouseEnter);
-  if (onMouseLeave != null) v.onMouseLeave.listen(onMouseLeave);
-  if (onMouseMove != null) v.onMouseMove.listen(onMouseMove);
-  if (onMouseOut != null) v.onMouseOut.listen(onMouseOut);
-  if (onMouseOver != null) v.onMouseOver.listen(onMouseOver);
-  if (onMouseUp != null) v.onMouseUp.listen(onMouseUp);
-  if (onMouseWheel != null) v.onMouseWheel.listen(onMouseWheel);
-  if (onPaste != null) v.onPaste.listen(onPaste);
-  if (onPause != null) v.onPause.listen(onPause);
-  if (onPlay != null) v.onPlay.listen(onPlay);
-  if (onPlaying != null) v.onPlaying.listen(onPlaying);
-  if (onRateChange != null) v.onRateChange.listen(onRateChange);
-  if (onReset != null) v.onReset.listen(onReset);
-  if (onResize != null) v.onResize.listen(onResize);
-  if (onScroll != null) v.onScroll.listen(onScroll);
-  if (onSearch != null) v.onSearch.listen(onSearch);
-  if (onSeeked != null) v.onSeeked.listen(onSeeked);
-  if (onSeeking != null) v.onSeeking.listen(onSeeking);
-  if (onSelect != null) v.onSelect.listen(onSelect);
-  if (onSelectStart != null) v.onSelectStart.listen(onSelectStart);
-  if (onStalled != null) v.onStalled.listen(onStalled);
-  if (onSubmit != null) v.onSubmit.listen(onSubmit);
-  if (onSuspend != null) v.onSuspend.listen(onSuspend);
-  if (onTimeUpdate != null) v.onTimeUpdate.listen(onTimeUpdate);
-  if (onTouchCancel != null) v.onTouchCancel.listen(onTouchCancel);
-  if (onTouchEnd != null) v.onTouchEnd.listen(onTouchEnd);
-  if (onTouchEnter != null) v.onTouchEnter.listen(onTouchEnter);
-  if (onTouchLeave != null) v.onTouchLeave.listen(onTouchLeave);
-  if (onTouchMove != null) v.onTouchMove.listen(onTouchMove);
-  if (onTouchStart != null) v.onTouchStart.listen(onTouchStart);
-  if (onTransitionEnd != null) v.onTransitionEnd.listen(onTransitionEnd);
-  if (onVolumeChange != null) v.onVolumeChange.listen(onVolumeChange);
-  if (onWaiting != null) v.onWaiting.listen(onWaiting);
-  if (onFullscreenChange != null)
-    v.onFullscreenChange.listen(onFullscreenChange);
-  if (onFullscreenError != null) v.onFullscreenError.listen(onFullscreenError);
-  if (onWheel != null) v.onWheel.listen(onWheel);
-  return v;
-}
-
-TrackElement trackElement(
-    {bool? defaultValue,
-    String? kind,
-    String? label,
-    String? src,
-    String? srclang,
-    String? nonce,
-    Map<String, String>? attributes,
-    List<Element>? children,
-    Iterable<String>? classes,
-    Map<String, String>? dataset,
-    String? innerHtml,
-    String? innerText,
-    int? scrollLeft,
-    int? scrollTop,
-    String? contentEditable,
-    String? dir,
-    bool? draggable,
-    bool? hidden,
-    bool? inert,
-    String? inputMode,
-    String? lang,
-    bool? spellcheck,
-    int? tabIndex,
-    String? title,
-    bool? translate,
-    String? className,
-    String? id,
-    String? slot,
-    Iterable<Node>? nodes,
-    String? text,
-    void Function(Event)? onAbort,
-    void Function(Event)? onBeforeCopy,
-    void Function(Event)? onBeforeCut,
-    void Function(Event)? onBeforePaste,
-    void Function(Event)? onBlur,
-    void Function(Event)? onCanPlay,
-    void Function(Event)? onCanPlayThrough,
-    void Function(Event)? onChange,
-    void Function(MouseEvent)? onClick,
-    void Function(MouseEvent)? onContextMenu,
-    void Function(ClipboardEvent)? onCopy,
-    void Function(ClipboardEvent)? onCut,
-    void Function(Event)? onDoubleClick,
-    void Function(MouseEvent)? onDrag,
-    void Function(MouseEvent)? onDragEnd,
-    void Function(MouseEvent)? onDragEnter,
-    void Function(MouseEvent)? onDragLeave,
-    void Function(MouseEvent)? onDragOver,
-    void Function(MouseEvent)? onDragStart,
-    void Function(MouseEvent)? onDrop,
-    void Function(Event)? onDurationChange,
-    void Function(Event)? onEmptied,
-    void Function(Event)? onEnded,
-    void Function(Event)? onError,
-    void Function(Event)? onFocus,
-    void Function(Event)? onInput,
-    void Function(Event)? onInvalid,
-    void Function(KeyboardEvent)? onKeyDown,
-    void Function(KeyboardEvent)? onKeyPress,
-    void Function(KeyboardEvent)? onKeyUp,
-    void Function(Event)? onLoad,
-    void Function(Event)? onLoadedData,
-    void Function(Event)? onLoadedMetadata,
-    void Function(MouseEvent)? onMouseDown,
-    void Function(MouseEvent)? onMouseEnter,
-    void Function(MouseEvent)? onMouseLeave,
-    void Function(MouseEvent)? onMouseMove,
-    void Function(MouseEvent)? onMouseOut,
-    void Function(MouseEvent)? onMouseOver,
-    void Function(MouseEvent)? onMouseUp,
-    void Function(WheelEvent)? onMouseWheel,
-    void Function(ClipboardEvent)? onPaste,
-    void Function(Event)? onPause,
-    void Function(Event)? onPlay,
-    void Function(Event)? onPlaying,
-    void Function(Event)? onRateChange,
-    void Function(Event)? onReset,
-    void Function(Event)? onResize,
-    void Function(Event)? onScroll,
-    void Function(Event)? onSearch,
-    void Function(Event)? onSeeked,
-    void Function(Event)? onSeeking,
-    void Function(Event)? onSelect,
-    void Function(Event)? onSelectStart,
-    void Function(Event)? onStalled,
-    void Function(Event)? onSubmit,
-    void Function(Event)? onSuspend,
-    void Function(Event)? onTimeUpdate,
-    void Function(TouchEvent)? onTouchCancel,
-    void Function(TouchEvent)? onTouchEnd,
-    void Function(TouchEvent)? onTouchEnter,
-    void Function(TouchEvent)? onTouchLeave,
-    void Function(TouchEvent)? onTouchMove,
-    void Function(TouchEvent)? onTouchStart,
-    void Function(TransitionEvent)? onTransitionEnd,
-    void Function(Event)? onVolumeChange,
-    void Function(Event)? onWaiting,
-    void Function(Event)? onFullscreenChange,
-    void Function(Event)? onFullscreenError,
-    void Function(WheelEvent)? onWheel}) {
-  final v = TrackElement();
-  if (defaultValue != null) v.defaultValue = defaultValue;
-  if (kind != null) v.kind = kind;
-  if (label != null) v.label = label;
-  if (src != null) v.src = src;
-  if (srclang != null) v.srclang = srclang;
-  if (nonce != null) v.nonce = nonce;
-  if (attributes != null) v.attributes = attributes;
-  if (children != null) v.children = children;
-  if (classes != null) v.classes = classes;
-  if (dataset != null) v.dataset = dataset;
-  if (innerHtml != null) v.innerHtml = innerHtml;
-  if (innerText != null) v.innerText = innerText;
-  if (scrollLeft != null) v.scrollLeft = scrollLeft;
-  if (scrollTop != null) v.scrollTop = scrollTop;
-  if (contentEditable != null) v.contentEditable = contentEditable;
-  if (dir != null) v.dir = dir;
-  if (draggable != null) v.draggable = draggable;
-  if (hidden != null) v.hidden = hidden;
-  if (inert != null) v.inert = inert;
-  if (inputMode != null) v.inputMode = inputMode;
-  if (lang != null) v.lang = lang;
-  if (spellcheck != null) v.spellcheck = spellcheck;
-  if (tabIndex != null) v.tabIndex = tabIndex;
-  if (title != null) v.title = title;
-  if (translate != null) v.translate = translate;
-  if (className != null) v.className = className;
-  if (id != null) v.id = id;
-  if (slot != null) v.slot = slot;
-  if (nodes != null) v.nodes = nodes;
-  if (text != null) v.text = text;
-  if (onAbort != null) v.onAbort.listen(onAbort);
-  if (onBeforeCopy != null) v.onBeforeCopy.listen(onBeforeCopy);
-  if (onBeforeCut != null) v.onBeforeCut.listen(onBeforeCut);
-  if (onBeforePaste != null) v.onBeforePaste.listen(onBeforePaste);
-  if (onBlur != null) v.onBlur.listen(onBlur);
-  if (onCanPlay != null) v.onCanPlay.listen(onCanPlay);
-  if (onCanPlayThrough != null) v.onCanPlayThrough.listen(onCanPlayThrough);
-  if (onChange != null) v.onChange.listen(onChange);
-  if (onClick != null) v.onClick.listen(onClick);
-  if (onContextMenu != null) v.onContextMenu.listen(onContextMenu);
-  if (onCopy != null) v.onCopy.listen(onCopy);
-  if (onCut != null) v.onCut.listen(onCut);
-  if (onDoubleClick != null) v.onDoubleClick.listen(onDoubleClick);
-  if (onDrag != null) v.onDrag.listen(onDrag);
-  if (onDragEnd != null) v.onDragEnd.listen(onDragEnd);
-  if (onDragEnter != null) v.onDragEnter.listen(onDragEnter);
-  if (onDragLeave != null) v.onDragLeave.listen(onDragLeave);
-  if (onDragOver != null) v.onDragOver.listen(onDragOver);
-  if (onDragStart != null) v.onDragStart.listen(onDragStart);
-  if (onDrop != null) v.onDrop.listen(onDrop);
-  if (onDurationChange != null) v.onDurationChange.listen(onDurationChange);
-  if (onEmptied != null) v.onEmptied.listen(onEmptied);
-  if (onEnded != null) v.onEnded.listen(onEnded);
-  if (onError != null) v.onError.listen(onError);
-  if (onFocus != null) v.onFocus.listen(onFocus);
-  if (onInput != null) v.onInput.listen(onInput);
-  if (onInvalid != null) v.onInvalid.listen(onInvalid);
-  if (onKeyDown != null) v.onKeyDown.listen(onKeyDown);
-  if (onKeyPress != null) v.onKeyPress.listen(onKeyPress);
-  if (onKeyUp != null) v.onKeyUp.listen(onKeyUp);
-  if (onLoad != null) v.onLoad.listen(onLoad);
-  if (onLoadedData != null) v.onLoadedData.listen(onLoadedData);
-  if (onLoadedMetadata != null) v.onLoadedMetadata.listen(onLoadedMetadata);
-  if (onMouseDown != null) v.onMouseDown.listen(onMouseDown);
-  if (onMouseEnter != null) v.onMouseEnter.listen(onMouseEnter);
-  if (onMouseLeave != null) v.onMouseLeave.listen(onMouseLeave);
-  if (onMouseMove != null) v.onMouseMove.listen(onMouseMove);
-  if (onMouseOut != null) v.onMouseOut.listen(onMouseOut);
-  if (onMouseOver != null) v.onMouseOver.listen(onMouseOver);
-  if (onMouseUp != null) v.onMouseUp.listen(onMouseUp);
-  if (onMouseWheel != null) v.onMouseWheel.listen(onMouseWheel);
-  if (onPaste != null) v.onPaste.listen(onPaste);
-  if (onPause != null) v.onPause.listen(onPause);
-  if (onPlay != null) v.onPlay.listen(onPlay);
-  if (onPlaying != null) v.onPlaying.listen(onPlaying);
-  if (onRateChange != null) v.onRateChange.listen(onRateChange);
-  if (onReset != null) v.onReset.listen(onReset);
-  if (onResize != null) v.onResize.listen(onResize);
-  if (onScroll != null) v.onScroll.listen(onScroll);
-  if (onSearch != null) v.onSearch.listen(onSearch);
-  if (onSeeked != null) v.onSeeked.listen(onSeeked);
-  if (onSeeking != null) v.onSeeking.listen(onSeeking);
-  if (onSelect != null) v.onSelect.listen(onSelect);
-  if (onSelectStart != null) v.onSelectStart.listen(onSelectStart);
-  if (onStalled != null) v.onStalled.listen(onStalled);
-  if (onSubmit != null) v.onSubmit.listen(onSubmit);
-  if (onSuspend != null) v.onSuspend.listen(onSuspend);
-  if (onTimeUpdate != null) v.onTimeUpdate.listen(onTimeUpdate);
-  if (onTouchCancel != null) v.onTouchCancel.listen(onTouchCancel);
-  if (onTouchEnd != null) v.onTouchEnd.listen(onTouchEnd);
-  if (onTouchEnter != null) v.onTouchEnter.listen(onTouchEnter);
-  if (onTouchLeave != null) v.onTouchLeave.listen(onTouchLeave);
-  if (onTouchMove != null) v.onTouchMove.listen(onTouchMove);
-  if (onTouchStart != null) v.onTouchStart.listen(onTouchStart);
-  if (onTransitionEnd != null) v.onTransitionEnd.listen(onTransitionEnd);
-  if (onVolumeChange != null) v.onVolumeChange.listen(onVolumeChange);
-  if (onWaiting != null) v.onWaiting.listen(onWaiting);
-  if (onFullscreenChange != null)
-    v.onFullscreenChange.listen(onFullscreenChange);
-  if (onFullscreenError != null) v.onFullscreenError.listen(onFullscreenError);
-  if (onWheel != null) v.onWheel.listen(onWheel);
-  return v;
-}
-
-UListElement uListElement(
-    {String? nonce,
-    Map<String, String>? attributes,
-    List<Element>? children,
-    Iterable<String>? classes,
-    Map<String, String>? dataset,
-    String? innerHtml,
-    String? innerText,
-    int? scrollLeft,
-    int? scrollTop,
-    String? contentEditable,
-    String? dir,
-    bool? draggable,
-    bool? hidden,
-    bool? inert,
-    String? inputMode,
-    String? lang,
-    bool? spellcheck,
-    int? tabIndex,
-    String? title,
-    bool? translate,
-    String? className,
-    String? id,
-    String? slot,
-    Iterable<Node>? nodes,
-    String? text,
-    void Function(Event)? onAbort,
-    void Function(Event)? onBeforeCopy,
-    void Function(Event)? onBeforeCut,
-    void Function(Event)? onBeforePaste,
-    void Function(Event)? onBlur,
-    void Function(Event)? onCanPlay,
-    void Function(Event)? onCanPlayThrough,
-    void Function(Event)? onChange,
-    void Function(MouseEvent)? onClick,
-    void Function(MouseEvent)? onContextMenu,
-    void Function(ClipboardEvent)? onCopy,
-    void Function(ClipboardEvent)? onCut,
-    void Function(Event)? onDoubleClick,
-    void Function(MouseEvent)? onDrag,
-    void Function(MouseEvent)? onDragEnd,
-    void Function(MouseEvent)? onDragEnter,
-    void Function(MouseEvent)? onDragLeave,
-    void Function(MouseEvent)? onDragOver,
-    void Function(MouseEvent)? onDragStart,
-    void Function(MouseEvent)? onDrop,
-    void Function(Event)? onDurationChange,
-    void Function(Event)? onEmptied,
-    void Function(Event)? onEnded,
-    void Function(Event)? onError,
-    void Function(Event)? onFocus,
-    void Function(Event)? onInput,
-    void Function(Event)? onInvalid,
-    void Function(KeyboardEvent)? onKeyDown,
-    void Function(KeyboardEvent)? onKeyPress,
-    void Function(KeyboardEvent)? onKeyUp,
-    void Function(Event)? onLoad,
-    void Function(Event)? onLoadedData,
-    void Function(Event)? onLoadedMetadata,
-    void Function(MouseEvent)? onMouseDown,
-    void Function(MouseEvent)? onMouseEnter,
-    void Function(MouseEvent)? onMouseLeave,
-    void Function(MouseEvent)? onMouseMove,
-    void Function(MouseEvent)? onMouseOut,
-    void Function(MouseEvent)? onMouseOver,
-    void Function(MouseEvent)? onMouseUp,
-    void Function(WheelEvent)? onMouseWheel,
-    void Function(ClipboardEvent)? onPaste,
-    void Function(Event)? onPause,
-    void Function(Event)? onPlay,
-    void Function(Event)? onPlaying,
-    void Function(Event)? onRateChange,
-    void Function(Event)? onReset,
-    void Function(Event)? onResize,
-    void Function(Event)? onScroll,
-    void Function(Event)? onSearch,
-    void Function(Event)? onSeeked,
-    void Function(Event)? onSeeking,
-    void Function(Event)? onSelect,
-    void Function(Event)? onSelectStart,
-    void Function(Event)? onStalled,
-    void Function(Event)? onSubmit,
-    void Function(Event)? onSuspend,
-    void Function(Event)? onTimeUpdate,
-    void Function(TouchEvent)? onTouchCancel,
-    void Function(TouchEvent)? onTouchEnd,
-    void Function(TouchEvent)? onTouchEnter,
-    void Function(TouchEvent)? onTouchLeave,
-    void Function(TouchEvent)? onTouchMove,
-    void Function(TouchEvent)? onTouchStart,
-    void Function(TransitionEvent)? onTransitionEnd,
-    void Function(Event)? onVolumeChange,
-    void Function(Event)? onWaiting,
-    void Function(Event)? onFullscreenChange,
-    void Function(Event)? onFullscreenError,
-    void Function(WheelEvent)? onWheel}) {
-  final v = UListElement();
-  if (nonce != null) v.nonce = nonce;
-  if (attributes != null) v.attributes = attributes;
-  if (children != null) v.children = children;
-  if (classes != null) v.classes = classes;
-  if (dataset != null) v.dataset = dataset;
-  if (innerHtml != null) v.innerHtml = innerHtml;
-  if (innerText != null) v.innerText = innerText;
-  if (scrollLeft != null) v.scrollLeft = scrollLeft;
-  if (scrollTop != null) v.scrollTop = scrollTop;
-  if (contentEditable != null) v.contentEditable = contentEditable;
-  if (dir != null) v.dir = dir;
-  if (draggable != null) v.draggable = draggable;
-  if (hidden != null) v.hidden = hidden;
-  if (inert != null) v.inert = inert;
-  if (inputMode != null) v.inputMode = inputMode;
-  if (lang != null) v.lang = lang;
-  if (spellcheck != null) v.spellcheck = spellcheck;
-  if (tabIndex != null) v.tabIndex = tabIndex;
-  if (title != null) v.title = title;
-  if (translate != null) v.translate = translate;
-  if (className != null) v.className = className;
-  if (id != null) v.id = id;
-  if (slot != null) v.slot = slot;
-  if (nodes != null) v.nodes = nodes;
-  if (text != null) v.text = text;
-  if (onAbort != null) v.onAbort.listen(onAbort);
-  if (onBeforeCopy != null) v.onBeforeCopy.listen(onBeforeCopy);
-  if (onBeforeCut != null) v.onBeforeCut.listen(onBeforeCut);
-  if (onBeforePaste != null) v.onBeforePaste.listen(onBeforePaste);
-  if (onBlur != null) v.onBlur.listen(onBlur);
-  if (onCanPlay != null) v.onCanPlay.listen(onCanPlay);
-  if (onCanPlayThrough != null) v.onCanPlayThrough.listen(onCanPlayThrough);
-  if (onChange != null) v.onChange.listen(onChange);
-  if (onClick != null) v.onClick.listen(onClick);
-  if (onContextMenu != null) v.onContextMenu.listen(onContextMenu);
-  if (onCopy != null) v.onCopy.listen(onCopy);
-  if (onCut != null) v.onCut.listen(onCut);
-  if (onDoubleClick != null) v.onDoubleClick.listen(onDoubleClick);
-  if (onDrag != null) v.onDrag.listen(onDrag);
-  if (onDragEnd != null) v.onDragEnd.listen(onDragEnd);
-  if (onDragEnter != null) v.onDragEnter.listen(onDragEnter);
-  if (onDragLeave != null) v.onDragLeave.listen(onDragLeave);
-  if (onDragOver != null) v.onDragOver.listen(onDragOver);
-  if (onDragStart != null) v.onDragStart.listen(onDragStart);
-  if (onDrop != null) v.onDrop.listen(onDrop);
-  if (onDurationChange != null) v.onDurationChange.listen(onDurationChange);
-  if (onEmptied != null) v.onEmptied.listen(onEmptied);
-  if (onEnded != null) v.onEnded.listen(onEnded);
-  if (onError != null) v.onError.listen(onError);
-  if (onFocus != null) v.onFocus.listen(onFocus);
-  if (onInput != null) v.onInput.listen(onInput);
-  if (onInvalid != null) v.onInvalid.listen(onInvalid);
-  if (onKeyDown != null) v.onKeyDown.listen(onKeyDown);
-  if (onKeyPress != null) v.onKeyPress.listen(onKeyPress);
-  if (onKeyUp != null) v.onKeyUp.listen(onKeyUp);
-  if (onLoad != null) v.onLoad.listen(onLoad);
-  if (onLoadedData != null) v.onLoadedData.listen(onLoadedData);
-  if (onLoadedMetadata != null) v.onLoadedMetadata.listen(onLoadedMetadata);
-  if (onMouseDown != null) v.onMouseDown.listen(onMouseDown);
-  if (onMouseEnter != null) v.onMouseEnter.listen(onMouseEnter);
-  if (onMouseLeave != null) v.onMouseLeave.listen(onMouseLeave);
-  if (onMouseMove != null) v.onMouseMove.listen(onMouseMove);
-  if (onMouseOut != null) v.onMouseOut.listen(onMouseOut);
-  if (onMouseOver != null) v.onMouseOver.listen(onMouseOver);
-  if (onMouseUp != null) v.onMouseUp.listen(onMouseUp);
-  if (onMouseWheel != null) v.onMouseWheel.listen(onMouseWheel);
-  if (onPaste != null) v.onPaste.listen(onPaste);
-  if (onPause != null) v.onPause.listen(onPause);
-  if (onPlay != null) v.onPlay.listen(onPlay);
-  if (onPlaying != null) v.onPlaying.listen(onPlaying);
-  if (onRateChange != null) v.onRateChange.listen(onRateChange);
-  if (onReset != null) v.onReset.listen(onReset);
-  if (onResize != null) v.onResize.listen(onResize);
-  if (onScroll != null) v.onScroll.listen(onScroll);
-  if (onSearch != null) v.onSearch.listen(onSearch);
-  if (onSeeked != null) v.onSeeked.listen(onSeeked);
-  if (onSeeking != null) v.onSeeking.listen(onSeeking);
-  if (onSelect != null) v.onSelect.listen(onSelect);
-  if (onSelectStart != null) v.onSelectStart.listen(onSelectStart);
-  if (onStalled != null) v.onStalled.listen(onStalled);
-  if (onSubmit != null) v.onSubmit.listen(onSubmit);
-  if (onSuspend != null) v.onSuspend.listen(onSuspend);
-  if (onTimeUpdate != null) v.onTimeUpdate.listen(onTimeUpdate);
-  if (onTouchCancel != null) v.onTouchCancel.listen(onTouchCancel);
-  if (onTouchEnd != null) v.onTouchEnd.listen(onTouchEnd);
-  if (onTouchEnter != null) v.onTouchEnter.listen(onTouchEnter);
-  if (onTouchLeave != null) v.onTouchLeave.listen(onTouchLeave);
-  if (onTouchMove != null) v.onTouchMove.listen(onTouchMove);
-  if (onTouchStart != null) v.onTouchStart.listen(onTouchStart);
-  if (onTransitionEnd != null) v.onTransitionEnd.listen(onTransitionEnd);
-  if (onVolumeChange != null) v.onVolumeChange.listen(onVolumeChange);
-  if (onWaiting != null) v.onWaiting.listen(onWaiting);
-  if (onFullscreenChange != null)
-    v.onFullscreenChange.listen(onFullscreenChange);
-  if (onFullscreenError != null) v.onFullscreenError.listen(onFullscreenError);
-  if (onWheel != null) v.onWheel.listen(onWheel);
-  return v;
-}
-
-VideoElement videoElement(
-    {int? height,
-    String? poster,
-    int? width,
-    bool? autoplay,
-    bool? controls,
-    String? crossOrigin,
-    num? currentTime,
-    bool? defaultMuted,
-    num? defaultPlaybackRate,
-    bool? disableRemotePlayback,
-    bool? loop,
-    bool? muted,
-    num? playbackRate,
-    String? preload,
-    String? src,
-    MediaStream? srcObject,
-    num? volume,
-    String? nonce,
-    Map<String, String>? attributes,
-    List<Element>? children,
-    Iterable<String>? classes,
-    Map<String, String>? dataset,
-    String? innerHtml,
-    String? innerText,
-    int? scrollLeft,
-    int? scrollTop,
-    String? contentEditable,
-    String? dir,
-    bool? draggable,
-    bool? hidden,
-    bool? inert,
-    String? inputMode,
-    String? lang,
-    bool? spellcheck,
-    int? tabIndex,
-    String? title,
-    bool? translate,
-    String? className,
-    String? id,
-    String? slot,
-    Iterable<Node>? nodes,
-    String? text,
-    void Function(Event)? onAbort,
-    void Function(Event)? onBeforeCopy,
-    void Function(Event)? onBeforeCut,
-    void Function(Event)? onBeforePaste,
-    void Function(Event)? onBlur,
-    void Function(Event)? onCanPlay,
-    void Function(Event)? onCanPlayThrough,
-    void Function(Event)? onChange,
-    void Function(MouseEvent)? onClick,
-    void Function(MouseEvent)? onContextMenu,
-    void Function(ClipboardEvent)? onCopy,
-    void Function(ClipboardEvent)? onCut,
-    void Function(Event)? onDoubleClick,
-    void Function(MouseEvent)? onDrag,
-    void Function(MouseEvent)? onDragEnd,
-    void Function(MouseEvent)? onDragEnter,
-    void Function(MouseEvent)? onDragLeave,
-    void Function(MouseEvent)? onDragOver,
-    void Function(MouseEvent)? onDragStart,
-    void Function(MouseEvent)? onDrop,
-    void Function(Event)? onDurationChange,
-    void Function(Event)? onEmptied,
-    void Function(Event)? onEnded,
-    void Function(Event)? onError,
-    void Function(Event)? onFocus,
-    void Function(Event)? onInput,
-    void Function(Event)? onInvalid,
-    void Function(KeyboardEvent)? onKeyDown,
-    void Function(KeyboardEvent)? onKeyPress,
-    void Function(KeyboardEvent)? onKeyUp,
-    void Function(Event)? onLoad,
-    void Function(Event)? onLoadedData,
-    void Function(Event)? onLoadedMetadata,
-    void Function(MouseEvent)? onMouseDown,
-    void Function(MouseEvent)? onMouseEnter,
-    void Function(MouseEvent)? onMouseLeave,
-    void Function(MouseEvent)? onMouseMove,
-    void Function(MouseEvent)? onMouseOut,
-    void Function(MouseEvent)? onMouseOver,
-    void Function(MouseEvent)? onMouseUp,
-    void Function(WheelEvent)? onMouseWheel,
-    void Function(ClipboardEvent)? onPaste,
-    void Function(Event)? onPause,
-    void Function(Event)? onPlay,
-    void Function(Event)? onPlaying,
-    void Function(Event)? onRateChange,
-    void Function(Event)? onReset,
-    void Function(Event)? onResize,
-    void Function(Event)? onScroll,
-    void Function(Event)? onSearch,
-    void Function(Event)? onSeeked,
-    void Function(Event)? onSeeking,
-    void Function(Event)? onSelect,
-    void Function(Event)? onSelectStart,
-    void Function(Event)? onStalled,
-    void Function(Event)? onSubmit,
-    void Function(Event)? onSuspend,
-    void Function(Event)? onTimeUpdate,
-    void Function(TouchEvent)? onTouchCancel,
-    void Function(TouchEvent)? onTouchEnd,
-    void Function(TouchEvent)? onTouchEnter,
-    void Function(TouchEvent)? onTouchLeave,
-    void Function(TouchEvent)? onTouchMove,
-    void Function(TouchEvent)? onTouchStart,
-    void Function(TransitionEvent)? onTransitionEnd,
-    void Function(Event)? onVolumeChange,
-    void Function(Event)? onWaiting,
-    void Function(Event)? onFullscreenChange,
-    void Function(Event)? onFullscreenError,
-    void Function(WheelEvent)? onWheel}) {
-  final v = VideoElement();
-  if (height != null) v.height = height;
-  if (poster != null) v.poster = poster;
-  if (width != null) v.width = width;
-  if (autoplay != null) v.autoplay = autoplay;
-  if (controls != null) v.controls = controls;
-  if (crossOrigin != null) v.crossOrigin = crossOrigin;
-  if (currentTime != null) v.currentTime = currentTime;
-  if (defaultMuted != null) v.defaultMuted = defaultMuted;
-  if (defaultPlaybackRate != null) v.defaultPlaybackRate = defaultPlaybackRate;
-  if (disableRemotePlayback != null)
-    v.disableRemotePlayback = disableRemotePlayback;
-  if (loop != null) v.loop = loop;
-  if (muted != null) v.muted = muted;
-  if (playbackRate != null) v.playbackRate = playbackRate;
-  if (preload != null) v.preload = preload;
-  if (src != null) v.src = src;
-  if (srcObject != null) v.srcObject = srcObject;
-  if (volume != null) v.volume = volume;
-  if (nonce != null) v.nonce = nonce;
-  if (attributes != null) v.attributes = attributes;
-  if (children != null) v.children = children;
-  if (classes != null) v.classes = classes;
-  if (dataset != null) v.dataset = dataset;
-  if (innerHtml != null) v.innerHtml = innerHtml;
-  if (innerText != null) v.innerText = innerText;
-  if (scrollLeft != null) v.scrollLeft = scrollLeft;
-  if (scrollTop != null) v.scrollTop = scrollTop;
-  if (contentEditable != null) v.contentEditable = contentEditable;
-  if (dir != null) v.dir = dir;
-  if (draggable != null) v.draggable = draggable;
-  if (hidden != null) v.hidden = hidden;
-  if (inert != null) v.inert = inert;
-  if (inputMode != null) v.inputMode = inputMode;
-  if (lang != null) v.lang = lang;
-  if (spellcheck != null) v.spellcheck = spellcheck;
-  if (tabIndex != null) v.tabIndex = tabIndex;
-  if (title != null) v.title = title;
-  if (translate != null) v.translate = translate;
-  if (className != null) v.className = className;
-  if (id != null) v.id = id;
-  if (slot != null) v.slot = slot;
-  if (nodes != null) v.nodes = nodes;
-  if (text != null) v.text = text;
-  if (onAbort != null) v.onAbort.listen(onAbort);
-  if (onBeforeCopy != null) v.onBeforeCopy.listen(onBeforeCopy);
-  if (onBeforeCut != null) v.onBeforeCut.listen(onBeforeCut);
-  if (onBeforePaste != null) v.onBeforePaste.listen(onBeforePaste);
-  if (onBlur != null) v.onBlur.listen(onBlur);
-  if (onCanPlay != null) v.onCanPlay.listen(onCanPlay);
-  if (onCanPlayThrough != null) v.onCanPlayThrough.listen(onCanPlayThrough);
-  if (onChange != null) v.onChange.listen(onChange);
-  if (onClick != null) v.onClick.listen(onClick);
-  if (onContextMenu != null) v.onContextMenu.listen(onContextMenu);
-  if (onCopy != null) v.onCopy.listen(onCopy);
-  if (onCut != null) v.onCut.listen(onCut);
-  if (onDoubleClick != null) v.onDoubleClick.listen(onDoubleClick);
-  if (onDrag != null) v.onDrag.listen(onDrag);
-  if (onDragEnd != null) v.onDragEnd.listen(onDragEnd);
-  if (onDragEnter != null) v.onDragEnter.listen(onDragEnter);
-  if (onDragLeave != null) v.onDragLeave.listen(onDragLeave);
-  if (onDragOver != null) v.onDragOver.listen(onDragOver);
-  if (onDragStart != null) v.onDragStart.listen(onDragStart);
-  if (onDrop != null) v.onDrop.listen(onDrop);
-  if (onDurationChange != null) v.onDurationChange.listen(onDurationChange);
-  if (onEmptied != null) v.onEmptied.listen(onEmptied);
-  if (onEnded != null) v.onEnded.listen(onEnded);
-  if (onError != null) v.onError.listen(onError);
-  if (onFocus != null) v.onFocus.listen(onFocus);
-  if (onInput != null) v.onInput.listen(onInput);
-  if (onInvalid != null) v.onInvalid.listen(onInvalid);
-  if (onKeyDown != null) v.onKeyDown.listen(onKeyDown);
-  if (onKeyPress != null) v.onKeyPress.listen(onKeyPress);
-  if (onKeyUp != null) v.onKeyUp.listen(onKeyUp);
-  if (onLoad != null) v.onLoad.listen(onLoad);
-  if (onLoadedData != null) v.onLoadedData.listen(onLoadedData);
-  if (onLoadedMetadata != null) v.onLoadedMetadata.listen(onLoadedMetadata);
-  if (onMouseDown != null) v.onMouseDown.listen(onMouseDown);
-  if (onMouseEnter != null) v.onMouseEnter.listen(onMouseEnter);
-  if (onMouseLeave != null) v.onMouseLeave.listen(onMouseLeave);
-  if (onMouseMove != null) v.onMouseMove.listen(onMouseMove);
-  if (onMouseOut != null) v.onMouseOut.listen(onMouseOut);
-  if (onMouseOver != null) v.onMouseOver.listen(onMouseOver);
-  if (onMouseUp != null) v.onMouseUp.listen(onMouseUp);
-  if (onMouseWheel != null) v.onMouseWheel.listen(onMouseWheel);
-  if (onPaste != null) v.onPaste.listen(onPaste);
-  if (onPause != null) v.onPause.listen(onPause);
-  if (onPlay != null) v.onPlay.listen(onPlay);
-  if (onPlaying != null) v.onPlaying.listen(onPlaying);
-  if (onRateChange != null) v.onRateChange.listen(onRateChange);
-  if (onReset != null) v.onReset.listen(onReset);
-  if (onResize != null) v.onResize.listen(onResize);
-  if (onScroll != null) v.onScroll.listen(onScroll);
-  if (onSearch != null) v.onSearch.listen(onSearch);
-  if (onSeeked != null) v.onSeeked.listen(onSeeked);
-  if (onSeeking != null) v.onSeeking.listen(onSeeking);
-  if (onSelect != null) v.onSelect.listen(onSelect);
-  if (onSelectStart != null) v.onSelectStart.listen(onSelectStart);
-  if (onStalled != null) v.onStalled.listen(onStalled);
-  if (onSubmit != null) v.onSubmit.listen(onSubmit);
-  if (onSuspend != null) v.onSuspend.listen(onSuspend);
-  if (onTimeUpdate != null) v.onTimeUpdate.listen(onTimeUpdate);
-  if (onTouchCancel != null) v.onTouchCancel.listen(onTouchCancel);
-  if (onTouchEnd != null) v.onTouchEnd.listen(onTouchEnd);
-  if (onTouchEnter != null) v.onTouchEnter.listen(onTouchEnter);
-  if (onTouchLeave != null) v.onTouchLeave.listen(onTouchLeave);
-  if (onTouchMove != null) v.onTouchMove.listen(onTouchMove);
-  if (onTouchStart != null) v.onTouchStart.listen(onTouchStart);
-  if (onTransitionEnd != null) v.onTransitionEnd.listen(onTransitionEnd);
-  if (onVolumeChange != null) v.onVolumeChange.listen(onVolumeChange);
-  if (onWaiting != null) v.onWaiting.listen(onWaiting);
-  if (onFullscreenChange != null)
-    v.onFullscreenChange.listen(onFullscreenChange);
-  if (onFullscreenError != null) v.onFullscreenError.listen(onFullscreenError);
-  if (onWheel != null) v.onWheel.listen(onWheel);
-  return v;
+class VideoElementWidget extends HtmlElementWidget {
+  VideoElementWidget(
+      {super.nonce,
+      super.attributes,
+      super.children,
+      super.classes,
+      super.dataset,
+      super.innerHtml,
+      super.innerText,
+      super.scrollLeft,
+      super.scrollTop,
+      super.contentEditable,
+      super.dir,
+      super.draggable,
+      super.hidden,
+      super.inert,
+      super.inputMode,
+      super.lang,
+      super.spellcheck,
+      super.tabIndex,
+      super.title,
+      super.translate,
+      super.className,
+      super.id,
+      super.slot,
+      super.nodes,
+      super.text,
+      super.onAbort,
+      super.onBeforeCopy,
+      super.onBeforeCut,
+      super.onBeforePaste,
+      super.onBlur,
+      super.onCanPlay,
+      super.onCanPlayThrough,
+      super.onChange,
+      super.onClick,
+      super.onContextMenu,
+      super.onCopy,
+      super.onCut,
+      super.onDoubleClick,
+      super.onDrag,
+      super.onDragEnd,
+      super.onDragEnter,
+      super.onDragLeave,
+      super.onDragOver,
+      super.onDragStart,
+      super.onDrop,
+      super.onDurationChange,
+      super.onEmptied,
+      super.onEnded,
+      super.onError,
+      super.onFocus,
+      super.onInput,
+      super.onInvalid,
+      super.onKeyDown,
+      super.onKeyPress,
+      super.onKeyUp,
+      super.onLoad,
+      super.onLoadedData,
+      super.onLoadedMetadata,
+      super.onMouseDown,
+      super.onMouseEnter,
+      super.onMouseLeave,
+      super.onMouseMove,
+      super.onMouseOut,
+      super.onMouseOver,
+      super.onMouseUp,
+      super.onMouseWheel,
+      super.onPaste,
+      super.onPause,
+      super.onPlay,
+      super.onPlaying,
+      super.onRateChange,
+      super.onReset,
+      super.onResize,
+      super.onScroll,
+      super.onSearch,
+      super.onSeeked,
+      super.onSeeking,
+      super.onSelect,
+      super.onSelectStart,
+      super.onStalled,
+      super.onSubmit,
+      super.onSuspend,
+      super.onTimeUpdate,
+      super.onTouchCancel,
+      super.onTouchEnd,
+      super.onTouchEnter,
+      super.onTouchLeave,
+      super.onTouchMove,
+      super.onTouchStart,
+      super.onTransitionEnd,
+      super.onVolumeChange,
+      super.onWaiting,
+      super.onFullscreenChange,
+      super.onFullscreenError,
+      super.onWheel});
+  @override
+  Element render() => hook(VideoElement());
 }

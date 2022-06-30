@@ -3,8 +3,8 @@ import 'dart:html';
 import 'package:try_wupper/todo_list_item.dart';
 import 'package:wupper/wupper.dart';
 
-class TodoListPage extends Widget {
-  final InputElement textField = inputElement(
+class TodoListPage extends StatelessWidget {
+  final textField = InputElementWidget(
     type: 'text',
     placeholder: 'New todo',
   );
@@ -29,34 +29,33 @@ class TodoListPage extends Widget {
   }
 
   @override
-  Element build(context) {
+  Widget build(context) {
     print("Build todo page: Context valid: ${context.parent != null}");
-    return divElement(
+    return DivElementWidget(
       className: 'container',
       children: [
         textField,
-        buttonElement(
+        ButtonElementWidget(
           text: 'Add',
           onClick: addTodoAction,
         ),
         todos.bind(context, (context, value) {
           print("BindContext valid: ${context.parent != null}");
-          return uListElement(
+          return UListElementWidget(
             children: [
-              for (final todo in value)
-                widgetElement(context, TodoListItem(todo: todo)),
+              for (final todo in value) TodoListItem(todo: todo),
             ],
           );
         }),
         text.bindAttribute(
-          divElement(
+          DivElementWidget(
               id: 'blocking_background',
               innerText: 'Bind attribute, initial text'),
           'innerText',
           (text) => 'Bind attribute: $text',
         ),
-        divElement(innerText: "Bind text: "),
-        text.bindText(divElement()),
+        DivElementWidget(innerText: "Bind text: "),
+        text.bindText(DivElementWidget()),
       ],
     );
   }

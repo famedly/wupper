@@ -50,7 +50,13 @@ abstract class Widget {
   /// using HTML Elements. It is **not** recommended to use this method to
   /// append your widget in the [build] method of another widget! Use
   /// [widgetElement] for this!
-  Element build(BuildContext context);
+  Widget build(BuildContext context);
+
+  Element render();
+
+  // cache
+  Widget? child;
+  Element? element;
 
   /// Override this method to initialize the state of this widget. The [parent]
   /// value is already set when this method is called.
@@ -75,7 +81,6 @@ abstract class Widget {
     return context.dependOnInheritedWidgetOfExactType<T>();
   }
 
-
   /// Checks if this widget instance is still mounted to the DOM.
   bool get mounted =>
       _appNode.querySelector('[$_dataWidgetTypeId="${hashCode.toString()}"]') !=
@@ -88,7 +93,7 @@ abstract class Widget {
 /// Use this method inside of the [build] method of the parent widget to
 /// append this widget to it. This creates a widget tree and makes it possible
 /// to use the [context.dependOnInheritedWidgetOfExactType] and [State.set]
-  /// method.
+/// method.
 Element widgetElement(BuildContext context, Widget child) {
   child._context = context;
   child.initState();
@@ -102,12 +107,19 @@ extension _WrapWithElement on Widget {
   Element wrapWithElement() {
     final childContext = BuildContext(this, callbacks: _context?._callbacks);
 
-    var element = build(childContext);
-    if (element.hasAttribute(_dataWidgetTypeKey) ||
-        element.hasAttribute(_dataWidgetTypeId)) {
-      element = spanElement(children: [element]);
+    var widget = build(childContext);
+
+    if (widget.hashCode != child?.hashCode) {
+      print("We muss build it once more");
     }
-    return element
+
+    element = widget.render();
+
+    if (element!.hasAttribute(_dataWidgetTypeKey) ||
+        element!.hasAttribute(_dataWidgetTypeId)) {
+      element = SpanElement()..children = [element!];
+    }
+    return element!
       ..setAttribute(_dataWidgetTypeKey, runtimeType.toString())
       ..setAttribute(_dataWidgetTypeId, hashCode.toString());
   }
@@ -177,5 +189,17 @@ class BuildContext {
       return parent as T;
     }
     return parent!.context.dependOnInheritedWidgetOfExactType<T>();
+  }
+}
+
+class TerminaisonWidget extends Widget {
+  @override
+  Widget build(BuildContext context) {
+    throw UnimplementedError();
+  }
+
+  @override
+  Element render() {
+    throw UnimplementedError();
   }
 }

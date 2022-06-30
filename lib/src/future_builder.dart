@@ -15,9 +15,9 @@ import 'package:wupper/wupper.dart';
 ///     divElement(text: snapshot.data ?? snapshot.error?.toString() ?? 'No data yet'),
 /// ).appendTo(this);
 /// ```
-class FutureBuilder<T> extends Widget {
+class FutureBuilder<T> extends StatelessWidget {
   final Future<T> future;
-  final Element Function(BuildContext context, AsyncSnapshot<T> snapshot)
+  final Widget Function(BuildContext context, AsyncSnapshot<T> snapshot)
       builder;
 
   final State<AsyncSnapshot<T>> _snapshot = State(
@@ -47,7 +47,7 @@ class FutureBuilder<T> extends Widget {
   }
 
   @override
-  Element build(context) {
+  Widget build(context) {
     return _snapshot.bind(
         context, (context, _snapshot) => builder(context, _snapshot));
   }

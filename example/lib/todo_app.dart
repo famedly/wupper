@@ -3,7 +3,7 @@ import 'dart:html';
 import 'package:try_wupper/todo_page.dart';
 import 'package:wupper/wupper.dart';
 
-class TodoApp extends Widget {
+class TodoApp extends StatelessWidget {
   final postBackExecuted = State<int>(0);
   @override
   void initState() {
@@ -15,11 +15,13 @@ class TodoApp extends Widget {
   }
 
   @override
-  Element build(context) {
-    return divElement(children: [
-      postBackExecuted.bind(context,
-          (context, value) => spanElement(innerText: "Post frame: $value")),
-      widgetElement(context, BasicRouter(routeBuilder: (route) {
+  Widget build(context) {
+    return DivElementWidget(children: [
+      postBackExecuted.bind(
+          context,
+          (context, value) =>
+              SpanElementWidget(innerText: "Post frame: $value")),
+      BasicRouter(routeBuilder: (route) {
         print("Build route $route");
         switch (route) {
           case '/':
@@ -27,15 +29,15 @@ class TodoApp extends Widget {
           default:
             return NotFoundPage();
         }
-      }))
+      })
     ]);
   }
 }
 
-class NotFoundPage extends Widget {
+class NotFoundPage extends StatelessWidget {
   @override
-  Element build(context) => divElement(children: [
-        paragraphElement(text: '404: Not found'),
-        anchorElement(href: '/#/', text: "To home page")
+  Widget build(context) => DivElementWidget(children: [
+        ParagraphElementWidget(text: '404: Not found'),
+        AnchorElementWidget(href: '/#/', text: "To home page")
       ]);
 }

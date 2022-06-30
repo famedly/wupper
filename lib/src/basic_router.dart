@@ -35,7 +35,7 @@ import '../wupper.dart';
 ///    }
 /// },
 /// ```
-class BasicRouter extends Widget {
+class BasicRouter extends StatelessWidget {
   final Widget Function(String) routeBuilder;
   late final State<String> currentRoute;
 
@@ -55,11 +55,11 @@ class BasicRouter extends Widget {
   void push(String route) => currentRoute.set(route);
 
   @override
-  Element build(context) {
+  Widget build(context) {
     window.location.hash = currentRoute.state;
     return currentRoute.bind(
       context,
-      (context, currentRoute) => widgetElement(context, routeBuilder(currentRoute)),
+      (context, currentRoute) => routeBuilder(currentRoute),
     );
   }
 }

@@ -18,7 +18,7 @@ import 'package:wupper/wupper.dart';
 /// ```
 class StreamBuilder<T> extends Widget {
   final Stream<T> stream;
-  final Element Function(BuildContext context, AsyncSnapshot<T> value) builder;
+  final Widget Function(BuildContext context, AsyncSnapshot<T> value) builder;
   late final StreamSubscription _streamSubscription;
   final State<AsyncSnapshot<T>> _snapshot = State(
     AsyncSnapshot(
@@ -66,6 +66,6 @@ class StreamBuilder<T> extends Widget {
   }
 
   @override
-  Element build(context) => _snapshot.bind(
+  Widget build(context) => _snapshot.bind(
       context, (context, _snapshot) => builder(context, _snapshot));
 }
