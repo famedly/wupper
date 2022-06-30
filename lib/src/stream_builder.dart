@@ -16,7 +16,7 @@ import 'package:wupper/wupper.dart';
 ///     divElement(text: snapshot.data ?? snapshot.error?.toString() ?? 'No data yet'),
 /// ).appendTo(this);
 /// ```
-class StreamBuilder<T> extends Widget {
+class StreamBuilder<T> extends StatelessWidget {
   final Stream<T> stream;
   final Widget Function(BuildContext context, AsyncSnapshot<T> value) builder;
   late final StreamSubscription _streamSubscription;

@@ -303,12 +303,6 @@ class ElementWidget extends Widget {
 
     return v;
   }
-
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
-  }
 }
 
 class HtmlElementWidget extends ElementWidget {
@@ -419,12 +413,6 @@ class HtmlElementWidget extends ElementWidget {
 
   @override
   Element render() => hook(HtmlElement());
-
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
-  }
 }
 
 class AnchorElementWidget extends HtmlElementWidget {

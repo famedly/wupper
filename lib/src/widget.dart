@@ -46,31 +46,14 @@ abstract class Widget {
   BuildContext? _context;
   BuildContext get context => _context!;
 
-  /// Method which needs to be defined by the developer to describe the UI
-  /// using HTML Elements. It is **not** recommended to use this method to
-  /// append your widget in the [build] method of another widget! Use
-  /// [widgetElement] for this!
-  Widget build(BuildContext context);
-
   Element render();
 
-  // cache
-  Widget? child;
   Element? element;
 
   /// Override this method to initialize the state of this widget. The [parent]
   /// value is already set when this method is called.
   void initState() {
     return;
-  }
-
-  /// Use this method inside of the [build] method of the parent widget to
-  /// append this widget to it. This creates a widget tree and makes it possible
-  /// to use the [context.dependOnInheritedWidgetOfExactType] and [State.set]
-  /// method.
-  @Deprecated("Use widgetElement instead")
-  Element appendTo(BuildContext context, [Object? cacheKey]) {
-    return widgetElement(context, this);
   }
 
   /// Looks up the widget tree until it finds a parent of this type or otherwise
@@ -81,48 +64,6 @@ abstract class Widget {
     return context.dependOnInheritedWidgetOfExactType<T>();
   }
 
-  /// Checks if this widget instance is still mounted to the DOM.
-  bool get mounted =>
-      _appNode.querySelector('[$_dataWidgetTypeId="${hashCode.toString()}"]') !=
-      null;
-
-  @override
-  String toString() => _context == null ? '' : build(_context!).toString();
-}
-
-/// Use this method inside of the [build] method of the parent widget to
-/// append this widget to it. This creates a widget tree and makes it possible
-/// to use the [context.dependOnInheritedWidgetOfExactType] and [State.set]
-/// method.
-Element widgetElement(BuildContext context, Widget child) {
-  child._context = context;
-  child.initState();
-  return child.wrapWithElement();
-}
-
-const String _dataWidgetTypeKey = 'data-widget-type';
-const String _dataWidgetTypeId = 'data-widget-id';
-
-extension _WrapWithElement on Widget {
-  Element wrapWithElement() {
-    final childContext = BuildContext(this, callbacks: _context?._callbacks);
-
-    var widget = build(childContext);
-
-    if (widget.hashCode != child?.hashCode) {
-      print("We muss build it once more");
-    }
-
-    element = widget.render();
-
-    if (element!.hasAttribute(_dataWidgetTypeKey) ||
-        element!.hasAttribute(_dataWidgetTypeId)) {
-      element = SpanElement()..children = [element!];
-    }
-    return element!
-      ..setAttribute(_dataWidgetTypeKey, runtimeType.toString())
-      ..setAttribute(_dataWidgetTypeId, hashCode.toString());
-  }
 }
 
 /// Creates a new app and appends it to the [target] HTML element.
@@ -145,7 +86,7 @@ void runApp(
 
   // Build and mount it
   rootWidget.initState();
-  _appNode.children = [rootWidget.wrapWithElement()];
+  _appNode.children = [rootWidget.render()];
 
   // We added elements to the grid, we can now execute callbacks.
   rootWidget._context?._executeCallbacks();
@@ -155,25 +96,25 @@ class BuildContext {
   Widget? parent;
 
   BuildContext(this.parent, {List<Function>? callbacks}) {
-    _callbacks = callbacks ?? [];
+    callbacks = callbacks ?? [];
   }
 
-  late List<Function> _callbacks;
+  late List<Function> callbacks;
 
   /// Add a callback which will be executed after initial build or after set state.
   void addPostFrameCallback(Function callback) {
-    _callbacks.add(callback);
+    callbacks.add(callback);
 
     if (parent == null) {
       print(
-          "WARNING: Added callback when parent is null. now: ${_callbacks.length} callback");
+          "WARNING: Added callback when parent is null. now: ${callbacks.length} callback");
     }
   }
 
   /// Execute all the callbacks and clear the callback list.
   void _executeCallbacks() {
-    while (_callbacks.isNotEmpty) {
-      _callbacks.removeLast()();
+    while (callbacks.isNotEmpty) {
+      callbacks.removeLast()();
     }
   }
 
@@ -189,17 +130,5 @@ class BuildContext {
       return parent as T;
     }
     return parent!.context.dependOnInheritedWidgetOfExactType<T>();
-  }
-}
-
-class TerminaisonWidget extends Widget {
-  @override
-  Widget build(BuildContext context) {
-    throw UnimplementedError();
-  }
-
-  @override
-  Element render() {
-    throw UnimplementedError();
   }
 }
