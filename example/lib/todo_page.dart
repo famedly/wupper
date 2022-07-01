@@ -14,7 +14,9 @@ class TodoListPage extends StatelessWidget {
   }
 
   void addTodoAction([_]) {
-    final value = textField.value;
+    final value = textField.inputElement?.value;
+
+    print("Text field value: $value");
     if (value == null || value.isEmpty) return;
     todos.set(todos.state..add(value));
     textField.inputElement?.value = '';

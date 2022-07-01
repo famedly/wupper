@@ -11,6 +11,7 @@ class TodoListItem extends StatelessWidget {
 
   @override
   void initState() {
+    print("Init state todo list item");
     context.addPostFrameCallback(() {
       postBackExecuted.set(postBackExecuted.state + 1);
     });
@@ -21,8 +22,10 @@ class TodoListItem extends StatelessWidget {
   Widget build(context) => LIElementWidget(
         children: [
           ParagraphElementWidget(text: todo),
-          postBackExecuted.bind(context,
-              (context, value) => SpanElementWidget(innerText: "Post frame: $value")),
+          postBackExecuted.bind(
+              context,
+              (context, value) =>
+                  SpanElementWidget(innerText: "Post frame: $value")),
           ButtonElementWidget(
             text: 'X',
             onClick: (_) => TodoListPage.of(context).removeTodo(todo),

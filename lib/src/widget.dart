@@ -48,7 +48,16 @@ abstract class Widget {
 
   Element render();
 
-  Element? childElement;
+  Element renderWrapper() {
+    element = render();
+    return element!;
+  }
+
+  void setContext(BuildContext context) {
+    _context = context;
+  }
+
+  Element? element;
 
   /// Override this method to initialize the state of this widget. The [parent]
   /// value is already set when this method is called.
@@ -88,7 +97,7 @@ void runApp(
   rootWidget.inflate(cntx);
 
   // Build and mount it
-  _appNode.children = [rootWidget.render()];
+  _appNode.children = [rootWidget.renderWrapper()];
 
   // We added elements to the grid, we can now execute callbacks.
   rootWidget._context?._executeCallbacks();

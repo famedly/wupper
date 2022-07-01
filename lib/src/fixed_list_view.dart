@@ -171,7 +171,7 @@ class FixedHeightListView extends StatelessWidget {
 
   Element? getRootView() {
     if (rootListView != null) return rootListView;
-    rootListView = appNode.querySelector("#" + childElement!.id);
+    rootListView = appNode.querySelector("#" + element!.id);
     _onScrollSub = rootListView?.onScroll.listen(_onScrollListener);
     _onResizeSub = window.onResize.listen(_onScrollListener);
     return rootListView;

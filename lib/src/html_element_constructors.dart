@@ -197,7 +197,7 @@ class ElementWidget extends StatelessWidget {
       this.onWheel});
 
   @override
-  Element render() => hook(HtmlElement());
+  Element render() => element = hook(HtmlElement());
 
   @override
   Widget build(BuildContext context) {
@@ -313,7 +313,7 @@ class ElementWidget extends StatelessWidget {
     if (onWheel != null) v.onWheel.listen(onWheel);
 
     if (children != null) {
-      v.children = children!.map((e) => e.render()).toList();
+      v.children = children!.map((e) => e.renderWrapper()).toList();
     }
 
     return v;

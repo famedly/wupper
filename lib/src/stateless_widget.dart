@@ -14,6 +14,7 @@ abstract class StatelessWidget extends Widget {
   StatelessWidget();
 
   void inflate(BuildContext context) {
+    setContext(context);
     final childContext = BuildContext(this, callbacks: context.callbacks);
     initState();
     child = build(childContext);
@@ -33,16 +34,18 @@ abstract class StatelessWidget extends Widget {
   Element render() {
     print("render ${this} child: $child");
     assert(child != null);
-    childElement = child!.render();
-    if (childElement!.hasAttribute(_dataWidgetTypeKey) ||
-        childElement!.hasAttribute(_dataWidgetTypeId)) {
-      childElement = SpanElement()..children = [childElement!];
+    element = child!.renderWrapper();
+    child!.element = element;
+    if (element!.hasAttribute(_dataWidgetTypeKey) ||
+        element!.hasAttribute(_dataWidgetTypeId)) {
+      element = SpanElement()..children = [element!];
     }
-    return childElement!
+    return element!
       ..setAttribute(_dataWidgetTypeKey, runtimeType.toString())
       ..setAttribute(_dataWidgetTypeId, hashCode.toString());
   }
 
   @override
   String toString() => child == null ? '' : child.toString();
+  
 }

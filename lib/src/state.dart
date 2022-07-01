@@ -15,7 +15,7 @@ class State<T> {
 
     final _subs = {..._subscriptions};
     for (final sub in _subs) {
-      final element = sub.widget.childElement;
+      final element = sub.widget.element;
       print("Element: ${element != null}");
       if (element == null) continue;
 
@@ -29,12 +29,12 @@ class State<T> {
       final newElement = sub.builder(context, value);
 
       if (newElement is StatelessWidget) newElement.inflate(context);
-      element.replaceWith(newElement.render());
+      element.replaceWith(newElement.renderWrapper());
       sub.widget = newElement;
     }
     final _textSubs = {..._textSubscriptions};
     for (final sub in _textSubs) {
-      final element = sub.widget.childElement;
+      final element = sub.widget.element;
       if (element == null) continue;
 
       if (element.isConnected != true) {
@@ -45,7 +45,7 @@ class State<T> {
     }
     final _attriSubs = {..._attributeSubscriptions};
     for (final sub in _attriSubs) {
-      final element = sub.widget.childElement;
+      final element = sub.widget.element;
       if (element == null) continue;
 
       if (element.isConnected != true) {
@@ -80,7 +80,7 @@ class State<T> {
   ]) {
     builder ??= (value) => value.toString();
     _textSubscriptions.add(_TextSubscription<T>(element, builder));
-    element.childElement?.text = builder(state);
+    element.element?.text = builder(state);
     return element;
   }
 
@@ -97,7 +97,7 @@ class State<T> {
         builder,
       ),
     );
-    element.childElement?.setAttribute(attribute, builder(state));
+    element.element?.setAttribute(attribute, builder(state));
     return element;
   }
 }
