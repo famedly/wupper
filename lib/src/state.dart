@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import '../wupper.dart';
 
 class State<T> {
@@ -17,31 +15,44 @@ class State<T> {
 
     final _subs = {..._subscriptions};
     for (final sub in _subs) {
-      if (sub.element.isConnected != true) {
+      final element = sub.widget.childElement;
+      print("Element: ${element != null}");
+      if (element == null) continue;
+
+      if (element.isConnected != true) {
         _subscriptions.remove(sub);
         continue;
       }
 
-      final newElement =
-          sub.builder(BuildContext(sub.parent, callbacks: callbacks), value);
-      sub.element.replaceWith(newElement);
-      sub.element = newElement;
+      final context = BuildContext(sub.parent, callbacks: callbacks);
+
+      final newElement = sub.builder(context, value);
+
+      if (newElement is StatelessWidget) newElement.inflate(context);
+      element.replaceWith(newElement.render());
+      sub.widget = newElement;
     }
     final _textSubs = {..._textSubscriptions};
     for (final sub in _textSubs) {
-      if (sub.element.isConnected != true) {
+      final element = sub.widget.childElement;
+      if (element == null) continue;
+
+      if (element.isConnected != true) {
         _textSubscriptions.remove(sub);
         continue;
       }
-      sub.element.text = sub.builder(value);
+      element.text = sub.builder(value);
     }
     final _attriSubs = {..._attributeSubscriptions};
     for (final sub in _attriSubs) {
-      if (sub.element.isConnected != true) {
+      final element = sub.widget.childElement;
+      if (element == null) continue;
+
+      if (element.isConnected != true) {
         _attributeSubscriptions.remove(sub);
         continue;
       }
-      sub.element.setAttribute(sub.attribute, sub.builder(value));
+      element.setAttribute(sub.attribute, sub.builder(value));
     }
 
     // execute callbacks
@@ -56,9 +67,11 @@ class State<T> {
 
   Widget bind(BuildContext context,
       Widget Function(BuildContext context, T value) builder) {
-    final element = builder(context, _state);
-    _subscriptions.add(_Subscription<T>(element, context.parent, builder));
-    return element;
+    final widget = builder(context, _state);
+
+    print("Bind widget: $widget");
+    _subscriptions.add(_Subscription<T>(widget, context.parent, builder));
+    return widget;
   }
 
   Widget bindText(
@@ -67,7 +80,7 @@ class State<T> {
   ]) {
     builder ??= (value) => value.toString();
     _textSubscriptions.add(_TextSubscription<T>(element, builder));
-    element.text = builder(state);
+    element.childElement?.text = builder(state);
     return element;
   }
 
@@ -84,30 +97,30 @@ class State<T> {
         builder,
       ),
     );
-    element.setAttribute(attribute, builder(state));
+    element.childElement?.setAttribute(attribute, builder(state));
     return element;
   }
 }
 
 class _TextSubscription<T> {
-  final Widget element;
+  final Widget widget;
   final String Function(T value) builder;
 
-  const _TextSubscription(this.element, this.builder);
+  const _TextSubscription(this.widget, this.builder);
 }
 
 class _AttributeSubscription<T> {
-  final Widget element;
+  final Widget widget;
   final String attribute;
   final String Function(T value) builder;
 
-  const _AttributeSubscription(this.element, this.attribute, this.builder);
+  const _AttributeSubscription(this.widget, this.attribute, this.builder);
 }
 
 class _Subscription<T> {
-  Widget element;
+  Widget widget;
   final Widget? parent;
   final Widget Function(BuildContext context, T value) builder;
 
-  _Subscription(this.element, this.parent, this.builder);
+  _Subscription(this.widget, this.parent, this.builder);
 }

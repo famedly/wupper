@@ -171,13 +171,13 @@ class FixedHeightListView extends StatelessWidget {
 
   Element? getRootView() {
     if (rootListView != null) return rootListView;
-    rootListView = appNode.querySelector("#" + div.id);
+    rootListView = appNode.querySelector("#" + childElement!.id);
     _onScrollSub = rootListView?.onScroll.listen(_onScrollListener);
     _onResizeSub = window.onResize.listen(_onScrollListener);
     return rootListView;
   }
 
-  void render(int i, {bool start = false, bool end = false}) {
+  void renderItem(int i, {bool start = false, bool end = false}) {
     final pos = i - firstItemOnScreen;
 
     final newElement = itemBuilder(context, i);
@@ -203,7 +203,7 @@ class FixedHeightListView extends StatelessWidget {
   void runRender() {
     var start = firstItemOnScreen - 1;
     while (start >= 0 && getUIElement(start) == null && onScreen(start)) {
-      render(start, start: true);
+      renderItem(start, start: true);
       rebuildNeeded[start] = false;
       start--;
     }
@@ -211,7 +211,7 @@ class FixedHeightListView extends StatelessWidget {
     for (var pos = 0; pos < _uListElement.children.length; pos++) {
       final i = pos + firstItemOnScreen;
       if ((rebuildNeeded[i] || getUIElement(i) == null) && onScreen(i)) {
-        render(i);
+        renderItem(i);
 
         rebuildNeeded[i] = false;
       }
@@ -220,7 +220,7 @@ class FixedHeightListView extends StatelessWidget {
     var end = lastItemOnScreen;
     while (
         end < initialItemCount && getUIElement(end) == null && onScreen(end)) {
-      render(end, end: true);
+      renderItem(end, end: true);
       rebuildNeeded[end] = false;
       end++;
     }
@@ -302,7 +302,7 @@ class FixedHeightListView extends StatelessWidget {
     _inited = false;
     rebuildNeeded = List.filled(initialItemCount, true, growable: true);
     _uListElement.id = "child_$hashCode";
-    div = DivElementWidget(children: [_uListElement]);
+    div = DivElementWidget(children: []);
     context.addPostFrameCallback(() {
       _onUpdateAllListener(initialItemCount);
     });

@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:try_wupper/todo_list_item.dart';
 import 'package:wupper/wupper.dart';
 
@@ -19,7 +17,7 @@ class TodoListPage extends StatelessWidget {
     final value = textField.value;
     if (value == null || value.isEmpty) return;
     todos.set(todos.state..add(value));
-    textField.value = '';
+    textField.inputElement?.value = '';
     text.set(value);
   }
 

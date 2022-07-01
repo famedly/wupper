@@ -10,9 +10,9 @@ import 'package:wupper/wupper.dart';
 /// Set [reverse] to true, to flip the direction of the items.
 class ListView extends StatelessWidget {
   final ListViewController? _controller;
-  final Element Function(BuildContext context, int i) itemBuilder;
-  final Element Function(BuildContext context)? headerBuilder;
-  final Element Function(BuildContext context)? footerBuilder;
+  final Widget Function(BuildContext context, int i) itemBuilder;
+  final Widget Function(BuildContext context)? headerBuilder;
+  final Widget Function(BuildContext context)? footerBuilder;
   int initialItemCount;
 
   late final StreamSubscription? _onUpdateAllSub;
@@ -44,7 +44,9 @@ class ListView extends StatelessWidget {
       return;
     }
     initialItemCount = i;
-    _uListElement.children = build(context).children;
+
+    // TODO: update element
+    _uListElement.children = renderChilds();
   }
 
   void _onUpdateListener(int i) {
@@ -53,7 +55,12 @@ class ListView extends StatelessWidget {
       return;
     }
     final index = headerBuilder != null ? i + 1 : 1;
-    _uListElement.children[index] = itemBuilder(context, i);
+
+    final child = itemBuilder(context, i);
+
+    if (child is StatelessWidget) child.build(context);
+
+    _uListElement.children[index] = child.render();
   }
 
   void _onInsertListener(int i) {
@@ -63,7 +70,13 @@ class ListView extends StatelessWidget {
     }
     initialItemCount++;
     final index = headerBuilder != null ? i + 1 : 1;
-    _uListElement.children.insert(index, itemBuilder(context, i));
+    final newWidget = itemBuilder(context, i);
+
+    if (newWidget is StatelessWidget) {
+      newWidget.build(context);
+    }
+
+    _uListElement.children.insert(index, newWidget.render());
   }
 
   void _onDeleteListener(int i) {
@@ -76,16 +89,54 @@ class ListView extends StatelessWidget {
     _uListElement.children.removeAt(index);
   }
 
+  Widget? headerWidget;
+  Widget? footerWidget;
+  List<Widget>? widgets;
+
+  void inflateChildren(BuildContext context) {
+    if (headerWidget is StatelessWidget) {
+      (headerWidget as StatelessWidget).build(context);
+    }
+
+    if (footerWidget is StatelessWidget) {
+      (footerWidget as StatelessWidget).build(context);
+    }
+
+    for (final widget in widgets ?? []) {
+      if (widget is StatelessWidget) {
+        widget.build(context);
+      }
+    }
+  }
+
+  List<Element> renderChilds() => [
+        if (headerWidget != null) headerWidget!.render(),
+        for (final widget in widgets ?? []) widget.render(),
+        if (footerWidget != null) footerWidget!.render(),
+      ];
+
+  @override
+  Element render() {
+    return _uListElement..children = renderChilds();
+  }
+
   @override
   Widget build(context) {
-    final headerBuilder = this.headerBuilder;
-    final footerBuilder = this.footerBuilder;
-    return _uListElement
-      ..children = [
-        if (headerBuilder != null) headerBuilder(context),
-        for (var i = 0; i < initialItemCount; i++) itemBuilder(context, i),
-        if (footerBuilder != null) footerBuilder(context),
-      ];
+    // construct the UI
+    headerWidget = headerBuilder?.call(context);
+    footerWidget = footerBuilder?.call(context);
+
+    widgets?.clear();
+    widgets ??= [];
+
+    for (var i = 0; i < initialItemCount; i++) {
+      widgets!.add(itemBuilder(context, i));
+    }
+
+    // build the children / inflate
+    inflateChildren(context);
+
+    return this;
   }
 }
 

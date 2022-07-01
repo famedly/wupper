@@ -11,10 +11,14 @@ abstract class StatelessWidget extends Widget {
   /// [widgetElement] for this!
   Widget build(BuildContext context);
 
-  StatelessWidget() {
-    initState();
+  StatelessWidget();
+
+  void inflate(BuildContext context) {
     final childContext = BuildContext(this, callbacks: context.callbacks);
+    initState();
     child = build(childContext);
+
+    if (child! is StatelessWidget) (child as StatelessWidget).inflate(context);
   }
 
   static const String _dataWidgetTypeKey = 'data-widget-type';
@@ -27,13 +31,14 @@ abstract class StatelessWidget extends Widget {
 
   @override
   Element render() {
+    print("render ${this} child: $child");
     assert(child != null);
-    element = child!.render();
-    if (element!.hasAttribute(_dataWidgetTypeKey) ||
-        element!.hasAttribute(_dataWidgetTypeId)) {
-      element = SpanElement()..children = [element!];
+    childElement = child!.render();
+    if (childElement!.hasAttribute(_dataWidgetTypeKey) ||
+        childElement!.hasAttribute(_dataWidgetTypeId)) {
+      childElement = SpanElement()..children = [childElement!];
     }
-    return element!
+    return childElement!
       ..setAttribute(_dataWidgetTypeKey, runtimeType.toString())
       ..setAttribute(_dataWidgetTypeId, hashCode.toString());
   }

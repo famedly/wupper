@@ -1,8 +1,9 @@
 import 'dart:html';
 
 import 'package:wupper/src/widget.dart';
+import 'package:wupper/wupper.dart';
 
-class ElementWidget extends Widget {
+class ElementWidget extends StatelessWidget {
   final Map<String, String>? attributes;
   final List<Widget>? children;
   final Iterable<String>? classes;
@@ -197,6 +198,20 @@ class ElementWidget extends Widget {
 
   @override
   Element render() => hook(HtmlElement());
+
+  @override
+  Widget build(BuildContext context) {
+    // context propagation to children
+    for (final child in children ?? []) {
+      if (child is StatelessWidget) {
+        child.inflate(context);
+      } else {
+        print("Arggg its a Widget");
+        child.build(context);
+      }
+    }
+    return EndpointWidget();
+  }
 
   Element hook(Element v) {
     if (attributes != null) v.attributes = attributes!;
@@ -3256,11 +3271,14 @@ class InputElementWidget extends HtmlElementWidget {
   @override
   Element hook(Element el) {
     final v = el as InputElement;
+    inputElement = v;
     if (type != null) v.type = type;
     if (value != null) v.value = value;
     if (placeholder != null) v.placeholder = placeholder!;
     return super.hook(v);
   }
+
+  InputElement? inputElement;
 
   @override
   Element render() => hook(InputElement());

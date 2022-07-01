@@ -1,10 +1,9 @@
-import 'dart:html';
-
 import 'package:try_wupper/todo_page.dart';
 import 'package:wupper/wupper.dart';
 
 class TodoApp extends StatelessWidget {
   final postBackExecuted = State<int>(0);
+
   @override
   void initState() {
     context.addPostFrameCallback(() {
@@ -16,11 +15,21 @@ class TodoApp extends StatelessWidget {
 
   @override
   Widget build(context) {
+    if (false)
+      return DivElementWidget(innerText: "Hello", children: [
+        DivElementWidget(innerText: "TODO"),
+        postBackExecuted.bind(
+            context,
+            (context, value) =>
+                SpanElementWidget(innerText: "Post frame: $value")),
+        DivElementWidget(innerText: "TODO")
+      ]);
+
     return DivElementWidget(children: [
-      postBackExecuted.bind(
-          context,
-          (context, value) =>
-              SpanElementWidget(innerText: "Post frame: $value")),
+      postBackExecuted.bind(context, (context, value) {
+        print("Buildcontext triggered for build");
+        return SpanElementWidget(innerText: "Post frame: $value");
+      }),
       BasicRouter(routeBuilder: (route) {
         print("Build route $route");
         switch (route) {
@@ -38,6 +47,22 @@ class NotFoundPage extends StatelessWidget {
   @override
   Widget build(context) => DivElementWidget(children: [
         ParagraphElementWidget(text: '404: Not found'),
-        AnchorElementWidget(href: '/#/', text: "To home page")
+        AnchorElementWidget(href: '/#/', text: "To home page"),
+        CustomWidget()
       ]);
+}
+
+class CustomWidget extends StatelessWidget {
+  String text = "oups";
+
+  @override
+  void initState() {
+    text = "nice, init state works!";
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ParagraphElementWidget(text: text);
+  }
 }

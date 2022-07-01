@@ -22,7 +22,7 @@
 
 import 'dart:html';
 
-import 'html_element_constructors.dart';
+import 'package:wupper/wupper.dart';
 
 /// the root node of the whole application
 ///
@@ -48,7 +48,7 @@ abstract class Widget {
 
   Element render();
 
-  Element? element;
+  Element? childElement;
 
   /// Override this method to initialize the state of this widget. The [parent]
   /// value is already set when this method is called.
@@ -63,13 +63,12 @@ abstract class Widget {
   T findParent<T>() {
     return context.dependOnInheritedWidgetOfExactType<T>();
   }
-
 }
 
 /// Creates a new app and appends it to the [target] HTML element.
 /// The [args] contain all attributes of the HTML element.
 void runApp(
-  Widget Function(Map<String, String> args) widgetBuilder, {
+  StatelessWidget Function(Map<String, String> args) widgetBuilder, {
   @Deprecated('Use [target] instead') String? targetId,
   Element? target,
 }) {
@@ -82,10 +81,13 @@ void runApp(
 
   // Set the context of the root widget
   final rootWidget = widgetBuilder(_appNode.dataset);
-  rootWidget._context = BuildContext(null);
+  final cntx = BuildContext(null);
+  print("Init context");
+  rootWidget._context = cntx;
+
+  rootWidget.inflate(cntx);
 
   // Build and mount it
-  rootWidget.initState();
   _appNode.children = [rootWidget.render()];
 
   // We added elements to the grid, we can now execute callbacks.
@@ -96,7 +98,7 @@ class BuildContext {
   Widget? parent;
 
   BuildContext(this.parent, {List<Function>? callbacks}) {
-    callbacks = callbacks ?? [];
+    this.callbacks = callbacks ?? [];
   }
 
   late List<Function> callbacks;
@@ -130,5 +132,13 @@ class BuildContext {
       return parent as T;
     }
     return parent!.context.dependOnInheritedWidgetOfExactType<T>();
+  }
+}
+
+class EndpointWidget extends Widget {
+  @override
+  Element render() {
+    print("Arggg trying to render an endpoint");
+    throw UnimplementedError();
   }
 }
