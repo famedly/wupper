@@ -31,7 +31,7 @@ class _StatefulWidgetTestState extends StateWidget<StatefulWidgetTest> {
       const WidgetTest(),
       const WidgetTest(),
       const WidgetTest(),
-      WidgetTest()
+      const WidgetTest()
     ]);
   }
 }
@@ -50,9 +50,9 @@ class _StateWidgetTestState extends StateWidget<StateWidgetTest> {
 
     return DivElementWidget(children: [
       ParagraphElementWidget(text: "Statefull widget: $date"),
-      WidgetTest(),
-      WidgetTest(),
-      WidgetTest(),
+      const WidgetTest(),
+      const WidgetTest(),
+      const WidgetTest(),
       ParagraphElementWidget(text: "end of test")
     ]);
   }

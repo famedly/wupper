@@ -14,7 +14,7 @@ class TodoApp extends StatelessWidget {
         print("Build route $route");
         switch (route) {
           case '/todo':
-            return TodoListPage();
+            return const TodoListPage();
           case '/state':
             return StatefulWidgetTest();
           default:

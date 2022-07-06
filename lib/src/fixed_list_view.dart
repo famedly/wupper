@@ -135,7 +135,7 @@ class _FixedHeightListView extends StateWidget<FixedHeightListView> {
   void unloadIfNotOnScreen() {
     // unload screen if needed
     _unloadIfNotOnScreenTimer =
-        Timer(Duration(milliseconds: 1000), _unloadIfNotOnScreen);
+        Timer(const Duration(milliseconds: 1000), _unloadIfNotOnScreen);
   }
 
   void _unloadIfNotOnScreen() {
