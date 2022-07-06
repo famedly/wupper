@@ -24,14 +24,14 @@ class _StatefulWidgetTestState extends StateWidget<StatefulWidgetTest> {
         onClick: add,
       ),
       const StateWidgetTest(),
-      const WidgetTest(),
+      const TimeWidgetTest(),
       const StateWidgetTest(),
-      const WidgetTest(),
-      const WidgetTest(),
-      const WidgetTest(),
-      const WidgetTest(),
-      const WidgetTest(),
-      const WidgetTest()
+      const TimeWidgetTest(),
+      const TimeWidgetTest(),
+      const TimeWidgetTest(),
+      const TimeWidgetTest(),
+      const TimeWidgetTest(),
+      const TimeWidgetTest()
     ]);
   }
 }
@@ -50,24 +50,22 @@ class _StateWidgetTestState extends StateWidget<StateWidgetTest> {
 
     return DivElementWidget(children: [
       ParagraphElementWidget(text: "Statefull widget: $date"),
-      const WidgetTest(),
-      const WidgetTest(),
-      const WidgetTest(),
+      const TimeWidgetTest(),
+      const TimeWidgetTest(),
+      const TimeWidgetTest(),
       ParagraphElementWidget(text: "end of test")
     ]);
   }
 }
 
-class WidgetTest extends StatelessWidget {
-  const WidgetTest() : super();
+class TimeWidgetTest extends StatelessWidget {
+  const TimeWidgetTest() : super();
 
   @override
   Widget build(BuildContext context) {
     print("Build widget test");
     final date = DateTime.now().toString();
 
-    return DivElementWidget(children: [
-      ParagraphElementWidget(text: "Stateless widget: $date"),
-    ]);
+    return ParagraphElementWidget(text: "Stateless widget: $date");
   }
 }

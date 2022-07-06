@@ -141,14 +141,17 @@ class _ListViewState extends StateWidget<ListView> {
 
     for (var i = 0; i < itemCount; i++) {
       final child = widget.itemBuilder(context, i);
-      child.inflate(context);
       widgets!.add(child);
     }
 
     // build the children / inflate
     inflateChildren(context);
 
-    throw Exception("Not implemented");
+    return DivElementWidget(children: [
+      if (headerWidget != null) headerWidget!,
+      ...widgets!,
+      if (footerWidget != null) footerWidget!
+    ]);
   }
 }
 

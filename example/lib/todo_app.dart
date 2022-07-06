@@ -1,6 +1,7 @@
 import 'package:try_wupper/todo_page.dart';
 import 'package:wupper/wupper.dart';
 
+import 'list_view_test.dart';
 import 'stateful_widget_test.dart';
 
 class TodoApp extends StatelessWidget {
@@ -17,6 +18,8 @@ class TodoApp extends StatelessWidget {
             return const TodoListPage();
           case '/state':
             return StatefulWidgetTest();
+          case '/list':
+            return ListViewTest();
           default:
             return NotFoundPage();
         }
@@ -36,6 +39,9 @@ class NotFoundPage extends StatelessWidget {
       ]),
       LIElementWidget(children: [
         AnchorElementWidget(href: '/#/state', text: "To state page")
+      ]),
+      LIElementWidget(children: [
+        AnchorElementWidget(href: '/#/list', text: "To list view page")
       ]),
       CustomWidget()
     ]);
