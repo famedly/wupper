@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:html';
 
 import 'package:wupper/wupper.dart';
 
@@ -16,11 +15,20 @@ import 'package:wupper/wupper.dart';
 ///     divElement(text: snapshot.data ?? snapshot.error?.toString() ?? 'No data yet'),
 /// ).appendTo(this);
 /// ```
-class StreamBuilder<T> extends StatelessWidget {
+
+class StreamBuilder<T> extends StatefulWidget {
   final Stream<T> stream;
   final Widget Function(BuildContext context, AsyncSnapshot<T> value) builder;
+
+  StreamBuilder({required this.stream, required this.builder});
+
+  @override
+  StateWidget<StatefulWidget> createState() => _StreamBuilderState();
+}
+
+class _StreamBuilderState extends StateWidget<StreamBuilder> {
   late final StreamSubscription _streamSubscription;
-  final State<AsyncSnapshot<T>> _snapshot = State(
+  final State<AsyncSnapshot> _snapshot = State(
     AsyncSnapshot(
       hasData: false,
       hasError: false,
@@ -29,15 +37,14 @@ class StreamBuilder<T> extends StatelessWidget {
     ),
   );
 
-  StreamBuilder({required this.stream, required this.builder});
-
   @override
   void initState() {
-    _streamSubscription = stream.listen(_listener, onError: _errorListener);
+    _streamSubscription =
+        widget.stream.listen(_listener, onError: _errorListener);
     super.initState();
   }
 
-  void _listener(T? data) {
+  void _listener(data) {
     if (!_snapshot.hasListener) {
       _streamSubscription.cancel();
       return;
@@ -67,5 +74,5 @@ class StreamBuilder<T> extends StatelessWidget {
 
   @override
   Widget build(context) => _snapshot.bind(
-      context, (context, _snapshot) => builder(context, _snapshot));
+      context, (context, _snapshot) => widget.builder(context, _snapshot));
 }

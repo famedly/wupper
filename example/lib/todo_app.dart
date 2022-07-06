@@ -1,40 +1,22 @@
 import 'package:try_wupper/todo_page.dart';
 import 'package:wupper/wupper.dart';
 
+import 'stateful_widget_test.dart';
+
 class TodoApp extends StatelessWidget {
-  final postBackExecuted = State<int>(0);
-
-  @override
-  void initState() {
-    context.addPostFrameCallback(() {
-      print("Router mounted");
-      postBackExecuted.set(postBackExecuted.state + 1);
-    });
-    super.initState();
-  }
-
   @override
   Widget build(context) {
-    if (false)
-      return DivElementWidget(innerText: "Hello", children: [
-        DivElementWidget(innerText: "TODO"),
-        postBackExecuted.bind(
-            context,
-            (context, value) =>
-                SpanElementWidget(innerText: "Post frame: $value")),
-        DivElementWidget(innerText: "TODO")
-      ]);
-
     return DivElementWidget(children: [
-      postBackExecuted.bind(context, (context, value) {
-        print("Buildcontext triggered for build");
-        return SpanElementWidget(innerText: "Post frame: $value");
-      }),
+      LIElementWidget(
+          children: [AnchorElementWidget(href: '/#/', text: "To not found")]),
+      ParagraphElementWidget(text: "Page:"),
       BasicRouter(routeBuilder: (route) {
         print("Build route $route");
         switch (route) {
-          case '/':
+          case '/todo':
             return TodoListPage();
+          case '/state':
+            return StatefulWidgetTest();
           default:
             return NotFoundPage();
         }
@@ -45,14 +27,27 @@ class TodoApp extends StatelessWidget {
 
 class NotFoundPage extends StatelessWidget {
   @override
-  Widget build(context) => DivElementWidget(children: [
-        ParagraphElementWidget(text: '404: Not found'),
-        AnchorElementWidget(href: '/#/', text: "To home page"),
-        CustomWidget()
-      ]);
+  Widget build(context) {
+    print("Build Not found page");
+    return DivElementWidget(children: [
+      ParagraphElementWidget(text: '404: Not found'),
+      LIElementWidget(children: [
+        AnchorElementWidget(href: '/#/todo', text: "To home page")
+      ]),
+      LIElementWidget(children: [
+        AnchorElementWidget(href: '/#/state', text: "To state page")
+      ]),
+      CustomWidget()
+    ]);
+  }
 }
 
-class CustomWidget extends StatelessWidget {
+class CustomWidget extends StatefulWidgetTest {
+  @override
+  StateWidget<StatefulWidget> createState() => _CustomWidgetTest();
+}
+
+class _CustomWidgetTest extends StateWidget<CustomWidget> {
   String text = "oups";
 
   @override

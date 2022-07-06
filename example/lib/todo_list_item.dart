@@ -1,19 +1,24 @@
-import 'dart:html';
-
 import 'package:try_wupper/todo_page.dart';
 import 'package:wupper/wupper.dart';
 
-class TodoListItem extends StatelessWidget {
-  final String todo;
-  final postBackExecuted = State<int>(0);
+class TodoListItem extends StatefulWidget {
+  const TodoListItem({required this.todo}) : super();
 
-  TodoListItem({required this.todo});
+  final String todo;
+
+  @override
+  StateWidget<TodoListItem> createState() => _TodoListItemState();
+}
+
+class _TodoListItemState extends StateWidget<TodoListItem> {
+  int count = 0;
 
   @override
   void initState() {
     print("Init state todo list item");
     context.addPostFrameCallback(() {
-      postBackExecuted.set(postBackExecuted.state + 1);
+      count++;
+      setState(() {});
     });
     super.initState();
   }
@@ -21,14 +26,11 @@ class TodoListItem extends StatelessWidget {
   @override
   Widget build(context) => LIElementWidget(
         children: [
-          ParagraphElementWidget(text: todo),
-          postBackExecuted.bind(
-              context,
-              (context, value) =>
-                  SpanElementWidget(innerText: "Post frame: $value")),
+          ParagraphElementWidget(text: widget.todo),
+          SpanElementWidget(innerText: "Post frame: $count"),
           ButtonElementWidget(
             text: 'X',
-            onClick: (_) => TodoListPage.of(context).removeTodo(todo),
+            onClick: (_) => TodoListPage.of(context).removeTodo(widget.todo),
           ),
         ],
       );

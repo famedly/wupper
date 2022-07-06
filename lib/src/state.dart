@@ -1,7 +1,8 @@
-import '../wupper.dart';
+import 'package:wupper/wupper.dart';
 
 class State<T> {
   State(T initState) : _state = initState;
+
   T get state => _state;
   bool get hasListener =>
       _subscriptions.isNotEmpty ||
@@ -15,29 +16,30 @@ class State<T> {
 
     final _subs = {..._subscriptions};
     for (final sub in _subs) {
-      final element = sub.widget.element;
-      print("Element: ${element != null}");
-      if (element == null) continue;
+      final element = sub.context.element;
+      final context = sub.context.overrideCallbacks();
 
-      if (element.isConnected != true) {
+      print("Element: ${element != null}");
+      if (element == null || element.isConnected != true) {
         _subscriptions.remove(sub);
         continue;
       }
 
-      final context = BuildContext(sub.parent, callbacks: callbacks);
-
       final newElement = sub.builder(context, value);
 
-      if (newElement is StatelessWidget) newElement.inflate(context);
-      element.replaceWith(newElement.renderWrapper());
-      sub.widget = newElement;
+      newElement.inflate(context);
+      context.widget = newElement;
+
+      context.executeCallbacks();
     }
+
+    /*
     final _textSubs = {..._textSubscriptions};
     for (final sub in _textSubs) {
       final element = sub.widget.element;
       if (element == null) continue;
 
-      if (element.isConnected != true) {
+      if (element == null || element.isConnected != true) {
         _textSubscriptions.remove(sub);
         continue;
       }
@@ -54,7 +56,7 @@ class State<T> {
       }
       element.setAttribute(sub.attribute, sub.builder(value));
     }
-
+    */
     // execute callbacks
     while (callbacks.isNotEmpty) {
       callbacks.removeLast()();
@@ -67,10 +69,12 @@ class State<T> {
 
   Widget bind(BuildContext context,
       Widget Function(BuildContext context, T value) builder) {
-    final widget = builder(context, _state);
+    final childContext = context.createChildContext();
+    final widget = builder(childContext, _state);
+    childContext.widget = widget;
 
     print("Bind widget: $widget");
-    _subscriptions.add(_Subscription<T>(widget, context.parent, builder));
+    _subscriptions.add(_Subscription<T>(childContext, builder));
     return widget;
   }
 
@@ -80,7 +84,7 @@ class State<T> {
   ]) {
     builder ??= (value) => value.toString();
     _textSubscriptions.add(_TextSubscription<T>(element, builder));
-    element.element?.text = builder(state);
+    //element.element?.text = builder(state);
     return element;
   }
 
@@ -97,7 +101,7 @@ class State<T> {
         builder,
       ),
     );
-    element.element?.setAttribute(attribute, builder(state));
+    //element.element?.setAttribute(attribute, builder(state));
     return element;
   }
 }
@@ -118,9 +122,8 @@ class _AttributeSubscription<T> {
 }
 
 class _Subscription<T> {
-  Widget widget;
-  final Widget? parent;
+  final BuildContext context; // context store the widget
   final Widget Function(BuildContext context, T value) builder;
 
-  _Subscription(this.widget, this.parent, this.builder);
+  _Subscription(this.context, this.builder);
 }

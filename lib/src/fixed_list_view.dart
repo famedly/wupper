@@ -8,11 +8,27 @@ import 'package:wupper/wupper.dart';
 /// `ListViewController`.
 /// Set an [itemBuilder] and an [initialItemCount] to render the list.
 /// Set [reverse] to true, to flip the direction of the items.
-class FixedHeightListView extends StatelessWidget {
-  final FixedHeightListViewController? _controller;
+class FixedHeightListView extends StatefulWidget {
+  FixedHeightListView(
+      {required this.itemBuilder,
+      required this.initialItemCount,
+      this.controller,
+      this.itemDefaultHeight = 100,
+      this.buffer = 0})
+      : assert(itemDefaultHeight > 0),
+        assert(buffer >= 0);
+
+  final FixedHeightListViewController? controller;
   final int itemDefaultHeight;
+  final int initialItemCount;
+  final int buffer;
   final Element Function(BuildContext context, int i) itemBuilder;
 
+  @override
+  StateWidget<StatefulWidget> createState() => _FixedHeightListView();
+}
+
+class _FixedHeightListView extends StateWidget<FixedHeightListView> {
   late final StreamSubscription? _onUpdateAllSub;
   late final StreamSubscription? _onUpdateSub;
   late final StreamSubscription? _onDeleteSub;
@@ -20,25 +36,21 @@ class FixedHeightListView extends StatelessWidget {
   late final StreamSubscription? _onScrollSub;
   late final StreamSubscription? _onResizeSub;
 
-  int initialItemCount;
-  final _uListElement = UListElement();
+  @override
+  void initState() {
+    itemCount = widget.initialItemCount;
 
-  FixedHeightListView(
-      {required this.itemBuilder,
-      required this.initialItemCount,
-      FixedHeightListViewController? controller,
-      this.itemDefaultHeight = 100,
-      this.buffer = 0})
-      : _controller = controller,
-        assert(itemDefaultHeight > 0),
-        assert(buffer >= 0) {
     // attach the list to the controller
-    _controller?._attachView(this);
+    widget.controller?._attachView(widget);
     _onUpdateAllSub =
-        _controller?._updateAll.stream.listen(_onUpdateAllListener);
-    _onUpdateSub = _controller?._update.stream.listen(_onUpdateListener);
-    _onDeleteSub = _controller?._delete.stream.listen(_onDeleteListener);
+        widget.controller?._updateAll.stream.listen(_onUpdateAllListener);
+    _onUpdateSub = widget.controller?._update.stream.listen(_onUpdateListener);
+    _onDeleteSub = widget.controller?._delete.stream.listen(_onDeleteListener);
+    super.initState();
   }
+
+  int itemCount = 0;
+  final _uListElement = UListElement();
 
   Timer? _unloadIfNotOnScreenTimer;
   List<bool> rebuildNeeded = [];
@@ -71,7 +83,7 @@ class FixedHeightListView extends StatelessWidget {
   }
 
   void setPos() {
-    final end = (initialItemCount - lastItemOnScreen) * itemDefaultHeight;
+    final end = (itemCount - lastItemOnScreen) * widget.itemDefaultHeight;
     _uListElement.setAttribute(
         "style", "padding: ${offsetTop}px 0px ${end}px  ");
   }
@@ -84,8 +96,6 @@ class FixedHeightListView extends StatelessWidget {
     return null;
   }
 
-  // Buffer to load elements further than what is displayed on the screen
-  final int buffer;
   bool onScreen(i) {
     if (rootListView == null) return false;
 
@@ -106,12 +116,12 @@ class FixedHeightListView extends StatelessWidget {
 
     // We calculate the distance to the max and min boundaries of the viewport
     // from the opposite point for the element.
-    var delta = scrollPositionToTop - i * itemDefaultHeight;
+    var delta = scrollPositionToTop - i * widget.itemDefaultHeight;
     final deltaEnd = delta + clientHeight;
 
-    delta = delta - itemDefaultHeight;
+    delta = delta - widget.itemDefaultHeight;
 
-    if (delta <= buffer && deltaEnd >= -buffer) {
+    if (delta <= widget.buffer && deltaEnd >= -widget.buffer) {
       return true;
     }
 
@@ -137,10 +147,10 @@ class FixedHeightListView extends StatelessWidget {
       if (element != null && !onScreen(i)) {
         _uListElement.children.removeAt(pos);
         if (i == firstItemOnScreen) {
-          offsetTop += itemDefaultHeight;
+          offsetTop += widget.itemDefaultHeight;
           firstItemOnScreen++;
         } else {
-          _offsetBottom = offsetBottom - itemDefaultHeight;
+          _offsetBottom = offsetBottom - widget.itemDefaultHeight;
           lastItemOnScreen--;
         }
         setPos();
@@ -169,9 +179,9 @@ class FixedHeightListView extends StatelessWidget {
 
   Element? rootListView;
 
-  Element? getRootView() {
+  Element? getRootView(BuildContext context) {
     if (rootListView != null) return rootListView;
-    rootListView = appNode.querySelector("#" + element!.id);
+    rootListView = appNode.querySelector("#" + context.element!.id);
     _onScrollSub = rootListView?.onScroll.listen(_onScrollListener);
     _onResizeSub = window.onResize.listen(_onScrollListener);
     return rootListView;
@@ -180,17 +190,17 @@ class FixedHeightListView extends StatelessWidget {
   void renderItem(int i, {bool start = false, bool end = false}) {
     final pos = i - firstItemOnScreen;
 
-    final newElement = itemBuilder(context, i);
+    final newElement = widget.itemBuilder(context, i);
 
-    newElement.style.height = "$itemDefaultHeight px";
+    newElement.style.height = "${widget.itemDefaultHeight} px";
     if (start) {
       _uListElement.children.insert(0, newElement);
-      offsetTop -= itemDefaultHeight;
+      offsetTop -= widget.itemDefaultHeight;
       firstItemOnScreen--;
       setPos();
     } else if (end) {
       _uListElement.children.add(newElement);
-      _offsetBottom = offsetBottom + itemDefaultHeight;
+      _offsetBottom = offsetBottom + widget.itemDefaultHeight;
       lastItemOnScreen++;
       setPos();
     } else {
@@ -218,8 +228,7 @@ class FixedHeightListView extends StatelessWidget {
     }
 
     var end = lastItemOnScreen;
-    while (
-        end < initialItemCount && getUIElement(end) == null && onScreen(end)) {
+    while (end < itemCount && getUIElement(end) == null && onScreen(end)) {
       renderItem(end, end: true);
       rebuildNeeded[end] = false;
       end++;
@@ -234,13 +243,13 @@ class FixedHeightListView extends StatelessWidget {
       return;
     }
 
-    initView();
+    initView(context);
 
-    if (initialItemCount != i) {
+    if (itemCount != i) {
       // we need to reset the view as the number of elements did change
       clearView();
 
-      initialItemCount = i;
+      itemCount = i;
     }
 
     rebuildNeeded = List.filled(i, true, growable: true);
@@ -262,7 +271,7 @@ class FixedHeightListView extends StatelessWidget {
       rebuildNeeded[i] = true;
     }
 
-    initView();
+    initView(context);
     updateViewPortDimension();
     runRender();
     unloadIfNotOnScreen();
@@ -281,17 +290,17 @@ class FixedHeightListView extends StatelessWidget {
       _onDeleteSub?.cancel();
       return;
     }
-    initialItemCount--;
+    itemCount--;
     final element = getUIElement(i);
     if (element != null) _uListElement.children.remove(element);
     rebuildNeeded.removeAt(i);
   }
 
   bool _inited = false;
-  void initView() {
+  void initView(BuildContext context) {
     if (!_inited) {
       _inited = true;
-      getRootView();
+      getRootView(context);
     }
   }
 
@@ -300,11 +309,11 @@ class FixedHeightListView extends StatelessWidget {
   @override
   Widget build(context) {
     _inited = false;
-    rebuildNeeded = List.filled(initialItemCount, true, growable: true);
+    rebuildNeeded = List.filled(itemCount, true, growable: true);
     _uListElement.id = "child_$hashCode";
     div = DivElementWidget(children: []);
     context.addPostFrameCallback(() {
-      _onUpdateAllListener(initialItemCount);
+      _onUpdateAllListener(itemCount);
     });
     return div;
   }
@@ -336,5 +345,5 @@ class FixedHeightListViewController {
   void delete(int index) => _delete.add(index);
 
   /// returns every [Element] which is currently present in the attached view
-  List<Element> get items => _view?._uListElement.children ?? [];
+  //List<Element> get items => _view?._uListElement.children ?? [];
 }

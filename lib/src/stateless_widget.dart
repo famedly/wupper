@@ -1,9 +1,7 @@
-import 'dart:html';
-
-import 'package:wupper/src/widget.dart';
+import 'package:wupper/wupper.dart';
 
 abstract class StatelessWidget extends Widget {
-  Widget? child;
+  const StatelessWidget() : super();
 
   /// Method which needs to be defined by the developer to describe the UI
   /// using HTML Elements. It is **not** recommended to use this method to
@@ -11,41 +9,15 @@ abstract class StatelessWidget extends Widget {
   /// [widgetElement] for this!
   Widget build(BuildContext context);
 
-  StatelessWidget();
-
+  @override
   void inflate(BuildContext context) {
-    setContext(context);
-    final childContext = BuildContext(this, callbacks: context.callbacks);
-    initState();
-    child = build(childContext);
+    context.widget = this;
 
-    if (child! is StatelessWidget) (child as StatelessWidget).inflate(context);
+    final child = build(context);
+
+    final childContext = context.createChildContext();
+    child.inflate(childContext);
+
+    render(context);
   }
-
-  static const String _dataWidgetTypeKey = 'data-widget-type';
-  static const String _dataWidgetTypeId = 'data-widget-id';
-
-  /// Checks if this widget instance is still mounted to the DOM.
-  bool get mounted =>
-      appNode.querySelector('[$_dataWidgetTypeId="${hashCode.toString()}"]') !=
-      null;
-
-  @override
-  Element render() {
-    print("render ${this} child: $child");
-    assert(child != null);
-    element = child!.renderWrapper();
-    child!.element = element;
-    if (element!.hasAttribute(_dataWidgetTypeKey) ||
-        element!.hasAttribute(_dataWidgetTypeId)) {
-      element = SpanElement()..children = [element!];
-    }
-    return element!
-      ..setAttribute(_dataWidgetTypeKey, runtimeType.toString())
-      ..setAttribute(_dataWidgetTypeId, hashCode.toString());
-  }
-
-  @override
-  String toString() => child == null ? '' : child.toString();
-  
 }

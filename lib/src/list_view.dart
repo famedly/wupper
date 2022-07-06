@@ -8,13 +8,25 @@ import 'package:wupper/wupper.dart';
 /// `ListViewController`.
 /// Set an [itemBuilder] and an [initialItemCount] to render the list.
 /// Set [reverse] to true, to flip the direction of the items.
-class ListView extends StatelessWidget {
-  final ListViewController? _controller;
+class ListView extends StatefulWidget {
+  final ListViewController? controller;
   final Widget Function(BuildContext context, int i) itemBuilder;
   final Widget Function(BuildContext context)? headerBuilder;
   final Widget Function(BuildContext context)? footerBuilder;
-  int initialItemCount;
+  final int initialItemCount;
 
+  ListView(
+      {required this.itemBuilder,
+      required this.initialItemCount,
+      this.headerBuilder,
+      this.footerBuilder,
+      this.controller});
+
+  @override
+  StateWidget<StatefulWidget> createState() => _ListViewState();
+}
+
+class _ListViewState extends StateWidget<ListView> {
   late final StreamSubscription? _onUpdateAllSub;
   late final StreamSubscription? _onUpdateSub;
   late final StreamSubscription? _onInsertSub;
@@ -22,20 +34,20 @@ class ListView extends StatelessWidget {
 
   final UListElement _uListElement = UListElement();
 
-  ListView({
-    required this.itemBuilder,
-    required this.initialItemCount,
-    this.headerBuilder,
-    this.footerBuilder,
-    ListViewController? controller,
-  }) : _controller = controller {
+  int itemCount = 0;
+  @override
+  void initState() {
+    itemCount = widget.initialItemCount;
+
     // attach the list to the controller
-    _controller?._attachView(this);
+    widget.controller?._attachView(widget);
     _onUpdateAllSub =
-        _controller?._updateAll.stream.listen(_onUpdateAllListener);
-    _onUpdateSub = _controller?._update.stream.listen(_onUpdateListener);
-    _onInsertSub = _controller?._insert.stream.listen(_onInsertListener);
-    _onDeleteSub = _controller?._delete.stream.listen(_onDeleteListener);
+        widget.controller?._updateAll.stream.listen(_onUpdateAllListener);
+    _onUpdateSub = widget.controller?._update.stream.listen(_onUpdateListener);
+    _onInsertSub = widget.controller?._insert.stream.listen(_onInsertListener);
+    _onDeleteSub = widget.controller?._delete.stream.listen(_onDeleteListener);
+
+    super.initState();
   }
 
   void _onUpdateAllListener(int i) {
@@ -43,10 +55,10 @@ class ListView extends StatelessWidget {
       _onUpdateAllSub?.cancel();
       return;
     }
-    initialItemCount = i;
+    itemCount = i;
 
     // TODO: update element
-    _uListElement.children = renderChilds();
+    _uListElement.children = renderChilds(context);
   }
 
   void _onUpdateListener(int i) {
@@ -54,13 +66,13 @@ class ListView extends StatelessWidget {
       _onUpdateSub?.cancel();
       return;
     }
-    final index = headerBuilder != null ? i + 1 : 1;
+    final index = widget.headerBuilder != null ? i + 1 : 1;
 
-    final child = itemBuilder(context, i);
+    final child = widget.itemBuilder(context, i);
 
     if (child is StatelessWidget) child.build(context);
 
-    _uListElement.children[index] = child.render();
+    _uListElement.children[index] = child.render(context);
   }
 
   void _onInsertListener(int i) {
@@ -68,15 +80,14 @@ class ListView extends StatelessWidget {
       _onInsertSub?.cancel();
       return;
     }
-    initialItemCount++;
-    final index = headerBuilder != null ? i + 1 : 1;
-    final newWidget = itemBuilder(context, i);
+    itemCount++;
+    final index = widget.headerBuilder != null ? i + 1 : 1;
 
-    if (newWidget is StatelessWidget) {
-      newWidget.build(context);
-    }
+    final childContext = BuildContext.build(context);
+    final newWidget = widget.itemBuilder(context, i);
+    newWidget.inflate(childContext);
 
-    _uListElement.children.insert(index, newWidget.render());
+    _uListElement.children.insert(index, childContext.element!);
   }
 
   void _onDeleteListener(int i) {
@@ -84,8 +95,8 @@ class ListView extends StatelessWidget {
       _onDeleteSub?.cancel();
       return;
     }
-    initialItemCount--;
-    final index = headerBuilder != null ? i + 1 : 1;
+    itemCount--;
+    final index = widget.headerBuilder != null ? i + 1 : 1;
     _uListElement.children.removeAt(index);
   }
 
@@ -109,34 +120,35 @@ class ListView extends StatelessWidget {
     }
   }
 
-  List<Element> renderChilds() => [
-        if (headerWidget != null) headerWidget!.render(),
-        for (final widget in widgets ?? []) widget.render(),
-        if (footerWidget != null) footerWidget!.render(),
+  List<Element> renderChilds(BuildContext context) => [
+        if (headerWidget != null) headerWidget!.render(context),
+        for (final widget in widgets ?? []) widget.render(context),
+        if (footerWidget != null) footerWidget!.render(context),
       ];
 
-  @override
-  Element render() {
-    return _uListElement..children = renderChilds();
+  Element renderElement(BuildContext context) {
+    return _uListElement..children = renderChilds(context);
   }
 
   @override
   Widget build(context) {
     // construct the UI
-    headerWidget = headerBuilder?.call(context);
-    footerWidget = footerBuilder?.call(context);
+    headerWidget = widget.headerBuilder?.call(context);
+    footerWidget = widget.footerBuilder?.call(context);
 
     widgets?.clear();
     widgets ??= [];
 
-    for (var i = 0; i < initialItemCount; i++) {
-      widgets!.add(itemBuilder(context, i));
+    for (var i = 0; i < itemCount; i++) {
+      final child = widget.itemBuilder(context, i);
+      child.inflate(context);
+      widgets!.add(child);
     }
 
     // build the children / inflate
     inflateChildren(context);
 
-    return this;
+    throw Exception("Not implemented");
   }
 }
 
@@ -170,5 +182,5 @@ class ListViewController {
   void delete(int index) => _delete.add(index);
 
   /// returns every [Element] which is currently present in the attached view
-  List<Element> get items => _view?._uListElement.children ?? [];
+  //List<Element> get items => _view?._uListElement.children ?? [];
 }

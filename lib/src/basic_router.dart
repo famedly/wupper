@@ -35,31 +35,46 @@ import '../wupper.dart';
 ///    }
 /// },
 /// ```
-class BasicRouter extends StatelessWidget {
+
+class BasicRouter extends StatefulWidget {
   final Widget Function(String) routeBuilder;
-  late final State<String> currentRoute;
+  final String? initialRoute;
 
   BasicRouter({
     required this.routeBuilder,
-    String? initialRoute,
-  }) : currentRoute = State<String>(
-            initialRoute ?? window.location.hash.replaceFirst('#', '')) {
+    this.initialRoute,
+  });
+
+  @override
+  StateWidget<StatefulWidget> createState() => _BasicRouterState();
+}
+
+class _BasicRouterState extends StateWidget<BasicRouter> {
+  late String currentRoute;
+
+  @override
+  void initState() {
+    currentRoute =
+        widget.initialRoute ?? window.location.hash.replaceFirst('#', '');
+
     window.onHashChange.listen(_onHashChangeListener);
+    super.initState();
   }
 
   void _onHashChangeListener(_) {
     final route = window.location.hash.replaceFirst('#', '');
-    if (route != currentRoute.state) push(route);
+    if (route != currentRoute) push(route);
   }
 
-  void push(String route) => currentRoute.set(route);
+  void push(String route) => setState(() {
+        print("Set state");
+        currentRoute = route;
+      });
 
   @override
   Widget build(context) {
-    window.location.hash = currentRoute.state;
-    return currentRoute.bind(
-      context,
-      (context, currentRoute) => routeBuilder(currentRoute),
-    );
+    print("Build router $currentRoute");
+    window.location.hash = currentRoute;
+    return widget.routeBuilder(currentRoute);
   }
 }

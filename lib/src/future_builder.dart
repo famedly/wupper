@@ -14,12 +14,13 @@ import 'package:wupper/wupper.dart';
 ///     divElement(text: snapshot.data ?? snapshot.error?.toString() ?? 'No data yet'),
 /// ).appendTo(this);
 /// ```
-class FutureBuilder<T> extends StatelessWidget {
+
+class FutureBuilder<T> extends StatefulWidget {
   final Future<T> future;
   final Widget Function(BuildContext context, AsyncSnapshot<T> snapshot)
       builder;
 
-  final State<AsyncSnapshot<T>> _snapshot = State(
+  final State<AsyncSnapshot<T>> snapshot = State(
     AsyncSnapshot(
       hasData: false,
       hasError: false,
@@ -30,12 +31,17 @@ class FutureBuilder<T> extends StatelessWidget {
 
   FutureBuilder({required this.future, required this.builder});
 
+  @override
+  StateWidget<FutureBuilder> createState() => _FutureBuilderState();
+}
+
+class _FutureBuilderState extends StateWidget<FutureBuilder> {
   void _run() async {
     try {
-      final data = await future;
-      _snapshot.set(AsyncSnapshot(hasData: true, data: data));
+      final data = await widget.future;
+      widget.snapshot.set(AsyncSnapshot(hasData: true, data: data));
     } catch (error) {
-      _snapshot.set(AsyncSnapshot(hasError: true, error: error));
+      widget.snapshot.set(AsyncSnapshot(hasError: true, error: error));
     }
   }
 
@@ -47,7 +53,7 @@ class FutureBuilder<T> extends StatelessWidget {
 
   @override
   Widget build(context) {
-    return _snapshot.bind(
-        context, (context, _snapshot) => builder(context, _snapshot));
+    return widget.snapshot.bind(
+        context, (context, _snapshot) => widget.builder(context, _snapshot));
   }
 }

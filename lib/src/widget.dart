@@ -24,6 +24,8 @@ import 'dart:html';
 
 import 'package:wupper/wupper.dart';
 
+import 'build_context.dart';
+
 /// the root node of the whole application
 ///
 /// this is required to perform relative `querySelector` calls
@@ -41,36 +43,67 @@ Element get appNode => _appNode;
 ///   Element build() => paragraphElement(text: '404: Not found');
 /// }
 /// ```
+
 abstract class Widget {
-  Widget? get parent => _context?.parent;
-  BuildContext? _context;
-  BuildContext get context => _context!;
+  const Widget();
 
-  Element render();
+  /// Set this widget context, build it’s child, and render the widget, updating
+  /// [Context.element]
+  /// When overriding pay attention that inflate need to call
+  /// [build] and [render]
+  void inflate(BuildContext context);
 
-  Element renderWrapper() {
-    element = render();
-    return element!;
-  }
+  static const String _dataWidgetTypeKey = 'data-widget-type';
+  static const String _dataWidgetTypeId = 'data-widget-id';
 
-  void setContext(BuildContext context) {
-    _context = context;
-  }
+  /// Checks if this widget instance is still mounted to the DOM.
+  bool get mounted =>
+      appNode.querySelector('[$_dataWidgetTypeId="${hashCode.toString()}"]') !=
+      null;
 
-  Element? element;
+  /// Render the DOM element and add it to the context.
+  Element render(BuildContext context) {
+    final child = context.child?.widget;
+    final childElement = context.child?.element;
 
-  /// Override this method to initialize the state of this widget. The [parent]
-  /// value is already set when this method is called.
-  void initState() {
-    return;
-  }
+    if (child == null || childElement == null) {
+      print(
+          "Render: ${context.parent?.widget} -> ${context.widget} -> ${context.child?.widget}");
 
-  /// Looks up the widget tree until it finds a parent of this type or otherwise
-  /// throws an exception. Make sure that this widget has been appended by the
-  /// [widgetElement] method first.
-  @Deprecated("Use context.dependOnInheritedWidgetOfExactType instead")
-  T findParent<T>() {
-    return context.dependOnInheritedWidgetOfExactType<T>();
+      print(
+          "Hmm... element not found for ${context.widget} ${context.child?.widget} ${context.child?.element}");
+    }
+
+    assert(child != null && childElement != null);
+
+    // Replace element if needed
+    if (context.element == childElement) {
+      print("Warning element is equal to child element");
+    }
+
+    var newElement = childElement;
+
+    if (newElement!.hasAttribute(_dataWidgetTypeKey) ||
+        newElement.hasAttribute(_dataWidgetTypeId)) {
+      if (newElement.getAttribute(_dataWidgetTypeId) != hashCode.toString()) {
+        print(
+            "Has attributes ${newElement.getAttribute(_dataWidgetTypeKey)} ${newElement.getAttribute(_dataWidgetTypeId)} $hashCode");
+
+        newElement = SpanElement()..children = [newElement];
+      }
+    }
+
+    newElement
+      ..setAttribute(_dataWidgetTypeKey, runtimeType.toString())
+      ..setAttribute(_dataWidgetTypeId, hashCode.toString());
+
+    if (context.element != null) {
+      context.element!.replaceWith(newElement);
+    }
+
+    context.element = newElement;
+
+    return context.element!;
   }
 }
 
@@ -90,64 +123,13 @@ void runApp(
 
   // Set the context of the root widget
   final rootWidget = widgetBuilder(_appNode.dataset);
-  final cntx = BuildContext(null);
-  print("Init context");
-  rootWidget._context = cntx;
+  final context = BuildContext();
 
-  rootWidget.inflate(cntx);
+  rootWidget.inflate(context);
 
   // Build and mount it
-  _appNode.children = [rootWidget.renderWrapper()];
+  _appNode.children = [context.element!];
 
   // We added elements to the grid, we can now execute callbacks.
-  rootWidget._context?._executeCallbacks();
-}
-
-class BuildContext {
-  Widget? parent;
-
-  BuildContext(this.parent, {List<Function>? callbacks}) {
-    this.callbacks = callbacks ?? [];
-  }
-
-  late List<Function> callbacks;
-
-  /// Add a callback which will be executed after initial build or after set state.
-  void addPostFrameCallback(Function callback) {
-    callbacks.add(callback);
-
-    if (parent == null) {
-      print(
-          "WARNING: Added callback when parent is null. now: ${callbacks.length} callback");
-    }
-  }
-
-  /// Execute all the callbacks and clear the callback list.
-  void _executeCallbacks() {
-    while (callbacks.isNotEmpty) {
-      callbacks.removeLast()();
-    }
-  }
-
-  /// Looks up the widget tree until it finds a parent of this type or otherwise
-  /// throws an exception. Make sure that this widget has been appended by the
-  /// [appendTo()] method first.
-  T dependOnInheritedWidgetOfExactType<T>() {
-    if (parent == null) {
-      throw Exception(
-          'Unable to find parent of type $T in widget tree. Have you appended this widget with `.build()` instead of `.appendTo(this)` maybe?');
-    }
-    if (parent is T) {
-      return parent as T;
-    }
-    return parent!.context.dependOnInheritedWidgetOfExactType<T>();
-  }
-}
-
-class EndpointWidget extends Widget {
-  @override
-  Element render() {
-    print("Arggg trying to render an endpoint");
-    throw UnimplementedError();
-  }
+  context.executeCallbacks();
 }

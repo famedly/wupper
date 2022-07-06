@@ -1,31 +1,42 @@
 import 'package:try_wupper/todo_list_item.dart';
 import 'package:wupper/wupper.dart';
 
-class TodoListPage extends StatelessWidget {
+class TodoListPage extends StatefulWidget {
+  const TodoListPage() : super();
+
+  static TodoListPageState of(BuildContext context) {
+    return context.findState<TodoListPageState>();
+  }
+
+  @override
+  StateWidget<StatefulWidget> createState() => TodoListPageState();
+}
+
+class TodoListPageState extends StateWidget<TodoListPage> {
   final textField = InputElementWidget(
     type: 'text',
     placeholder: 'New todo',
   );
-  State<List<String>> todos = State([]);
-  State<String> text = State("");
-
-  static TodoListPage of(BuildContext context) {
-    return context.dependOnInheritedWidgetOfExactType<TodoListPage>();
-  }
+  List<String> todos = [];
+  String text = "";
 
   void addTodoAction([_]) {
     final value = textField.inputElement?.value;
 
     print("Text field value: $value");
     if (value == null || value.isEmpty) return;
-    todos.set(todos.state..add(value));
     textField.inputElement?.value = '';
-    text.set(value);
+
+    setState(() {
+      todos.add(value);
+      text = value;
+    });
   }
 
   void removeTodo(String todo) {
     print("Remove todo $todo");
-    todos.set(todos.state..removeWhere((t) => t == todo));
+    todos.removeWhere((t) => t == todo);
+    setState(() {});
   }
 
   @override
@@ -39,23 +50,12 @@ class TodoListPage extends StatelessWidget {
           text: 'Add',
           onClick: addTodoAction,
         ),
-        todos.bind(context, (context, value) {
-          print("BindContext valid: ${context.parent != null}");
-          return UListElementWidget(
-            children: [
-              for (final todo in value) TodoListItem(todo: todo),
-            ],
-          );
-        }),
-        text.bindAttribute(
-          DivElementWidget(
-              id: 'blocking_background',
-              innerText: 'Bind attribute, initial text'),
-          'innerText',
-          (text) => 'Bind attribute: $text',
+        UListElementWidget(
+          children: [
+            for (final todo in todos) TodoListItem(todo: todo),
+          ],
         ),
-        DivElementWidget(innerText: "Bind text: "),
-        text.bindText(DivElementWidget()),
+        DivElementWidget(innerText: "Bind text: $text")
       ],
     );
   }
