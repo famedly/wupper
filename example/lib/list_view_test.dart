@@ -8,7 +8,7 @@ class ListViewTest extends StatefulWidget {
 }
 
 class _ListViewTestState extends StateWidget<ListViewTest> {
-  int count = 2000;
+  int count = 20;
   final controller = ListViewController();
 
   void add(_) {

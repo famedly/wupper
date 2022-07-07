@@ -63,9 +63,27 @@ class BuildContext {
     return parent!.findState<T>();
   }
 
-  BuildContext createChildContext() {
+  BuildContext createChildContext(
+      {bool inheritChildren = true, BuildContext? target}) {
     final childContext = BuildContext.fromParent(this, callbacks: callbacks);
-    child = childContext;
+
+    // allow overriding child. Needed for html_element_constructor
+    final child = target ?? this.child;
+
+    // try to preserve child context
+    if (child?.child != null && inheritChildren) {
+      childContext.child = child?.child;
+    }
+
+    if (inheritChildren) {
+      childContext.widgetState = child?.widgetState; // TODO: widget state
+      childContext.domChildren = child?.domChildren;
+    }
+
+    if (target == null) {
+      this.child = childContext;
+    }
+
     return childContext;
   }
 
@@ -88,5 +106,36 @@ class BuildContext {
     widget = newContext.widget;
     element = newContext.element;
     widgetState = newContext.widgetState;
+  }
+
+  BuildContext? getWidgetContext(Widget newWidget) {
+    final oldChildIndex = domChildren?.indexWhere(
+        (context) => context.widget.hashCode == newWidget.hashCode);
+
+    if (oldChildIndex != -1 && oldChildIndex != null) {
+      return domChildren![oldChildIndex];
+    }
+    return null;
+  }
+
+  bool shouldReRender(Widget newWidget) {
+    print(
+        "Should re render: ${child?.widget} ${child?.widget.hashCode}  ${newWidget.hashCode}  res: ${child?.widget.hashCode != newWidget.hashCode}");
+    return child?.widget.hashCode != newWidget.hashCode;
+  }
+
+  bool cachedInflate(Widget newWidget) {
+    if (shouldReRender(newWidget)) {
+      print("Re render $this  child: ${child?.domChildren?.length} children");
+
+      /// If we have a child of the same type, we might want to forward also the
+      /// [domChildren] and [widgetState]
+      final childContext = createChildContext(
+          inheritChildren: newWidget.runtimeType == child?.widget.runtimeType);
+      newWidget.inflate(childContext);
+      return true;
+    }
+
+    return false;
   }
 }

@@ -76,19 +76,11 @@ abstract class Widget {
 
     assert(child != null && childElement != null);
 
-    // Replace element if needed
-    if (context.element == childElement) {
-      print("Warning element is equal to child element");
-    }
-
     var newElement = childElement;
 
     if (newElement!.hasAttribute(_dataWidgetTypeKey) ||
         newElement.hasAttribute(_dataWidgetTypeId)) {
       if (newElement.getAttribute(_dataWidgetTypeId) != hashCode.toString()) {
-        print(
-            "Has attributes ${newElement.getAttribute(_dataWidgetTypeKey)} ${newElement.getAttribute(_dataWidgetTypeId)} $hashCode");
-
         newElement = SpanElement()..children = [newElement];
       }
     }

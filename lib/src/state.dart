@@ -72,7 +72,7 @@ class State<T> {
     final childContext = context.createChildContext();
     final widget = builder(childContext, _state);
     childContext.widget = widget;
-    
+
     _subscriptions.add(_Subscription<T>(childContext, builder));
     return widget;
   }

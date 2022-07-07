@@ -54,6 +54,6 @@ class _FutureBuilderState extends StateWidget<FutureBuilder> {
   @override
   Widget build(context) {
     return widget.snapshot.bind(
-        context, (context, _snapshot) => widget.builder(context, _snapshot));
+        context, (context, snapshot) => widget.builder(context, snapshot));
   }
 }

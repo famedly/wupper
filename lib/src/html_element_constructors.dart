@@ -319,6 +319,7 @@ class ElementWidget extends Widget {
 
     final oldDomElements = context.domChildren ?? [];
     context.domChildren = [];
+    final wasChildUsed = List.filled(oldDomElements.length, false);
 
     // context propagation to children
     if (children != null) {
@@ -326,14 +327,38 @@ class ElementWidget extends Widget {
         final child = children![i];
 
         /// Try to find if we already have this widget in the dom
-        final oldChildIndex = oldDomElements
-            .indexWhere((context) => context.widget.hashCode == child.hashCode);
+        var sameHashCode = -1;
+        var sameRunType = -1;
+        for (var i = 0; i < oldDomElements.length; i++) {
+          final context = oldDomElements[i];
+
+          if (context.widget.hashCode == child.hashCode && !wasChildUsed[i]) {
+            sameHashCode = i;
+
+            break;
+          }
+          if (context.widget.runtimeType == child.runtimeType &&
+              !wasChildUsed[i] &&
+              sameRunType == -1) {
+            sameRunType = i;
+          }
+        }
 
         /// Was the element already created ?
-        if (oldChildIndex != -1) {
+        if (sameHashCode != -1) {
           context.domChildren!.add(oldDomElements[i]);
+          wasChildUsed[sameHashCode] = true;
         } else {
-          final childContext = BuildContext.fromParent(context);
+          BuildContext? target;
+
+          if (sameRunType != -1) {
+            wasChildUsed[sameRunType] = true;
+            target = oldDomElements[sameRunType];
+          }
+
+          final childContext = context.createChildContext(
+              inheritChildren: target != null, target: target);
+
           context.domChildren!.add(childContext);
           child.inflate(childContext);
         }

@@ -11,8 +11,13 @@ abstract class StatefulWidget extends Widget {
   void inflate(BuildContext context) {
     context.widget = this;
 
-    context.widgetState = createState();
-    context.widgetState!.inflate(context);
+    if (context.widgetState == null || context.widget.hashCode != hashCode) {
+      context.widgetState = createState();
+      context.widgetState!.inflate(context);
+    } else {
+      print("Reusing stateful context");
+      context.widgetState!.inflate(context, runInitState: false);
+    }
 
     render(context);
   }
@@ -40,28 +45,29 @@ abstract class StateWidget<T extends StatefulWidget> {
 
     callback();
 
-    print("Set state ${this.context.widget} ${this.context.element}");
-
-    bool shouldRebuild = false;
+    // Create a local only context where the callback list is overrided
     final context = this.context.overrideCallbacks();
 
     final child = build(context);
 
     // compare with old child
-    if (child.hashCode != context.widget.hashCode) {
-      shouldRebuild = true;
-      print("Should rebuild ${child}");
-    } else {
-      print("Same hashcode");
-    }
+    if (context.shouldReRender(child)) {
+      final childContext =
+          (context.child?.widget.runtimeType == child.runtimeType &&
+                  context.child != null)
+              ? context.child!
+              : context.createChildContext(inheritChildren: false);
 
-    if (shouldRebuild) {
       // we reuse the same context so we know what was the previous context to
       // reuse the same widgets
       // override callbacks
       context.child!.callbacks = context.callbacks;
-      child.inflate(context.child!);
 
+      // Import back the function local context to the class local context.
+      // This was needed to override the callbacks list.
+      child.inflate(childContext);
+
+      this.context.importContext(context);
       render();
     }
 
@@ -75,14 +81,14 @@ abstract class StateWidget<T extends StatefulWidget> {
   @protected
   Widget build(BuildContext context);
 
-  void inflate(BuildContext context) {
+  void inflate(BuildContext context, {bool runInitState = true}) {
     this.context = context;
 
-    initState();
+    if (runInitState) {
+      initState();
+    }
 
     final child = build(context);
-
-    final childContext = context.createChildContext();
-    child.inflate(childContext);
+    context.cachedInflate(child);
   }
 }

@@ -14,9 +14,7 @@ abstract class StatelessWidget extends Widget {
     context.widget = this;
 
     final child = build(context);
-
-    final childContext = context.createChildContext();
-    child.inflate(childContext);
+    context.cachedInflate(child);
 
     render(context);
   }

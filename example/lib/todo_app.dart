@@ -20,6 +20,8 @@ class TodoApp extends StatelessWidget {
             return StatefulWidgetTest();
           case '/list':
             return ListViewTest();
+          case '/other':
+            return const CustomWidget();
           default:
             return NotFoundPage();
         }
@@ -29,6 +31,8 @@ class TodoApp extends StatelessWidget {
 }
 
 class NotFoundPage extends StatelessWidget {
+  const NotFoundPage() : super();
+
   @override
   Widget build(context) {
     print("Build Not found page");
@@ -43,12 +47,15 @@ class NotFoundPage extends StatelessWidget {
       LIElementWidget(children: [
         AnchorElementWidget(href: '/#/list', text: "To list view page")
       ]),
-      CustomWidget()
+      LIElementWidget(children: [
+        AnchorElementWidget(href: '/#/other', text: "To other page")
+      ]),
     ]);
   }
 }
 
 class CustomWidget extends StatefulWidgetTest {
+  const CustomWidget() : super();
   @override
   StateWidget<StatefulWidget> createState() => _CustomWidgetTest();
 }
