@@ -21,7 +21,6 @@ class _ListViewTestState extends StateWidget<ListViewTest> {
 
   @override
   Widget build(BuildContext context) {
-    print("Build stateful widget from the text");
     return DivElementWidget(children: [
       ParagraphElementWidget(text: "Count: $count"),
       ButtonElementWidget(
@@ -41,7 +40,6 @@ class ListItemWidget extends StatelessWidget {
   final int pos;
   @override
   Widget build(BuildContext context) {
-    print("Build widget test");
     final date = DateTime.now().toString();
 
     return DivElementWidget(children: [

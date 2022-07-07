@@ -35,6 +35,9 @@ class _StatefulWidgetTestState extends StateWidget<StatefulWidgetTest> {
       TimeWidgetWrapper(),
       TimeWidgetWrapper(),
       TimeWidgetWrapper(),
+      const TimeWidgetStatefullTest(),
+      // ignore: prefer_const_constructors
+      TimeWidgetStatefullTest(),
 
       ParagraphElementWidget(text: "Some other random tests"),
       const StateWidgetTest(),
@@ -91,6 +94,19 @@ class TimeWidgetTest extends StatelessWidget {
 
     return ParagraphElementWidget(
         text: "I'm const (so shouldn't update): $date");
+  }
+}
+
+class TimeWidgetStatefullTest extends StatefulWidget {
+  const TimeWidgetStatefullTest() : super();
+  @override
+  StateWidget<StatefulWidget> createState() => _TimeWidgetStatefullTest();
+}
+
+class _TimeWidgetStatefullTest extends StateWidget<TimeWidgetStatefullTest> {
+  @override
+  Widget build(BuildContext context) {
+    return const TimeWidgetTest();
   }
 }
 

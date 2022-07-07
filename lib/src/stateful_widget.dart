@@ -15,7 +15,6 @@ abstract class StatefulWidget extends Widget {
       context.widgetState = createState();
       context.widgetState!.inflate(context);
     } else {
-      print("Reusing stateful context");
       context.widgetState!.inflate(context, runInitState: false);
     }
 

@@ -12,18 +12,17 @@ class TodoApp extends StatelessWidget {
           children: [AnchorElementWidget(href: '/#/', text: "To not found")]),
       ParagraphElementWidget(text: "Page:"),
       BasicRouter(routeBuilder: (route) {
-        print("Build route $route");
         switch (route) {
           case '/todo':
             return const TodoListPage();
           case '/state':
-            return StatefulWidgetTest();
+            return const StatefulWidgetTest();
           case '/list':
             return ListViewTest();
           case '/other':
             return const CustomWidget();
           default:
-            return NotFoundPage();
+            return const NotFoundPage();
         }
       })
     ]);
@@ -35,7 +34,6 @@ class NotFoundPage extends StatelessWidget {
 
   @override
   Widget build(context) {
-    print("Build Not found page");
     return DivElementWidget(children: [
       ParagraphElementWidget(text: '404: Not found'),
       LIElementWidget(children: [

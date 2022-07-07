@@ -119,15 +119,11 @@ class BuildContext {
   }
 
   bool shouldReRender(Widget newWidget) {
-    print(
-        "Should re render: ${child?.widget} ${child?.widget.hashCode}  ${newWidget.hashCode}  res: ${child?.widget.hashCode != newWidget.hashCode}");
     return child?.widget.hashCode != newWidget.hashCode;
   }
 
   bool cachedInflate(Widget newWidget) {
     if (shouldReRender(newWidget)) {
-      print("Re render $this  child: ${child?.domChildren?.length} children");
-
       /// If we have a child of the same type, we might want to forward also the
       /// [domChildren] and [widgetState]
       final childContext = createChildContext(

@@ -15,7 +15,6 @@ class _TodoListItemState extends StateWidget<TodoListItem> {
 
   @override
   void initState() {
-    print("Init state todo list item");
     context.addPostFrameCallback(() {
       count++;
       setState(() {});

@@ -22,8 +22,6 @@ class TodoListPageState extends StateWidget<TodoListPage> {
 
   void addTodoAction([_]) {
     final value = textField.inputElement?.value;
-
-    print("Text field value: $value");
     if (value == null || value.isEmpty) return;
     textField.inputElement?.value = '';
 
@@ -34,14 +32,12 @@ class TodoListPageState extends StateWidget<TodoListPage> {
   }
 
   void removeTodo(String todo) {
-    print("Remove todo $todo");
     todos.removeWhere((t) => t == todo);
     setState(() {});
   }
 
   @override
   Widget build(context) {
-    print("Build todo page: Context valid: ${context.parent != null}");
     return DivElementWidget(
       className: 'container',
       children: [
