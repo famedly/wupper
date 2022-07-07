@@ -132,6 +132,8 @@ class _ListViewState extends StateWidget<ListView> {
 
   @override
   Widget build(context) {
+    itemCount = widget.initialItemCount;
+
     // construct the UI
     headerWidget = widget.headerBuilder?.call(context);
     footerWidget = widget.footerBuilder?.call(context);
