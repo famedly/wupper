@@ -727,8 +727,10 @@ class BodyElementWidget extends HtmlElementWidget {
 }
 
 class ButtonElementWidget extends HtmlElementWidget {
+  final String? type;
   ButtonElementWidget(
-      {super.nonce,
+      {this.type,
+      super.nonce,
       super.attributes,
       super.children,
       super.classes,
@@ -823,8 +825,13 @@ class ButtonElementWidget extends HtmlElementWidget {
       super.onFullscreenChange,
       super.onFullscreenError,
       super.onWheel});
+
   @override
-  Element render(BuildContext context) => hook(context, ButtonElement());
+  Element render(BuildContext context) {
+    final v = ButtonElement();
+    if (type != null) v.type = type!;
+    return hook(context, v);
+  }
 }
 
 class CanvasElementWidget extends HtmlElementWidget {
