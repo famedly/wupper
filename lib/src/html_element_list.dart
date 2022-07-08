@@ -2754,8 +2754,10 @@ class IFrameElementWidget extends HtmlElementWidget {
 }
 
 class ImageElementWidget extends HtmlElementWidget {
+  final String? src;
   ImageElementWidget(
-      {super.nonce,
+      {this.src,
+      super.nonce,
       super.attributes,
       super.children,
       super.classes,
@@ -2850,8 +2852,13 @@ class ImageElementWidget extends HtmlElementWidget {
       super.onFullscreenChange,
       super.onFullscreenError,
       super.onWheel});
+
   @override
-  Element render(BuildContext context) => hook(context, ImageElement());
+  Element render(BuildContext context) {
+    final v = ImageElement();
+    if (src != null) v.src = src!;
+    return hook(context, v);
+  }
 }
 
 class InputElementWidget extends HtmlElementWidget {
