@@ -38,14 +38,15 @@ abstract class StateWidget<T extends StatefulWidget> {
   }
 
   void setState(VoidCallback callback) {
-    if (this.context.widget == null) {
+    if (context.widget == null) {
       throw Exception("The element need to have been render to update it.");
     }
 
-    callback();
-
     // Create a local only context where the callback list is overrided
-    final context = this.context.overrideCallbacks();
+    final oldCallBacks = context.callbacks;
+    context = context.overrideCallbacks();
+
+    callback();
 
     final child = build(context);
 
@@ -66,12 +67,17 @@ abstract class StateWidget<T extends StatefulWidget> {
       // This was needed to override the callbacks list.
       child.inflate(childContext);
 
-      this.context.importContext(context);
+      // really important!
+      //this.context.importContext(context);
       render();
     }
 
     context.executeCallbacks();
+    context.callbacks = oldCallBacks;
   }
+
+  void addPostFrameCallback(VoidCallback callback) =>
+      context.addPostFrameCallback(callback);
 
   void render() {
     widget.render(context);

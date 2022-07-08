@@ -29,7 +29,7 @@ export 'src/html_element_list.dart';
 export 'src/future_builder.dart';
 export 'src/stream_builder.dart';
 export 'src/list_view.dart';
-export 'src/fixed_list_view.dart';
+export 'src/fixed_height_list_view.dart';
 export 'src/state.dart';
 export 'src/widget.dart';
 export 'src/stateless_widget.dart';

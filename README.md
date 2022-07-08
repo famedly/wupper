@@ -104,7 +104,7 @@ class TodoListPage extends Widget {
     final value = textField.value;
     if (value == null || value.isEmpty) return;
     todos.set(todos.state.add(value));
-    textField.value = '';
+    textField.value = '';f
   }
 
   void removeTodo(String todo) {
@@ -209,6 +209,10 @@ Especially, build callbacks are handy if you want to execute a function after th
 ```
   context.addPostFrameCallback((){/* my function */});
 ```
+
+Notes:
+
+
 
 ### runApp and widget tree
 

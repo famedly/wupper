@@ -12,3 +12,13 @@ html, body {
   padding: 20px;
   text-align: center;
 }
+
+.div1{
+  border: 2px solid green;
+  height: 400px; overflow: scroll; 
+}
+
+.flex {
+  display: flex;
+  height: 25px;
+}

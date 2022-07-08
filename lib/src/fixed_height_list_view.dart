@@ -13,7 +13,7 @@ class FixedHeightListView extends StatefulWidget {
       {required this.itemBuilder,
       required this.initialItemCount,
       this.controller,
-      this.itemDefaultHeight = 100,
+      required this.itemDefaultHeight,
       this.buffer = 0})
       : assert(itemDefaultHeight > 0),
         assert(buffer >= 0);
@@ -22,7 +22,7 @@ class FixedHeightListView extends StatefulWidget {
   final int itemDefaultHeight;
   final int initialItemCount;
   final int buffer;
-  final Element Function(BuildContext context, int i) itemBuilder;
+  final Widget Function(BuildContext context, int i) itemBuilder;
 
   @override
   StateWidget<StatefulWidget> createState() => _FixedHeightListView();
@@ -33,8 +33,8 @@ class _FixedHeightListView extends StateWidget<FixedHeightListView> {
   late final StreamSubscription? _onUpdateSub;
   late final StreamSubscription? _onDeleteSub;
 
-  late final StreamSubscription? _onScrollSub;
-  late final StreamSubscription? _onResizeSub;
+  StreamSubscription? _onScrollSub;
+  StreamSubscription? _onResizeSub;
 
   @override
   void initState() {
@@ -50,7 +50,9 @@ class _FixedHeightListView extends StateWidget<FixedHeightListView> {
   }
 
   int itemCount = 0;
-  final _uListElement = UListElement();
+
+  Element get _uListElement => context.element!;
+  List<Element> domChildren = [];
 
   Timer? _unloadIfNotOnScreenTimer;
   List<bool> rebuildNeeded = [];
@@ -64,8 +66,8 @@ class _FixedHeightListView extends StateWidget<FixedHeightListView> {
     if (_offsetBottom != null) return _offsetBottom!;
 
     var delta = 0;
-    for (int i = 0; i < _uListElement.children.length; i++) {
-      delta += _uListElement.children[i].offsetHeight;
+    for (int i = 0; i < domChildren.length; i++) {
+      delta += domChildren[i].offsetHeight;
     }
 
     _offsetBottom = offsetTop + delta;
@@ -90,8 +92,8 @@ class _FixedHeightListView extends StateWidget<FixedHeightListView> {
 
   Element? getUIElement(int i) {
     final pos = i - firstItemOnScreen;
-    if (pos >= 0 && pos < _uListElement.children.length) {
-      return _uListElement.children[pos];
+    if (pos >= 0 && pos < domChildren.length) {
+      return domChildren[pos];
     }
     return null;
   }
@@ -107,7 +109,7 @@ class _FixedHeightListView extends StateWidget<FixedHeightListView> {
         return true;
       }
       if (scrollPositionToTop + clientHeight > offsetBottom &&
-          pos >= _uListElement.children.length) {
+          pos >= domChildren.length) {
         return true;
       }
     }
@@ -140,12 +142,14 @@ class _FixedHeightListView extends StateWidget<FixedHeightListView> {
 
   void _unloadIfNotOnScreen() {
     var pos = 0;
-    while (pos < _uListElement.children.length) {
+    while (pos < domChildren.length) {
       final i = pos + firstItemOnScreen;
       final element = getUIElement(i);
 
       if (element != null && !onScreen(i)) {
-        _uListElement.children.removeAt(pos);
+        domChildren.removeAt(pos);
+        context.element?.children =
+            domChildren; // TODO: see how we can remove this bug fix
         if (i == firstItemOnScreen) {
           offsetTop += widget.itemDefaultHeight;
           firstItemOnScreen++;
@@ -167,6 +171,7 @@ class _FixedHeightListView extends StateWidget<FixedHeightListView> {
       _onResizeSub?.cancel();
       return;
     }
+
     scrollHandler();
   }
 
@@ -180,31 +185,46 @@ class _FixedHeightListView extends StateWidget<FixedHeightListView> {
   Element? rootListView;
 
   Element? getRootView(BuildContext context) {
-    if (rootListView != null) return rootListView;
-    rootListView = appNode.querySelector("#" + context.element!.id);
+    _uListElement.children = domChildren;
+
+    if (rootListView == _uListElement.parent) {
+      return rootListView;
+    }
+
+    if (rootListView != null) {}
+
+    rootListView = _uListElement.parent;
     _onScrollSub = rootListView?.onScroll.listen(_onScrollListener);
-    _onResizeSub = window.onResize.listen(_onScrollListener);
+    _onResizeSub ??= window.onResize.listen(_onScrollListener);
+
+    // init screen
+    setPos();
     return rootListView;
   }
 
   void renderItem(int i, {bool start = false, bool end = false}) {
     final pos = i - firstItemOnScreen;
 
-    final newElement = widget.itemBuilder(context, i);
+    final child = widget.itemBuilder(context, i);
+
+    final childContext = context.createChildContext(inheritChildren: false);
+    child.inflate(childContext);
+
+    final newElement = childContext.element!;
 
     newElement.style.height = "${widget.itemDefaultHeight} px";
     if (start) {
-      _uListElement.children.insert(0, newElement);
+      domChildren.insert(0, newElement);
       offsetTop -= widget.itemDefaultHeight;
       firstItemOnScreen--;
       setPos();
     } else if (end) {
-      _uListElement.children.add(newElement);
+      domChildren.add(newElement);
       _offsetBottom = offsetBottom + widget.itemDefaultHeight;
       lastItemOnScreen++;
       setPos();
     } else {
-      _uListElement.children[pos] = newElement;
+      domChildren[pos] = newElement;
     }
 
     rebuildNeeded[i] = false;
@@ -218,7 +238,7 @@ class _FixedHeightListView extends StateWidget<FixedHeightListView> {
       start--;
     }
 
-    for (var pos = 0; pos < _uListElement.children.length; pos++) {
+    for (var pos = 0; pos < domChildren.length; pos++) {
       final i = pos + firstItemOnScreen;
       if ((rebuildNeeded[i] || getUIElement(i) == null) && onScreen(i)) {
         renderItem(i);
@@ -233,6 +253,9 @@ class _FixedHeightListView extends StateWidget<FixedHeightListView> {
       rebuildNeeded[end] = false;
       end++;
     }
+
+    context.element?.children =
+        domChildren; // TODO: see how we can remove this bug fix
   }
 
   void _onUpdateAllListener(int i) {
@@ -280,7 +303,7 @@ class _FixedHeightListView extends StateWidget<FixedHeightListView> {
   void clearView() {
     offsetTop = 0;
     _offsetBottom = 0;
-    _uListElement.children.clear();
+    domChildren.clear();
     firstItemOnScreen = 0;
     lastItemOnScreen = 0;
   }
@@ -292,7 +315,7 @@ class _FixedHeightListView extends StateWidget<FixedHeightListView> {
     }
     itemCount--;
     final element = getUIElement(i);
-    if (element != null) _uListElement.children.remove(element);
+    if (element != null) domChildren.remove(element);
     rebuildNeeded.removeAt(i);
   }
 
@@ -304,18 +327,19 @@ class _FixedHeightListView extends StateWidget<FixedHeightListView> {
     }
   }
 
-  late DivElementWidget div;
-
   @override
   Widget build(context) {
+    print("Render list view xxxxx $hashCode");
     _inited = false;
-    rebuildNeeded = List.filled(itemCount, true, growable: true);
-    _uListElement.id = "child_$hashCode";
-    div = DivElementWidget(children: []);
+
+    if (rootListView == null) {
+      rebuildNeeded = List.filled(itemCount, true, growable: true);
+    }
+
     context.addPostFrameCallback(() {
       _onUpdateAllListener(itemCount);
     });
-    return div;
+    return DivElementWidget(children: []);
   }
 }
 
@@ -345,5 +369,5 @@ class FixedHeightListViewController {
   void delete(int index) => _delete.add(index);
 
   /// returns every [Element] which is currently present in the attached view
-  //List<Element> get items => _view?._uListElement.children ?? [];
+  //List<Element> get items => _view?.domChildren ?? [];
 }

@@ -328,14 +328,15 @@ class ElementWidget extends Widget {
         /// Try to find if we already have this widget in the dom
         var sameHashCode = -1;
         var sameRunType = -1;
+
         for (var i = 0; i < oldDomElements.length; i++) {
           final context = oldDomElements[i];
 
           if (context.widget.hashCode == child.hashCode && !wasChildUsed[i]) {
             sameHashCode = i;
-
             break;
           }
+
           if (context.widget.runtimeType == child.runtimeType &&
               !wasChildUsed[i] &&
               sameRunType == -1) {

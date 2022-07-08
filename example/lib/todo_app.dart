@@ -1,3 +1,4 @@
+import 'package:try_wupper/perf_test_page.dart';
 import 'package:try_wupper/todo_page.dart';
 import 'package:wupper/wupper.dart';
 
@@ -19,8 +20,8 @@ class TodoApp extends StatelessWidget {
             return const StatefulWidgetTest();
           case '/list':
             return ListViewTest();
-          case '/other':
-            return const CustomWidget();
+          case '/perf':
+            return const PerfTestPage();
           default:
             return const NotFoundPage();
         }
@@ -46,29 +47,8 @@ class NotFoundPage extends StatelessWidget {
         AnchorElementWidget(href: '/#/list', text: "To list view page")
       ]),
       LIElementWidget(children: [
-        AnchorElementWidget(href: '/#/other', text: "To other page")
+        AnchorElementWidget(href: '/#/perf', text: "To perf page")
       ]),
     ]);
-  }
-}
-
-class CustomWidget extends StatefulWidgetTest {
-  const CustomWidget() : super();
-  @override
-  StateWidget<StatefulWidget> createState() => _CustomWidgetTest();
-}
-
-class _CustomWidgetTest extends StateWidget<CustomWidget> {
-  String text = "oups";
-
-  @override
-  void initState() {
-    text = "nice, init state works!";
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return ParagraphElementWidget(text: text);
   }
 }
