@@ -3,7 +3,7 @@ import 'dart:html';
 import 'package:wupper/wupper.dart';
 
 class HtmlElementWidget extends ElementWidget {
-  String? nonce;
+  final String? nonce;
 
   HtmlElementWidget(
       {this.nonce,
@@ -323,8 +323,10 @@ class AreaElementWidget extends HtmlElementWidget {
 }
 
 class AudioElementWidget extends HtmlElementWidget {
+  final String? src;
   AudioElementWidget(
-      {super.nonce,
+      {this.src,
+      super.nonce,
       super.attributes,
       super.children,
       super.classes,
@@ -420,7 +422,7 @@ class AudioElementWidget extends HtmlElementWidget {
       super.onFullscreenError,
       super.onWheel});
   @override
-  Element render(BuildContext context) => hook(context, AudioElement());
+  Element render(BuildContext context) => hook(context, AudioElement(src));
 }
 
 class BRElementWidget extends HtmlElementWidget {
@@ -2755,8 +2757,15 @@ class IFrameElementWidget extends HtmlElementWidget {
 
 class ImageElementWidget extends HtmlElementWidget {
   final String? src;
+  final String? alt;
+  final int? height;
+  final int? width;
+
   ImageElementWidget(
       {this.src,
+      this.alt,
+      this.height,
+      this.width,
       super.nonce,
       super.attributes,
       super.children,
@@ -2855,8 +2864,8 @@ class ImageElementWidget extends HtmlElementWidget {
 
   @override
   Element render(BuildContext context) {
-    final v = ImageElement();
-    if (src != null) v.src = src!;
+    final v = ImageElement(src: src, height: height, width: width);
+    if (alt != null) v.alt = alt!;
     return hook(context, v);
   }
 }
