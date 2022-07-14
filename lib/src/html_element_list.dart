@@ -2874,10 +2874,13 @@ class InputElementWidget extends HtmlElementWidget {
   final String? type;
   final String? value;
   final String? placeholder;
+  final bool? autofocus;
+
   InputElementWidget(
       {this.type,
       this.value,
       this.placeholder,
+      this.autofocus,
       super.nonce,
       super.attributes,
       super.children,
@@ -2978,16 +2981,17 @@ class InputElementWidget extends HtmlElementWidget {
   Element hook(BuildContext context, Element el) {
     final v = el as InputElement;
     inputElement = v;
-    if (type != null) v.type = type;
     if (value != null) v.value = value;
     if (placeholder != null) v.placeholder = placeholder!;
+    if (autofocus != null) v.autofocus = autofocus!;
     return super.hook(context, v);
   }
 
   InputElement? inputElement;
 
   @override
-  Element render(BuildContext context) => hook(context, InputElement());
+  Element render(BuildContext context) =>
+      hook(context, InputElement(type: type));
 }
 
 class LIElementWidget extends HtmlElementWidget {
