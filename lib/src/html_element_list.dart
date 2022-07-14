@@ -730,8 +730,11 @@ class BodyElementWidget extends HtmlElementWidget {
 
 class ButtonElementWidget extends HtmlElementWidget {
   final String? type;
+  final bool? disabled;
+
   ButtonElementWidget(
       {this.type,
+      this.disabled,
       super.nonce,
       super.attributes,
       super.children,
@@ -832,6 +835,7 @@ class ButtonElementWidget extends HtmlElementWidget {
   Element render(BuildContext context) {
     final v = ButtonElement();
     if (type != null) v.type = type!;
+    if(disabled != null) v.disabled = disabled!;
     return hook(context, v);
   }
 }
