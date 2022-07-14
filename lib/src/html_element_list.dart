@@ -2977,8 +2977,11 @@ class LIElementWidget extends HtmlElementWidget {
 }
 
 class LabelElementWidget extends HtmlElementWidget {
+  final String? htmlFor;
+
   LabelElementWidget(
-      {super.nonce,
+      {this.htmlFor,
+      super.nonce,
       super.attributes,
       super.children,
       super.classes,
@@ -3073,8 +3076,13 @@ class LabelElementWidget extends HtmlElementWidget {
       super.onFullscreenChange,
       super.onFullscreenError,
       super.onWheel});
+
   @override
-  Element render(BuildContext context) => hook(context, LabelElement());
+  Element render(BuildContext context) {
+    final v = LabelElement();
+    if (htmlFor != null) v.htmlFor = htmlFor!;
+    return hook(context, v);
+  }
 }
 
 class LegendElementWidget extends HtmlElementWidget {
