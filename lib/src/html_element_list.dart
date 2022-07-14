@@ -114,8 +114,10 @@ class HtmlElementWidget extends ElementWidget {
 
 class AnchorElementWidget extends HtmlElementWidget {
   String? href;
+  String? target;
   AnchorElementWidget(
       {this.href,
+      this.target,
       super.nonce,
       super.attributes,
       super.children,
@@ -214,9 +216,8 @@ class AnchorElementWidget extends HtmlElementWidget {
 
   @override
   Element render(BuildContext context) {
-    final v = AnchorElement();
-
-    if (href != null) v.href = href;
+    final v = AnchorElement(href: href);
+    if (target != null) v.target = target!;
     return hook(context, v);
   }
 }
