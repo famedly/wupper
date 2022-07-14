@@ -16,6 +16,7 @@ class ElementController {
 
 class InputElementController extends ElementController {
   String? get value => (element as InputElement).value;
+  set value(String? value) => (element as InputElement).value = value;
 }
 
 class InputElementWidget extends HtmlElementWidget {

@@ -13,17 +13,14 @@ class TodoListPage extends StatefulWidget {
 }
 
 class TodoListPageState extends StateWidget<TodoListPage> {
-  final textField = InputElementWidget(
-    type: 'text',
-    placeholder: 'New todo',
-  );
+  final textFieldController = InputElementController();
   List<String> todos = [];
   String text = "";
 
   void addTodoAction([_]) {
-    final value = textField.inputElement?.value;
+    final value = textFieldController.value;
     if (value == null || value.isEmpty) return;
-    textField.inputElement?.value = '';
+    textFieldController.value = '';
 
     setState(() {
       todos.add(value);
@@ -41,7 +38,11 @@ class TodoListPageState extends StateWidget<TodoListPage> {
     return DivElementWidget(
       className: 'container',
       children: [
-        textField,
+        InputElementWidget(
+    type: 'text',
+    placeholder: 'New todo',
+    controller:  textFieldController
+  ),
         ButtonElementWidget(
           text: 'Add',
           onClick: addTodoAction,
