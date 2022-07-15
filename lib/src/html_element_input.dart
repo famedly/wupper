@@ -28,6 +28,7 @@ class InputElementWidget extends HtmlElementWidget {
   final String? autocomplete;
   final String? autocapitalize;
   final bool? disabled;
+  final bool? checked;
 
   InputElementWidget(
       {this.type,
@@ -38,6 +39,7 @@ class InputElementWidget extends HtmlElementWidget {
       this.controller,
       this.autocomplete,
       this.disabled,
+      this.checked,
       super.nonce,
       super.attributes,
       super.children,
@@ -144,6 +146,7 @@ class InputElementWidget extends HtmlElementWidget {
     if (autocomplete != null) v.autocomplete = autocomplete!;
     if (autocapitalize != null) v.autocapitalize = autocapitalize!;
     if (disabled != null) v.disabled = disabled!;
+    if(checked != null) v.checked = checked!;
 
     controller?.attachMe(v);
     return super.hook(context, v);
