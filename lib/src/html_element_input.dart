@@ -26,6 +26,7 @@ class InputElementWidget extends HtmlElementWidget {
   final bool? autofocus;
   final InputElementController? controller;
   final String? autocomplete;
+  final String? autocapitalize;
   final bool? disabled;
 
   InputElementWidget(
@@ -33,6 +34,7 @@ class InputElementWidget extends HtmlElementWidget {
       this.value,
       this.placeholder,
       this.autofocus,
+      this.autocapitalize,
       this.controller,
       this.autocomplete,
       this.disabled,
@@ -140,6 +142,7 @@ class InputElementWidget extends HtmlElementWidget {
     if (placeholder != null) v.placeholder = placeholder!;
     if (autofocus != null) v.autofocus = autofocus!;
     if (autocomplete != null) v.autocomplete = autocomplete!;
+    if (autocapitalize != null) v.autocapitalize = autocapitalize!;
     if (disabled != null) v.disabled = disabled!;
 
     controller?.attachMe(v);
