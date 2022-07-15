@@ -241,3 +241,11 @@ For example our `TodoListItem` widget would look like this:
 ```
 
 The `data-widget-type` becomes "minified" in production.
+
+
+
+## Widgets types
+
+* StatelessWidget
+* StatefulWidget
+* WrapperWidget : A wrapper allowing to add custom Element objects into the widget tree.
