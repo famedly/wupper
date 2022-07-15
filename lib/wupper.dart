@@ -27,6 +27,7 @@ export 'src/basic_router.dart';
 export 'src/html_element_constructors.dart';
 export 'src/html_element_list.dart';
 export 'src/html_element_input.dart';
+export 'src/html_element_media.dart';
 export 'src/future_builder.dart';
 export 'src/stream_builder.dart';
 export 'src/list_view.dart';
