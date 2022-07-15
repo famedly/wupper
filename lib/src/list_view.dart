@@ -15,12 +15,16 @@ class ListView extends StatefulWidget {
   final Widget Function(BuildContext context)? footerBuilder;
   final int initialItemCount;
 
-  ListView(
+  final String? className;
+
+  const ListView(
       {required this.itemBuilder,
       required this.initialItemCount,
       this.headerBuilder,
       this.footerBuilder,
-      this.controller});
+      this.controller,
+      this.className})
+      : super();
 
   @override
   StateWidget<StatefulWidget> createState() => _ListViewState();
@@ -153,7 +157,7 @@ class _ListViewState extends StateWidget<ListView> {
       if (headerWidget != null) headerWidget!,
       ...widgets!,
       if (footerWidget != null) footerWidget!
-    ]);
+    ], className: widget.className);
   }
 }
 
