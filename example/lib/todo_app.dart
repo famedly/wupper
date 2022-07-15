@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:try_wupper/perf_test_page.dart';
 import 'package:try_wupper/todo_page.dart';
 import 'package:wupper/wupper.dart';
@@ -49,6 +51,13 @@ class NotFoundPage extends StatelessWidget {
       LIElementWidget(children: [
         AnchorElementWidget(href: '/#/perf', text: "To perf page")
       ]),
+      DivElementWidget(text: "api", children: [
+        ParagraphElementWidget(text: "test"),
+        ParagraphElementWidget(text: "nice")
+      ]),
+      WrapperWidget(DivElement()
+        ..children = [ParagraphElement()..text = "test"]
+        ..appendText("nice"))
     ]);
   }
 }
