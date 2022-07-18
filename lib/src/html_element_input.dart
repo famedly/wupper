@@ -134,7 +134,8 @@ class InputElementWidget extends HtmlElementWidget {
       super.onWaiting,
       super.onFullscreenChange,
       super.onFullscreenError,
-      super.onWheel});
+      super.onWheel,
+      super.postCreation});
 
   @override
   Element hook(BuildContext context, Element el) {
@@ -146,7 +147,7 @@ class InputElementWidget extends HtmlElementWidget {
     if (autocomplete != null) v.autocomplete = autocomplete!;
     if (autocapitalize != null) v.autocapitalize = autocapitalize!;
     if (disabled != null) v.disabled = disabled!;
-    if(checked != null) v.checked = checked!;
+    if (checked != null) v.checked = checked!;
 
     controller?.attachMe(v);
     return super.hook(context, v);
@@ -257,7 +258,8 @@ class TextAreaElementWidget extends HtmlElementWidget {
       super.onWaiting,
       super.onFullscreenChange,
       super.onFullscreenError,
-      super.onWheel});
+      super.onWheel,
+      super.postCreation});
 
   @override
   Element render(context) {
@@ -366,7 +368,8 @@ class CheckboxInputElementWidget extends HtmlElementWidget {
       super.onWaiting,
       super.onFullscreenChange,
       super.onFullscreenError,
-      super.onWheel});
+      super.onWheel,
+      super.postCreation});
 
   @override
   Element render(BuildContext context) {

@@ -100,12 +100,13 @@ class HtmlElementWidget extends ElementWidget {
       super.onWaiting,
       super.onFullscreenChange,
       super.onFullscreenError,
-      super.onWheel});
+      super.onWheel,
+      super.postCreation});
   @override
-  Element hook(BuildContext context, Element el) {
-    final v = el as HtmlElement;
-    if (nonce != null) v.nonce = nonce;
-    return super.hook(context, v);
+  Element hook(BuildContext context, Element v) {
+    final el = v as HtmlElement;
+    if (nonce != null) el.nonce = nonce;
+    return super.hook(context, el);
   }
 
   @override
@@ -212,7 +213,8 @@ class AnchorElementWidget extends HtmlElementWidget {
       super.onWaiting,
       super.onFullscreenChange,
       super.onFullscreenError,
-      super.onWheel});
+      super.onWheel,
+      super.postCreation});
 
   @override
   Element render(BuildContext context) {
@@ -318,7 +320,8 @@ class AreaElementWidget extends HtmlElementWidget {
       super.onWaiting,
       super.onFullscreenChange,
       super.onFullscreenError,
-      super.onWheel});
+      super.onWheel,
+      super.postCreation});
   @override
   Element render(BuildContext context) => hook(context, AreaElement());
 }
@@ -419,7 +422,8 @@ class BRElementWidget extends HtmlElementWidget {
       super.onWaiting,
       super.onFullscreenChange,
       super.onFullscreenError,
-      super.onWheel});
+      super.onWheel,
+      super.postCreation});
   @override
   Element render(BuildContext context) => hook(context, BRElement());
 }
@@ -520,7 +524,8 @@ class BaseElementWidget extends HtmlElementWidget {
       super.onWaiting,
       super.onFullscreenChange,
       super.onFullscreenError,
-      super.onWheel});
+      super.onWheel,
+      super.postCreation});
   @override
   Element render(BuildContext context) => hook(context, BaseElement());
 }
@@ -621,7 +626,8 @@ class BodyElementWidget extends HtmlElementWidget {
       super.onWaiting,
       super.onFullscreenChange,
       super.onFullscreenError,
-      super.onWheel});
+      super.onWheel,
+      super.postCreation});
   @override
   Element render(BuildContext context) => hook(context, BodyElement());
 }
@@ -727,7 +733,8 @@ class ButtonElementWidget extends HtmlElementWidget {
       super.onWaiting,
       super.onFullscreenChange,
       super.onFullscreenError,
-      super.onWheel});
+      super.onWheel,
+      super.postCreation});
 
   @override
   Element render(BuildContext context) {
@@ -834,7 +841,8 @@ class CanvasElementWidget extends HtmlElementWidget {
       super.onWaiting,
       super.onFullscreenChange,
       super.onFullscreenError,
-      super.onWheel});
+      super.onWheel,
+      super.postCreation});
   @override
   Element render(BuildContext context) => hook(context, CanvasElement());
 }
@@ -935,7 +943,8 @@ class ContentElementWidget extends HtmlElementWidget {
       super.onWaiting,
       super.onFullscreenChange,
       super.onFullscreenError,
-      super.onWheel});
+      super.onWheel,
+      super.postCreation});
   @override
   Element render(BuildContext context) => hook(context, ContentElement());
 }
@@ -1036,7 +1045,8 @@ class DListElementWidget extends HtmlElementWidget {
       super.onWaiting,
       super.onFullscreenChange,
       super.onFullscreenError,
-      super.onWheel});
+      super.onWheel,
+      super.postCreation});
   @override
   Element render(BuildContext context) => hook(context, DListElement());
 }
@@ -1137,7 +1147,8 @@ class DataListElementWidget extends HtmlElementWidget {
       super.onWaiting,
       super.onFullscreenChange,
       super.onFullscreenError,
-      super.onWheel});
+      super.onWheel,
+      super.postCreation});
   @override
   Element render(BuildContext context) => hook(context, DataListElement());
 }
@@ -1238,7 +1249,8 @@ class DetailsElementWidget extends HtmlElementWidget {
       super.onWaiting,
       super.onFullscreenChange,
       super.onFullscreenError,
-      super.onWheel});
+      super.onWheel,
+      super.postCreation});
   @override
   Element render(BuildContext context) => hook(context, DetailsElement());
 }
@@ -1339,7 +1351,8 @@ class DivElementWidget extends HtmlElementWidget {
       super.onWaiting,
       super.onFullscreenChange,
       super.onFullscreenError,
-      super.onWheel});
+      super.onWheel,
+      super.postCreation});
   @override
   Element render(BuildContext context) => hook(context, DivElement());
 }
@@ -1440,7 +1453,8 @@ class EmbedElementWidget extends HtmlElementWidget {
       super.onWaiting,
       super.onFullscreenChange,
       super.onFullscreenError,
-      super.onWheel});
+      super.onWheel,
+      super.postCreation});
   @override
   Element render(BuildContext context) => hook(context, EmbedElement());
 }
@@ -1541,7 +1555,8 @@ class FieldSetElementWidget extends HtmlElementWidget {
       super.onWaiting,
       super.onFullscreenChange,
       super.onFullscreenError,
-      super.onWheel});
+      super.onWheel,
+      super.postCreation});
   @override
   Element render(BuildContext context) => hook(context, FieldSetElement());
 }
@@ -1642,7 +1657,8 @@ class FormElementWidget extends HtmlElementWidget {
       super.onWaiting,
       super.onFullscreenChange,
       super.onFullscreenError,
-      super.onWheel});
+      super.onWheel,
+      super.postCreation});
   @override
   Element render(BuildContext context) => hook(context, FormElement());
 }
@@ -1743,7 +1759,8 @@ class HRElementWidget extends HtmlElementWidget {
       super.onWaiting,
       super.onFullscreenChange,
       super.onFullscreenError,
-      super.onWheel});
+      super.onWheel,
+      super.postCreation});
   @override
   Element render(BuildContext context) => hook(context, HRElement());
 }
@@ -1844,7 +1861,8 @@ class HeadElementWidget extends HtmlElementWidget {
       super.onWaiting,
       super.onFullscreenChange,
       super.onFullscreenError,
-      super.onWheel});
+      super.onWheel,
+      super.postCreation});
   @override
   Element render(BuildContext context) => hook(context, HeadElement());
 }
@@ -1945,7 +1963,8 @@ class HeadingElementH1Widget extends HtmlElementWidget {
       super.onWaiting,
       super.onFullscreenChange,
       super.onFullscreenError,
-      super.onWheel});
+      super.onWheel,
+      super.postCreation});
   @override
   Element render(BuildContext context) => hook(context, HeadingElement.h1());
 }
@@ -2046,7 +2065,8 @@ class HeadingElementH2Widget extends HtmlElementWidget {
       super.onWaiting,
       super.onFullscreenChange,
       super.onFullscreenError,
-      super.onWheel});
+      super.onWheel,
+      super.postCreation});
   @override
   Element render(BuildContext context) => hook(context, HeadingElement.h2());
 }
@@ -2147,7 +2167,8 @@ class HeadingElementH3Widget extends HtmlElementWidget {
       super.onWaiting,
       super.onFullscreenChange,
       super.onFullscreenError,
-      super.onWheel});
+      super.onWheel,
+      super.postCreation});
   @override
   Element render(BuildContext context) => hook(context, HeadingElement.h3());
 }
@@ -2248,7 +2269,8 @@ class HeadingElementH4Widget extends HtmlElementWidget {
       super.onWaiting,
       super.onFullscreenChange,
       super.onFullscreenError,
-      super.onWheel});
+      super.onWheel,
+      super.postCreation});
   @override
   Element render(BuildContext context) => hook(context, HeadingElement.h4());
 }
@@ -2349,7 +2371,8 @@ class HeadingElementH5Widget extends HtmlElementWidget {
       super.onWaiting,
       super.onFullscreenChange,
       super.onFullscreenError,
-      super.onWheel});
+      super.onWheel,
+      super.postCreation});
   @override
   Element render(BuildContext context) => hook(context, HeadingElement.h5());
 }
@@ -2450,7 +2473,8 @@ class HeadingElementH6Widget extends HtmlElementWidget {
       super.onWaiting,
       super.onFullscreenChange,
       super.onFullscreenError,
-      super.onWheel});
+      super.onWheel,
+      super.postCreation});
   @override
   Element render(BuildContext context) => hook(context, HeadingElement.h6());
 }
@@ -2551,7 +2575,8 @@ class HtmlHtmlElementWidget extends HtmlElementWidget {
       super.onWaiting,
       super.onFullscreenChange,
       super.onFullscreenError,
-      super.onWheel});
+      super.onWheel,
+      super.postCreation});
   @override
   Element render(BuildContext context) => hook(context, HtmlHtmlElement());
 }
@@ -2652,7 +2677,8 @@ class IFrameElementWidget extends HtmlElementWidget {
       super.onWaiting,
       super.onFullscreenChange,
       super.onFullscreenError,
-      super.onWheel});
+      super.onWheel,
+      super.postCreation});
   @override
   Element render(BuildContext context) => hook(context, IFrameElement());
 }
@@ -2762,7 +2788,8 @@ class ImageElementWidget extends HtmlElementWidget {
       super.onWaiting,
       super.onFullscreenChange,
       super.onFullscreenError,
-      super.onWheel});
+      super.onWheel,
+      super.postCreation});
 
   @override
   Element render(BuildContext context) {
@@ -2868,7 +2895,8 @@ class LIElementWidget extends HtmlElementWidget {
       super.onWaiting,
       super.onFullscreenChange,
       super.onFullscreenError,
-      super.onWheel});
+      super.onWheel,
+      super.postCreation});
   @override
   Element render(BuildContext context) => hook(context, LIElement());
 }
@@ -2972,7 +3000,8 @@ class LabelElementWidget extends HtmlElementWidget {
       super.onWaiting,
       super.onFullscreenChange,
       super.onFullscreenError,
-      super.onWheel});
+      super.onWheel,
+      super.postCreation});
 
   @override
   Element render(BuildContext context) {
@@ -3078,7 +3107,8 @@ class LegendElementWidget extends HtmlElementWidget {
       super.onWaiting,
       super.onFullscreenChange,
       super.onFullscreenError,
-      super.onWheel});
+      super.onWheel,
+      super.postCreation});
   @override
   Element render(BuildContext context) => hook(context, LegendElement());
 }
@@ -3179,7 +3209,8 @@ class LinkElementWidget extends HtmlElementWidget {
       super.onWaiting,
       super.onFullscreenChange,
       super.onFullscreenError,
-      super.onWheel});
+      super.onWheel,
+      super.postCreation});
   @override
   Element render(BuildContext context) => hook(context, LinkElement());
 }
@@ -3280,7 +3311,8 @@ class MapElementWidget extends HtmlElementWidget {
       super.onWaiting,
       super.onFullscreenChange,
       super.onFullscreenError,
-      super.onWheel});
+      super.onWheel,
+      super.postCreation});
   @override
   Element render(BuildContext context) => hook(context, MapElement());
 }
@@ -3381,7 +3413,8 @@ class MenuElementWidget extends HtmlElementWidget {
       super.onWaiting,
       super.onFullscreenChange,
       super.onFullscreenError,
-      super.onWheel});
+      super.onWheel,
+      super.postCreation});
   @override
   Element render(BuildContext context) => hook(context, MenuElement());
 }
@@ -3482,7 +3515,8 @@ class MetaElementWidget extends HtmlElementWidget {
       super.onWaiting,
       super.onFullscreenChange,
       super.onFullscreenError,
-      super.onWheel});
+      super.onWheel,
+      super.postCreation});
   @override
   Element render(BuildContext context) => hook(context, MetaElement());
 }
@@ -3583,7 +3617,8 @@ class MeterElementWidget extends HtmlElementWidget {
       super.onWaiting,
       super.onFullscreenChange,
       super.onFullscreenError,
-      super.onWheel});
+      super.onWheel,
+      super.postCreation});
   @override
   Element render(BuildContext context) => hook(context, MeterElement());
 }
@@ -3684,7 +3719,8 @@ class OListElementWidget extends HtmlElementWidget {
       super.onWaiting,
       super.onFullscreenChange,
       super.onFullscreenError,
-      super.onWheel});
+      super.onWheel,
+      super.postCreation});
   @override
   Element render(BuildContext context) => hook(context, OListElement());
 }
@@ -3785,7 +3821,8 @@ class ObjectElementWidget extends HtmlElementWidget {
       super.onWaiting,
       super.onFullscreenChange,
       super.onFullscreenError,
-      super.onWheel});
+      super.onWheel,
+      super.postCreation});
   @override
   Element render(BuildContext context) => hook(context, ObjectElement());
 }
@@ -3886,7 +3923,8 @@ class OptGroupElementWidget extends HtmlElementWidget {
       super.onWaiting,
       super.onFullscreenChange,
       super.onFullscreenError,
-      super.onWheel});
+      super.onWheel,
+      super.postCreation});
   @override
   Element render(BuildContext context) => hook(context, OptGroupElement());
 }
@@ -3987,7 +4025,8 @@ class OptionElementWidget extends HtmlElementWidget {
       super.onWaiting,
       super.onFullscreenChange,
       super.onFullscreenError,
-      super.onWheel});
+      super.onWheel,
+      super.postCreation});
   @override
   Element render(BuildContext context) => hook(context, OptionElement());
 }
@@ -4088,7 +4127,8 @@ class OutputElementWidget extends HtmlElementWidget {
       super.onWaiting,
       super.onFullscreenChange,
       super.onFullscreenError,
-      super.onWheel});
+      super.onWheel,
+      super.postCreation});
   @override
   Element render(BuildContext context) => hook(context, OutputElement());
 }
@@ -4189,7 +4229,8 @@ class ParagraphElementWidget extends HtmlElementWidget {
       super.onWaiting,
       super.onFullscreenChange,
       super.onFullscreenError,
-      super.onWheel});
+      super.onWheel,
+      super.postCreation});
   @override
   Element render(BuildContext context) => hook(context, ParagraphElement());
 }
@@ -4290,7 +4331,8 @@ class PreElementWidget extends HtmlElementWidget {
       super.onWaiting,
       super.onFullscreenChange,
       super.onFullscreenError,
-      super.onWheel});
+      super.onWheel,
+      super.postCreation});
   @override
   Element render(BuildContext context) => hook(context, PreElement());
 }
@@ -4391,7 +4433,8 @@ class ProgressElementWidget extends HtmlElementWidget {
       super.onWaiting,
       super.onFullscreenChange,
       super.onFullscreenError,
-      super.onWheel});
+      super.onWheel,
+      super.postCreation});
   @override
   Element render(BuildContext context) => hook(context, ProgressElement());
 }
@@ -4492,7 +4535,8 @@ class QuoteElementWidget extends HtmlElementWidget {
       super.onWaiting,
       super.onFullscreenChange,
       super.onFullscreenError,
-      super.onWheel});
+      super.onWheel,
+      super.postCreation});
   @override
   Element render(BuildContext context) => hook(context, QuoteElement());
 }
@@ -4593,7 +4637,8 @@ class ScriptElementWidget extends HtmlElementWidget {
       super.onWaiting,
       super.onFullscreenChange,
       super.onFullscreenError,
-      super.onWheel});
+      super.onWheel,
+      super.postCreation});
   @override
   Element render(BuildContext context) => hook(context, ScriptElement());
 }
@@ -4694,7 +4739,8 @@ class SelectElementWidget extends HtmlElementWidget {
       super.onWaiting,
       super.onFullscreenChange,
       super.onFullscreenError,
-      super.onWheel});
+      super.onWheel,
+      super.postCreation});
   @override
   Element render(BuildContext context) => hook(context, SelectElement());
 }
@@ -4795,7 +4841,8 @@ class ShadowElementWidget extends HtmlElementWidget {
       super.onWaiting,
       super.onFullscreenChange,
       super.onFullscreenError,
-      super.onWheel});
+      super.onWheel,
+      super.postCreation});
   @override
   Element render(BuildContext context) => hook(context, ShadowElement());
 }
@@ -4896,7 +4943,8 @@ class SourceElementWidget extends HtmlElementWidget {
       super.onWaiting,
       super.onFullscreenChange,
       super.onFullscreenError,
-      super.onWheel});
+      super.onWheel,
+      super.postCreation});
   @override
   Element render(BuildContext context) => hook(context, SourceElement());
 }
@@ -4997,7 +5045,8 @@ class SpanElementWidget extends HtmlElementWidget {
       super.onWaiting,
       super.onFullscreenChange,
       super.onFullscreenError,
-      super.onWheel});
+      super.onWheel,
+      super.postCreation});
   @override
   Element render(BuildContext context) => hook(context, SpanElement());
 }
@@ -5098,7 +5147,8 @@ class StyleElementWidget extends HtmlElementWidget {
       super.onWaiting,
       super.onFullscreenChange,
       super.onFullscreenError,
-      super.onWheel});
+      super.onWheel,
+      super.postCreation});
   @override
   Element render(BuildContext context) => hook(context, StyleElement());
 }
@@ -5199,7 +5249,8 @@ class TableElementWidget extends HtmlElementWidget {
       super.onWaiting,
       super.onFullscreenChange,
       super.onFullscreenError,
-      super.onWheel});
+      super.onWheel,
+      super.postCreation});
   @override
   Element render(BuildContext context) => hook(context, TableElement());
 }
@@ -5300,7 +5351,8 @@ class TableRowElementWidget extends HtmlElementWidget {
       super.onWaiting,
       super.onFullscreenChange,
       super.onFullscreenError,
-      super.onWheel});
+      super.onWheel,
+      super.postCreation});
   @override
   Element render(BuildContext context) => hook(context, TableRowElement());
 }
@@ -5401,7 +5453,8 @@ class TemplateElementWidget extends HtmlElementWidget {
       super.onWaiting,
       super.onFullscreenChange,
       super.onFullscreenError,
-      super.onWheel});
+      super.onWheel,
+      super.postCreation});
   @override
   Element render(BuildContext context) => hook(context, TemplateElement());
 }
@@ -5502,7 +5555,8 @@ class TitleElementWidget extends HtmlElementWidget {
       super.onWaiting,
       super.onFullscreenChange,
       super.onFullscreenError,
-      super.onWheel});
+      super.onWheel,
+      super.postCreation});
   @override
   Element render(BuildContext context) => hook(context, TitleElement());
 }
@@ -5603,7 +5657,8 @@ class TrackElementWidget extends HtmlElementWidget {
       super.onWaiting,
       super.onFullscreenChange,
       super.onFullscreenError,
-      super.onWheel});
+      super.onWheel,
+      super.postCreation});
   @override
   Element render(BuildContext context) => hook(context, TrackElement());
 }
@@ -5704,7 +5759,8 @@ class UListElementWidget extends HtmlElementWidget {
       super.onWaiting,
       super.onFullscreenChange,
       super.onFullscreenError,
-      super.onWheel});
+      super.onWheel,
+      super.postCreation});
   @override
   Element render(BuildContext context) => hook(context, UListElement());
 }
@@ -5805,7 +5861,8 @@ class VideoElementWidget extends HtmlElementWidget {
       super.onWaiting,
       super.onFullscreenChange,
       super.onFullscreenError,
-      super.onWheel});
+      super.onWheel,
+      super.postCreation});
   @override
   Element render(BuildContext context) => hook(context, VideoElement());
 }

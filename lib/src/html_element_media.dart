@@ -114,7 +114,8 @@ class AudioElementWidget extends HtmlElementWidget {
       super.onWaiting,
       super.onFullscreenChange,
       super.onFullscreenError,
-      super.onWheel});
+      super.onWheel,
+      super.postCreation});
   @override
   Element render(BuildContext context) {
     final v = AudioElement(src);
