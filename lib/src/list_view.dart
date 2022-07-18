@@ -15,15 +15,18 @@ class ListView extends StatefulWidget {
   final Widget Function(BuildContext context)? footerBuilder;
   final int initialItemCount;
 
+  final String? id;
   final String? className;
-
+  final void Function(Element)? postCreation;
   const ListView(
       {required this.itemBuilder,
       required this.initialItemCount,
       this.headerBuilder,
       this.footerBuilder,
       this.controller,
-      this.className})
+      this.id,
+      this.className,
+      this.postCreation})
       : super();
 
   @override
@@ -153,11 +156,15 @@ class _ListViewState extends StateWidget<ListView> {
     // build the children / inflate
     inflateChildren(context);
 
-    return DivElementWidget(children: [
-      if (headerWidget != null) headerWidget!,
-      ...widgets!,
-      if (footerWidget != null) footerWidget!
-    ], className: widget.className);
+    return DivElementWidget(
+        id: widget.id,
+        children: [
+          if (headerWidget != null) headerWidget!,
+          ...widgets!,
+          if (footerWidget != null) footerWidget!
+        ],
+        className: widget.className,
+        postCreation: widget.postCreation);
   }
 }
 
