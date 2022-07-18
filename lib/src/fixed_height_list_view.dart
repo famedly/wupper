@@ -14,7 +14,11 @@ class FixedHeightListView extends StatefulWidget {
       required this.initialItemCount,
       this.controller,
       required this.itemDefaultHeight,
-      this.buffer = 0})
+      this.buffer = 0,
+      this.id,
+      this.className,
+      this.postCreation,
+      this.classes})
       : assert(itemDefaultHeight > 0),
         assert(buffer >= 0);
 
@@ -23,6 +27,11 @@ class FixedHeightListView extends StatefulWidget {
   final int initialItemCount;
   final int buffer;
   final Widget Function(BuildContext context, int i) itemBuilder;
+
+  final String? id;
+  final String? className;
+  final Set<String>? classes;
+  final void Function(Element)? postCreation;
 
   @override
   StateWidget<StatefulWidget> createState() => _FixedHeightListView();
@@ -339,7 +348,12 @@ class _FixedHeightListView extends StateWidget<FixedHeightListView> {
     context.addPostFrameCallback(() {
       _onUpdateAllListener(itemCount);
     });
-    return DivElementWidget(children: []);
+    return DivElementWidget(
+        id: widget.id,
+        classes: widget.classes,
+        className: widget.className,
+        children: [],
+        postCreation: widget.postCreation);
   }
 }
 
