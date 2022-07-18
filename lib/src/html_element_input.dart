@@ -9,6 +9,9 @@ class ElementController {
     return _element!;
   }
 
+  int get scrollHeight => element.scrollHeight;
+  int get clientHeight => element.clientHeight;
+
   void attachMe(Element e) {
     _element = e;
   }
@@ -18,6 +21,11 @@ class InputElementController extends ElementController {
   InputElement get inputElement => (element as InputElement);
   String? get value => (element as InputElement).value;
   set value(String? value) => (element as InputElement).value = value;
+}
+
+class TextAreaElementController extends InputElementController {
+  TextAreaElement get textAreaElement => (element as TextAreaElement);
+  int get rows => textAreaElement.rows;
 }
 
 class InputElementWidget extends HtmlElementWidget {
@@ -162,7 +170,7 @@ class InputElementWidget extends HtmlElementWidget {
 }
 
 class TextAreaElementWidget extends HtmlElementWidget {
-  final InputElementController? controller;
+  final TextAreaElementController? controller;
   TextAreaElementWidget(
       {this.controller,
       super.nonce,
