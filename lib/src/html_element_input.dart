@@ -171,8 +171,10 @@ class InputElementWidget extends HtmlElementWidget {
 
 class TextAreaElementWidget extends HtmlElementWidget {
   final TextAreaElementController? controller;
+  final String? value;
   TextAreaElementWidget(
       {this.controller,
+      this.value,
       super.nonce,
       super.attributes,
       super.children,
@@ -273,6 +275,7 @@ class TextAreaElementWidget extends HtmlElementWidget {
   @override
   Element render(context) {
     final v = TextAreaElement();
+    if (value != null) v.value = value;
     controller?.attachMe(v);
     return hook(context, v);
   }
