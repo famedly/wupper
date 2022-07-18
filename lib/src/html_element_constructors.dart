@@ -99,6 +99,8 @@ class ElementWidget extends Widget {
   final void Function(Event)? onFullscreenError;
   final void Function(WheelEvent)? onWheel;
 
+  final void Function(Element e)? postCreation;
+
   ElementWidget(
       {this.attributes,
       this.children,
@@ -193,7 +195,8 @@ class ElementWidget extends Widget {
       this.onWaiting,
       this.onFullscreenChange,
       this.onFullscreenError,
-      this.onWheel});
+      this.onWheel,
+      this.postCreation});
 
   Element hook(BuildContext context, Element v) {
     // Set the element object in context
@@ -303,6 +306,8 @@ class ElementWidget extends Widget {
     if (children != null) {
       v.children = context.domChildren!.map((e) => e.element!).toList();
     }
+
+    postCreation?.call(v);
 
     return v;
   }
