@@ -72,19 +72,55 @@ class _PerfTestWidgetState extends StateWidget<PerfTestWidget> {
       if (widget.listType == ListType.listView)
         ListView(
             controller: listController,
-            itemBuilder: (context, pos) => PerfTestItem(pos),
+            itemBuilder: itemConstructor,
             initialItemCount: widget.itemCount),
       if (widget.listType == ListType.fixedListView)
         DivElementWidget(className: 'div1', children: [
           FixedHeightListView(
               controller: fixedListController,
-              itemBuilder: (context, pos) => PerfTestItem(pos),
+              itemBuilder: itemConstructor,
               itemDefaultHeight: 25,
               initialItemCount: widget.itemCount)
         ]),
       if (widget.listType == ListType.forLoop)
-        for (var i = 0; i < widget.itemCount; i++) PerfTestItem(i)
+        for (var i = 0; i < widget.itemCount; i++) PerfTestItem(i),
     ]);
+  }
+
+  Widget itemConstructor(BuildContext context, int pos) {
+    return DivElementWidget(
+      className: "flex",
+      children: [
+        ParagraphElementWidget(
+          text: "$pos: ",
+          postCreation: (e) {
+            e.style.margin = "0px";
+          },
+        ),
+        const TimeWidgetTest(),
+        if (widget.listType != ListType.forLoop)
+          ButtonElementWidget(
+              text: "refresh element",
+              onClick: (_) {
+                if (widget.listType == ListType.listView) {
+                  listController.update(pos);
+                } else if (widget.listType == ListType.fixedListView) {
+                  fixedListController.update(pos);
+                }
+              }),
+        if (widget.listType != ListType.forLoop)
+          ButtonElementWidget(
+              text: "delete",
+              onClick: (_) {
+                if (widget.listType == ListType.listView) {
+                  listController.delete(pos);
+                } else if (widget.listType == ListType.fixedListView) {
+                  fixedListController.delete(pos);
+                }
+              }),
+      ],
+      postCreation: (e) => e.style.height = "25px",
+    );
   }
 }
 
@@ -95,7 +131,10 @@ class PerfTestItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DivElementWidget(className: "flex", children: [
-      ParagraphElementWidget(text: "$pos: "),
+      ParagraphElementWidget(
+        text: "$pos: ",
+        postCreation: (e) => e.style.margin = "0px",
+      ),
       const TimeWidgetTest()
     ]);
   }

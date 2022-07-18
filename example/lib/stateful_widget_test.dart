@@ -93,7 +93,13 @@ class TimeWidgetTest extends StatelessWidget {
     final date = DateTime.now().toString();
 
     return ParagraphElementWidget(
-        text: "I'm const (so shouldn't update): $date");
+        text: "I'm const (so shouldn't update): $date",
+        postCreation: (e) {
+          e.style.marginTop = "0";
+          e.style.marginBottom = "0";
+          e.style.marginLeft = "0";
+          e.style.marginRight = "auto";
+        });
   }
 }
 
