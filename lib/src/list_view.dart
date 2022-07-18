@@ -30,10 +30,10 @@ class ListView extends StatefulWidget {
       : super();
 
   @override
-  StateWidget<StatefulWidget> createState() => _ListViewState();
+  StateWidget<StatefulWidget> createState() => ListViewState();
 }
 
-class _ListViewState extends StateWidget<ListView> {
+class ListViewState extends StateWidget<ListView> {
   late final StreamSubscription? _onUpdateAllSub;
   late final StreamSubscription? _onUpdateSub;
   late final StreamSubscription? _onInsertSub;
@@ -47,7 +47,7 @@ class _ListViewState extends StateWidget<ListView> {
     itemCount = widget.initialItemCount;
 
     // attach the list to the controller
-    widget.controller?._attachView(widget);
+    widget.controller?._attachView(this);
     _onUpdateAllSub =
         widget.controller?._updateAll.stream.listen(_onUpdateAllListener);
     _onUpdateSub = widget.controller?._update.stream.listen(_onUpdateListener);
@@ -156,7 +156,7 @@ class _ListViewState extends StateWidget<ListView> {
     // build the children / inflate
     inflateChildren(context);
 
-    return DivElementWidget(
+    return UListElementWidget(
         id: widget.id,
         children: [
           if (headerWidget != null) headerWidget!,
@@ -175,7 +175,7 @@ class _ListViewState extends StateWidget<ListView> {
 /// - `insert(index)`
 /// - `delete(index)`
 class ListViewController {
-  ListView? _view;
+  ListViewState? _view;
   final StreamController<int> _updateAll = StreamController<int>.broadcast();
   final StreamController<int> _update = StreamController<int>.broadcast();
   final StreamController<int> _insert = StreamController<int>.broadcast();
@@ -183,7 +183,7 @@ class ListViewController {
 
   /// connects the given [ListView] with the controller in order to access its
   /// properties
-  void _attachView(ListView listView) => _view = listView;
+  void _attachView(ListViewState listView) => _view = listView;
 
   /// re-renders the entire list with the given new [itemCount]
   void updateAll(int itemCount) => _updateAll.add(itemCount);
@@ -198,5 +198,5 @@ class ListViewController {
   void delete(int index) => _delete.add(index);
 
   /// returns every [Element] which is currently present in the attached view
-  //List<Element> get items => _view?._uListElement.children ?? [];
+  List<Element> get items => _view?._uListElement.children ?? [];
 }

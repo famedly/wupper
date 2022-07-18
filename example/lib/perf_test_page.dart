@@ -1,3 +1,4 @@
+import 'package:try_wupper/perf_test_widget.dart';
 import 'package:wupper/wupper.dart';
 
 import 'stateful_widget_test.dart';
@@ -88,54 +89,6 @@ class _CustomWidgetTest extends StateWidget<PerfTestPage> {
             }),
       ]),
       PerfTestWidget(itemCount: itemCount, listType: useFixedList)
-    ]);
-  }
-}
-
-class PerfTestWidget extends StatefulWidget {
-  const PerfTestWidget({required this.itemCount, required this.listType})
-      : super();
-
-  final int itemCount;
-  final ListType listType;
-  @override
-  StateWidget<StatefulWidget> createState() => _PerfTestWidgetState();
-}
-
-class _PerfTestWidgetState extends StateWidget<PerfTestWidget> {
-  int refreshCount = 0;
-
-  @override
-  Widget build(BuildContext context) {
-    refreshCount++;
-    return DivElementWidget(children: [
-      ParagraphElementWidget(text: "My element: $refreshCount"),
-      if (widget.listType == ListType.listView)
-        ListView(
-            itemBuilder: (context, pos) => PerfTestItem(pos),
-            initialItemCount: widget.itemCount),
-      if (widget.listType == ListType.fixedListView)
-        DivElementWidget(className: 'div1', children: [
-          FixedHeightListView(
-              itemBuilder: (context, pos) => PerfTestItem(pos),
-              itemDefaultHeight: 25,
-              initialItemCount: widget.itemCount)
-        ]),
-      if (widget.listType == ListType.forLoop)
-        for (var i = 0; i < widget.itemCount; i++) PerfTestItem(i)
-    ]);
-  }
-}
-
-class PerfTestItem extends StatelessWidget {
-  const PerfTestItem(this.pos) : super();
-
-  final int pos;
-  @override
-  Widget build(BuildContext context) {
-    return DivElementWidget(className: "flex", children: [
-      ParagraphElementWidget(text: "$pos: "),
-      const TimeWidgetTest()
     ]);
   }
 }
