@@ -15,6 +15,7 @@ class ElementController {
 }
 
 class InputElementController extends ElementController {
+  InputElement get inputElement => (element as InputElement);
   String? get value => (element as InputElement).value;
   set value(String? value) => (element as InputElement).value = value;
 }
