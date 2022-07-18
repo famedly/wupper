@@ -38,6 +38,7 @@ class InputElementWidget extends HtmlElementWidget {
   final String? autocapitalize;
   final bool? disabled;
   final bool? checked;
+  final bool? readOnly;
 
   InputElementWidget(
       {this.type,
@@ -49,6 +50,7 @@ class InputElementWidget extends HtmlElementWidget {
       this.autocomplete,
       this.disabled,
       this.checked,
+      this.readOnly,
       super.nonce,
       super.attributes,
       super.children,
@@ -150,6 +152,7 @@ class InputElementWidget extends HtmlElementWidget {
   Element hook(BuildContext context, Element el) {
     final v = el as InputElement;
     inputElement = v;
+
     if (value != null) v.value = value;
     if (placeholder != null) v.placeholder = placeholder!;
     if (autofocus != null) v.autofocus = autofocus!;
@@ -157,6 +160,7 @@ class InputElementWidget extends HtmlElementWidget {
     if (autocapitalize != null) v.autocapitalize = autocapitalize!;
     if (disabled != null) v.disabled = disabled!;
     if (checked != null) v.checked = checked!;
+    if (readOnly != null) v.readOnly = readOnly!;
 
     controller?.attachMe(v);
     return super.hook(context, v);
