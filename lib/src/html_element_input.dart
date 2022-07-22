@@ -4,6 +4,7 @@ import 'package:wupper/wupper.dart';
 
 class ElementController {
   Element? _element;
+  Element? get elementNullable => _element;
   Element get element {
     if (!isAtached) {
       throw Exception("Element is not mounted");
@@ -24,7 +25,7 @@ class ElementController {
 
 class InputElementController extends ElementController {
   InputElement get inputElement => (element as InputElement);
-  String? get value => (element as InputElement).value;
+  String? get value => (elementNullable as InputElement?)?.value;
   set value(String? value) => (element as InputElement).value = value;
 }
 
