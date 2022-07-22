@@ -89,7 +89,7 @@ abstract class Widget {
       ..setAttribute(_dataWidgetTypeKey, runtimeType.toString())
       ..setAttribute(_dataWidgetTypeId, hashCode.toString());
 
-    if (context.element != null) {
+    if (context.element != null && context.element?.parentNode != null) {
       context.element!.replaceWith(newElement);
     }
 

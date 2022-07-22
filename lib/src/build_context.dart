@@ -134,4 +134,30 @@ class BuildContext {
 
     return false;
   }
+
+  // DOM manipulation functions
+  void addDomElement(BuildContext context) {
+    if (context.element != null) {
+      element?.children.add(context.element!);
+    }
+    domChildren!.add(context);
+  }
+
+  void insertDomChildren(int i, BuildContext context) {
+    if (context.element != null) {
+      element?.children.insert(i, context.element!);
+    }
+    domChildren!.insert(i, context);
+  }
+
+  void deleteDomChildren(int i) {
+    element?.children.removeAt(i);
+    domChildren!.removeAt(i);
+  }
+
+  void replaceDomChildrenWith(int i, BuildContext childContext) {
+    element?.children[i].replaceWith(childContext.element!);
+    element?.children[i] = childContext.element!;
+    domChildren![i] = childContext;
+  }
 }

@@ -39,7 +39,7 @@ class ListViewState extends StateWidget<ListView> {
   late final StreamSubscription? _onInsertSub;
   late final StreamSubscription? _onDeleteSub;
 
-  final UListElement _uListElement = UListElement();
+  late UListElement _uListElement;
 
   int itemCount = 0;
   @override
@@ -64,22 +64,22 @@ class ListViewState extends StateWidget<ListView> {
     }
     itemCount = i;
 
-    // TODO: update element
-    _uListElement.children = renderChilds(context);
+    setState(() {});
   }
+
+  int widgetIndex(int i) => widget.headerBuilder != null ? i + 1 : i;
 
   void _onUpdateListener(int i) {
     if (!mounted) {
       _onUpdateSub?.cancel();
       return;
     }
-    final index = widget.headerBuilder != null ? i + 1 : 1;
+    final context = this.context.child!;
+    final childContext = context.createChildContext(inheritChildren: false);
 
     final child = widget.itemBuilder(context, i);
-
-    if (child is StatelessWidget) child.build(context);
-
-    _uListElement.children[index] = child.render(context);
+    child.inflate(childContext);
+    context.replaceDomChildrenWith(widgetIndex(i), childContext);
   }
 
   void _onInsertListener(int i) {
@@ -87,14 +87,15 @@ class ListViewState extends StateWidget<ListView> {
       _onInsertSub?.cancel();
       return;
     }
+
     itemCount++;
-    final index = widget.headerBuilder != null ? i + 1 : 1;
 
-    final childContext = BuildContext.build(context);
-    final newWidget = widget.itemBuilder(context, i);
-    newWidget.inflate(childContext);
+    final context = this.context.child!;
+    final childContext = context.createChildContext(inheritChildren: false);
 
-    _uListElement.children.insert(index, childContext.element!);
+    final child = widget.itemBuilder(context, i);
+    child.inflate(childContext);
+    context.insertDomChildren(widgetIndex(i), childContext);
   }
 
   void _onDeleteListener(int i) {
@@ -103,38 +104,9 @@ class ListViewState extends StateWidget<ListView> {
       return;
     }
     itemCount--;
-    final index = widget.headerBuilder != null ? i + 1 : 1;
-    _uListElement.children.removeAt(index);
-  }
 
-  Widget? headerWidget;
-  Widget? footerWidget;
-  List<Widget>? widgets;
-
-  void inflateChildren(BuildContext context) {
-    if (headerWidget is StatelessWidget) {
-      (headerWidget as StatelessWidget).build(context);
-    }
-
-    if (footerWidget is StatelessWidget) {
-      (footerWidget as StatelessWidget).build(context);
-    }
-
-    for (final widget in widgets ?? []) {
-      if (widget is StatelessWidget) {
-        widget.build(context);
-      }
-    }
-  }
-
-  List<Element> renderChilds(BuildContext context) => [
-        if (headerWidget != null) headerWidget!.render(context),
-        for (final widget in widgets ?? []) widget.render(context),
-        if (footerWidget != null) footerWidget!.render(context),
-      ];
-
-  Element renderElement(BuildContext context) {
-    return _uListElement..children = renderChilds(context);
+    final context = this.context.child!;
+    context.deleteDomChildren(widgetIndex(i));
   }
 
   @override
@@ -142,29 +114,27 @@ class ListViewState extends StateWidget<ListView> {
     itemCount = widget.initialItemCount;
 
     // construct the UI
-    headerWidget = widget.headerBuilder?.call(context);
-    footerWidget = widget.footerBuilder?.call(context);
+    final headerWidget = widget.headerBuilder?.call(context);
+    final footerWidget = widget.footerBuilder?.call(context);
 
-    widgets?.clear();
-    widgets ??= [];
+    final widgets = [];
 
     for (var i = 0; i < itemCount; i++) {
-      final child = widget.itemBuilder(context, i);
-      widgets!.add(child);
+      widgets.add(widget.itemBuilder(context, i));
     }
-
-    // build the children / inflate
-    inflateChildren(context);
 
     return UListElementWidget(
         id: widget.id,
         children: [
-          if (headerWidget != null) headerWidget!,
-          ...widgets!,
-          if (footerWidget != null) footerWidget!
+          if (headerWidget != null) headerWidget,
+          ...widgets,
+          if (footerWidget != null) footerWidget
         ],
         className: widget.className,
-        postCreation: widget.postCreation);
+        postCreation: (e) {
+          _uListElement = e as UListElement;
+          widget.postCreation?.call(e);
+        });
   }
 }
 
