@@ -6,7 +6,7 @@ class ElementController {
   Element? _element;
   Element? get elementNullable => _element;
   Element get element {
-    if (!isAtached) {
+    if (!isAttached) {
       throw Exception("Element is not mounted");
     }
 
@@ -20,7 +20,7 @@ class ElementController {
     _element = e;
   }
 
-  bool get isAtached => _element?.isConnected == true;
+  bool get isAttached => _element?.isConnected == true;
 }
 
 class InputElementController extends ElementController {
@@ -156,7 +156,7 @@ class InputElementWidget extends HtmlElementWidget {
 
   @override
   Element hook(BuildContext context, Element v) {
-    if (controller?.isAtached == true && controller?.element is InputElement) {
+    if (controller?.isAttached == true && controller?.element is InputElement) {
       return super.hook(context, controller!.element);
     }
     // TODO: update the attribute of the InputElement if the widget parameter are changed
@@ -287,7 +287,7 @@ class TextAreaElementWidget extends HtmlElementWidget {
 
   @override
   Element render(context) {
-    if (controller?.isAtached == true &&
+    if (controller?.isAttached == true &&
         controller?.element is TextAreaElement) {
       return controller!.element;
     }
