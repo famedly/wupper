@@ -27,6 +27,7 @@ abstract class StatefulWidget extends Widget {
 
 abstract class StateWidget<T extends StatefulWidget> {
   late BuildContext context;
+  bool _ready = false; // did the widget did a first build ?
 
   T get widget => context.widget! as T;
   bool get mounted => widget.mounted;
@@ -38,6 +39,7 @@ abstract class StateWidget<T extends StatefulWidget> {
   }
 
   void setState(VoidCallback callback) {
+    if (!_ready) return;
     if (context.widget == null) {
       throw Exception("The element need to have been render to update it.");
     }
@@ -95,5 +97,7 @@ abstract class StateWidget<T extends StatefulWidget> {
 
     final child = build(context);
     context.cachedInflate(child);
+
+    _ready = true;
   }
 }
