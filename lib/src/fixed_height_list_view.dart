@@ -348,7 +348,7 @@ class _FixedHeightListView extends StateWidget<FixedHeightListView> {
     context.addPostFrameCallback(() {
       _onUpdateAllListener(itemCount);
     });
-    return DivElementWidget(
+    return UListElementWidget(
         id: widget.id,
         classes: widget.classes,
         className: widget.className,
