@@ -5,9 +5,10 @@ import 'package:wupper/wupper.dart';
 class ElementController {
   Element? _element;
   Element get element {
-    if (_element?.isConnected != false) {
+    if (!isAtached) {
       throw Exception("Element is not mounted");
     }
+
     return _element!;
   }
 
@@ -18,7 +19,7 @@ class ElementController {
     _element = e;
   }
 
-  bool get isAtached => _element != null;
+  bool get isAtached => _element?.isConnected == true;
 }
 
 class InputElementController extends ElementController {
@@ -155,13 +156,11 @@ class InputElementWidget extends HtmlElementWidget {
   @override
   Element hook(BuildContext context, Element v) {
     if (controller?.isAtached == true && controller?.element is InputElement) {
-      inputElement = controller!.element as InputElement;
-      return inputElement!;
+      return super.hook(context, controller!.element);
     }
     // TODO: update the attribute of the InputElement if the widget parameter are changed
 
     final el = v as InputElement;
-    inputElement = el;
 
     controller?.attachMe(el);
 
@@ -176,8 +175,6 @@ class InputElementWidget extends HtmlElementWidget {
 
     return super.hook(context, el);
   }
-
-  InputElement? inputElement;
 
   @override
   Element render(BuildContext context) =>

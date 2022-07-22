@@ -3,6 +3,7 @@ import 'dart:html';
 import 'package:try_wupper/future_test.dart';
 import 'package:try_wupper/perf_test_page.dart';
 import 'package:try_wupper/state_test.dart';
+import 'package:try_wupper/test_inputs.dart';
 import 'package:try_wupper/todo_page.dart';
 import 'package:wupper/wupper.dart';
 
@@ -28,6 +29,8 @@ class TodoApp extends StatelessWidget {
             return const PerfTestPage();
           case '/future':
             return const FutureTest();
+          case '/input':
+            return const TestInput();
           case '/legacy_state':
             return LegacyStateTest();
           default:
@@ -60,6 +63,9 @@ class NotFoundPage extends StatelessWidget {
       ]),
       LIElementWidget(children: [
         AnchorElementWidget(href: '/#/perf', text: "To perf page")
+      ]),
+      LIElementWidget(children: [
+        AnchorElementWidget(href: '/#/input', text: "To input page")
       ]),
       LIElementWidget(children: [
         AnchorElementWidget(href: '/#/future', text: "To future test page")
