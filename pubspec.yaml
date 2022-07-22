@@ -11,5 +11,5 @@ environment:
 dev_dependencies:
   lints: ^2.0.0
   analyzer: ^4.2.0
-  meta: ^1.8.0
   flutter_lints: ^2.0.1
+dependencies: {meta: ^1.8.0}
