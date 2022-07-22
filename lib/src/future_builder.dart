@@ -23,10 +23,10 @@ class FutureBuilder<T> extends StatefulWidget {
   const FutureBuilder({required this.future, required this.builder}) : super();
 
   @override
-  StateWidget<FutureBuilder> createState() => _FutureBuilderState<T>();
+  StateWidget<FutureBuilder<T>> createState() => _FutureBuilderState<T>();
 }
 
-class _FutureBuilderState<T> extends StateWidget<FutureBuilder> {
+class _FutureBuilderState<T> extends StateWidget<FutureBuilder<T>> {
   AsyncSnapshot<T> snapshot = AsyncSnapshot(
     hasData: false,
     hasError: false,
