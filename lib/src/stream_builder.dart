@@ -73,6 +73,6 @@ class _StreamBuilderState extends StateWidget<StreamBuilder> {
   }
 
   @override
-  Widget build(context) => _snapshot.bind(
-      context, (context, snap) => widget.builder(context, snap));
+  Widget build(context) =>
+      _snapshot.bind(context, (context, snap) => widget.builder(context, snap));
 }

@@ -39,10 +39,9 @@ class TodoListPageState extends StateWidget<TodoListPage> {
       className: 'container',
       children: [
         InputElementWidget(
-    type: 'text',
-    placeholder: 'New todo',
-    controller:  textFieldController
-  ),
+            type: 'text',
+            placeholder: 'New todo',
+            controller: textFieldController),
         ButtonElementWidget(
           text: 'Add',
           onClick: addTodoAction,
