@@ -1,5 +1,6 @@
 import 'dart:html';
 
+import 'package:try_wupper/future_test.dart';
 import 'package:try_wupper/perf_test_page.dart';
 import 'package:try_wupper/todo_page.dart';
 import 'package:wupper/wupper.dart';
@@ -24,6 +25,8 @@ class TodoApp extends StatelessWidget {
             return ListViewTest();
           case '/perf':
             return const PerfTestPage();
+          case '/future':
+            return const FutureTest();
           default:
             return const NotFoundPage();
         }
@@ -50,6 +53,9 @@ class NotFoundPage extends StatelessWidget {
       ]),
       LIElementWidget(children: [
         AnchorElementWidget(href: '/#/perf', text: "To perf page")
+      ]),
+      LIElementWidget(children: [
+        AnchorElementWidget(href: '/#/future', text: "To future test page")
       ]),
       DivElementWidget(text: "api", children: [
         ParagraphElementWidget(text: "test"),

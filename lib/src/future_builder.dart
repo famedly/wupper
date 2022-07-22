@@ -20,29 +20,27 @@ class FutureBuilder<T> extends StatefulWidget {
   final Widget Function(BuildContext context, AsyncSnapshot<T> snapshot)
       builder;
 
-  final State<AsyncSnapshot<T>> snapshot = State(
-    AsyncSnapshot(
-      hasData: false,
-      hasError: false,
-      error: null,
-      data: null,
-    ),
-  );
-
-  FutureBuilder({required this.future, required this.builder});
+  const FutureBuilder({required this.future, required this.builder}) : super();
 
   @override
-  StateWidget<FutureBuilder> createState() => _FutureBuilderState();
+  StateWidget<FutureBuilder> createState() => _FutureBuilderState<T>();
 }
 
-class _FutureBuilderState extends StateWidget<FutureBuilder> {
+class _FutureBuilderState<T> extends StateWidget<FutureBuilder> {
+  AsyncSnapshot<T> snapshot = AsyncSnapshot(
+    hasData: false,
+    hasError: false,
+    error: null,
+    data: null,
+  );
   void _run() async {
     try {
       final data = await widget.future;
-      widget.snapshot.set(AsyncSnapshot(hasData: true, data: data));
+      snapshot = AsyncSnapshot(hasData: true, data: data);
     } catch (error) {
-      widget.snapshot.set(AsyncSnapshot(hasError: true, error: error));
+      snapshot = AsyncSnapshot(hasError: true, error: error);
     }
+    setState(() {});
   }
 
   @override
@@ -53,7 +51,6 @@ class _FutureBuilderState extends StateWidget<FutureBuilder> {
 
   @override
   Widget build(context) {
-    return widget.snapshot.bind(
-        context, (context, snapshot) => widget.builder(context, snapshot));
+    return widget.builder(context, snapshot);
   }
 }
