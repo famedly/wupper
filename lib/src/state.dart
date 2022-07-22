@@ -4,77 +4,30 @@ class State<T> {
   State(T initState) : _state = initState;
 
   T get state => _state;
-  bool get hasListener =>
-      _subscriptions.isNotEmpty ||
-      _textSubscriptions.isNotEmpty ||
-      _attributeSubscriptions.isNotEmpty;
+  bool get hasListener => controllers.isNotEmpty;
+
+  final Set<StateSubscriptionController> controllers = {};
 
   T _state;
   void set(T value) {
     final callbacks = <Function>[];
     _state = value;
 
-    final subs = {..._subscriptions};
-    for (final sub in subs) {
-      final element = sub.context.element;
-      final context = sub.context.overrideCallbacks();
-
-      print("Element: ${element != null}");
-      if (element == null || element.isConnected != true) {
-        _subscriptions.remove(sub);
-        continue;
-      }
-
-      final newElement = sub.builder(context, value);
-
-      newElement.inflate(context);
-      context.widget = newElement;
-
-      context.executeCallbacks();
+    for (final controller in controllers) {
+      controller.set(value);
     }
 
-    /*
-    final _textSubs = {..._textSubscriptions};
-    for (final sub in _textSubs) {
-      final element = sub.widget.element;
-      if (element == null) continue;
-
-      if (element == null || element.isConnected != true) {
-        _textSubscriptions.remove(sub);
-        continue;
-      }
-      element.text = sub.builder(value);
-    }
-    final _attriSubs = {..._attributeSubscriptions};
-    for (final sub in _attriSubs) {
-      final element = sub.widget.element;
-      if (element == null) continue;
-
-      if (element.isConnected != true) {
-        _attributeSubscriptions.remove(sub);
-        continue;
-      }
-      element.setAttribute(sub.attribute, sub.builder(value));
-    }
-    */
     // execute callbacks
     while (callbacks.isNotEmpty) {
       callbacks.removeLast()();
     }
   }
 
-  final Set<_Subscription<T>> _subscriptions = {};
-  final Set<_TextSubscription<T>> _textSubscriptions = {};
-  final Set<_AttributeSubscription<T>> _attributeSubscriptions = {};
-
   Widget bind(BuildContext context,
       Widget Function(BuildContext context, T value) builder) {
-    final childContext = context.createChildContext();
-    final widget = builder(childContext, _state);
-    childContext.widget = widget;
-
-    _subscriptions.add(_Subscription<T>(childContext, builder));
-    return widget;
+    final controller = StateSubscriptionController<T>(_state);
+    controllers.add(controller);
+    return StateSubscriptionWidget<T>(builder: builder, controller: controller);
   }
 
   Widget bindText(
@@ -82,9 +35,10 @@ class State<T> {
     String Function(T value)? builder,
   ]) {
     builder ??= (value) => value.toString();
-    _textSubscriptions.add(_TextSubscription<T>(element, builder));
-    //element.element?.text = builder(state);
-    return element;
+    final controller = StateSubscriptionController<T>(state);
+    controllers.add(controller);
+    return StateTextWidget<T>(
+        child: element, controller: controller, builder: builder);
   }
 
   Widget bindAttribute(
@@ -93,36 +47,123 @@ class State<T> {
     String Function(T value)? builder,
   ]) {
     builder ??= (value) => value.toString();
-    _attributeSubscriptions.add(
-      _AttributeSubscription<T>(
-        element,
-        attribute,
-        builder,
-      ),
-    );
-    //element.element?.setAttribute(attribute, builder(state));
-    return element;
+
+    final controller = StateSubscriptionController<T>(state);
+    controllers.add(controller);
+    return StateAttributeWidget<T>(
+        child: element,
+        controller: controller,
+        builder: builder,
+        attribute: attribute);
   }
 }
 
-class _TextSubscription<T> {
-  final Widget widget;
-  final String Function(T value) builder;
+class StateSubscriptionController<T> {
+  StateWidget? _state;
+  T value;
 
-  const _TextSubscription(this.widget, this.builder);
+  StateSubscriptionController(this.value);
+  void attach(StateWidget state) => _state = state;
+
+  void set(T value) {
+    this.value = value;
+    _state?.setState(() {});
+  }
 }
 
-class _AttributeSubscription<T> {
-  final Widget widget;
+// Widget builder
+class StateSubscriptionWidget<T> extends StatefulWidget {
+  final Widget Function(BuildContext, T) builder;
+  final StateSubscriptionController<T> controller;
+
+  const StateSubscriptionWidget(
+      {required this.builder, required this.controller})
+      : super();
+  @override
+  StateWidget<StateSubscriptionWidget<T>> createState() =>
+      StateSubscriptionWidgetState<T>();
+}
+
+class StateSubscriptionWidgetState<T>
+    extends StateWidget<StateSubscriptionWidget<T>> {
+  @override
+  void initState() {
+    widget.controller.attach(this);
+
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) =>
+      widget.builder(context, widget.controller.value);
+}
+
+// Text
+class StateTextWidget<T> extends StatefulWidget {
+  final StateSubscriptionController<T> controller;
+
+  final String Function(T value) builder;
+  final Widget child;
+
+  const StateTextWidget(
+      {required this.child, required this.controller, required this.builder})
+      : super();
+  @override
+  StateWidget<StateTextWidget<T>> createState() => StateTextWidgetState<T>();
+}
+
+class StateTextWidgetState<T> extends StateWidget<StateTextWidget<T>> {
+  @override
+  void initState() {
+    widget.controller.attach(this);
+
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    addPostFrameCallback(() {
+      context.element!.text = widget.builder(widget.controller.value);
+    });
+    return widget.child;
+  }
+}
+
+// Attribute
+
+class StateAttributeWidget<T> extends StatefulWidget {
+  final StateSubscriptionController<T> controller;
+
+  final String Function(T value) builder;
+  final Widget child;
   final String attribute;
-  final String Function(T value) builder;
 
-  const _AttributeSubscription(this.widget, this.attribute, this.builder);
+  const StateAttributeWidget(
+      {required this.child,
+      required this.controller,
+      required this.builder,
+      required this.attribute})
+      : super();
+  @override
+  StateWidget<StateAttributeWidget<T>> createState() =>
+      StateAttributeWidgetState<T>();
 }
 
-class _Subscription<T> {
-  final BuildContext context; // context store the widget
-  final Widget Function(BuildContext context, T value) builder;
+class StateAttributeWidgetState<T>
+    extends StateWidget<StateAttributeWidget<T>> {
+  @override
+  void initState() {
+    widget.controller.attach(this);
 
-  _Subscription(this.context, this.builder);
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    addPostFrameCallback(() {
+      context.element!.setAttribute(
+          widget.attribute, widget.builder(widget.controller.value));
+    });
+    return widget.child;
+  }
 }

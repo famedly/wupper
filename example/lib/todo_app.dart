@@ -2,6 +2,7 @@ import 'dart:html';
 
 import 'package:try_wupper/future_test.dart';
 import 'package:try_wupper/perf_test_page.dart';
+import 'package:try_wupper/state_test.dart';
 import 'package:try_wupper/todo_page.dart';
 import 'package:wupper/wupper.dart';
 
@@ -27,6 +28,8 @@ class TodoApp extends StatelessWidget {
             return const PerfTestPage();
           case '/future':
             return const FutureTest();
+          case '/legacy_state':
+            return LegacyStateTest();
           default:
             return const NotFoundPage();
         }
@@ -47,6 +50,10 @@ class NotFoundPage extends StatelessWidget {
       ]),
       LIElementWidget(children: [
         AnchorElementWidget(href: '/#/state', text: "To state page")
+      ]),
+      LIElementWidget(children: [
+        AnchorElementWidget(
+            href: '/#/legacy_state', text: "To legacy state page")
       ]),
       LIElementWidget(children: [
         AnchorElementWidget(href: '/#/list', text: "To list view page")
