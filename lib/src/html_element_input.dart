@@ -5,7 +5,9 @@ import 'package:wupper/wupper.dart';
 class ElementController {
   Element? _element;
   Element get element {
-    if (_element == null) throw Exception("Element is not mounted");
+    if (_element?.isConnected != false) {
+      throw Exception("Element is not mounted");
+    }
     return _element!;
   }
 
@@ -15,6 +17,8 @@ class ElementController {
   void attachMe(Element e) {
     _element = e;
   }
+
+  bool get isAtached => _element != null;
 }
 
 class InputElementController extends ElementController {
@@ -150,8 +154,16 @@ class InputElementWidget extends HtmlElementWidget {
 
   @override
   Element hook(BuildContext context, Element v) {
+    if (controller?.isAtached == true && controller?.element is InputElement) {
+      inputElement = controller!.element as InputElement;
+      return inputElement!;
+    }
+    // TODO: update the attribute of the InputElement if the widget parameter are changed
+
     final el = v as InputElement;
     inputElement = el;
+
+    controller?.attachMe(el);
 
     if (value != null) el.value = value;
     if (placeholder != null) el.placeholder = placeholder!;
@@ -162,7 +174,6 @@ class InputElementWidget extends HtmlElementWidget {
     if (checked != null) el.checked = checked!;
     if (readOnly != null) el.readOnly = readOnly!;
 
-    controller?.attachMe(el);
     return super.hook(context, el);
   }
 
@@ -278,6 +289,11 @@ class TextAreaElementWidget extends HtmlElementWidget {
 
   @override
   Element render(context) {
+    if (controller?.isAtached == true &&
+        controller?.element is TextAreaElement) {
+      return controller!.element;
+    }
+
     final v = TextAreaElement();
     if (value != null) v.value = value;
     controller?.attachMe(v);
