@@ -29,9 +29,11 @@ class InputElementController extends ElementController {
   set value(String? value) => (element as InputElement).value = value;
 }
 
-class TextAreaElementController extends InputElementController {
+class TextAreaElementController extends ElementController {
   TextAreaElement get textAreaElement => (element as TextAreaElement);
   int get rows => textAreaElement.rows;
+  String? get value => (elementNullable as TextAreaElement?)?.value;
+  set value(String? value) => textAreaElement.value = value;
 }
 
 class InputElementWidget extends HtmlElementWidget {
