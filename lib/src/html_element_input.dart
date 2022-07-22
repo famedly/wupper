@@ -149,21 +149,21 @@ class InputElementWidget extends HtmlElementWidget {
       super.postCreation});
 
   @override
-  Element hook(BuildContext context, Element el) {
-    final v = el as InputElement;
-    inputElement = v;
+  Element hook(BuildContext context, Element v) {
+    final el = v as InputElement;
+    inputElement = el;
 
-    if (value != null) v.value = value;
-    if (placeholder != null) v.placeholder = placeholder!;
-    if (autofocus != null) v.autofocus = autofocus!;
-    if (autocomplete != null) v.autocomplete = autocomplete!;
-    if (autocapitalize != null) v.autocapitalize = autocapitalize!;
-    if (disabled != null) v.disabled = disabled!;
-    if (checked != null) v.checked = checked!;
-    if (readOnly != null) v.readOnly = readOnly!;
+    if (value != null) el.value = value;
+    if (placeholder != null) el.placeholder = placeholder!;
+    if (autofocus != null) el.autofocus = autofocus!;
+    if (autocomplete != null) el.autocomplete = autocomplete!;
+    if (autocapitalize != null) el.autocapitalize = autocapitalize!;
+    if (disabled != null) el.disabled = disabled!;
+    if (checked != null) el.checked = checked!;
+    if (readOnly != null) el.readOnly = readOnly!;
 
-    controller?.attachMe(v);
-    return super.hook(context, v);
+    controller?.attachMe(el);
+    return super.hook(context, el);
   }
 
   InputElement? inputElement;

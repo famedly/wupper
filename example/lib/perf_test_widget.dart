@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:try_wupper/perf_test_page.dart';
 import 'package:try_wupper/stateful_widget_test.dart';
 import 'package:wupper/wupper.dart';

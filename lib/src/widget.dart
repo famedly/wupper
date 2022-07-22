@@ -24,8 +24,6 @@ import 'dart:html';
 
 import 'package:wupper/wupper.dart';
 
-import 'build_context.dart';
-
 /// the root node of the whole application
 ///
 /// this is required to perform relative `querySelector` calls

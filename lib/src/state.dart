@@ -14,8 +14,8 @@ class State<T> {
     final callbacks = <Function>[];
     _state = value;
 
-    final _subs = {..._subscriptions};
-    for (final sub in _subs) {
+    final subs = {..._subscriptions};
+    for (final sub in subs) {
       final element = sub.context.element;
       final context = sub.context.overrideCallbacks();
 
