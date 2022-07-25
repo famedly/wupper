@@ -60,7 +60,7 @@ class _FixedHeightListView extends StateWidget<FixedHeightListView> {
 
   int itemCount = 0;
 
-  Element get _uListElement => context.element!;
+  final Element _uListElement = UListElement();
   List<Element> domChildren = [];
 
   Timer? _unloadIfNotOnScreenTimer;
@@ -95,8 +95,8 @@ class _FixedHeightListView extends StateWidget<FixedHeightListView> {
 
   void setPos() {
     final end = (itemCount - lastItemOnScreen) * widget.itemDefaultHeight;
-    _uListElement.setAttribute(
-        "style", "padding: ${offsetTop}px 0px ${end}px  ");
+    _uListElement.setAttribute("style",
+        "padding: ${offsetTop}px 0px ${end}px; margin-block-start: 0px;");
   }
 
   Element? getUIElement(int i) {
@@ -157,8 +157,8 @@ class _FixedHeightListView extends StateWidget<FixedHeightListView> {
 
       if (element != null && !onScreen(i)) {
         domChildren.removeAt(pos);
-        context.element?.children =
-            domChildren; // TODO: see how we can remove this bug fix
+        _uListElement.children = domChildren;
+        // TODO: see how we can remove this bug fix
         if (i == firstItemOnScreen) {
           offsetTop += widget.itemDefaultHeight;
           firstItemOnScreen++;
@@ -263,7 +263,7 @@ class _FixedHeightListView extends StateWidget<FixedHeightListView> {
       end++;
     }
 
-    context.element?.children =
+    _uListElement.children =
         domChildren; // TODO: see how we can remove this bug fix
   }
 
@@ -287,6 +287,7 @@ class _FixedHeightListView extends StateWidget<FixedHeightListView> {
     rebuildNeeded = List.filled(i, true, growable: true);
 
     updateViewPortDimension();
+    print("Dom: ${_uListElement}");
     runRender();
     unloadIfNotOnScreen();
   }
@@ -348,11 +349,14 @@ class _FixedHeightListView extends StateWidget<FixedHeightListView> {
     context.addPostFrameCallback(() {
       _onUpdateAllListener(itemCount);
     });
-    return UListElementWidget(
+
+    return DivElementWidget(
         id: widget.id,
         classes: widget.classes,
         className: widget.className,
-        children: [],
+        children: [
+          WrapperWidget(_uListElement),
+        ],
         postCreation: widget.postCreation);
   }
 }
