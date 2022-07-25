@@ -196,13 +196,13 @@ class _FixedHeightListView extends StateWidget<FixedHeightListView> {
   Element? getRootView(BuildContext context) {
     _uListElement.children = domChildren;
 
-    if (rootListView == _uListElement.parent) {
+    // We need to check if the widget parent did change. If yes, we need to update the onScroll hook
+    // RootListView -> DivWrapper -> UListElement
+    if (rootListView == _uListElement.parent?.parent) {
       return rootListView;
     }
 
-    if (rootListView != null) {}
-
-    rootListView = _uListElement.parent;
+    rootListView = _uListElement.parent?.parent;
     _onScrollSub = rootListView?.onScroll.listen(_onScrollListener);
     _onResizeSub ??= window.onResize.listen(_onScrollListener);
 
