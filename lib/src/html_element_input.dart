@@ -297,7 +297,11 @@ class TextAreaElementWidget extends HtmlElementWidget {
     }
 
     final v = TextAreaElement();
+
+    controller?.attachMe(v);
+
     if (value != null) v.value = value;
+
     return hook(context, v);
   }
 }
