@@ -9,8 +9,9 @@ import 'package:wupper/wupper.dart';
 /// Set an [itemBuilder] and an [initialItemCount] to render the list.
 /// Set [reverse] to true, to flip the direction of the items.
 class FixedHeightListView extends StatefulWidget {
-  FixedHeightListView(
-      {required this.itemBuilder,
+  const FixedHeightListView(
+      {Key? key,
+      required this.itemBuilder,
       required this.initialItemCount,
       this.controller,
       required this.itemDefaultHeight,
@@ -20,7 +21,8 @@ class FixedHeightListView extends StatefulWidget {
       this.postCreation,
       this.classes})
       : assert(itemDefaultHeight > 0),
-        assert(buffer >= 0);
+        assert(buffer >= 0),
+        super(key: key);
 
   final FixedHeightListViewController? controller;
   final int itemDefaultHeight;
@@ -198,11 +200,11 @@ class _FixedHeightListView extends StateWidget<FixedHeightListView> {
 
     // We need to check if the widget parent did change. If yes, we need to update the onScroll hook
     // RootListView -> DivWrapper -> UListElement
-    if (rootListView == _uListElement.parent?.parent) {
+    if (rootListView == _uListElement.parent) {
       return rootListView;
     }
 
-    rootListView = _uListElement.parent?.parent;
+    rootListView = _uListElement.parent;
     _onScrollSub = rootListView?.onScroll.listen(_onScrollListener);
     _onResizeSub ??= window.onResize.listen(_onScrollListener);
 
@@ -344,6 +346,8 @@ class _FixedHeightListView extends StateWidget<FixedHeightListView> {
     if (rootListView == null) {
       rebuildNeeded = List.filled(itemCount, true, growable: true);
     }
+
+    print("Build fixed scroll view");
 
     context.addPostFrameCallback(() {
       _onUpdateAllListener(itemCount);
