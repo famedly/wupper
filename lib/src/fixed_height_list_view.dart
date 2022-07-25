@@ -339,7 +339,6 @@ class _FixedHeightListView extends StateWidget<FixedHeightListView> {
 
   @override
   Widget build(context) {
-    print("Render list view xxxxx $hashCode");
     _inited = false;
 
     if (rootListView == null) {

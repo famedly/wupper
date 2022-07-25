@@ -46,7 +46,6 @@ class NotFoundPage extends StatelessWidget {
 
   @override
   Widget build(context) {
-    print("Hmm.. not found page ?");
     return DivElementWidget(
         children: [
           ParagraphElementWidget(text: '404: Not found'),
@@ -80,8 +79,6 @@ class NotFoundPage extends StatelessWidget {
             ..children = [ParagraphElement()..text = "test"]
             ..appendText("nice"))
         ],
-        postCreation: (element) {
-          print("Not found div rendered ${element.isConnected}");
-        });
+      );
   }
 }
