@@ -30,7 +30,7 @@ abstract class StateWidget<T extends StatefulWidget> {
   bool _ready = false; // did the widget did a first build ?
 
   T get widget => context.widget! as T;
-  bool get mounted => widget.mounted;
+  bool get mounted => context.mounted;
 
   /// Override this method to initialize the state of this widget. The [parent]
   /// value is already set when this method is called.
@@ -58,7 +58,7 @@ abstract class StateWidget<T extends StatefulWidget> {
           (context.child?.widget.runtimeType == child.runtimeType &&
                   context.child != null)
               ? context.child!
-              : context.createChildContext(inheritChildren: false);
+              : context.createChildContext(copyOldProperties: false);
 
       // we reuse the same context so we know what was the previous context to
       // reuse the same widgets
@@ -82,7 +82,7 @@ abstract class StateWidget<T extends StatefulWidget> {
       context.addPostFrameCallback(callback);
 
   void render() {
-    widget.render(context);
+   widget.render(context);
   }
 
   @protected

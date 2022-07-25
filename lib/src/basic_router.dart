@@ -67,13 +67,11 @@ class _BasicRouterState extends StateWidget<BasicRouter> {
   }
 
   void push(String route) => setState(() {
-        print("Set state");
         currentRoute = route;
       });
 
   @override
   Widget build(context) {
-    print("Build router $currentRoute");
     window.location.hash = currentRoute;
     return widget.routeBuilder(currentRoute);
   }

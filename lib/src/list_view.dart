@@ -75,7 +75,7 @@ class ListViewState extends StateWidget<ListView> {
       return;
     }
     final context = this.context.child!;
-    final childContext = context.createChildContext(inheritChildren: false);
+    final childContext = context.createChildContext(copyOldProperties: false);
 
     final child = widget.itemBuilder(context, i);
     child.inflate(childContext);
@@ -91,7 +91,7 @@ class ListViewState extends StateWidget<ListView> {
     itemCount++;
 
     final context = this.context.child!;
-    final childContext = context.createChildContext(inheritChildren: false);
+    final childContext = context.createChildContext(copyOldProperties: false);
 
     final child = widget.itemBuilder(context, i);
     child.inflate(childContext);

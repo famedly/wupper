@@ -20,6 +20,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import 'dart:developer';
 import 'dart:html';
 
 import 'package:wupper/wupper.dart';
@@ -54,29 +55,32 @@ abstract class Widget {
   static const String _dataWidgetTypeKey = 'data-widget-type';
   static const String _dataWidgetTypeId = 'data-widget-id';
 
-  /// Checks if this widget instance is still mounted to the DOM.
-  bool get mounted =>
-      appNode.querySelector('[$_dataWidgetTypeId="${hashCode.toString()}"]') !=
-      null;
 
   /// Render the DOM element and add it to the context.
   Element render(BuildContext context) {
-    final child = context.child?.widget;
     final childElement = context.child?.element;
 
-    if (child == null || childElement == null) {
-      print(
-          "Render: ${context.parent?.widget} -> ${context.widget} -> ${context.child?.widget}");
+    if (context.child == null || childElement == null) {
+      window.console.warn("Snap... we hit a render issue");
+      window.console.warn("Widget parent: ${context.parent?.widget}");
+      window.console.warn("Widget: ${context.widget}");
+      window.console.warn("Widget child: ${context.child?.widget}");
+      window.console.warn("Element parent: ${context.parent?.element}");
+      window.console.warn("Element: ${context.element}");
+      window.console.warn("Element child: ${context.child?.element}");
 
-      print(
-          "Hmm... element not found for ${context.widget} ${context.child?.widget} ${context.child?.element}");
+
     }
 
-    assert(child != null && childElement != null);
+    if (context.child == null) {
+      throw Exception("This element has no child");
+    } else if (childElement == null) {
+      throw Exception("This elment was not rendered");
+    }
 
     var newElement = childElement;
 
-    if (newElement!.hasAttribute(_dataWidgetTypeKey) ||
+    if (newElement.hasAttribute(_dataWidgetTypeKey) ||
         newElement.hasAttribute(_dataWidgetTypeId)) {
       if (newElement.getAttribute(_dataWidgetTypeId) != hashCode.toString()) {
         newElement = SpanElement()..children = [newElement];

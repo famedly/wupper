@@ -216,7 +216,8 @@ class _FixedHeightListView extends StateWidget<FixedHeightListView> {
 
     final child = widget.itemBuilder(context, i);
 
-    final childContext = context.createChildContext(inheritChildren: false);
+    final childContext =
+        context.createChildContext(setChild: false, copyOldProperties: false);
     child.inflate(childContext);
 
     final newElement = childContext.element!;
@@ -287,7 +288,6 @@ class _FixedHeightListView extends StateWidget<FixedHeightListView> {
     rebuildNeeded = List.filled(i, true, growable: true);
 
     updateViewPortDimension();
-    print("Dom: ${_uListElement}");
     runRender();
     unloadIfNotOnScreen();
   }

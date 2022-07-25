@@ -362,7 +362,7 @@ class ElementWidget extends Widget {
           }
 
           final childContext = context.createChildContext(
-              inheritChildren: target != null, target: target);
+              copyOldProperties: target != null, target: target);
 
           context.domChildren!.add(childContext);
           child.inflate(childContext);
