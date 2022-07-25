@@ -80,6 +80,7 @@ class BuildContext {
     }
 
     if (copyOldProperties) {
+      childContext.widget = child?.widget;
       childContext.widgetState = child?.widgetState; // TODO: widget state
       childContext.domChildren = child?.domChildren;
     }
@@ -125,7 +126,8 @@ class BuildContext {
   }
 
   bool shouldReRender(Widget newWidget) {
-    return child?.widget.hashCode != newWidget.hashCode;
+    return child?.widget.hashCode != newWidget.hashCode ||
+        child?.widget?.key != newWidget.key;
   }
 
   bool cachedInflate(Widget newWidget) {

@@ -30,7 +30,10 @@ class _StatefulWidgetTestState extends StateWidget<StatefulWidgetTest> {
       // ignore: prefer_const_constructors
       StateWidgetTest(),
       TimeWidgetTestNotConst(),
-
+      const KeyTest(),
+      // ignore: prefer_const_constructors
+      KeyTest(key: Key("test")),
+      KeyTest(key: Key(count.toString())),
       ParagraphElementWidget(text: "TimeWrapper"),
       TimeWidgetWrapper(),
       TimeWidgetWrapper(),
@@ -123,5 +126,26 @@ class TimeWidgetTestNotConst extends StatelessWidget {
 
     return ParagraphElementWidget(
         text: "I' NOT const (so I SHOULD update): $date");
+  }
+}
+
+class KeyTest extends StatefulWidget {
+  const KeyTest({Key? key}) : super(key: key);
+
+  @override
+  StateWidget<StatefulWidget> createState() => KeyTestState();
+}
+
+class KeyTestState extends StateWidget<KeyTest> {
+  int value = 0;
+  @override
+  Widget build(BuildContext context) {
+    final date = DateTime.now().toString();
+    value++;
+
+    return ParagraphElementWidget(
+      text:
+          "I'm statefull but I can have a key (${widget.key?.value}) : $date updates: $value",
+    );
   }
 }

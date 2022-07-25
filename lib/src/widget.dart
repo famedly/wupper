@@ -43,7 +43,8 @@ Element get appNode => _appNode;
 /// ```
 
 abstract class Widget {
-  const Widget();
+  final Key? key;
+  const Widget({required this.key});
 
   /// Set this widget context, build it’s child, and render the widget, updating
   /// [Context.element]
@@ -53,7 +54,6 @@ abstract class Widget {
 
   static const String _dataWidgetTypeKey = 'data-widget-type';
   static const String _dataWidgetTypeId = 'data-widget-id';
-
 
   /// Render the DOM element and add it to the context.
   Element render(BuildContext context) {
@@ -67,8 +67,6 @@ abstract class Widget {
       window.console.warn("Element parent: ${context.parent?.element}");
       window.console.warn("Element: ${context.element}");
       window.console.warn("Element child: ${context.child?.element}");
-
-
     }
 
     if (context.child == null) {
@@ -98,6 +96,20 @@ abstract class Widget {
 
     return context.element!;
   }
+}
+
+class Key {
+  final String value;
+  Key(this.value);
+
+  @override
+  bool operator ==(other) {
+    if (other.runtimeType != runtimeType) return false;
+    return (other as Key).value == value;
+  }
+
+  @override
+  int get hashCode => value.hashCode;
 }
 
 /// Creates a new app and appends it to the [target] HTML element.

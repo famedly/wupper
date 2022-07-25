@@ -102,7 +102,8 @@ class ElementWidget extends Widget {
   final void Function(Element e)? postCreation;
 
   ElementWidget(
-      {this.attributes,
+      {Key? key,
+      this.attributes,
       this.children,
       this.classes,
       this.dataset,
@@ -196,7 +197,8 @@ class ElementWidget extends Widget {
       this.onFullscreenChange,
       this.onFullscreenError,
       this.onWheel,
-      this.postCreation});
+      this.postCreation})
+      : super(key: key);
 
   Element hook(BuildContext context, Element v) {
     // Set the element object in context
@@ -331,34 +333,37 @@ class ElementWidget extends Widget {
         final child = children![i];
 
         /// Try to find if we already have this widget in the dom
-        var sameHashCode = -1;
-        var sameRunType = -1;
+        var sameHashCodePos = -1;
+        var sameRunTypePos = -1;
 
         for (var i = 0; i < oldDomElements.length; i++) {
           final context = oldDomElements[i];
 
-          if (context.widget.hashCode == child.hashCode && !wasChildUsed[i]) {
-            sameHashCode = i;
+          if (context.widget.hashCode == child.hashCode &&
+              context.widget?.key == child.key &&
+              !wasChildUsed[i]) {
+            sameHashCodePos = i;
             break;
           }
 
           if (context.widget.runtimeType == child.runtimeType &&
+              context.widget?.key == child.key &&
               !wasChildUsed[i] &&
-              sameRunType == -1) {
-            sameRunType = i;
+              sameRunTypePos == -1) {
+            sameRunTypePos = i;
           }
         }
 
         /// Was the element already created ?
-        if (sameHashCode != -1) {
+        if (sameHashCodePos != -1) {
           context.domChildren!.add(oldDomElements[i]);
-          wasChildUsed[sameHashCode] = true;
+          wasChildUsed[sameHashCodePos] = true;
         } else {
           BuildContext? target;
 
-          if (sameRunType != -1) {
-            wasChildUsed[sameRunType] = true;
-            target = oldDomElements[sameRunType];
+          if (sameRunTypePos != -1) {
+            wasChildUsed[sameRunTypePos] = true;
+            target = oldDomElements[sameRunTypePos];
           }
 
           final childContext = context.createChildContext(

@@ -5,13 +5,16 @@ import 'package:meta/meta.dart';
 import '../wupper.dart';
 
 abstract class StatefulWidget extends Widget {
-  const StatefulWidget() : super();
+  const StatefulWidget({Key? key}) : super(key: key);
 
   @override
   void inflate(BuildContext context) {
+    bool sameRunType = context.widget.runtimeType == runtimeType;
+    bool sameKey = context.widget?.key == key;
+
     context.widget = this;
 
-    if (context.widgetState == null || context.widget.hashCode != hashCode) {
+    if (context.widgetState == null || !(sameRunType && sameKey)) {
       context.widgetState = createState();
       context.widgetState!.inflate(context);
     } else {
@@ -82,7 +85,7 @@ abstract class StateWidget<T extends StatefulWidget> {
       context.addPostFrameCallback(callback);
 
   void render() {
-   widget.render(context);
+    widget.render(context);
   }
 
   @protected
