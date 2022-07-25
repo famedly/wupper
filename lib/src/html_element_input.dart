@@ -16,8 +16,9 @@ class ElementController {
   int get scrollHeight => element.scrollHeight;
   int get clientHeight => element.clientHeight;
 
-  void attachMe(Element e) {
+  void attachMe(BuildContext context, Element e) {
     _element = e;
+    context.element = e;
   }
 
   bool get isAttached => _element?.isConnected == true;
@@ -165,7 +166,7 @@ class InputElementWidget extends HtmlElementWidget {
 
     final el = v as InputElement;
 
-    controller?.attachMe(el);
+    controller?.attachMe(context, el);
 
     if (value != null) el.value = value;
     if (placeholder != null) el.placeholder = placeholder!;
@@ -296,7 +297,7 @@ class TextAreaElementWidget extends HtmlElementWidget {
 
     final v = TextAreaElement();
     if (value != null) v.value = value;
-    controller?.attachMe(v);
+    controller?.attachMe(context, v);
     return hook(context, v);
   }
 }
