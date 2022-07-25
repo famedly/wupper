@@ -121,8 +121,6 @@ class AudioElementWidget extends HtmlElementWidget {
     final v = AudioElement(src);
     if (loop != null) v.loop = loop!;
 
-    controller?.attachMe(context, v);
-
     return hook(context, v);
   }
 }
