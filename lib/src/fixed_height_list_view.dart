@@ -63,7 +63,7 @@ class _FixedHeightListView extends StateWidget<FixedHeightListView> {
   int itemCount = 0;
 
   final Element _uListElement = UListElement();
-  List<Element> domChildren = [];
+  List<Element> get domChildren => _uListElement.children;
 
   Timer? _unloadIfNotOnScreenTimer;
   List<bool> rebuildNeeded = [];
@@ -116,10 +116,10 @@ class _FixedHeightListView extends StateWidget<FixedHeightListView> {
 
     if (element == null) {
       final pos = i - firstItemOnScreen;
-      if (pos < 0 && scrollPositionToTop < offsetTop) {
+      if (pos < 0 && scrollPositionToTop - widget.buffer < offsetTop) {
         return true;
       }
-      if (scrollPositionToTop + clientHeight > offsetBottom &&
+      if (scrollPositionToTop + clientHeight + widget.buffer > offsetBottom &&
           pos >= domChildren.length) {
         return true;
       }
@@ -158,8 +158,7 @@ class _FixedHeightListView extends StateWidget<FixedHeightListView> {
       final element = getUIElement(i);
 
       if (element != null && !onScreen(i)) {
-        domChildren.removeAt(pos);
-        _uListElement.children = domChildren;
+        _uListElement.children.removeAt(pos);
         // TODO: see how we can remove this bug fix
         if (i == firstItemOnScreen) {
           offsetTop += widget.itemDefaultHeight;
@@ -196,19 +195,22 @@ class _FixedHeightListView extends StateWidget<FixedHeightListView> {
   Element? rootListView;
 
   Element? getRootView(BuildContext context) {
-    _uListElement.children = domChildren;
-
     // We need to check if the widget parent did change. If yes, we need to update the onScroll hook
-    // RootListView -> DivWrapper -> UListElement
+    // RootListView (DivElement) -> UListElement
     if (rootListView == _uListElement.parent) {
       return rootListView;
     }
 
     rootListView = _uListElement.parent;
+
+    // set old scroll pos if we just refreshed the Widget
+    rootListView?.scrollTop = scrollPositionToTop;
+
+    // hook the scroll listener
     _onScrollSub = rootListView?.onScroll.listen(_onScrollListener);
     _onResizeSub ??= window.onResize.listen(_onScrollListener);
 
-    // init screen
+    // init position and scroll length
     setPos();
     return rootListView;
   }
@@ -244,25 +246,24 @@ class _FixedHeightListView extends StateWidget<FixedHeightListView> {
 
   void runRender() {
     var start = firstItemOnScreen - 1;
+    // render items before the actual section of items
     while (start >= 0 && getUIElement(start) == null && onScreen(start)) {
       renderItem(start, start: true);
-      rebuildNeeded[start] = false;
       start--;
     }
 
-    for (var pos = 0; pos < domChildren.length; pos++) {
-      final i = pos + firstItemOnScreen;
-      if ((rebuildNeeded[i] || getUIElement(i) == null) && onScreen(i)) {
-        renderItem(i);
-
-        rebuildNeeded[i] = false;
+    // for the element actually displayed, refresh them only if needed
+    // (refresh asked and onScreen) or if there haven’t been rendered.
+    for (var pos = firstItemOnScreen; pos < lastItemOnScreen; pos++) {
+      if ((rebuildNeeded[pos] || getUIElement(pos) == null) && onScreen(pos)) {
+        renderItem(pos);
       }
     }
 
+    // render items after
     var end = lastItemOnScreen;
     while (end < itemCount && getUIElement(end) == null && onScreen(end)) {
       renderItem(end, end: true);
-      rebuildNeeded[end] = false;
       end++;
     }
 
@@ -331,23 +332,12 @@ class _FixedHeightListView extends StateWidget<FixedHeightListView> {
     rebuildNeeded.removeAt(i);
   }
 
-  bool _inited = false;
   void initView(BuildContext context) {
-    if (!_inited) {
-      _inited = true;
-      getRootView(context);
-    }
+    getRootView(context);
   }
 
   @override
   Widget build(context) {
-    _inited = false;
-
-    if (rootListView == null) {
-      rebuildNeeded = List.filled(itemCount, true, growable: true);
-    }
-
-    print("Build fixed scroll view");
 
     context.addPostFrameCallback(() {
       _onUpdateAllListener(itemCount);

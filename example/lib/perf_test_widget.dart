@@ -73,13 +73,13 @@ class _PerfTestWidgetState extends StateWidget<PerfTestWidget> {
             itemBuilder: itemConstructor,
             initialItemCount: widget.itemCount),
       if (widget.listType == ListType.fixedListView)
-        DivElementWidget(className: 'div1', children: [
-          FixedHeightListView(
-              controller: fixedListController,
-              itemBuilder: itemConstructor,
-              itemDefaultHeight: 25,
-              initialItemCount: widget.itemCount)
-        ]),
+        FixedHeightListView(
+            controller: fixedListController,
+            itemBuilder: itemConstructor,
+            classes: {'div1'},
+            itemDefaultHeight: 25,
+            buffer: 0,
+            initialItemCount: widget.itemCount),
       if (widget.listType == ListType.forLoop)
         for (var i = 0; i < widget.itemCount; i++) PerfTestItem(i),
     ]);
