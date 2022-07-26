@@ -23,18 +23,16 @@ class StreamBuilder<T> extends StatefulWidget {
   StreamBuilder({required this.stream, required this.builder});
 
   @override
-  StateWidget<StatefulWidget> createState() => _StreamBuilderState();
+  StateWidget<StreamBuilder<T>> createState() => _StreamBuilderState<T>();
 }
 
-class _StreamBuilderState extends StateWidget<StreamBuilder> {
+class _StreamBuilderState<T> extends StateWidget<StreamBuilder<T>> {
   late final StreamSubscription _streamSubscription;
-  final State<AsyncSnapshot> _snapshot = State(
-    AsyncSnapshot(
-      hasData: false,
-      hasError: false,
-      error: null,
-      data: null,
-    ),
+  AsyncSnapshot<T> _snapshot = AsyncSnapshot(
+    hasData: false,
+    hasError: false,
+    error: null,
+    data: null,
   );
 
   @override
@@ -45,34 +43,35 @@ class _StreamBuilderState extends StateWidget<StreamBuilder> {
   }
 
   void _listener(data) {
-    if (!_snapshot.hasListener) {
+    if (!mounted) {
       _streamSubscription.cancel();
       return;
     }
-    _snapshot.set(
-      AsyncSnapshot(
+
+    setState(() {
+      _snapshot = AsyncSnapshot(
         hasData: true,
         data: data,
-      ),
-    );
+      );
+    });
   }
 
   void _errorListener(Object? error) {
-    if (!_snapshot.hasListener) {
+    if (!mounted) {
       _streamSubscription.cancel();
       return;
     }
-    _snapshot.set(
-      AsyncSnapshot(
+
+    setState(() {
+      _snapshot = AsyncSnapshot(
         hasError: true,
         error: error,
-        hasData: _snapshot.state.hasData,
-        data: _snapshot.state.data,
-      ),
-    );
+        hasData: _snapshot.hasData,
+        data: _snapshot.data,
+      );
+    });
   }
 
   @override
-  Widget build(context) =>
-      _snapshot.bind(context, (context, snap) => widget.builder(context, snap));
+  Widget build(context) => widget.builder(context, _snapshot);
 }
