@@ -5,7 +5,7 @@ class LegacyStateTest extends StatelessWidget {
   final State<int> value2 = State<int>(0);
 
   void add(_) {
-    print("Add");
+    print("Add: ${value.state + 1}");
     value.set(value.state + 1);
     value2.set(value.state);
   }
