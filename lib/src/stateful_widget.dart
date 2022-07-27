@@ -55,27 +55,22 @@ abstract class StateWidget<T extends StatefulWidget> {
 
     final child = build(context);
 
-    // compare with old child
-    if (context.shouldReRender(child)) {
-      final childContext =
-          (context.child?.widget.runtimeType == child.runtimeType &&
-                  context.child != null)
-              ? context.child!
-              : context.createChildContext(copyOldProperties: false);
+    final childContext =
+        (context.child?.widget.runtimeType == child.runtimeType &&
+                context.child != null)
+            ? context.child!
+            : context.createChildContext(copyOldProperties: false);
 
-      // we reuse the same context so we know what was the previous context to
-      // reuse the same widgets
-      // override callbacks
-      context.child!.callbacks = context.callbacks;
+    // we reuse the same context so we know what was the previous context to
+    // reuse the same widgets
+    // override callbacks
+    context.child!.callbacks = context.callbacks;
 
-      // Import back the function local context to the class local context.
-      // This was needed to override the callbacks list.
-      child.inflate(childContext);
+    // Import back the function local context to the class local context.
+    // This was needed to override the callbacks list.
+    child.inflate(childContext);
 
-      // really important!
-      //this.context.importContext(context);
-      render();
-    }
+    render();
 
     context.executeCallbacks();
     context.callbacks = oldCallBacks;
