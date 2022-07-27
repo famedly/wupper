@@ -51,8 +51,6 @@ class _FixedHeightListView extends StateWidget<FixedHeightListView> {
   void initState() {
     itemCount = widget.initialItemCount;
 
-    // attach the list to the controller
-    widget.controller?._attachView(widget);
     _onUpdateAllSub =
         widget.controller?._updateAll.stream.listen(_onUpdateAllListener);
     _onUpdateSub = widget.controller?._update.stream.listen(_onUpdateListener);
@@ -159,7 +157,6 @@ class _FixedHeightListView extends StateWidget<FixedHeightListView> {
 
       if (element != null && !onScreen(i)) {
         _uListElement.children.removeAt(pos);
-        // TODO: see how we can remove this bug fix
         if (i == firstItemOnScreen) {
           offsetTop += widget.itemDefaultHeight;
           firstItemOnScreen++;
@@ -266,9 +263,6 @@ class _FixedHeightListView extends StateWidget<FixedHeightListView> {
       renderItem(end, end: true);
       end++;
     }
-
-    _uListElement.children =
-        domChildren; // TODO: see how we can remove this bug fix
   }
 
   void _onUpdateAllListener(int i) {
@@ -338,7 +332,6 @@ class _FixedHeightListView extends StateWidget<FixedHeightListView> {
 
   @override
   Widget build(context) {
-
     context.addPostFrameCallback(() {
       _onUpdateAllListener(itemCount);
     });
@@ -361,14 +354,9 @@ class _FixedHeightListView extends StateWidget<FixedHeightListView> {
 /// - `insert(index)`
 /// - `delete(index)`
 class FixedHeightListViewController {
-  FixedHeightListView? _view;
   final StreamController<int> _updateAll = StreamController<int>.broadcast();
   final StreamController<int> _update = StreamController<int>.broadcast();
   final StreamController<int> _delete = StreamController<int>.broadcast();
-
-  /// connects the given [FixedHeightListView] with the controller in order to access its
-  /// properties
-  void _attachView(FixedHeightListView listView) => _view = listView;
 
   /// re-renders the entire list with the given new [itemCount]
   void updateAll(int itemCount) => _updateAll.add(itemCount);

@@ -1,6 +1,4 @@
 import 'dart:html';
-
-import 'package:meta/meta.dart';
 import 'package:wupper/wupper.dart';
 
 /// BuildContext is used to know our position in the widget tree.
@@ -36,13 +34,12 @@ class BuildContext {
     callbacks.add(callback);
 
     if (parent == null) {
-      print(
-          "WARNING: Added callback when parent is null. now: ${callbacks.length} callback");
+      window.console.warn(
+          "Added callback when parent is null. now: ${callbacks.length} callback");
     }
   }
 
   /// Execute all the callbacks and clear the callback list.
-  @protected
   void executeCallbacks({BuildContext? oldContext}) {
     while (callbacks.isNotEmpty) {
       callbacks.removeLast()();
@@ -67,6 +64,7 @@ class BuildContext {
 
   BuildContext createChildContext(
       {bool copyOldProperties = true,
+      bool copyOldElement = false,
       bool setChild = true,
       BuildContext? target}) {
     final childContext = BuildContext.fromParent(this, callbacks: callbacks);
@@ -81,8 +79,12 @@ class BuildContext {
 
     if (copyOldProperties) {
       childContext.widget = child?.widget;
-      childContext.widgetState = child?.widgetState; // TODO: widget state
+      childContext.widgetState = child?.widgetState;
       childContext.domChildren = child?.domChildren;
+    }
+
+    if (copyOldElement) {
+      childContext.element = child?.element;
     }
 
     if (setChild) {

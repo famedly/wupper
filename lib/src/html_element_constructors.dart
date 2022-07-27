@@ -355,8 +355,12 @@ class ElementWidget extends Widget {
         }
 
         /// Was the element already created ?
-        if (sameHashCodePos != -1) {
+        if (sameHashCodePos != -1 &&
+            oldDomElements[i].element?.isConnected == true) {
           context.domChildren!.add(oldDomElements[i]);
+          oldDomElements[i].parent = context;
+
+          assert(oldDomElements[i].element?.isConnected == true);
           wasChildUsed[sameHashCodePos] = true;
         } else {
           BuildContext? target;

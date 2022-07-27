@@ -1,7 +1,7 @@
 import 'package:wupper/wupper.dart';
 
 abstract class StatelessWidget extends Widget {
-  const StatelessWidget({Key? key}) : super(key:key);
+  const StatelessWidget({Key? key}) : super(key: key);
 
   /// Method which needs to be defined by the developer to describe the UI
   /// using HTML Elements. It is **not** recommended to use this method to
