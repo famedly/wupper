@@ -100,7 +100,7 @@ abstract class Widget {
 
 class Key {
   final String value;
-  Key(this.value);
+  const Key(this.value);
 
   @override
   bool operator ==(other) {
