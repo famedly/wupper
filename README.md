@@ -27,42 +27,48 @@ Similar to Flutter we say: Everything is a widget. But instead of using Flutter 
 A basic widget looks like this:
 
 ```dart
-class TodoListItem extends Widget {
+class TodoListItem extends StatelessWidget {
   final String todo;
 
-  TodoListItem({required this.todo});
+  const TodoListItem({Key? key, required this.todo}) : super(key: key);
 
   @override
-  Element build(BuildContext context) => lIElement(
+  Widget build(BuildContext context) => LIElement(
         children: [
-          paragraphElement(text: todo),
-          buttonElement(
+          ParagraphElementWidget(text: todo),
+          ButtonElementWidget(
             text: 'X',
-            onClick: (_) => findParent<TodoListPage>().removeTodo(todo),
+            onClick: (_) => TodoListPage.of(context).removeTodo(todo),
           ),
         ],
       );
 }
 ```
 
-Use normal final variables for parameters and `State` variables for state management. It will have a getter and setter:
+As in flutter, we can use `StatefulWidget` to store state inside widgets
 
 ```dart
-class CounterPage extends Widget {
-  CounterPage({required this.title});
+class CounterPage extends StatefulWidget {
+  const CounterPage({Key? key, required this.title}): super(key: key);
 
   final String title;
-  final State<int> count = State(0);
+
+@override
+StateWidget<CounterPage> createState() => CounterPageState();
+}
+
+class CounterPageState extends StateWidget<CounterPage>{
+  int count = 0;
 
   @override
-  Element build(BuildContext context) {
-    return divElement(
+  Widget build(BuildContext context) {
+    return DivElementWidget(
       children: [
-        headingElementH1(text: title),
-        count.bind(context, (context, count) => paragraphElement(text: 'Counter: $count')),
-        buttonElement(
+        HeadingElementH1Widget(text: title),
+        ParagraphElementWidget(text: 'Counter: $count')),
+        ButtonElementWidget(
           text: 'Counter +',
-          onClick: (_) => count.set(count.state + 1),
+          onClick: (_) => setState((){ count++; }) ,
         ),
       ],
     );
@@ -70,41 +76,17 @@ class CounterPage extends Widget {
 }
 ```
 
-If you just want to bind the text node of an element you can use `State.bindText()`:
 
 ```dart
-count.bindText(
-  paragraphElement(),
-  (count) => 'Counter: $count'
-),
-```
-
-You can also use `State.bindAttribute()` to only update a single attribute:
-
-```dart
-count.bindAttribute(
-  paragraphElement(),
-  'style',
-  (count) => count == 0 ? 'color: blue;' : 'color: red;',
-),
-```
-
-The widget class must extend `Widget` and at least implement a build method. This method must return a HTML Element. We can compose
-a widget from other widgets as well using `WidgetClass().appendTo(this)`.
-
-```dart
-class TodoListPage extends Widget {
-  final InputElement textField = inputElement(
-    type: 'text',
-    placeholder: 'New todo',
-  );
+class TodoListPage extends StatelessWidget {
+  final textFieldController = InputElementController();
   State<List<String>> todos = State([]);
 
   void addTodoAction([_]) {
-    final value = textField.value;
+    final value = textFieldController.value;
     if (value == null || value.isEmpty) return;
     todos.set(todos.state.add(value));
-    textField.value = '';f
+    textFieldController.value = '';f
   }
 
   void removeTodo(String todo) {
@@ -112,17 +94,21 @@ class TodoListPage extends Widget {
   }
 
   @override
-  Element build(BuildContext context) => divElement(
+  Widget build(BuildContext context) => DivElementWidget(
         className: 'container',
         children: [
-          textField,
-          buttonElement(
+           InputElementWidet(
+            controller: textFieldController,
+            type: 'text',
+            placeholder: 'New todo',
+          ),
+          ButtonElementWidget(
             text: 'Add',
             onClick: addTodoAction,
           ),
-          uListElement(
+          UListElementWidget(
             children: [
-              for (final todo in todos) TodoListItem(todo: todo).appendTo(context),
+              for (final todo in todos) TodoListItem(todo: todo),
             ],
           ),
         ],
@@ -175,8 +161,8 @@ depending of the result of a future. Optional you can set an errorBuilder to han
 FutureBuilder<String>(
   future: loadDataFromServer(),
   builder: (BuilContext context, AsyncSnapshot<String> snapshot) =>
-    divElement(text: snapshot.data ?? snapshot.error?.toString() ?? 'No data yet'),
-).appendTo(context);
+    DivElementWidget(text: snapshot.data ?? snapshot.error?.toString() ?? 'No data yet'),
+);
 ```
 
 #### StreamBuilder
@@ -191,11 +177,11 @@ set an errorBuilder to handle errors.
 StreamBuilder<String>(
   stream: someDataStream,
   builder: (BuildContext context, AsyncSnapshot<String> snapshot) =>
-    divElement(text: snapshot.data ?? snapshot.error?.toString() ?? 'No data yet'),
-).appendTo(context);
+    DivElementWidget(text: snapshot.data ?? snapshot.error?.toString() ?? 'No data yet'),
+);
 ```
 
-### Context
+### BuildContext
 
 The BuildContext is used in the `build` and `appendTo` functions. It is used to provide some context when building the widget.
 

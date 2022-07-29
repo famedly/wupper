@@ -157,7 +157,7 @@ class InputElementWidget extends HtmlElementWidget {
       super.postCreation});
 
   @override
-  Element hook(BuildContext context, Element v) {
+  Element hook(BuildContext context, Element v) { // TODO: see how we can update the value when calling a new build
     if (controller?.isAttached == true && controller?.element is InputElement) {
       context.element = controller!.element;
       return controller!.element;
