@@ -216,10 +216,6 @@ Especially, build callbacks are handy if you want to execute a function after th
   context.addPostFrameCallback((){/* my function */});
 ```
 
-Notes:
-
-
-
 ### runApp and widget tree
 
 Once we have our first widgets we need to append them to the DOM. We can do this by using `runApp()`:
@@ -250,8 +246,6 @@ The `data-widget-type` becomes "minified" in production.
 
 
 
-## Widgets types
+## WrapperWidget
 
-* StatelessWidget
-* StatefulWidget
-* WrapperWidget : A wrapper allowing to add custom Element objects into the widget tree.
+It is possible to embed `Element` objects in the build function using `WidgetElement`.
