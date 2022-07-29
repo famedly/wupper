@@ -78,19 +78,26 @@ class CounterPageState extends StateWidget<CounterPage>{
 
 
 ```dart
+
 class TodoListPage extends StatelessWidget {
+
+  }
+
+  class TodoListPageState extends StateWidget<TodoListPage>{
   final textFieldController = InputElementController();
-  State<List<String>> todos = State([]);
+   List<String> todos = [];
 
   void addTodoAction([_]) {
     final value = textFieldController.value;
     if (value == null || value.isEmpty) return;
-    todos.set(todos.state.add(value));
-    textFieldController.value = '';f
+    todos.add(value);
+    textFieldController.value = '';
+    setState((){});
   }
 
   void removeTodo(String todo) {
-    todos.set(todos.state..removeWhere((t) => t == todo));
+    todos.removeWhere((t) => t == todo);
+    setState((){});
   }
 
   @override
@@ -116,17 +123,29 @@ class TodoListPage extends StatelessWidget {
 }
 ```
 
-With `.appendTo(this)` this widget becomes part of the other widget and receives a link back to it's parent. So we make sure
-that every widget always knows their parent widget and we get a "widget tree". We can use this to find a specific parent
-somewhere up in it by using `findParent<Type>()`. This works very similar to **Provider** in Flutter:
+### BuildContext
+
+The build method is used to determine the widget children. Then the render function will be called to obtain the rendered version of the widget which is an object of the `Element` type.
+
+The BuildContext item is responsible to store
+* the widget
+* element (the rendered version of the widget)
+* the position of the widget in the widget graph. It will also be used to store the rendered version of the widget.
+
+Therefore, the context object can be used to find a particula `StateWidget` among the widgets parent. This can be done by calling `context.findState<StateType>()`. This works very similar to **Provider** in Flutter:
 
 ```dart
-findParent<TodoListPage>().removeTodo(todo)
+context.findState<TodoListPageState>().removeTodo(todo)
 ```
+
+### Basic router
+
 We also have a very basic hash router:
 
 ```dart
-class TodoApp extends Widget {
+class TodoApp extends StatelessWidget {
+  const TodoApp({Key? key}) : super(key: key);
+
   @override
   Element build(BuildContext context) {
     return BasicRouter(routeBuilder: (route) {
@@ -136,13 +155,14 @@ class TodoApp extends Widget {
         default:
           return NotFoundPage();
       }
-    }).appendTo(context);
+    });
   }
 }
 
 class NotFoundPage extends Widget {
+  const NotFoundPage({Key? key}) : super(key: key);
   @override
-  Element build(BuildContext context) => paragraphElement(text: '404: Not found');
+  Element build(BuildContext context) => ParagraphElementWidget(text: '404: Not found');
 }
 ```
 
