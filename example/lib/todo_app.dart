@@ -47,38 +47,38 @@ class NotFoundPage extends StatelessWidget {
   @override
   Widget build(context) {
     return DivElementWidget(
-        children: [
-          ParagraphElementWidget(text: '404: Not found'),
-          LIElementWidget(children: [
-            AnchorElementWidget(href: '/#/todo', text: "To home page")
-          ]),
-          LIElementWidget(children: [
-            AnchorElementWidget(href: '/#/state', text: "To state page")
-          ]),
-          LIElementWidget(children: [
-            AnchorElementWidget(
-                href: '/#/legacy_state', text: "To legacy state page")
-          ]),
-          LIElementWidget(children: [
-            AnchorElementWidget(href: '/#/list', text: "To list view page")
-          ]),
-          LIElementWidget(children: [
-            AnchorElementWidget(href: '/#/perf', text: "To perf page")
-          ]),
-          LIElementWidget(children: [
-            AnchorElementWidget(href: '/#/input', text: "To input page")
-          ]),
-          LIElementWidget(children: [
-            AnchorElementWidget(href: '/#/future', text: "To future test page")
-          ]),
-          DivElementWidget(text: "api", children: [
-            ParagraphElementWidget(text: "test"),
-            ParagraphElementWidget(text: "nice")
-          ]),
-          WrapperWidget(DivElement()
-            ..children = [ParagraphElement()..text = "test"]
-            ..appendText("nice"))
-        ],
-      );
+      children: [
+        ParagraphElementWidget(text: '404: Not found'),
+        LIElementWidget(children: [
+          AnchorElementWidget(href: '/#/todo', text: "To home page")
+        ]),
+        LIElementWidget(children: [
+          AnchorElementWidget(href: '/#/state', text: "To state page")
+        ]),
+        LIElementWidget(children: [
+          AnchorElementWidget(
+              href: '/#/legacy_state', text: "To legacy state page")
+        ]),
+        LIElementWidget(children: [
+          AnchorElementWidget(href: '/#/list', text: "To list view page")
+        ]),
+        LIElementWidget(children: [
+          AnchorElementWidget(href: '/#/perf', text: "To perf page")
+        ]),
+        LIElementWidget(children: [
+          AnchorElementWidget(href: '/#/input', text: "To input page")
+        ]),
+        LIElementWidget(children: [
+          AnchorElementWidget(href: '/#/future', text: "To future test page")
+        ]),
+        DivElementWidget(text: "api", children: [
+          ParagraphElementWidget(text: "test"),
+          ParagraphElementWidget(text: "nice")
+        ]),
+        WrapperWidget(DivElement()
+          ..children = [ParagraphElement()..text = "test"]
+          ..appendText("nice"))
+      ],
+    );
   }
 }
