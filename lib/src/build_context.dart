@@ -42,7 +42,7 @@ class BuildContext {
   /// Execute all the callbacks and clear the callback list.
   void executeCallbacks({BuildContext? oldContext}) {
     while (callbacks.isNotEmpty) {
-      callbacks.removeLast()();
+      callbacks.removeLast().call();
     }
 
     oldContext?.importContext(this);
