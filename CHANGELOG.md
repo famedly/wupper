@@ -1,3 +1,12 @@
+## 5.0.0
+BREAKING CHANGE: migration to new state management
+
+- similar to Flutter, Wupper now features Stateless and Statefull Widgets
+- requires to adjust any custom Widget implementation
+- HTML element builders converted into Widget classes
+- no more need for `appendTo()`
+- migrate `findParent` to `BuildContext.findState`
+
 ## 4.1.2
 - fix: concurrent modifications in subscriptions sets
 
