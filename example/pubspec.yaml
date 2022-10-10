@@ -1,0 +1,18 @@
+name: try_wupper
+description: An absolute bare-bones web app using wupper.
+version: 1.0.0
+
+publish_to: none
+
+environment:
+  sdk: '>=2.17.1 <3.0.0'
+
+dev_dependencies:
+  build_runner: ^2.1.4
+  build_web_compilers: ^3.2.1
+  lints: ^2.0.0
+  flutter_lints: ^2.0.1
+
+dependencies:
+  wupper:
+    path: ../

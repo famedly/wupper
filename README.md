@@ -27,42 +27,48 @@ Similar to Flutter we say: Everything is a widget. But instead of using Flutter 
 A basic widget looks like this:
 
 ```dart
-class TodoListItem extends Widget {
+class TodoListItem extends StatelessWidget {
   final String todo;
 
-  TodoListItem({required this.todo});
+  const TodoListItem({Key? key, required this.todo}) : super(key: key);
 
   @override
-  Element build() => lIElement(
+  Widget build(BuildContext context) => LIElement(
         children: [
-          paragraphElement(text: todo),
-          buttonElement(
+          ParagraphElementWidget(text: todo),
+          ButtonElementWidget(
             text: 'X',
-            onClick: (_) => findParent<TodoListPage>().removeTodo(todo),
+            onClick: (_) => TodoListPage.of(context).removeTodo(todo),
           ),
         ],
       );
 }
 ```
 
-Use normal final variables for parameters and `State` variables for state management. It will have a getter and setter:
+As in flutter, we can use `StatefulWidget` to store state inside widgets
 
 ```dart
-class CounterPage extends Widget {
-  CounterPage({required this.title});
+class CounterPage extends StatefulWidget {
+  const CounterPage({Key? key, required this.title}): super(key: key);
 
   final String title;
-  final State<int> count = State(0);
+
+@override
+StateWidget<CounterPage> createState() => CounterPageState();
+}
+
+class CounterPageState extends StateWidget<CounterPage>{
+  int count = 0;
 
   @override
-  Element build() {
-    return divElement(
+  Widget build(BuildContext context) {
+    return DivElementWidget(
       children: [
-        headingElementH1(text: title),
-        count.bind((count) => paragraphElement(text: 'Counter: $count')),
-        buttonElement(
+        HeadingElementH1Widget(text: title),
+        ParagraphElementWidget(text: 'Counter: $count')),
+        ButtonElementWidget(
           text: 'Counter +',
-          onClick: (_) => count.set(count.state + 1),
+          onClick: (_) => setState((){ count++; }) ,
         ),
       ],
     );
@@ -70,59 +76,46 @@ class CounterPage extends Widget {
 }
 ```
 
-If you just want to bind the text node of an element you can use `State.bindText()`:
 
 ```dart
-count.bindText(
-  paragraphElement(),
-  (count) => 'Counter: $count'
-),
-```
 
-You can also use `State.bindAttribute()` to only update a single attribute:
+class TodoListPage extends StatelessWidget {
 
-```dart
-count.bindAttribute(
-  paragraphElement(),
-  'style',
-  (count) => count == 0 ? 'color: blue;' : 'color: red;',
-),
-```
+  }
 
-The widget class must extend `Widget` and at least implement a build method. This method must return a HTML Element. We can compose
-a widget from other widgets as well using `WidgetClass().appendTo(this)`.
-
-```dart
-class TodoListPage extends Widget {
-  final InputElement textField = inputElement(
-    type: 'text',
-    placeholder: 'New todo',
-  );
-  State<List<String>> todos = State([]);
+  class TodoListPageState extends StateWidget<TodoListPage>{
+  final textFieldController = InputElementController();
+   List<String> todos = [];
 
   void addTodoAction([_]) {
-    final value = textField.value;
+    final value = textFieldController.value;
     if (value == null || value.isEmpty) return;
-    todos.set(todos.state.add(value));
-    textField.value = '';
+    todos.add(value);
+    textFieldController.value = '';
+    setState((){});
   }
 
   void removeTodo(String todo) {
-    todos.set(todos.state..removeWhere((t) => t == todo));
+    todos.removeWhere((t) => t == todo);
+    setState((){});
   }
 
   @override
-  Element build() => divElement(
+  Widget build(BuildContext context) => DivElementWidget(
         className: 'container',
         children: [
-          textField,
-          buttonElement(
+           InputElementWidet(
+            controller: textFieldController,
+            type: 'text',
+            placeholder: 'New todo',
+          ),
+          ButtonElementWidget(
             text: 'Add',
             onClick: addTodoAction,
           ),
-          uListElement(
+          UListElementWidget(
             children: [
-              for (final todo in todos) TodoListItem(todo: todo).appendTo(this),
+              for (final todo in todos) TodoListItem(todo: todo),
             ],
           ),
         ],
@@ -130,19 +123,31 @@ class TodoListPage extends Widget {
 }
 ```
 
-With `.appendTo(this)` this widget becomes part of the other widget and receives a link back to it's parent. So we make sure
-that every widget always knows their parent widget and we get a "widget tree". We can use this to find a specific parent
-somewhere up in it by using `findParent<Type>()`. This works very similar to **Provider** in Flutter:
+### BuildContext
+
+The build method is used to determine the widget children. Then the render function will be called to obtain the rendered version of the widget which is an object of the `Element` type.
+
+The BuildContext item is responsible to store
+* the widget
+* element (the rendered version of the widget)
+* the position of the widget in the widget graph. It will also be used to store the rendered version of the widget.
+
+Therefore, the context object can be used to find a particula `StateWidget` among the widgets parent. This can be done by calling `context.findState<StateType>()`. This works very similar to **Provider** in Flutter:
 
 ```dart
-findParent<TodoListPage>().removeTodo(todo)
+context.findState<TodoListPageState>().removeTodo(todo)
 ```
+
+### Basic router
+
 We also have a very basic hash router:
 
 ```dart
-class TodoApp extends Widget {
+class TodoApp extends StatelessWidget {
+  const TodoApp({Key? key}) : super(key: key);
+
   @override
-  Element build() {
+  Element build(BuildContext context) {
     return BasicRouter(routeBuilder: (route) {
       switch (route) {
         case '/':
@@ -150,13 +155,14 @@ class TodoApp extends Widget {
         default:
           return NotFoundPage();
       }
-    }).appendTo(this);
+    });
   }
 }
 
 class NotFoundPage extends Widget {
+  const NotFoundPage({Key? key}) : super(key: key);
   @override
-  Element build() => paragraphElement(text: '404: Not found');
+  Element build(BuildContext context) => ParagraphElementWidget(text: '404: Not found');
 }
 ```
 
@@ -167,17 +173,16 @@ You have FutureBuilders and StreamBuilders which are working similar to Flutter.
 #### FutureBuilder
 
 Similar to Flutters FutureBuilder but without AsyncSnapshot. Build something
-depending of the result of a future. Optional you can set an errorBuilder to
-handle errors happening while waiting on the future.
+depending of the result of a future. Optional you can set an errorBuilder to handle errors happening while waiting on the future.
 
 ##### Example:
 
 ```dart
 FutureBuilder<String>(
   future: loadDataFromServer(),
-  builder: (AsyncSnapshot<String> snapshot, Widget parent) =>
-    divElement(text: snapshot.data ?? snapshot.error?.toString() ?? 'No data yet'),
-).appendTo(this);
+  builder: (BuilContext context, AsyncSnapshot<String> snapshot) =>
+    DivElementWidget(text: snapshot.data ?? snapshot.error?.toString() ?? 'No data yet'),
+);
 ```
 
 #### StreamBuilder
@@ -191,9 +196,24 @@ set an errorBuilder to handle errors.
 ```dart
 StreamBuilder<String>(
   stream: someDataStream,
-  builder: (AsyncSnapshot<String> snapshot, Widget parent) =>
-    divElement(text: snapshot.data ?? snapshot.error?.toString() ?? 'No data yet'),
-).appendTo(this);
+  builder: (BuildContext context, AsyncSnapshot<String> snapshot) =>
+    DivElementWidget(text: snapshot.data ?? snapshot.error?.toString() ?? 'No data yet'),
+);
+```
+
+### BuildContext
+
+The BuildContext is used in the `build` and `appendTo` functions. It is used to provide some context when building the widget.
+
+It stores
+
+* the parent of the widget so appendTo can add the element to the widget.
+* add information for the build callback so we can execute callbacks after inital build or set states.
+
+Especially, build callbacks are handy if you want to execute a function after the element has been added to the DOM.
+
+```
+  context.addPostFrameCallback((){/* my function */});
 ```
 
 ### runApp and widget tree
@@ -223,3 +243,9 @@ For example our `TodoListItem` widget would look like this:
 ```
 
 The `data-widget-type` becomes "minified" in production.
+
+
+
+## WrapperWidget
+
+It is possible to embed `Element` objects in the build function using `WidgetElement`.

@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:html';
 
 import 'package:wupper/wupper.dart';
 
@@ -16,55 +15,63 @@ import 'package:wupper/wupper.dart';
 ///     divElement(text: snapshot.data ?? snapshot.error?.toString() ?? 'No data yet'),
 /// ).appendTo(this);
 /// ```
-class StreamBuilder<T> extends Widget {
+
+class StreamBuilder<T> extends StatefulWidget {
   final Stream<T> stream;
-  final Element Function(AsyncSnapshot<T> value, Widget parent) builder;
-  late final StreamSubscription _streamSubscription;
-  final State<AsyncSnapshot<T>> _snapshot = State(
-    AsyncSnapshot(
-      hasData: false,
-      hasError: false,
-      error: null,
-      data: null,
-    ),
-  );
+  final Widget Function(BuildContext context, AsyncSnapshot<T> value) builder;
 
   StreamBuilder({required this.stream, required this.builder});
 
   @override
+  StateWidget<StreamBuilder<T>> createState() => _StreamBuilderState<T>();
+}
+
+class _StreamBuilderState<T> extends StateWidget<StreamBuilder<T>> {
+  late final StreamSubscription _streamSubscription;
+  AsyncSnapshot<T> _snapshot = AsyncSnapshot(
+    hasData: false,
+    hasError: false,
+    error: null,
+    data: null,
+  );
+
+  @override
   void initState() {
-    _streamSubscription = stream.listen(_listener, onError: _errorListener);
+    _streamSubscription =
+        widget.stream.listen(_listener, onError: _errorListener);
     super.initState();
   }
 
-  void _listener(T? data) {
-    if (!_snapshot.hasListener) {
+  void _listener(data) {
+    if (!mounted) {
       _streamSubscription.cancel();
       return;
     }
-    _snapshot.set(
-      AsyncSnapshot(
+
+    setState(() {
+      _snapshot = AsyncSnapshot(
         hasData: true,
         data: data,
-      ),
-    );
+      );
+    });
   }
 
   void _errorListener(Object? error) {
-    if (!_snapshot.hasListener) {
+    if (!mounted) {
       _streamSubscription.cancel();
       return;
     }
-    _snapshot.set(
-      AsyncSnapshot(
+
+    setState(() {
+      _snapshot = AsyncSnapshot(
         hasError: true,
         error: error,
-        hasData: _snapshot.state.hasData,
-        data: _snapshot.state.data,
-      ),
-    );
+        hasData: _snapshot.hasData,
+        data: _snapshot.data,
+      );
+    });
   }
 
   @override
-  Element build() => _snapshot.bind((_snapshot) => builder(_snapshot, this));
+  Widget build(context) => widget.builder(context, _snapshot);
 }

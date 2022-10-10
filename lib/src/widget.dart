@@ -22,7 +22,7 @@
 
 import 'dart:html';
 
-import 'html_element_constructors.dart';
+import 'package:wupper/wupper.dart';
 
 /// the root node of the whole application
 ///
@@ -30,6 +30,8 @@ import 'html_element_constructors.dart';
 /// as the root node might be out of scope for `document.querySelector` in case
 /// it is placed in a shadow DOM or frame
 late Element _appNode;
+
+Element get appNode => _appNode;
 
 /// Flutter-like widgets for building UIs with HTML elements. Define the [build]
 /// method to create a new widget.
@@ -39,121 +41,81 @@ late Element _appNode;
 ///   Element build() => paragraphElement(text: '404: Not found');
 /// }
 /// ```
+
 abstract class Widget {
-  Widget? get parent => _parent;
-  Widget? _parent;
+  final Key? key;
+  const Widget({required this.key});
 
-  /// Method which needs to be defined by the developer to describe the UI
-  /// using HTML Elements. It is **not** recommended to use this method to
-  /// append your widget in the [build] method of another widget! Use [appendTo]
-  /// for this!
-  Element build();
+  /// Set this widget context, build it’s child, and render the widget, updating
+  /// [Context.element]
+  /// When overriding pay attention that inflate need to call
+  /// [build] and [render]
+  void inflate(BuildContext context);
 
-  /// Override this method to initialize the state of this widget. The [parent]
-  /// value is already set when this method is called.
-  void initState() {
-    return;
-  }
+  static const String _dataWidgetTypeKey = 'data-widget-type';
+  static const String _dataWidgetTypeId = 'data-widget-id';
 
-  /// Use this method inside of the [build] method of the parent widget to
-  /// append this widget to it. This creates a widget tree and makes it possible
-  /// to use the [findParent()] and [setState()] method.
-  Element appendTo(Widget parent, [Object? cacheKey]) {
-    _parent = parent;
-    initState();
-    return wrapWithElement();
-  }
+  /// Render the DOM element and add it to the context.
+  Element render(BuildContext context) {
+    final childElement = context.child?.element;
 
-  /// Looks up the widget tree until it finds a parent of this type or otherwise
-  /// throws an exception. Make sure that this widget has been appended by the
-  /// [appendTo()] method first.
-  T findParent<T>() {
-    final parentPointer = parent;
-    if (parentPointer == null) {
-      throw Exception(
-          'Unable to find parent of type $T in widget tree. Have you appended this widget with `.build()` instead of `.appendTo(this)` maybe?');
+    if (context.child == null || childElement == null) {
+      window.console.warn("Snap... we hit a render issue");
+      window.console.warn("Widget parent: ${context.parent?.widget}");
+      window.console.warn("Widget: ${context.widget}");
+      window.console.warn("Widget child: ${context.child?.widget}");
+      window.console.warn("Element parent: ${context.parent?.element}");
+      window.console.warn("Element: ${context.element}");
+      window.console.warn("Element child: ${context.child?.element}");
     }
-    if (parentPointer is T) {
-      return parentPointer as T;
-    }
-    return parentPointer.findParent<T>();
-  }
 
-  /// Similar to the Flutter equivalent this changes the state of this widget
-  /// and rebuilds the UI and all underlying widgets. Make sure that this widget
-  /// has been appended by the [appendTo()] method first.
-  ///
-  /// If you do not want to rebuild everything, specify the elements you want
-  /// to rebuild in [only] by adding valid selectors. For example, to replace
-  /// only the element with the ID "list_item_4": set `only: {'#list_item_4'}`.
-  @Deprecated('Use State objects instead')
-  void setState(void Function() fun, {Set<String>? only}) {
-    fun();
-    final widgetNode =
-        _appNode.querySelector('[$_dataWidgetTypeId="${hashCode.toString()}"]');
-    if (widgetNode == null) {
-      throw Exception(
-          'No widget node with hashCode $hashCode found in the DOM! Have you appended this widget with `.build()` instead of `.appendTo(this)` maybe?');
+    if (context.child == null) {
+      throw Exception("This element has no child");
+    } else if (childElement == null) {
+      throw Exception("This elment was not rendered");
     }
-    final newBuild = wrapWithElement();
-    if (only == null) {
-      widgetNode.replaceWith(newBuild);
-    } else {
-      for (final query in only) {
-        final elemToReplace = widgetNode.querySelector(query);
-        if (elemToReplace == null) {
-          throw Exception(
-              'Can not setState. The querySelector("$query") returned null in the old build.');
-        }
-        final replaceWith = newBuild.querySelector(query);
-        if (replaceWith == null) {
-          throw Exception(
-              'Can not setState. The querySelector("$query") returned null in the new build.');
-        }
-        elemToReplace.replaceWith(replaceWith);
+
+    var newElement = childElement;
+
+    if (newElement.hasAttribute(_dataWidgetTypeKey) ||
+        newElement.hasAttribute(_dataWidgetTypeId)) {
+      if (newElement.getAttribute(_dataWidgetTypeId) != hashCode.toString()) {
+        newElement = SpanElement()..children = [newElement];
       }
     }
-    while (_postSetStateCallbacks.isNotEmpty) {
-      _postSetStateCallbacks.removeLast()();
-    }
-  }
 
-  final List<Function> _postSetStateCallbacks = [];
-
-  /// Perform some action after setState has been called.
-  void addPostSetStateCallback(Function callback) {
-    _postSetStateCallbacks.add(callback);
-  }
-
-  /// Checks if this widget instance is still mounted to the DOM.
-  bool get mounted =>
-      _appNode.querySelector('[$_dataWidgetTypeId="${hashCode.toString()}"]') !=
-      null;
-
-  @override
-  String toString() => build().toString();
-}
-
-const String _dataWidgetTypeKey = 'data-widget-type';
-const String _dataWidgetTypeId = 'data-widget-id';
-
-extension _WrapWithElement on Widget {
-  Element wrapWithElement() {
-    var element = build();
-    if (element.hasAttribute(_dataWidgetTypeKey) ||
-        element.hasAttribute(_dataWidgetTypeId)) {
-      element = spanElement(children: [element]);
-    }
-    return element
+    newElement
       ..setAttribute(_dataWidgetTypeKey, runtimeType.toString())
       ..setAttribute(_dataWidgetTypeId, hashCode.toString());
+
+    if (context.element != null && context.element?.parentNode != null) {
+      context.element!.replaceWith(newElement);
+    }
+
+    context.element = newElement;
+
+    return context.element!;
   }
+}
+
+class Key {
+  final String value;
+  const Key(this.value);
+
+  @override
+  bool operator ==(other) {
+    if (other.runtimeType != runtimeType) return false;
+    return (other as Key).value == value;
+  }
+
+  @override
+  int get hashCode => value.hashCode;
 }
 
 /// Creates a new app and appends it to the [target] HTML element.
 /// The [args] contain all attributes of the HTML element.
 void runApp(
-  Widget Function(Map<String, String> args) widgetBuilder, {
+  StatelessWidget Function(Map<String, String> args) widgetBuilder, {
   @Deprecated('Use [target] instead') String? targetId,
   Element? target,
 }) {
@@ -163,7 +125,16 @@ void runApp(
     throw Exception('There is no element with the ID $targetId in the DOM!');
   }
   _appNode = target;
+
+  // Set the context of the root widget
   final rootWidget = widgetBuilder(_appNode.dataset);
-  rootWidget.initState();
-  _appNode.children = [rootWidget.wrapWithElement()];
+  final context = BuildContext();
+
+  rootWidget.inflate(context);
+
+  // Build and mount it
+  _appNode.children = [context.element!];
+
+  // We added elements to the grid, we can now execute callbacks.
+  context.executeCallbacks();
 }
