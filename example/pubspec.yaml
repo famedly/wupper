@@ -2,6 +2,8 @@ name: try_wupper
 description: An absolute bare-bones web app using wupper.
 version: 1.0.0
 
+publish_to: none
+
 environment:
   sdk: '>=2.17.1 <3.0.0'
 
@@ -13,4 +15,4 @@ dev_dependencies:
 
 dependencies:
   wupper:
-    path: ..
+    path: ../
