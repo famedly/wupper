@@ -1,4 +1,4 @@
-image: google/dart
+image: dart
 
 stages:
   - test
@@ -9,6 +9,6 @@ code_analyze:
   stage: test
   dependencies: []
   script:
-    - pub get
+    - dart pub get
     - dart format lib/ test/ --set-exit-if-changed
     - dart analyze
