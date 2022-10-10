@@ -10,5 +10,6 @@ code_analyze:
   dependencies: []
   script:
     - dart pub get
-    - dart format lib/ test/ --set-exit-if-changed
+    - cd example; dart pub get; cd ..
+    - dart format lib/ test/ example/lib example/test example/web --set-exit-if-changed
     - dart analyze
