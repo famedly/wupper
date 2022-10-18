@@ -1,3 +1,6 @@
+## 5.0.1
+- fix: added missing TableCellElementWidget
+
 ## 5.0.0
 BREAKING CHANGE: migration to new state management
 
