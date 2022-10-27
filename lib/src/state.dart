@@ -1,6 +1,8 @@
 import 'package:wupper/wupper.dart';
 
+@Deprecated("Please use Stateful widgets instead")
 class State<T> {
+  @Deprecated("Please use StatefulWidget instead")
   State(T initState) : _state = initState;
 
   T get state => _state;
