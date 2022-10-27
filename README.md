@@ -246,6 +246,6 @@ The `data-widget-type` becomes "minified" in production.
 
 
 
-## WrapperWidget
+### WrapperWidget
 
 It is possible to embed `Element` objects in the build function using `WidgetElement`.
