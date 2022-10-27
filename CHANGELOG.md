@@ -1,3 +1,6 @@
+## 5.0.2
+- fix: execute callback in any case before setState returns 
+
 ## 5.0.1
 - fix: added missing TableCellElementWidget
 
