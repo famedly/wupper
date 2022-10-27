@@ -10,6 +10,6 @@ class WrapperWidget extends Widget {
   @override
   void inflate(BuildContext context) {
     context.widget = this;
-    context.element = element;
+    context.setElement(element);
   }
 }

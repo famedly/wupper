@@ -54,7 +54,7 @@ abstract class Widget {
 
   /// Render the DOM element and add it to the context.
   Element? render(BuildContext context) {
-    return context.element;
+    return context.getElement();
   }
 }
 

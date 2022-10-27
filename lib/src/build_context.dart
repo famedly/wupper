@@ -7,10 +7,11 @@ import 'package:wupper/wupper.dart';
 class BuildContext {
   // To know the position of the widget
   Widget? widget;
-  Element? element;
+  Element? _element;
+  Element? get element => _element;
 
   Element? getElement() {
-    return element ?? child?.getElement();
+    return _element ?? child?.getElement();
   }
 
   // In order to know the position of this widget in the context
@@ -31,7 +32,7 @@ class BuildContext {
 
   late List<Function> callbacks;
 
-  bool get mounted => element?.isConnected ?? false;
+  bool get mounted => getElement()?.isConnected ?? false;
 
   /// Add a callback which will be executed after initial build or after set state.
   void addPostFrameCallback(Function callback) {
@@ -88,7 +89,7 @@ class BuildContext {
     }
 
     if (copyOldElement) {
-      childContext.element = child?.element;
+      childContext._element = child?._element;
     }
 
     if (setChild) {
@@ -117,7 +118,7 @@ class BuildContext {
     parent = newContext.parent;
     domChildren = newContext.domChildren;
     widget = newContext.widget;
-    element = newContext.element;
+    _element = newContext._element;
     widgetState = newContext.widgetState;
   }
 
@@ -143,28 +144,30 @@ class BuildContext {
   }
 
   // DOM manipulation functions
-  void addDomElement(BuildContext context) {
-    if (context.element != null) {
-      element?.children.add(context.element!);
-    }
-    domChildren!.add(context);
-  }
 
   void insertDomChildren(int i, BuildContext context) {
-    if (context.element != null) {
-      element?.children.insert(i, context.element!);
+    final newElement = context.getElement();
+
+    if (newElement != null) {
+      getElement()?.children.insert(i, newElement);
     }
     domChildren!.insert(i, context);
   }
 
   void deleteDomChildren(int i) {
-    element?.children.removeAt(i);
+    getElement()?.children.removeAt(i);
     domChildren!.removeAt(i);
   }
 
   void replaceDomChildrenWith(int i, BuildContext childContext) {
-    element?.children[i].replaceWith(childContext.element!);
-    element?.children[i] = childContext.element!;
+    getElement()!.children[i].replaceWith(childContext.getElement()!);
+    getElement()!.children[i] = childContext.getElement()!;
     domChildren![i] = childContext;
+  }
+
+  /// Set the element field and replace the previous DOM element if necessary
+  void setElement(Element element) {
+    _element?.replaceWith(element);
+    _element = element;
   }
 }

@@ -202,10 +202,7 @@ class ElementWidget extends Widget {
 
   Element hook(BuildContext context, Element v) {
     // Set the element object in context
-    if (context.element != null) {
-      context.element!.replaceWith(v);
-    }
-    context.element = v;
+    context.setElement(v);
 
     if (attributes != null) v.attributes = attributes!;
     if (classes != null) v.classes = classes!;

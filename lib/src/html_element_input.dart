@@ -183,7 +183,7 @@ class InputElementWidget extends HtmlElementWidget {
   Element hook(BuildContext context, Element v) {
     // TODO: see how we can update the value when calling a new build
     if (controller?.isAttached == true && controller?.element is InputElement) {
-      context.element = controller!.element;
+      context.setElement(controller!.element);
       return controller!.element;
     }
     // TODO: update the attribute of the InputElement if the widget parameter are changed
@@ -316,7 +316,7 @@ class TextAreaElementWidget extends HtmlElementWidget {
   Element render(context) {
     if (controller?.isAttached == true &&
         controller?.element is TextAreaElement) {
-      context.element = controller!.element;
+      context.setElement(controller!.element);
       return controller!.element;
     }
 

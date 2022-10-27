@@ -48,8 +48,6 @@ abstract class StateWidget<T extends StatefulWidget> {
     }
     final oldElement = context.getElement();
 
-    print("State: ${oldElement?.isConnected} [$this]");
-
     if (oldElement?.isConnected != true) {
       window.console.error("$this not connected.");
       throw ("Element not connected");

@@ -66,25 +66,24 @@ class _CustomWidgetTest extends StateWidget<PerfTestPage> {
       DivElementWidget(children: [
         ParagraphElementWidget(text: "List type: $useFixedList"),
         ButtonElementWidget(
-            text: "list",
+            text: "for loop",
             onClick: (_) {
               setState(() {
-                if (useFixedList == ListType.listView) {
-                  useFixedList = ListType.forLoop;
-                } else {
-                  useFixedList = ListType.listView;
-                }
+                useFixedList = ListType.forLoop;
+              });
+            }),
+        ButtonElementWidget(
+            text: "list view",
+            onClick: (_) {
+              setState(() {
+                useFixedList = ListType.listView;
               });
             }),
         ButtonElementWidget(
             text: "fixed list",
             onClick: (_) {
               setState(() {
-                if (useFixedList == ListType.fixedListView) {
-                  useFixedList = ListType.forLoop;
-                } else {
-                  useFixedList = ListType.fixedListView;
-                }
+                useFixedList = ListType.fixedListView;
               });
             }),
       ]),
