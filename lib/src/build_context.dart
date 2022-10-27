@@ -9,6 +9,10 @@ class BuildContext {
   Widget? widget;
   Element? element;
 
+  Element? getElement() {
+    return element ?? child?.getElement();
+  }
+
   // In order to know the position of this widget in the context
   BuildContext? parent;
   BuildContext? child;
@@ -117,23 +121,15 @@ class BuildContext {
     widgetState = newContext.widgetState;
   }
 
-  BuildContext? getWidgetContext(Widget newWidget) {
-    final oldChildIndex = domChildren?.indexWhere(
-        (context) => context.widget.hashCode == newWidget.hashCode);
-
-    if (oldChildIndex != -1 && oldChildIndex != null) {
-      return domChildren![oldChildIndex];
-    }
-    return null;
-  }
-
-  bool shouldReRender(Widget newWidget) {
+  /// Determine if the newly rendered widget is different from the previous one.
+  bool _shouldReRender(Widget newWidget) {
     return child?.widget.hashCode != newWidget.hashCode ||
         child?.widget?.key != newWidget.key;
   }
 
+  /// Ask for a new render of the child element if we need to update it
   bool cachedInflate(Widget newWidget) {
-    if (shouldReRender(newWidget)) {
+    if (_shouldReRender(newWidget)) {
       /// If we have a child of the same type, we might want to forward also the
       /// [domChildren] and [widgetState]
       final childContext = createChildContext(

@@ -46,12 +46,13 @@ abstract class StateWidget<T extends StatefulWidget> {
     if (context.widget == null) {
       throw Exception("The element need to have been render to update it.");
     }
+    final oldElement = context.getElement();
 
-    if (context.element?.isConnected != true) {
+    print("State: ${oldElement?.isConnected} [$this]");
+
+    if (oldElement?.isConnected != true) {
       window.console.error("$this not connected.");
       throw ("Element not connected");
-    } else if (context.child?.element?.isConnected != true) {
-      window.console.error("$this child is not connected.");
     }
 
     // Create a local only context where the callback list is overrided
@@ -82,8 +83,14 @@ abstract class StateWidget<T extends StatefulWidget> {
 
     render();
 
-    assert(childContext.element?.isConnected == true);
+    // update the previous widget
+    oldElement?.replaceWith(childContext.getElement()!);
 
+    // the element should now be attached to the DOM. Else, we run into an error and the app is not
+    // functioning properly
+    assert(context.getElement()?.isConnected == true);
+
+    // exectue callbacks and restore the other ones
     context.executeCallbacks();
     context.callbacks = oldCallBacks;
   }

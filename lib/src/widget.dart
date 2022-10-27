@@ -52,49 +52,9 @@ abstract class Widget {
   /// [build] and [render]
   void inflate(BuildContext context);
 
-  static const String _dataWidgetTypeKey = 'data-widget-type';
-  static const String _dataWidgetTypeId = 'data-widget-id';
-
   /// Render the DOM element and add it to the context.
-  Element render(BuildContext context) {
-    final childElement = context.child?.element;
-
-    if (context.child == null || childElement == null) {
-      window.console.warn("Snap... we hit a render issue");
-      window.console.warn("Widget parent: ${context.parent?.widget}");
-      window.console.warn("Widget: ${context.widget}");
-      window.console.warn("Widget child: ${context.child?.widget}");
-      window.console.warn("Element parent: ${context.parent?.element}");
-      window.console.warn("Element: ${context.element}");
-      window.console.warn("Element child: ${context.child?.element}");
-    }
-
-    if (context.child == null) {
-      throw Exception("This element has no child");
-    } else if (childElement == null) {
-      throw Exception("This elment was not rendered");
-    }
-
-    var newElement = childElement;
-
-    if (newElement.hasAttribute(_dataWidgetTypeKey) ||
-        newElement.hasAttribute(_dataWidgetTypeId)) {
-      if (newElement.getAttribute(_dataWidgetTypeId) != hashCode.toString()) {
-        newElement = SpanElement()..children = [newElement];
-      }
-    }
-
-    newElement
-      ..setAttribute(_dataWidgetTypeKey, runtimeType.toString())
-      ..setAttribute(_dataWidgetTypeId, hashCode.toString());
-
-    if (context.element != null && context.element?.parentNode != null) {
-      context.element!.replaceWith(newElement);
-    }
-
-    context.element = newElement;
-
-    return context.element!;
+  Element? render(BuildContext context) {
+    return context.element;
   }
 }
 
@@ -126,14 +86,16 @@ void runApp(
   }
   _appNode = target;
 
-  // Set the context of the root widget
   final rootWidget = widgetBuilder(_appNode.dataset);
+
+  // Create the root context
   final context = BuildContext();
 
+  // render the app 
   rootWidget.inflate(context);
 
-  // Build and mount it
-  _appNode.children = [context.element!];
+  // and mount it into the DOM
+  _appNode.children = [context.getElement()!];
 
   // We added elements to the grid, we can now execute callbacks.
   context.executeCallbacks();

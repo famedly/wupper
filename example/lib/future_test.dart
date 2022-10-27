@@ -7,6 +7,7 @@ class FutureTest extends StatefulWidget {
 }
 
 class FutureTestState extends StateWidget<FutureTest> {
+  int renderCount = 0;
   @override
   Widget build(BuildContext context) {
     return DivElementWidget(children: [
@@ -17,8 +18,11 @@ class FutureTestState extends StateWidget<FutureTest> {
       FutureBuilder(
           future: Future.delayed(
               const Duration(seconds: 1), () => DateTime.now().toString()),
-          builder: (context, snap) =>
-              ParagraphElementWidget(text: "Result ${snap.data}"))
+          builder: (context, snap) {
+            renderCount++;
+            return ParagraphElementWidget(
+                text: "Render count $renderCount Result ${snap.data}");
+          })
     ]);
   }
 }

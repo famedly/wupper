@@ -306,7 +306,7 @@ class ElementWidget extends Widget {
     if (onWheel != null) v.onWheel.listen(onWheel);
 
     if (children != null) {
-      v.children = context.domChildren!.map((e) => e.element!).toList();
+      v.children = context.domChildren!.map((e) => e.getElement()!).toList();
     }
 
     postCreation?.call(v);

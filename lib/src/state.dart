@@ -94,7 +94,7 @@ class StateTextWidgetState<T> extends StateWidget<StateTextWidget<T>> {
   @override
   Widget build(BuildContext context) {
     addPostFrameCallback(() {
-      context.element!.text = widget.builder(widget.state.state);
+      context.getElement()!.text = widget.builder(widget.state.state);
     });
     return widget.child;
   }
@@ -132,7 +132,7 @@ class StateAttributeWidgetState<T>
   @override
   Widget build(BuildContext context) {
     addPostFrameCallback(() {
-      context.element!
+      context.getElement()!
           .setAttribute(widget.attribute, widget.builder(widget.state.state));
     });
     return widget.child;
