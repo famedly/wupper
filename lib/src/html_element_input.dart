@@ -1,9 +1,14 @@
+import 'dart:async';
 import 'dart:html';
 
 import 'package:wupper/wupper.dart';
 
 class ElementController {
   Element? _element;
+
+  StreamSubscription<Event>? elementChangeListener;
+  List<VoidCallback> listeners = [];
+
   Element? get elementNullable => _element;
   Element get element {
     if (!isAttached) {
@@ -17,7 +22,25 @@ class ElementController {
   int get clientHeight => element.clientHeight;
 
   void attachMe(Element e) {
+    elementChangeListener?.cancel();
+
     _element = e;
+    elementChangeListener = e.onChange.listen(_onChange);
+    elementChangeListener = e.onInput.listen(_onChange);
+  }
+
+  void _onChange(Event e) {
+    for (var listener in listeners) {
+      listener.call();
+    }
+  }
+
+  void addListener(VoidCallback callback) {
+    listeners.add(callback);
+  }
+
+  void dispose() {
+    elementChangeListener?.cancel();
   }
 
   bool get isAttached => _element?.isConnected == true;
