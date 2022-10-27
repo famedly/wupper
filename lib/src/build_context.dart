@@ -10,6 +10,7 @@ class BuildContext {
   Element? _element;
   Element? get element => _element;
 
+  /// Search for the first non null child element
   Element? getElement() {
     return _element ?? child?.getElement();
   }

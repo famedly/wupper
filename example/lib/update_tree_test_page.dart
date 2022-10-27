@@ -25,6 +25,14 @@ class UpdateTreeTestPageState extends StateWidget<UpdateTreeTestPage> {
   }
 
   @override
+  void initState() {
+    addPostFrameCallback(() {
+      update(null);
+    });
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return DivElementWidget(children: [
       InputElementWidget(controller: controller),
