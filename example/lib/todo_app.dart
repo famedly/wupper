@@ -9,6 +9,7 @@ import 'package:wupper/wupper.dart';
 
 import 'list_view_test.dart';
 import 'stateful_widget_test.dart';
+import 'update_tree_test_page.dart';
 
 class TodoApp extends StatelessWidget {
   @override
@@ -23,9 +24,11 @@ class TodoApp extends StatelessWidget {
             return const TodoListPage();
           case '/state':
             return const StatefulWidgetTest();
+          case '/render_test':
+            return const UpdateTreeTestPage();
           case '/list':
             return ListViewTest();
-          case '/perf':
+          case '/list_perf':
             return const PerfTestPage();
           case '/future':
             return const FutureTest();
@@ -57,13 +60,17 @@ class NotFoundPage extends StatelessWidget {
         ]),
         LIElementWidget(children: [
           AnchorElementWidget(
+              href: '/#/render_test', text: "To render test page")
+        ]),
+        LIElementWidget(children: [
+          AnchorElementWidget(
               href: '/#/legacy_state', text: "To legacy state page")
         ]),
         LIElementWidget(children: [
           AnchorElementWidget(href: '/#/list', text: "To list view page")
         ]),
         LIElementWidget(children: [
-          AnchorElementWidget(href: '/#/perf', text: "To perf page")
+          AnchorElementWidget(href: '/#/list_perf', text: "To list perf page")
         ]),
         LIElementWidget(children: [
           AnchorElementWidget(href: '/#/input', text: "To input page")
