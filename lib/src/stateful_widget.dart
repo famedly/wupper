@@ -46,14 +46,15 @@ abstract class StateWidget<T extends StatefulWidget> {
 
     if (!_ready) return;
     if (context.widget == null) {
-      throw Exception("The element need to have been render to update it.");
+      throw Exception(
+          "Tried to call setState on a $runtimeType Widget which has not been rendered yet!");
     }
-
-    if (context.element?.isConnected != true) {
-      window.console.error("$this not connected.");
-      throw ("Element not connected");
+    if (!mounted) {
+      throw Exception(
+          "Tried to call setState on a $runtimeType Widget which is not mounted!");
     } else if (context.child?.element?.isConnected != true) {
-      window.console.error("$this child is not connected.");
+      throw Exception(
+          "Tried to call setState on a $runtimeType Widget while the child is not connected!");
     }
 
     // Create a local only context where the callback list is overrided
