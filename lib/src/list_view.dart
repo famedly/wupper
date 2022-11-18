@@ -18,16 +18,16 @@ class ListView extends StatefulWidget {
   final String? id;
   final String? className;
   final void Function(Element)? postCreation;
-  const ListView(
-      {required this.itemBuilder,
-      required this.initialItemCount,
-      this.headerBuilder,
-      this.footerBuilder,
-      this.controller,
-      this.id,
-      this.className,
-      this.postCreation})
-      : super();
+  const ListView({
+    required this.itemBuilder,
+    required this.initialItemCount,
+    this.headerBuilder,
+    this.footerBuilder,
+    this.controller,
+    this.id,
+    this.className,
+    this.postCreation,
+  }) : super();
 
   @override
   StateWidget<StatefulWidget> createState() => ListViewState();
@@ -38,6 +38,7 @@ class ListViewState extends StateWidget<ListView> {
   late final StreamSubscription? _onUpdateSub;
   late final StreamSubscription? _onInsertSub;
   late final StreamSubscription? _onDeleteSub;
+  StreamSubscription? _onScrollSub;
 
   late UListElement _uListElement;
 
@@ -55,6 +56,14 @@ class ListViewState extends StateWidget<ListView> {
     _onDeleteSub = widget.controller?._delete.stream.listen(_onDeleteListener);
 
     super.initState();
+  }
+
+  void _onScrollListener(_) {
+    if (!mounted) {
+      _onScrollSub?.cancel();
+      return;
+    }
+    widget.controller?._onScroll.add(context.element!);
   }
 
   void _onUpdateAllListener(int i) {
@@ -113,6 +122,12 @@ class ListViewState extends StateWidget<ListView> {
   Widget build(context) {
     itemCount = widget.initialItemCount;
 
+    if (widget.controller?.onScroll != null) {
+      addPostFrameCallback(() {
+        _onScrollSub = this.context.element?.onScroll.listen(_onScrollListener);
+      });
+    }
+
     // construct the UI
     final headerWidget = widget.headerBuilder?.call(context);
     final footerWidget = widget.footerBuilder?.call(context);
@@ -150,6 +165,9 @@ class ListViewController {
   final StreamController<int> _update = StreamController<int>.broadcast();
   final StreamController<int> _insert = StreamController<int>.broadcast();
   final StreamController<int> _delete = StreamController<int>.broadcast();
+  final StreamController<Element> _onScroll =
+      StreamController<Element>.broadcast();
+  Stream<Element> get onScroll => _onScroll.stream;
 
   /// connects the given [ListView] with the controller in order to access its
   /// properties
