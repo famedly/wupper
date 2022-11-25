@@ -187,11 +187,22 @@ class InputElementWidget extends HtmlElementWidget {
 }
 
 class TextAreaElementWidget extends HtmlElementWidget {
-  final TextAreaElementController? controller;
   final String? value;
+  final String? placeholder;
+  final bool? autofocus;
+  final TextAreaElementController? controller;
+  final String? autocapitalize;
+  final bool? disabled;
+  final bool? readOnly;
+
   TextAreaElementWidget(
       {this.controller,
       this.value,
+      this.placeholder,
+      this.autofocus,
+      this.autocapitalize,
+      this.disabled,
+      this.readOnly,
       super.nonce,
       super.attributes,
       super.children,
@@ -302,6 +313,11 @@ class TextAreaElementWidget extends HtmlElementWidget {
     controller?.attachMe(v);
 
     if (value != null) v.value = value;
+    if (placeholder != null) v.placeholder = placeholder!;
+    if (autofocus != null) v.autofocus = autofocus!;
+    if (autocapitalize != null) v.autocapitalize = autocapitalize!;
+    if (disabled != null) v.disabled = disabled!;
+    if (readOnly != null) v.readOnly = readOnly!;
 
     return hook(context, v);
   }
