@@ -1,3 +1,7 @@
+## 5.0.4
+- fix: Missing construction setter for TextAreaElementWidget
+- feat: Add ValueNotifier
+
 ## 5.0.3
 - feat: Add onScroll callback to listview
 
