@@ -166,7 +166,7 @@ class NotFoundPage extends Widget {
 }
 ```
 
-### FutureBuilder and StreamBuilder
+### FutureBuilder, StreamBuilder and ValueNotifierBuilder
 
 You have FutureBuilders and StreamBuilders which are working similar to Flutter.
 
@@ -199,6 +199,37 @@ StreamBuilder<String>(
   builder: (BuildContext context, AsyncSnapshot<String> snapshot) =>
     DivElementWidget(text: snapshot.data ?? snapshot.error?.toString() ?? 'No data yet'),
 );
+```
+
+#### ValueNotifierBuilder
+
+Similar to Flutters ValueListeneableBuilder. Define a ValueNotifier which offers the
+same API like Flutter's one and build reactive Widgets with it. Useful when you don't
+want to rebuild the whole UI with Statefull Widgets:
+
+##### Example:
+```dart
+final ValueNotifier<int> counter = ValueNotifier<int>(0);
+
+//...
+Widget build(context) {
+  return DivElementWidget(
+    children: [
+    ValueNotifierBuilder(
+      value: counter,
+      builder: (context, value) {
+        return ParagraphElementWidget(text: 'Counter: $value');
+      }
+    ),
+    ButtonElementWidget(
+      text: '+1',
+      onClick: (_) {
+        counter.value = counter.value+1;
+      }
+    ),
+  ],
+  );
+}
 ```
 
 ### BuildContext

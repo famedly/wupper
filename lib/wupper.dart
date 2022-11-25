@@ -36,6 +36,8 @@ export 'src/state.dart';
 export 'src/widget.dart';
 export 'src/stateless_widget.dart';
 export 'src/stateful_widget.dart';
+export 'src/value_notifier.dart';
+export 'src/value_notifier_builder.dart';
 export 'src/wrapper_widget.dart';
 export 'src/build_context.dart';
 export 'src/state.dart';
