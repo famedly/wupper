@@ -17,6 +17,7 @@ class ListView extends StatefulWidget {
 
   final String? id;
   final String? className;
+  final Set<String>? classes;
   final void Function(Element)? postCreation;
   const ListView({
     required this.itemBuilder,
@@ -26,6 +27,7 @@ class ListView extends StatefulWidget {
     this.controller,
     this.id,
     this.className,
+    this.classes,
     this.postCreation,
   }) : super();
 
@@ -146,6 +148,7 @@ class ListViewState extends StateWidget<ListView> {
           if (footerWidget != null) footerWidget
         ],
         className: widget.className,
+        classes: widget.classes,
         postCreation: (e) {
           _uListElement = e as UListElement;
           widget.postCreation?.call(e);
