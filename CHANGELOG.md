@@ -1,3 +1,6 @@
+## 5.0.5
+- fix: Added missing classes Set to ListView Widget
+
 ## 5.0.4
 - fix: Missing construction setter for TextAreaElementWidget
 - feat: Add ValueNotifier
