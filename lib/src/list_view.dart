@@ -20,6 +20,7 @@ class ListView extends StatefulWidget {
   final Set<String>? classes;
   final void Function(Element)? postCreation;
   const ListView({
+    Key? key,
     required this.itemBuilder,
     required this.initialItemCount,
     this.headerBuilder,
@@ -29,7 +30,7 @@ class ListView extends StatefulWidget {
     this.className,
     this.classes,
     this.postCreation,
-  }) : super();
+  }) : super(key: key);
 
   @override
   StateWidget<StatefulWidget> createState() => ListViewState();
