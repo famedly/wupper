@@ -40,4 +40,3 @@ export 'src/value_notifier.dart';
 export 'src/value_notifier_builder.dart';
 export 'src/wrapper_widget.dart';
 export 'src/build_context.dart';
-export 'src/state.dart';

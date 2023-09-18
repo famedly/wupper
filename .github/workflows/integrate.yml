@@ -1,0 +1,28 @@
+name: Continuous Integration
+
+on:
+  pull_request:
+  merge_group:
+
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  FLUTTER_VERSION: 3.10.6
+  DART_VERSION: 3.0.6
+
+jobs:
+  dart:
+    permissions:
+      contents: read
+    uses: famedly/frontend-ci-templates/.github/workflows/dart.yml@main
+    needs: [versions]
+    with:
+      FLUTTER_VERSION: 3.13.4
+      DART_VERSION: 3.1.1
+
+  general:
+    permissions:
+      contents: read
+    uses: famedly/frontend-ci-templates/.github/workflows/general.yml@main
