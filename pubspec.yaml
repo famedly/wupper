@@ -15,3 +15,4 @@ dev_dependencies:
   lints: ^2.0.0
   analyzer: ^4.2.0
   flutter_lints: ^2.0.1
+  import_sorter: ^4.6.0
