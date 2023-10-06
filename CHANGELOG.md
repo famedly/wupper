@@ -1,3 +1,14 @@
+## 5.0.6
+
+- chore: add general and publish ci (td)
+- chore: add import sorter (Nicolas Werner)
+- ci: fix versions dependency (Nicolas Werner)
+- docs: Update links (Krille)
+- ci: Add CI workflow (Krille)
+- fix: Duplicated import (Krille)
+- fix: add missing key parameter to ListView (The one with the braid)
+- chore: add github action (Niklas Zender
+
 ## 5.0.5
 - fix: Added missing classes Set to ListView Widget
 
