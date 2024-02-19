@@ -52,7 +52,8 @@ abstract class StateWidget<T extends StatefulWidget> {
     if (!mounted) {
       throw Exception(
           "Tried to call setState on a $runtimeType Widget which is not mounted!");
-    } else if (context.child?.element?.isConnected != true) {
+    } else if (context.child?.element?.isConnected != true &&
+        context.widget.runtimeType != BasicRouter) {
       throw Exception(
           "Tried to call setState on a $runtimeType Widget while the child is not connected!");
     }
